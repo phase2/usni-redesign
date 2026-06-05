@@ -1,0 +1,36 @@
+import type { Article } from '@/types'
+
+interface LargeFeatureProps {
+  article: Article
+  className?: string
+}
+
+export default function LargeFeature({ article, className = '' }: LargeFeatureProps) {
+  return (
+    <article className={`flex flex-col gap-4 ${className}`}>
+      {article.image && (
+        <a href={article.href} className="block overflow-hidden aspect-[4/3] bg-neutral-subtlest flex-shrink-0">
+          <img
+            src={article.image}
+            alt={article.imageAlt ?? article.headline}
+            className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          />
+        </a>
+      )}
+      <div className="flex flex-col gap-3">
+        <p className="font-body font-medium text-xs uppercase tracking-widest text-navy-subtle">
+          {article.category}
+        </p>
+        <a href={article.href}>
+          <h3 className="font-headline text-2xl lg:text-3xl text-navy-bolder leading-tight hover:text-navy-subtle transition-colors">
+            {article.headline}
+          </h3>
+        </a>
+        {article.excerpt && (
+          <p className="font-body text-sm text-navy leading-relaxed line-clamp-3">{article.excerpt}</p>
+        )}
+        <p className="font-body text-xs text-navy/60">{article.date}</p>
+      </div>
+    </article>
+  )
+}
