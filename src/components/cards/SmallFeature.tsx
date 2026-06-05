@@ -4,13 +4,14 @@ interface SmallFeatureProps {
   article: Article
   showImage?: boolean
   className?: string
+  aspectRatio?: string
 }
 
-export default function SmallFeature({ article, showImage = true, className = '' }: SmallFeatureProps) {
+export default function SmallFeature({ article, showImage = true, className = '', aspectRatio }: SmallFeatureProps) {
   return (
     <article className={`flex flex-col gap-3 ${className}`}>
       {showImage && article.image && (
-        <a href={article.href} className="block overflow-hidden aspect-[4/3] bg-neutral-subtlest flex-shrink-0">
+        <a href={article.href} className={`block overflow-hidden ${aspectRatio ?? 'aspect-[4/3]'} bg-neutral-subtlest flex-shrink-0`}>
           <img
             src={article.image}
             alt={article.imageAlt ?? article.headline}
@@ -19,7 +20,7 @@ export default function SmallFeature({ article, showImage = true, className = ''
         </a>
       )}
       <div className="flex flex-col gap-2">
-        <p className="font-body font-medium text-xs uppercase tracking-widest text-navy-subtle">
+        <p className="font-body font-semibold text-xs uppercase tracking-widest text-navy-subtle">
           {article.category}
         </p>
         <a href={article.href}>
@@ -27,7 +28,9 @@ export default function SmallFeature({ article, showImage = true, className = ''
             {article.headline}
           </h3>
         </a>
-        <p className="font-body text-xs text-navy/60">{article.date}</p>
+        <p className="font-body text-xs text-neutral-subtle">
+          {article.date}{article.author ? ` | by ${article.author}` : ''}
+        </p>
       </div>
     </article>
   )

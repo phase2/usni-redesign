@@ -18,7 +18,7 @@ export default function LargeFeature({ article, className = '' }: LargeFeaturePr
         </a>
       )}
       <div className="flex flex-col gap-3">
-        <p className="font-body font-medium text-xs uppercase tracking-widest text-navy-subtle">
+        <p className="font-body font-semibold text-xs uppercase tracking-widest text-navy-subtle">
           {article.category}
         </p>
         <a href={article.href}>
@@ -27,9 +27,9 @@ export default function LargeFeature({ article, className = '' }: LargeFeaturePr
           </h3>
         </a>
         {article.excerpt && (
-          <p className="font-body text-sm text-navy leading-relaxed line-clamp-3">{article.excerpt}</p>
+          <p className="font-body text-sm text-neutral-subtle leading-relaxed line-clamp-3">{article.excerpt}</p>
         )}
-        <p className="font-body text-xs text-navy/60">{article.date}</p>
+        <p className="font-body text-xs text-neutral-subtle">{article.date}</p>
       </div>
     </article>
   )

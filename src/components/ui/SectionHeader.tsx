@@ -34,7 +34,7 @@ export default function SectionHeader({
 
   return (
     <div className={`${className}`}>
-      <div className="border-t border-border-light pt-8 flex flex-col lg:flex-row lg:items-start lg:gap-8">
+      <div className="border-t-2 border-navy-bold pt-8 flex flex-col lg:flex-row lg:items-start lg:gap-8">
         <div className="flex-1">
           {eyebrow && (
             <p className="font-body font-medium text-sm uppercase tracking-[0.08em] text-navy-subtle mb-3">
@@ -48,7 +48,7 @@ export default function SectionHeader({
         {(description || ctaLabel) && (
           <div className="flex-1 mt-6 lg:mt-0 lg:max-w-[600px] flex flex-col gap-6 justify-start">
             {description && (
-              <p className="font-body text-base lg:text-lg text-navy leading-relaxed">
+              <p className="font-body text-base lg:text-lg text-neutral-subtle leading-relaxed">
                 {description}
               </p>
             )}

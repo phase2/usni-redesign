@@ -41,6 +41,26 @@
   .footer-nav-accent {
     @apply block h-0.5 w-14 bg-tan mt-2;
   }
+
+  /* Reusable section background gradients */
+  .section-gradient {
+    background: linear-gradient(256deg, #FFF -0.22%, #F4F4F6 100%);
+  }
+
+  .section-gradient-blue {
+    background: linear-gradient(256deg, #EEF2FF -0.22%, #E6EEFF 100%);
+  }
+
+  /* Header structural zones */
+  .header-top {
+    @apply border-b border-border-light relative;
+    /* overflow toggled dynamically to allow utility dropdowns to escape */
+  }
+
+  .header-bottom {
+    @apply relative;
+    /* no top border — header-top's border-b serves as the single divider */
+  }
 }
 
 @layer utilities {

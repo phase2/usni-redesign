@@ -17,7 +17,7 @@ function useScrolled(threshold = 10) {
 function FullLogo() {
   return (
     <a href="/" className="flex-shrink-0" aria-label="U.S. Naval Institute home">
-      <img src="/usni-logo-full.svg" alt="U.S. Naval Institute" className="h-12 w-auto" />
+      <img src="/usni-logo-full.svg" alt="U.S. Naval Institute" className="w-auto" style={{ height: '69px' }} />
     </a>
   )
 }
@@ -127,7 +127,7 @@ function NavLink({ item, compact }: { item: NavItem; compact: boolean }) {
         href={item.href}
         className={`flex items-center gap-[10px] font-body font-extrabold whitespace-nowrap leading-none
                     transition-colors duration-150
-                    ${compact ? 'text-[18px] pl-3 pr-2 py-4' : 'text-[21px] pl-4 pr-3 py-6'}
+                    ${compact ? 'text-[18px] px-4 py-4' : 'text-[21px] px-5 py-6'}
                     ${open ? 'bg-navy-bolder text-white' : 'text-navy-subtle hover:text-navy-bolder'}`}
         aria-haspopup={item.children ? 'true' : undefined}
         aria-expanded={item.children ? open : undefined}
@@ -242,12 +242,14 @@ export default function Header() {
 
       {/* ── Utility bar — collapses on scroll ── */}
       <div
-        className={`border-b border-border-light overflow-hidden transition-all duration-300 ease-in-out ${
-          scrolled ? 'max-h-0 opacity-0 pointer-events-none' : 'max-h-[3.5rem] opacity-100'
+        className={`header-top transition-all duration-300 ease-in-out ${
+          scrolled
+            ? 'max-h-0 opacity-0 pointer-events-none overflow-hidden'
+            : 'max-h-40 opacity-100 overflow-visible'
         }`}
       >
         <div className="container-site">
-          <div className="flex items-center justify-between h-14">
+          <div className="flex items-center justify-between py-4">
             <FullLogo />
             <div className="hidden lg:flex items-center">
               <ArchivesLink />
@@ -291,7 +293,7 @@ export default function Header() {
       </div>
 
       {/* ── Main nav ── */}
-      <div className={`border-t border-[#c4c9d4] transition-all duration-300 ${scrolled ? 'border-t-0' : ''}`}>
+      <div className="header-bottom">
         <div className="container-site">
           <div className="hidden lg:flex items-center">
             {/* Seal logo — only visible when scrolled */}

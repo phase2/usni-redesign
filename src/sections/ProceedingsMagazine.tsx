@@ -1,73 +1,85 @@
-import SectionHeader from '@/components/ui/SectionHeader'
 import SmallFeature from '@/components/cards/SmallFeature'
-import { proceedingsArticles } from '@/data/homepage'
-
-const magazineCoverUrl = 'https://picsum.photos/seed/proceedings-mag/400/560'
+import ButtonLinkCTA from '@/components/ui/ButtonLinkCTA'
+import { proceedingsArticles, proceedingsCoverImage } from '@/data/homepage'
 
 export default function ProceedingsMagazine() {
   const col1Articles = proceedingsArticles.slice(0, 2)
   const col2Articles = proceedingsArticles.slice(2, 4)
 
   return (
-    <section className="bg-white py-16 lg:py-20">
+    <section className="section-gradient py-16 lg:py-20">
       <div className="container-site">
-        <SectionHeader
-          eyebrow="Our Flagship Journal Since 1874"
-          headline="Proceedings Magazine"
-          description="The Proceedings is the U.S. Naval Institute's flagship monthly publication. It is the leading forum for the exchange of ideas on national defense and naval affairs. Read by senior leaders across the joint force."
-          ctaLabel="Explore All Issues"
-          ctaHref="/proceedings"
-          className="mb-10"
-        />
 
-        {/* Magazine grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-[auto_1px_1fr_1px_1fr] gap-0 items-start">
-          {/* Left: magazine cover + CTAs */}
-          <div className="lg:w-[280px] xl:w-[320px] flex-shrink-0 pb-8 lg:pb-0">
-            <div className="aspect-[3/4] bg-neutral-subtlest overflow-hidden mb-6">
+        {/* ── Section header ── */}
+        <div className="border-t-2 border-navy-bold pt-8 flex flex-col lg:flex-row lg:items-start lg:gap-12 mb-12">
+          <div className="flex-1">
+            <p className="font-body font-semibold text-sm uppercase tracking-[0.08em] text-navy-subtle mb-2">
+              April 2026 Edition
+            </p>
+            <h2 className="font-headline text-4xl lg:text-5xl text-navy-bolder leading-tight">
+              Proceedings Magazine
+            </h2>
+          </div>
+          <div className="flex-1 mt-6 lg:mt-0 flex flex-col gap-5 justify-start">
+            <p className="font-body text-base lg:text-lg text-neutral-subtle leading-relaxed">
+              Our flagship publication since 1874, Proceedings is the independent forum where military
+              professionals, scholars, and strategists debate the most consequential issues facing
+              naval and maritime defense. Every issue delivers peer-reviewed analysis, firsthand
+              perspective, and bold argument.
+            </p>
+            <ButtonLinkCTA href="/proceedings">
+              Explore Proceedings Magazine
+            </ButtonLinkCTA>
+          </div>
+        </div>
+
+        {/* ── 3-column grid: cover | col1 | col2 ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr_1fr] xl:grid-cols-[290px_1fr_1fr] gap-8">
+
+          {/* Left — magazine cover + action buttons */}
+          <div className="flex flex-col gap-4">
+            <a href="/proceedings" className="block overflow-hidden bg-neutral-subtlest">
               <img
-                src={magazineCoverUrl}
+                src={proceedingsCoverImage}
                 alt="Proceedings Magazine — Current Issue"
-                className="w-full h-full object-cover"
+                className="w-full h-auto object-cover hover:scale-105 transition-transform duration-300"
               />
-            </div>
-            <div className="flex flex-col gap-3">
-              <a
-                href="/proceedings/current"
-                className="flex items-center justify-center bg-navy-bolder text-white font-body font-bold text-sm py-3.5 px-5 w-full hover:bg-navy transition-colors"
-              >
-                Read Current Issue
-              </a>
-              <a
-                href="/membership"
-                className="flex items-center justify-center bg-transparent text-navy-bolder border border-navy-bolder font-body font-bold text-sm py-3.5 px-5 w-full hover:bg-navy-bolder hover:text-white transition-colors"
-              >
-                Subscribe / Join
-              </a>
-            </div>
+            </a>
+            <a
+              href="/proceedings"
+              className="flex items-center justify-center bg-navy-bolder text-white font-body font-bold text-sm py-4 px-5 w-full hover:bg-navy transition-colors"
+            >
+              Read the latest edition
+            </a>
+            <a
+              href="/proceedings/all-issues"
+              className="flex items-center justify-center bg-transparent text-navy-bolder border border-navy-bolder font-body font-bold text-sm py-4 px-5 w-full hover:bg-navy-bolder hover:text-white transition-colors"
+            >
+              Browse the full archive
+            </a>
           </div>
 
-          {/* Divider */}
-          <div className="hidden lg:block bg-border-light mx-8" />
-
-          {/* Middle articles */}
-          <div className="divide-y divide-border-light border-t lg:border-t-0 border-border-light">
+          {/* Middle column — 2 stacked articles */}
+          <div className="flex flex-col gap-8 border-t lg:border-t-0 pt-8 lg:pt-0">
             {col1Articles.map((article) => (
-              <div key={article.id} className="py-6 first:pt-0 lg:first:pt-0">
-                <SmallFeature article={article} showImage={true} />
-              </div>
+              <SmallFeature
+                key={article.id}
+                article={article}
+                showImage={true}
+                aspectRatio="aspect-[16/10]"
+              />
             ))}
           </div>
 
-          {/* Divider */}
-          <div className="hidden lg:block bg-border-light mx-8" />
-
-          {/* Right articles */}
-          <div className="divide-y divide-border-light border-t lg:border-t-0 border-border-light">
+          {/* Right column — 2 stacked articles */}
+          <div className="flex flex-col gap-8 border-t lg:border-t-0 pt-8 lg:pt-0">
             {col2Articles.map((article) => (
-              <div key={article.id} className="py-6 first:pt-0 lg:first:pt-0">
-                <SmallFeature article={article} showImage={true} />
-              </div>
+              <SmallFeature
+                key={article.id}
+                article={article}
+                showImage={true}
+                aspectRatio="aspect-[16/10]"
+              />
             ))}
           </div>
         </div>

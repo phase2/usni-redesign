@@ -18,7 +18,7 @@ export default function SplitFeature() {
           <h2 className="font-headline text-3xl lg:text-4xl text-navy-bolder leading-tight mb-4">
             Shop Our Ship's Store
           </h2>
-          <p className="font-body text-base text-navy leading-relaxed mb-3">
+          <p className="font-body text-base text-neutral-subtle leading-relaxed mb-3">
             Show your U.S. Naval Institute pride wherever you go with a selection of t-shirts, hoodies,
             hats, notebooks, and more in our Ship's Store.
           </p>

@@ -1,5 +1,5 @@
-const membershipImage = 'https://picsum.photos/seed/usni-membership/700/450'
-const donationImage = 'https://picsum.photos/seed/usni-donation/700/450'
+import membershipImage from '@/assets/images/membership-home-teaser.png'
+import donationImage from '@/assets/images/donate-home-teaser.png'
 
 interface PromoCardProps {
   eyebrow: string
@@ -26,7 +26,7 @@ function PromoCard({ eyebrow, headline, body, ctaLabel, ctaHref, image, imageAlt
             {headline}
           </h3>
         </div>
-        <p className="font-body text-sm lg:text-base text-navy leading-relaxed flex-1">{body}</p>
+        <p className="font-body text-sm lg:text-base text-neutral-subtle leading-relaxed flex-1">{body}</p>
         <a
           href={ctaHref}
           className="inline-flex items-center justify-center bg-navy-bolder text-white font-body font-bold text-sm tracking-[-0.3px] px-5 py-3.5 border border-navy-bolder hover:bg-navy transition-colors mt-auto"

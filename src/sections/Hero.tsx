@@ -10,7 +10,7 @@ export default function Hero() {
       {/* Navy content panel — bleeds to viewport left edge, no container constraint */}
       <div
         className="relative z-10 bg-navy-boldest flex flex-col justify-center gap-8
-                   w-full lg:w-1/2 xl:w-[49%]
+                   w-full lg:w-1/2 xl:w-[49%] max-w-[900px]
                    py-16 lg:py-20
                    pr-8 lg:pr-14"
         style={{ paddingLeft: 'clamp(1.5rem, 6.5vw, 7rem)' }}

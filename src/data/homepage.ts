@@ -7,6 +7,20 @@ import imgMiddleEastShipping from '@/assets/images/usni-news-Middle-East-Shippin
 import imgAmphibsBougainville from '@/assets/images/usni-news-amphibs-bougainville.png'
 import imgProgramTrain700 from '@/assets/images/usni-news-Program-Has-Helped-Train-700.png'
 
+// Proceedings
+import imgProceedingsCover from '@/assets/images/proceedings-cover-april26.png'
+import imgProcHallmarkRussia from '@/assets/images/proceedings-hallmark-russia.png'
+import imgProcMaritimeDominance from '@/assets/images/proceedings-maritime-dominance.png'
+import imgProcConfrontingCyber from '@/assets/images/proceedings-confronting-cyber-threats.png'
+import imgProcWhatChina from '@/assets/images/proceedings-what-china-can-learn.png'
+
+// Naval History
+import imgNHCover from '@/assets/images/naval-history-magazine-april26.png'
+import imgNHOnOurScope from '@/assets/images/nh-on-our-scope.png'
+import imgNHShipwrecks from '@/assets/images/nh-holy-grail-shipwrecks.png'
+import imgNHArizona from '@/assets/images/nh-uss-arizona.png'
+import imgNHClashFleets from '@/assets/images/nh-clash-fleets-south-china-sea.png'
+
 export const archivesDropdown: NavItem[] = [
   { label: 'Oral Histories', href: '/archive/oral-histories' },
   { label: 'Memoirs', href: '/archive/memoirs' },
@@ -170,11 +184,11 @@ export const latestNewsArticles: Article[] = [
   {
     id: '1',
     category: 'USNI News',
-    headline: 'USS George Washington (CVN 73) Carrier Strike Group Departs for Scheduled Deployment',
+    headline: 'USS Bougainville (LHA 8) Nears Completion at Huntington Ingalls Shipyard',
     date: 'April 28, 2025',
-    image: imgCarrierGeorge,
-    imageAlt: 'F/A-18 launching from USS George Washington',
-    href: '/news/george-washington-deployment',
+    image: imgAmphibsBougainville,
+    imageAlt: 'USS Bougainville amphibious assault ship under construction',
+    href: '/news/uss-bougainville-construction',
   },
   {
     id: '2',
@@ -197,29 +211,29 @@ export const latestNewsArticles: Article[] = [
   {
     id: 'mp1',
     category: 'USNI News',
-    headline: 'Middle East Shipping Lanes Remain Under Threat as Houthi Attacks Continue',
-    date: 'April 25, 2025',
-    image: imgMiddleEastShipping,
-    imageAlt: 'Container ship in Middle East shipping lane',
-    href: '/news/middle-east-shipping-threat',
-  },
-  {
-    id: 'mp2',
-    category: 'USNI News',
-    headline: 'USS Bougainville (LHA 8) Nears Completion at Huntington Ingalls Shipyard',
-    date: 'April 24, 2025',
-    image: imgAmphibsBougainville,
-    imageAlt: 'USS Bougainville under construction',
-    href: '/news/uss-bougainville-construction',
-  },
-  {
-    id: 'mp3',
-    category: 'USNI News',
     headline: 'Navy Program Has Helped Train 700 Partner Nation Sailors in Indo-Pacific',
     date: 'April 23, 2025',
     image: imgProgramTrain700,
     imageAlt: 'Ship launch ceremony',
     href: '/news/navy-program-train-700-sailors',
+  },
+  {
+    id: 'mp2',
+    category: 'USNI News',
+    headline: 'USS George Washington (CVN 73) Carrier Strike Group Departs for Scheduled Deployment',
+    date: 'April 24, 2025',
+    image: imgCarrierGeorge,
+    imageAlt: 'F/A-18 launching from USS George Washington',
+    href: '/news/george-washington-deployment',
+  },
+  {
+    id: 'mp3',
+    category: 'USNI News',
+    headline: 'Middle East Shipping Lanes Remain Under Threat as Houthi Attacks Continue',
+    date: 'April 25, 2025',
+    image: imgMiddleEastShipping,
+    imageAlt: 'Container ship in Middle East shipping lane',
+    href: '/news/middle-east-shipping-threat',
   },
   {
     id: 'mp4',
@@ -233,77 +247,86 @@ export const latestNewsArticles: Article[] = [
 export const proceedingsArticles: Article[] = [
   {
     id: 'p1',
-    category: 'Proceedings',
-    headline: 'Why the Navy Needs a New Approach to Unmanned Surface Vessels',
-    date: 'May 2025',
-    image: 'https://picsum.photos/seed/proc1/450/320',
-    imageAlt: 'Unmanned surface vessel',
-    href: '/proceedings/unmanned-surface-vessels',
+    category: 'Article Tag',
+    headline: "The Hallmarks of Russia's Hybrid War",
+    date: 'April 2026',
+    author: 'Sean Wiswesser',
+    image: imgProcHallmarkRussia,
+    imageAlt: "Senior officials at a conference on Russia's hybrid warfare",
+    href: '/proceedings/hallmarks-russia-hybrid-war',
   },
   {
     id: 'p2',
-    category: 'Proceedings',
-    headline: 'Rethinking Carrier Doctrine in the Age of Hypersonic Missiles',
-    date: 'May 2025',
-    image: 'https://picsum.photos/seed/proc2/450/320',
-    imageAlt: 'Aircraft carrier',
-    href: '/proceedings/carrier-doctrine-hypersonic',
+    category: 'Article Tag',
+    headline: 'Maritime Dominance Must Include the U.S. Coast Guard',
+    date: 'April 2026',
+    author: 'Bruce Stubbs',
+    image: imgProcMaritimeDominance,
+    imageAlt: 'U.S. Coast Guard cutter operating with Navy vessels',
+    href: '/proceedings/maritime-dominance-coast-guard',
   },
   {
     id: 'p3',
-    category: 'Proceedings',
-    headline: 'A New Generation of Naval Officers Must Embrace Strategic Ambiguity',
-    date: 'May 2025',
-    image: 'https://picsum.photos/seed/proc3/450/320',
-    imageAlt: 'Naval officers',
-    href: '/proceedings/new-generation-strategic',
+    category: 'Article Tag',
+    headline: 'Confronting Cyber Threats to Defend the Homeland',
+    date: 'April 2026',
+    author: 'Major Sharon Rollins, U.S. Marine Corps',
+    image: imgProcConfrontingCyber,
+    imageAlt: 'Military cyber operator at a command console',
+    href: '/proceedings/confronting-cyber-threats',
   },
   {
     id: 'p4',
-    category: 'Proceedings',
-    headline: 'The Submarine Force Must Evolve to Maintain Undersea Dominance',
-    date: 'May 2025',
-    image: 'https://picsum.photos/seed/proc4/450/320',
-    imageAlt: 'Submarine at sea',
-    href: '/proceedings/submarine-force-evolution',
+    category: 'Article Tag',
+    headline: "What China Can Learn from Washington's Caribbean Model",
+    date: 'April 2026',
+    author: 'Lt. P. J. Greenbaum, U.S. Navy',
+    image: imgProcWhatChina,
+    imageAlt: 'Amphibious forces operating in the Caribbean',
+    href: '/proceedings/china-caribbean-model',
   },
 ]
+
+export const proceedingsCoverImage = imgProceedingsCover
 
 export const navalHistoryArticles: Article[] = [
   {
     id: 'nh1',
-    category: 'Naval History',
-    headline: 'The Forgotten Fleet: America\'s Riverine Navy in Vietnam',
-    date: 'June 2025',
-    image: 'https://picsum.photos/seed/nh1/450/320',
-    imageAlt: 'Riverine patrol boats',
-    href: '/naval-history/vietnam-riverine',
+    category: 'On Our Scope',
+    headline: 'On Our Scope',
+    date: 'April 2026',
+    image: imgNHOnOurScope,
+    imageAlt: 'Naval officer looking through binoculars on a ship',
+    href: '/naval-history/on-our-scope',
   },
   {
     id: 'nh2',
-    category: 'Naval History',
-    headline: 'Yamamoto\'s Miscalculation: How Intelligence Failures Shaped the Pacific War',
-    date: 'June 2025',
-    image: 'https://picsum.photos/seed/nh2/450/320',
-    imageAlt: 'Pacific War naval battle',
-    href: '/naval-history/yamamoto-miscalculation',
+    category: 'Naval History News',
+    headline: "Recovery of the 'Holy Grail of Shipwrecks' Begins amid Decades-Long Legal Battle",
+    date: 'April 2026',
+    image: imgNHShipwrecks,
+    imageAlt: 'Historic naval battle painting of tall ships',
+    href: '/naval-history/holy-grail-shipwrecks',
   },
   {
     id: 'nh3',
-    category: 'Naval History',
-    headline: 'Iron Men, Wooden Ships: The Legacy of the Continental Navy',
-    date: 'June 2025',
-    image: 'https://picsum.photos/seed/nh3/450/320',
-    imageAlt: 'Continental Navy ship',
-    href: '/naval-history/continental-navy',
+    category: 'Naval History News',
+    headline: 'More Than 100 Tons of Concrete Removed from the USS Arizona',
+    date: 'April 2026',
+    image: imgNHArizona,
+    imageAlt: 'Workers removing concrete from the USS Arizona memorial',
+    href: '/naval-history/uss-arizona-concrete',
   },
   {
     id: 'nh4',
-    category: 'Naval History',
-    headline: 'The Battle of Leyte Gulf Reconsidered: New Archival Evidence',
-    date: 'June 2025',
-    image: 'https://picsum.photos/seed/nh4/450/320',
-    imageAlt: 'Leyte Gulf battle',
-    href: '/naval-history/leyte-gulf-reconsidered',
+    category: 'Classic Sea Fights',
+    headline: 'Clash of Fleets in the South China Sea',
+    date: 'April 2026',
+    author: 'Cadet Brandon H. Tran, U.S. Military Academy',
+    image: imgNHClashFleets,
+    imageAlt: 'Naval battle painting in the South China Sea',
+    href: '/naval-history/clash-fleets-south-china-sea',
   },
 ]
+
+export const navalHistoryCoverImage = imgNHCover

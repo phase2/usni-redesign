@@ -11,10 +11,14 @@ export default {
         navy: {
           boldest: '#001233',
           bolder: '#001845',
+          bold: '#002B5C',
           DEFAULT: '#012A74',
           subtle: '#023E7D',
           subtler: '#2B5496',
         },
+        // Text tokens
+        'text-primary': '#001845',
+        'neutral-subtle': '#4E576A',
         // Gold / secondary CTA palette
         gold: {
           DEFAULT: '#FFD000',

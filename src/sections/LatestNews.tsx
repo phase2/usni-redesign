@@ -45,8 +45,8 @@ export default function LatestNews() {
 
           {/* Right column: Most Popular */}
           <div className="py-6 lg:py-0 border-t lg:border-t-0 border-border-light">
-            <div className="bg-surface-subtle px-4 py-3 mb-2">
-              <p className="font-body font-bold text-sm text-navy-bolder">Most Popular</p>
+            <div className="bg-navy-bold px-4 py-3 mb-2">
+              <p className="font-body font-bold text-sm text-white uppercase tracking-widest">Most Popular</p>
             </div>
             <div className="divide-y divide-border-light">
               {mostPopular.map((article) => (
