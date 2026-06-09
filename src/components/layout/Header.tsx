@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { navItems, archivesDropdown } from '@/data/homepage'
 import type { NavItem, MegaMenuCTA } from '@/types'
 
@@ -109,7 +110,7 @@ function SimpleDropdown({ items }: { items: NavItem[] }) {
 }
 
 /* ─── Nav link (full & compact) ──────────────────────────────────────────────── */
-function NavLink({ item, compact }: { item: NavItem; compact: boolean }) {
+function NavLink({ item, compact, isActive }: { item: NavItem; compact: boolean; isActive: boolean }) {
   const [open, setOpen] = useState(false)
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -122,15 +123,21 @@ function NavLink({ item, compact }: { item: NavItem; compact: boolean }) {
   }
 
   return (
-    <div className="relative h-full flex items-stretch" onMouseEnter={handleEnter} onMouseLeave={handleLeave}>
+    <div
+      className={`relative h-full flex items-stretch border-b-[4px] transition-colors duration-150
+        ${isActive ? 'border-gold' : 'border-transparent'}`}
+      onMouseEnter={handleEnter}
+      onMouseLeave={handleLeave}
+    >
       <a
         href={item.href}
         className={`flex items-center gap-[10px] font-body font-extrabold whitespace-nowrap leading-none
                     transition-colors duration-150
-                    ${compact ? 'text-[18px] px-4 py-4' : 'text-[21px] px-5 py-6'}
+                    ${compact ? 'text-[18px] px-4 py-8' : 'text-[21px] px-5 py-6'}
                     ${open ? 'bg-navy-bolder text-white' : 'text-navy-subtle hover:text-navy-bolder'}`}
         aria-haspopup={item.children ? 'true' : undefined}
         aria-expanded={item.children ? open : undefined}
+        aria-current={isActive ? 'page' : undefined}
       >
         {item.label}
         {item.children && <Chevron open={open} />}
@@ -221,10 +228,11 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
         <div className="p-4">
           <a
             href="/giving/donate"
-            className="flex items-center justify-center gap-2 w-full bg-gold text-navy-bolder
-                       font-body font-bold text-base py-4 px-5 hover:bg-gold-dark transition-colors"
+            className="flex items-center justify-center gap-2.5 w-full bg-gold text-navy-bolder
+                       font-body font-bold text-base py-4 px-5 hover:bg-[#FFE566] transition-colors"
           >
-            ♡ Donate
+            <img src="/donate-button-logo.svg" alt="" className="h-6 w-auto" aria-hidden="true" />
+            Donate
           </a>
         </div>
       </div>
@@ -236,6 +244,7 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const scrolled = useScrolled(10)
+  const { pathname } = useLocation()
 
   return (
     <header className={`sticky top-0 z-40 bg-white transition-shadow duration-300 ${scrolled ? 'shadow-md' : 'shadow-sm'}`}>
@@ -276,10 +285,11 @@ export default function Header() {
               </a>
               <a
                 href="/giving/donate"
-                className="ml-3 flex items-center gap-2 bg-gold text-navy-bolder font-body font-bold
-                           text-[18px] px-6 py-2 hover:bg-gold-dark transition-colors whitespace-nowrap leading-none"
+                className="ml-3 flex items-center gap-2.5 bg-gold text-navy-bolder font-body font-bold
+                           text-[18px] px-6 py-3.5 hover:bg-[#FFE566] transition-colors whitespace-nowrap leading-none"
               >
-                ♡ Donate
+                <img src="/donate-button-logo.svg" alt="" style={{ height: '1.4rem' }} className="w-auto" aria-hidden="true" />
+                Donate
               </a>
             </div>
             {/* Mobile toggle (utility bar) */}
@@ -308,7 +318,12 @@ export default function Header() {
             {/* Nav items */}
             <nav className="flex items-stretch flex-1" aria-label="Primary navigation">
               {navItems.map((item) => (
-                <NavLink key={item.href} item={item} compact={scrolled} />
+                <NavLink
+                  key={item.href}
+                  item={item}
+                  compact={scrolled}
+                  isActive={pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href + '/'))}
+                />
               ))}
             </nav>
 

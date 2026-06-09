@@ -7,7 +7,7 @@ const links = [
 
 export default function GivingJumpNav() {
   return (
-    <nav className="bg-white border-b border-border-light sticky top-[65px] z-30" aria-label="Page sections">
+    <nav className="bg-white border-b border-border-light sticky top-[86px] z-30" aria-label="Page sections">
       <div className="container-site">
         <ul className="flex items-stretch gap-0 overflow-x-auto">
           {links.map((link, i) => (

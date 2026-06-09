@@ -13,7 +13,7 @@ export default function ProceedingsLatestIssue() {
 
         <div className="flex gap-8 items-start">
           {/* Magazine cover sidebar */}
-          <div className="flex-none w-[350px] sticky top-8 pt-8">
+          <div className="flex-none w-[350px] sticky top-[96px] pt-8">
             <div className="aspect-[350/478] bg-neutral-subtlest overflow-hidden mb-6">
               <img
                 src={magazineCoverUrl}
@@ -21,20 +21,12 @@ export default function ProceedingsLatestIssue() {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="flex flex-col gap-3">
-              <a
-                href="/proceedings/current/download"
-                className="flex items-center justify-center gap-2 bg-navy-bold text-white font-body font-bold text-sm tracking-[-0.3px] px-5 py-3.5 border border-navy-bold hover:bg-navy transition-colors w-full"
-              >
-                ↓ Download PDF
-              </a>
-              <a
-                href="/proceedings/current/epub"
-                className="flex items-center justify-center gap-2 bg-transparent text-navy-bolder font-body font-bold text-sm tracking-[-0.3px] px-5 py-3.5 border border-navy-bolder hover:bg-navy-bolder hover:text-white transition-colors w-full"
-              >
-                ↓ Access ePub
-              </a>
-            </div>
+            <a
+              href="/proceedings/current"
+              className="flex items-center justify-center gap-2 bg-navy-bold text-white font-body font-bold text-sm tracking-[-0.3px] px-5 py-3.5 border border-navy-bold hover:bg-navy transition-colors w-full"
+            >
+              View the full issue
+            </a>
           </div>
 
           {/* Article grid */}
@@ -67,15 +59,6 @@ export default function ProceedingsLatestIssue() {
               </div>
             </div>
 
-            {/* View full issue CTA */}
-            <div className="flex justify-center pt-4">
-              <a
-                href="/proceedings/current"
-                className="inline-flex items-center justify-center gap-2 bg-transparent text-navy-bolder font-body font-bold text-sm tracking-[-0.3px] px-8 py-3.5 border border-navy-bolder hover:bg-navy-bolder hover:text-white transition-colors w-[350px]"
-              >
-                View the full issue
-              </a>
-            </div>
           </div>
         </div>
       </div>

@@ -54,6 +54,7 @@ export const featuredArticleCenter: Article = {
   author: 'Corporal Richard Sweeney III, U.S. Marine Corps Reserve',
   image: imgThreeMEFs,
   href: '/proceedings/three-mefs',
+
 }
 
 export const featuredArticlesRight: Article[] = [
