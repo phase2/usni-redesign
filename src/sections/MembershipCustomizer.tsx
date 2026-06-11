@@ -1,158 +1,262 @@
 import { useState } from 'react'
 
 type Region = 'us' | 'international'
-type Term = '1' | '3'
+type Term = '1' | '3' | 'lifetime'
 
-interface TierPricing {
-  digital: number | null
-  full: number
-  student: number | null
+// ─── Feature lists ────────────────────────────────────────────────────────────
+
+const digitalFeatures = [
+  'Digital edition of Proceedings + full access to USNI.org.',
+  'NEW: Interactive flippable PDF edition of Proceedings (Nov 2024 onward).',
+  "NEW: 20% off the Naval Institute Ship's Store.",
+  'Up to 40% off Naval Institute Press titles.',
+  '28% off Naval History Magazine.',
+  'Sea Scroll — the weekly members-only USNI newsletter.',
+  'Free invitations to USNI conference series + discounted access to WEST, the largest Sea Services conference.',
+  '150+ years of archives — oral histories, photographs, and every Proceedings article from 1874 to today.',
+  'A voice in the open forum to advance the naval profession.',
+]
+
+const fullFeatures = [
+  'Print Proceedings delivered monthly + digital edition + full USNI.org access.',
+  'NEW: Interactive flippable PDF edition of Proceedings (Nov 2024 onward).',
+  "NEW: 20% off the Naval Institute Ship's Store.",
+  'Up to 40% off Naval Institute Press titles.',
+  '28% off Naval History Magazine.',
+  'Sea Scroll — the weekly members-only USNI newsletter.',
+  'Free invitations to USNI conference series + discounted access to WEST, the largest Sea Services conference.',
+  '150+ years of archives — oral histories, photographs, and every Proceedings article from 1874 to today.',
+  'A voice in the open forum to advance the naval profession.',
+]
+
+const studentFeatures = [
+  'Print and digital Proceedings + full access to USNI.org.',
+  'NEW: Interactive flippable PDF edition of Proceedings (Nov 2024 onward).',
+  "NEW: 20% off the Naval Institute Ship's Store.",
+  'Up to 40% off Naval Institute Press titles.',
+  '28% off Naval History Magazine.',
+  'Sea Scroll — the weekly members-only USNI newsletter.',
+  'Free invitations to USNI conference series + discounted access to WEST, the largest Sea Services conference.',
+  '150+ years of archives — oral histories, photographs, and every Proceedings article from 1874 to today.',
+  'A voice in the open forum to advance the naval profession.',
+]
+
+const lifeExtras = [
+  'A Naval Institute Fleece Pullover.',
+  'An official Life Member Baseball Cap.',
+  'An embroidered Naval Institute patch.',
+  'A Naval Institute lapel pin.',
+  'Naval Institute decals and a special Life Member certificate.',
+]
+
+// ─── Pricing data ─────────────────────────────────────────────────────────────
+
+interface TierDef {
+  plan: string
+  name: string
+  price: number | null
+  originalPrice?: number
+  description: string
+  features: string[]
+  isMostPopular?: boolean
 }
 
-const pricing: Record<Region, Record<Term, TierPricing>> = {
+type AnnualTerm = '1' | '3'
+
+const pricingData: Record<Region, Record<AnnualTerm, TierDef[]>> = {
   us: {
-    '1': { digital: 45, full: 75, student: 20 },
-    '3': { digital: 120, full: 195, student: null },
+    '1': [
+      { plan: 'digital', name: 'Digital', price: 45, description: 'Full online access to USNI.org and the digital edition of Proceedings.', features: digitalFeatures },
+      { plan: 'full', name: 'Full', price: 75, description: 'Everything in Digital plus the print edition of Proceedings mailed monthly.', features: fullFeatures, isMostPopular: true },
+      { plan: 'student', name: 'Student', price: 20, description: 'For full-time students and active-duty personnel in professional military education.', features: studentFeatures },
+    ],
+    '3': [
+      { plan: 'digital', name: 'Digital', price: 120, originalPrice: 135, description: 'Full online access to USNI.org and the digital edition of Proceedings.', features: digitalFeatures },
+      { plan: 'full', name: 'Full', price: 195, originalPrice: 225, description: 'Everything in Digital plus the print edition of Proceedings mailed monthly.', features: fullFeatures, isMostPopular: true },
+    ],
   },
   international: {
-    '1': { digital: null, full: 110, student: 30 },
-    '3': { digital: null, full: 285, student: null },
+    '1': [
+      { plan: 'digital', name: 'Digital', price: 60, description: 'Full online access to USNI.org and the digital edition of Proceedings.', features: digitalFeatures },
+      { plan: 'full', name: 'Full', price: 95, description: 'Everything in Digital plus the print edition of Proceedings mailed monthly.', features: fullFeatures, isMostPopular: true },
+      { plan: 'student', name: 'Student', price: 30, description: 'For full-time students and active-duty personnel in professional military education.', features: studentFeatures },
+    ],
+    '3': [
+      { plan: 'digital', name: 'Digital', price: 165, originalPrice: 180, description: 'Full online access to USNI.org and the digital edition of Proceedings.', features: digitalFeatures },
+      { plan: 'full', name: 'Full', price: 255, originalPrice: 285, description: 'Everything in Digital plus the print edition of Proceedings mailed monthly.', features: fullFeatures, isMostPopular: true },
+    ],
   },
 }
 
-function CheckIcon({ className = '' }: { className?: string }) {
+// ─── Lifetime data ────────────────────────────────────────────────────────────
+
+interface LifetimeTierDef {
+  plan: string
+  name: string
+  price: number
+  description: string
+  features: string[]
+}
+
+interface LifetimeGroupDef {
+  label: string
+  tiers: LifetimeTierDef[]
+}
+
+const lifetimeGroups: LifetimeGroupDef[] = [
+  {
+    label: 'For those under 60',
+    tiers: [
+      {
+        plan: 'full-life',
+        name: 'Full Life',
+        price: 1873,
+        description: 'Everything USNI for life — including print Proceedings delivered to your door.',
+        features: [...fullFeatures, ...lifeExtras],
+      },
+      {
+        plan: 'online-life',
+        name: 'Online Life',
+        price: 1150,
+        description: 'Full digital access for life — all the content, none of the print.',
+        features: [...digitalFeatures, ...lifeExtras],
+      },
+    ],
+  },
+  {
+    label: '60 and older – save 34%',
+    tiers: [
+      {
+        plan: 'senior-life',
+        name: 'Senior Life',
+        price: 1236.18,
+        description: 'Everything USNI for life — including print Proceedings delivered to your door.',
+        features: ['34% off the standard life membership rate.', ...fullFeatures, ...lifeExtras],
+      },
+      {
+        plan: 'senior-online-life',
+        name: 'Senior Online Life',
+        price: 759,
+        description: 'Digital-only life membership at the best available rate.',
+        features: ['34% off the standard life membership rate.', ...digitalFeatures, ...lifeExtras],
+      },
+    ],
+  },
+]
+
+// ─── Sub-components ───────────────────────────────────────────────────────────
+
+function CheckIcon() {
   return (
-    <svg className={`w-4 h-4 flex-shrink-0 ${className}`} viewBox="0 0 16 16" fill="none">
+    <svg className="w-4 h-4 flex-shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none">
       <path d="M3 8l3.5 3.5L13 4.5" stroke="#0466c8" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   )
 }
 
-function StarIcon({ className = '' }: { className?: string }) {
-  return (
-    <svg className={`w-4 h-4 flex-shrink-0 ${className}`} viewBox="0 0 16 16" fill="none">
-      <path d="M8 2l1.5 3.5L13 6l-2.5 2.5.5 3.5L8 10.5 5 12l.5-3.5L3 6l3.5-.5L8 2z" fill="#0466c8" />
-    </svg>
-  )
-}
-
-interface FeatureItem {
-  text: string
-  highlight?: boolean
-}
-
-const digitalFeatures: FeatureItem[] = [
-  { text: 'Full USNI.org access' },
-  { text: 'Digital Proceedings + interactive PDF' },
-  { text: '150+ years of archives' },
-  { text: 'Sea Scroll newsletter' },
-  { text: "20% off Ship's Store" },
-  { text: 'Up to 40% off NI Press books' },
-  { text: '28% off Naval History Magazine' },
-  { text: 'Conference invitations + WEST discount' },
-]
-
-const fullFeatures: FeatureItem[] = [
-  { text: 'Print edition of Proceedings', highlight: true },
-  { text: 'Digital Proceedings + interactive PDF' },
-  { text: '150+ years of archives' },
-  { text: 'Sea Scroll newsletter' },
-  { text: "20% off Ship's Store" },
-  { text: 'Up to 40% off NI Press books' },
-  { text: '28% off Naval History Magazine' },
-  { text: 'Conference invitations + WEST discount' },
-]
-
-const studentFeatures: FeatureItem[] = [
-  { text: 'Print + digital Proceedings', highlight: true },
-  { text: 'Full USNI.org access' },
-  { text: 'Interactive PDF (Nov 2024+)' },
-  { text: 'Digital Proceedings + interactive PDF' },
-  { text: '150+ years of archives' },
-  { text: 'Sea Scroll newsletter' },
-  { text: "20% off Ship's Store" },
-  { text: 'Up to 40% off NI Press books' },
-  { text: '28% off Naval History Magazine' },
-]
-
 function TierCard({
   name,
   price,
+  originalPrice,
+  priceUnit,
   description,
   features,
   isMostPopular,
-  disabled,
+  showSpacer = true,
+  ctaText,
+  cartHref,
 }: {
   name: string
   price: number | null
+  originalPrice?: number
+  priceUnit?: string
   description: string
-  features: FeatureItem[]
+  features: string[]
   isMostPopular?: boolean
-  disabled?: boolean
+  showSpacer?: boolean
+  ctaText?: string
+  cartHref?: string
 }) {
+  const disabled = price === null
+
+  const formattedPrice = price !== null
+    ? price % 1 === 0
+      ? price.toLocaleString()
+      : price.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    : null
+
+  const buttonLabel = ctaText ?? (price !== null ? `Join — $${formattedPrice}` : 'Not available')
+
   return (
-    <div className={`relative flex flex-col flex-1 min-w-0 ${isMostPopular ? 'border-4 border-[#0466c8]' : 'border border-[#999fad]'} bg-white overflow-hidden ${disabled ? 'opacity-50' : ''}`}>
-      {/* Most popular badge */}
-      {isMostPopular && (
-        <div className="bg-[#0466c8] flex items-center justify-center py-2">
-          <span className="font-body font-medium text-[18px] uppercase tracking-[0.06em] text-white">
+    <div className={`relative flex flex-col flex-1 min-w-0 bg-white overflow-hidden
+      ${isMostPopular ? 'border border-gold' : 'border border-[#c4c9d4]'}
+      ${disabled ? 'opacity-50' : ''}`}
+    >
+      {/* Badge row */}
+      {isMostPopular ? (
+        <div className="bg-gold flex items-center justify-center py-2.5">
+          <span className="font-body font-bold text-[11px] uppercase tracking-[0.12em] text-navy-bolder">
             Most Popular
           </span>
         </div>
-      )}
+      ) : showSpacer ? (
+        <div className="h-[43px]" aria-hidden="true" />
+      ) : null}
 
-      {/* Spacer to align non-badged cards with badged one */}
-      {!isMostPopular && <div className="h-[43px]" aria-hidden="true" />}
+      <div className="flex flex-col flex-1 px-5 py-6 gap-5">
+        {/* Title + price */}
+        <div className="flex items-start justify-between gap-3">
+          <h3 className="font-headline text-[26px] text-navy-bolder leading-tight">{name}</h3>
 
-      <div className="flex flex-col gap-4 px-5 py-6 flex-1">
-        {/* Headline + price */}
-        <div className="flex items-start justify-between border-b border-[#0466c8] pb-2">
-          <h3 className="font-headline text-[28px] text-navy-bolder leading-[1.2] flex-1">
-            {name}
-          </h3>
           {price !== null && (
-            <div className="flex items-start gap-0.5 flex-shrink-0">
-              <span className="font-body font-bold text-base text-navy-subtle mt-1.5">$</span>
-              <span className="font-headline text-[36px] text-navy-subtle leading-[1.3]">{price}</span>
+            <div className="flex flex-col items-end flex-shrink-0">
+              <div className="flex items-baseline gap-1.5">
+                {originalPrice && (
+                  <span className="font-body text-sm text-neutral-subtle line-through">
+                    ${originalPrice.toLocaleString()}
+                  </span>
+                )}
+                <div className="flex items-start">
+                  <span className="font-body font-bold text-sm text-navy-bolder mt-[3px]">$</span>
+                  <span className="font-headline text-[36px] text-navy-bolder leading-[1.0]">
+                    {formattedPrice}
+                  </span>
+                </div>
+              </div>
+              {priceUnit && (
+                <span className="font-body text-xs text-neutral-subtle text-right">{priceUnit}</span>
+              )}
             </div>
-          )}
-          {price === null && (
-            <span className="font-body font-bold text-sm text-neutral-subtle mt-2">Not available</span>
           )}
         </div>
 
         {/* Description */}
-        <p className="font-body text-xl text-neutral-subtle leading-[1.4]">
-          {description}
-        </p>
+        <p className="font-body text-base text-neutral-subtle leading-[1.5]">{description}</p>
 
         {/* CTA */}
-        <div>
-          {price !== null && !disabled ? (
-            <a
-              href="#"
-              className="flex items-center justify-center gap-2 w-full bg-navy-bold text-white font-body font-bold text-base tracking-[-0.5px] px-6 py-4 border border-navy-bold hover:bg-navy transition-colors"
-            >
-              Select {name}
-              <svg className="w-3 h-3 flex-shrink-0" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M2 6h8M6 2l4 4-4 4" />
-              </svg>
-            </a>
-          ) : (
-            <div className="flex items-center justify-center w-full bg-[#c4c9d4] text-white font-body font-bold text-base px-6 py-4 cursor-not-allowed">
-              Not available for this selection
-            </div>
-          )}
-        </div>
+        {!disabled ? (
+          <a
+            href={cartHref ?? '#'}
+            className={`flex items-center justify-center w-full font-body font-bold text-base px-6 py-4 transition-colors
+              ${isMostPopular
+                ? 'bg-gold text-navy-bolder hover:bg-gold-dark'
+                : 'bg-navy-bolder text-white hover:bg-navy-bold'
+              }`}
+          >
+            {buttonLabel}
+          </a>
+        ) : (
+          <div className="flex items-center justify-center w-full bg-[#c4c9d4] text-white font-body font-bold text-base px-6 py-4 cursor-not-allowed">
+            Not available
+          </div>
+        )}
 
-        {/* Feature list */}
-        <ul className="flex flex-col border-t border-gold pt-4 gap-1">
+        {/* Features */}
+        <ul className="flex flex-col border-t border-[#e4e7ec] pt-4 gap-0.5">
           {features.map((f) => (
-            <li key={f.text} className="flex items-center gap-2 py-1">
-              {f.highlight ? <StarIcon /> : <CheckIcon />}
-              <span className={`font-body text-sm text-neutral-subtle leading-[1.5] ${f.highlight ? 'font-bold' : ''}`}>
-                {f.text}
-              </span>
+            <li key={f} className="flex items-start gap-2 py-0.5">
+              <CheckIcon />
+              <span className="font-body text-sm text-neutral-subtle leading-[1.5]">{f}</span>
             </li>
           ))}
         </ul>
@@ -190,11 +294,20 @@ function DropdownSelect({
   )
 }
 
+// ─── Main component ───────────────────────────────────────────────────────────
+
 export default function MembershipCustomizer() {
   const [region, setRegion] = useState<Region>('us')
   const [term, setTerm] = useState<Term>('1')
 
-  const prices = pricing[region][term]
+  function handleTermChange(v: string) {
+    const next = v as Term
+    setTerm(next)
+    if (next === 'lifetime') setRegion('us')
+  }
+
+  const priceUnit = term === '1' ? '/ yr' : term === '3' ? '/ 3 yrs' : ''
+  const isLifetime = term === 'lifetime'
 
   return (
     <section className="bg-white py-section">
@@ -203,53 +316,88 @@ export default function MembershipCustomizer() {
           Find the right membership for you
         </h2>
 
-        {/* Inline sentence-style dropdowns */}
+        {/* Sentence-style selectors */}
         <div className="flex flex-wrap items-center gap-x-3 gap-y-4 pb-8 border-b border-[#c4c9d4]">
           <span className="font-headline text-[28px] lg:text-[36px] text-neutral-subtle leading-[1.2]">I live</span>
-          <DropdownSelect
-            value={region}
-            onChange={(v) => setRegion(v as Region)}
-            options={[
-              { value: 'us', label: 'in the U.S.' },
-              { value: 'international', label: 'outside the U.S.' },
-            ]}
-          />
+
+          {!isLifetime && (
+            <DropdownSelect
+              value={region}
+              onChange={(v) => setRegion(v as Region)}
+              options={[
+                { value: 'us', label: 'in the U.S.' },
+                { value: 'international', label: 'outside the U.S.' },
+              ]}
+            />
+          )}
+          {isLifetime && (
+            <span className="font-headline text-[28px] lg:text-[36px] text-navy-bolder leading-[1.2] border border-navy-subtle px-4 py-3">in the U.S.</span>
+          )}
+
           <span className="font-headline text-[28px] lg:text-[36px] text-neutral-subtle leading-[1.2]">and want to buy a</span>
+
           <DropdownSelect
             value={term}
-            onChange={(v) => setTerm(v as Term)}
+            onChange={handleTermChange}
             options={[
-              { value: '1', label: '1 year' },
-              { value: '3', label: '3 year' },
+              { value: '1', label: '1-year' },
+              { value: '3', label: '3-year' },
+              { value: 'lifetime', label: 'lifetime' },
             ]}
           />
+
           <span className="font-headline text-[28px] lg:text-[36px] text-neutral-subtle leading-[1.2]">membership.</span>
         </div>
 
-        {/* Tier cards */}
-        <div className="flex flex-col lg:flex-row gap-8 mt-8 items-stretch">
-          <TierCard
-            name="Digital"
-            price={prices.digital}
-            disabled={prices.digital === null}
-            description="Full online access and the digital edition of Proceedings. No print delivery."
-            features={digitalFeatures}
-          />
-          <TierCard
-            name="Full"
-            price={prices.full}
-            description="Everything digital, plus the print edition of Proceedings delivered monthly."
-            features={fullFeatures}
-            isMostPopular
-          />
-          <TierCard
-            name="Student"
-            price={prices.student}
-            disabled={prices.student === null}
-            description="For full-time students, active-duty PME, and military college program participants."
-            features={studentFeatures}
-          />
-        </div>
+        {/* ── Annual tier cards ── */}
+        {!isLifetime && (
+          <div className="flex flex-col lg:flex-row gap-8 mt-8 items-stretch">
+            {pricingData[region][term as AnnualTerm].map((tier) => (
+              <TierCard
+                key={tier.plan}
+                name={tier.name}
+                price={tier.price}
+                originalPrice={tier.originalPrice}
+                priceUnit={priceUnit}
+                description={tier.description}
+                features={tier.features}
+                isMostPopular={tier.isMostPopular}
+                cartHref={tier.price !== null
+                  ? `/membership/cart?plan=${tier.plan}&term=${term}&region=${region}&price=${tier.price}`
+                  : undefined
+                }
+              />
+            ))}
+          </div>
+        )}
+
+        {/* ── Lifetime cards ── */}
+        {isLifetime && (
+          <div className="flex flex-col gap-12 mt-8">
+            {lifetimeGroups.map((group) => (
+              <div key={group.label}>
+                <h3 className="font-headline text-2xl lg:text-3xl text-navy-bolder mb-6">
+                  {group.label}
+                </h3>
+                <div className="flex flex-col lg:flex-row gap-8 items-stretch">
+                  {group.tiers.map((tier) => (
+                    <TierCard
+                      key={tier.plan}
+                      name={tier.name}
+                      price={tier.price}
+                      priceUnit=""
+                      description={tier.description}
+                      features={tier.features}
+                      showSpacer={false}
+                      ctaText={`Select ${tier.name}`}
+                      cartHref={`/membership/cart?plan=${tier.plan}&term=lifetime&region=us&price=${tier.price}`}
+                    />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   )

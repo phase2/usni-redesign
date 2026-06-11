@@ -15,18 +15,17 @@ export default function MembershipHero() {
                    pr-8 lg:pr-14"
         style={{ paddingLeft: 'clamp(1.5rem, 6.5vw, 7rem)' }}
       >
-        <p className="font-body font-medium text-sm uppercase tracking-[0.08em] text-navy-subtle">
-          Membership
-        </p>
-
-        <div className="flex flex-col gap-6">
-          <h1 className="font-headline text-5xl lg:text-6xl xl:text-[64px] text-navy-bolder leading-[1.1]">
-            Join the independent forum for sea power
-          </h1>
-          <p className="font-body text-lg lg:text-xl text-neutral-subtle leading-relaxed">
-            150 years of advancing the naval profession – through print, debate, and digital access.
-            Choose the membership that fits your commitment.
-          </p>
+        <div className="eyebrow-headline">
+          <p className="eyebrow">Membership</p>
+          <div className="flex flex-col gap-6">
+            <h1 className="font-headline text-5xl lg:text-6xl xl:text-[64px] text-navy-bolder leading-[1.1]">
+              Join the independent forum for sea power
+            </h1>
+            <p className="font-body text-lg lg:text-xl text-neutral-subtle leading-relaxed">
+              150 years of advancing the naval profession – through print, debate, and digital access.
+              Choose the membership that fits your commitment.
+            </p>
+          </div>
         </div>
 
         <div className="flex flex-wrap gap-4 items-center">

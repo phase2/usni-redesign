@@ -2,50 +2,52 @@ import coverImage from '@/assets/images/proceedings-magazine-april-cover.png'
 
 export default function ProceedingsIssueHero() {
   return (
-    <section
-      className="relative z-20"
-      style={{ background: 'linear-gradient(to bottom, #1d2535, #0e121a)' }}
-    >
-      <div className="container-site pt-10 pb-0 lg:pt-14">
+    <section style={{ background: 'linear-gradient(to bottom, #1d2535, #0e121a)' }}>
+      <div className="container-site py-12 lg:py-16">
         <div className="flex items-start gap-10 xl:gap-16">
 
-          {/* Left: issue info */}
-          <div className="flex-1 pb-10 lg:pb-14">
-            <nav className="flex items-center gap-2 mb-8 font-body text-sm text-white/55">
-              <a href="/" className="hover:text-white transition-colors">Home</a>
-              <span>/</span>
-              <a href="/publications" className="hover:text-white transition-colors">Publications</a>
-              <span>/</span>
-              <a href="/proceedings" className="hover:text-white transition-colors">Proceedings</a>
-              <span>/</span>
-              <span className="text-white/80">April 2026 Issue</span>
-            </nav>
+          {/* Left column */}
+          <div className="flex-1 min-w-0 flex flex-col gap-4">
 
-            <h1 className="font-headline text-5xl lg:text-[64px] text-white leading-[0.95] mb-4">
-              April 2026
+            {/* Breadcrumb + divider */}
+            <div className="pb-4 border-b border-[#33415c]">
+              <nav className="flex flex-wrap items-center gap-x-2 gap-y-1 font-body font-bold text-base text-white">
+                <a href="/" className="flex items-center gap-1.5 hover:text-white/80 transition-colors">
+                  <i className="fa-solid fa-house text-[10px]" aria-hidden="true" />
+                  Home
+                </a>
+                <span className="text-white/40">/</span>
+                <a href="/publications" className="hover:text-white/80 transition-colors">Publications</a>
+                <span className="text-white/40">/</span>
+                <a href="/proceedings" className="hover:text-white/80 transition-colors">Proceedings</a>
+                <span className="text-white/40">/</span>
+                <span className="font-normal italic text-[#f4f4f6]">April 2026 Issue</span>
+              </nav>
+            </div>
+
+            {/* Title */}
+            <h1 className="font-headline text-[56px] lg:text-[64px] text-white leading-[1.1]">
+              Proceedings:<br />April 2026
             </h1>
-            <p className="font-body text-base text-white/60 mb-10 tracking-wide">
-              Vol. 152/4/1,478
+
+            {/* Volume */}
+            <p className="font-body font-bold text-[24px] text-[#f4f4f6] leading-[1.4]">
+              Volume 152/4/1,478
             </p>
 
-            <div className="flex flex-wrap gap-4">
-              <a
-                href="/proceedings/apr-2026/digital"
-                className="inline-flex items-center gap-2 bg-gold text-navy-boldest font-body font-bold text-sm tracking-[-0.2px] px-6 py-3.5 hover:brightness-95 transition-all"
-              >
-                Access Digital Edition (PDF)
-              </a>
+            {/* CTA */}
+            <div className="pt-2">
               <a
                 href="/proceedings/archive"
-                className="inline-flex items-center gap-2 border border-white/70 text-white font-body font-bold text-sm tracking-[-0.2px] px-6 py-3.5 hover:bg-white/10 transition-colors"
+                className="inline-flex items-center justify-center bg-gold text-navy-bolder font-body font-bold text-base tracking-[-0.5px] px-5 py-4 hover:bg-gold-dark transition-colors"
               >
                 See the Proceedings Archive
               </a>
             </div>
           </div>
 
-          {/* Right: cover anchored to top, extends below hero via negative margin */}
-          <div className="hidden lg:block flex-shrink-0 w-[300px] xl:w-[340px] -mb-32 xl:-mb-40">
+          {/* Right: cover */}
+          <div className="hidden lg:block flex-shrink-0 w-[280px] xl:w-[316px] self-center">
             <img
               src={coverImage}
               alt="Proceedings April 2026 Cover"

@@ -12,13 +12,13 @@ export default function SplitFeature() {
       {/* Content card — right side */}
       <div className="relative container-site h-full flex items-center justify-end min-h-[480px]">
         <div className="bg-white p-8 lg:p-12 w-full max-w-full md:max-w-[480px] lg:max-w-[520px] my-12">
-          <p className="font-body font-medium text-xs uppercase tracking-widest text-navy-subtle mb-3">
-            USNI Store
-          </p>
-          <h2 className="font-headline text-3xl lg:text-4xl text-navy-bolder leading-tight mb-4">
-            Shop Our Ship's Store
-          </h2>
-          <p className="font-body text-base text-neutral-subtle leading-relaxed mb-3">
+          <div className="eyebrow-headline mb-4">
+            <p className="eyebrow">USNI Store</p>
+            <h2 className="font-headline text-3xl lg:text-4xl text-navy-bolder leading-tight">
+              Shop Our Ship's Store
+            </h2>
+          </div>
+          <p className="font-body text-base text-neutral-subtle leading-relaxed mb-1.5">
             Show your U.S. Naval Institute pride wherever you go with a selection of t-shirts, hoodies,
             hats, notebooks, and more in our Ship's Store.
           </p>

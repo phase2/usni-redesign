@@ -10,12 +10,12 @@ export default function ProceedingsMembershipCTA() {
 
       <div className="relative container-site h-full flex items-center justify-end min-h-[480px]">
         <div className="bg-white p-8 lg:p-12 w-full max-w-full md:max-w-[480px] lg:max-w-[560px] my-20">
-          <p className="font-body font-medium text-sm uppercase tracking-widest text-navy-subtle mb-3">
-            Join USNI & Subscribe
-          </p>
-          <h2 className="font-headline text-4xl lg:text-5xl text-navy-bolder leading-tight mb-4">
-            Proceedings goes deeper. So should you.
-          </h2>
+          <div className="eyebrow-headline mb-4">
+            <p className="eyebrow">Join USNI & Subscribe</p>
+            <h2 className="font-headline text-4xl lg:text-5xl text-navy-bolder leading-tight">
+              Proceedings goes deeper. So should you.
+            </h2>
+          </div>
           <p className="font-body text-base text-neutral-subtle leading-relaxed mb-6">
             A USNI membership gives you full access to every issue of Proceedings — plus the complete digital archive stretching back to 1874, member pricing on Naval Institute Press titles, and a community of the most serious minds in maritime defense. For less than a dollar a week, you're part of the conversation that matters.
           </p>

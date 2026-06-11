@@ -22,12 +22,10 @@ export default function SectionHeader({
   if (centered) {
     return (
       <div className={`text-center ${className}`}>
-        {eyebrow && (
-          <p className="font-body font-medium text-sm uppercase tracking-[0.08em] text-navy-subtle mb-3">
-            {eyebrow}
-          </p>
-        )}
-        <h2 className="font-headline text-4xl lg:text-5xl text-navy-bolder">{headline}</h2>
+        <div className="eyebrow-headline items-center">
+          {eyebrow && <p className="eyebrow">{eyebrow}</p>}
+          <h2 className="font-headline text-4xl lg:text-5xl text-navy-bolder">{headline}</h2>
+        </div>
       </div>
     )
   }
@@ -36,14 +34,12 @@ export default function SectionHeader({
     <div className={`${className}`}>
       <div className="border-t-2 border-navy-bold pt-8 flex flex-col lg:flex-row lg:items-start lg:gap-8">
         <div className="flex-1">
-          {eyebrow && (
-            <p className="font-body font-medium text-sm uppercase tracking-[0.08em] text-navy-subtle mb-3">
-              {eyebrow}
-            </p>
-          )}
-          <h2 className="font-headline text-4xl lg:text-5xl text-navy-bolder leading-tight">
-            {headline}
-          </h2>
+          <div className="eyebrow-headline">
+            {eyebrow && <p className="eyebrow">{eyebrow}</p>}
+            <h2 className="font-headline text-4xl lg:text-5xl text-navy-bolder leading-tight">
+              {headline}
+            </h2>
+          </div>
         </div>
         {(description || ctaLabel) && (
           <div className="flex-1 mt-6 lg:mt-0 lg:max-w-[600px] flex flex-col gap-6 justify-start">

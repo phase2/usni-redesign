@@ -66,12 +66,12 @@ export default function GivingWaysToGive() {
 
           {/* Left — intro */}
           <div>
-            <p className="font-body font-medium text-sm uppercase tracking-[0.08em] text-navy-subtle mb-3">
-              Ways to Give
-            </p>
-            <h2 className="font-headline text-3xl lg:text-4xl text-navy-bolder leading-tight mb-6">
-              There are Many Ways to Make a Gift
-            </h2>
+            <div className="eyebrow-headline mb-6">
+              <p className="eyebrow">Ways to Give</p>
+              <h2 className="font-headline text-3xl lg:text-4xl text-navy-bolder leading-tight">
+                There are Many Ways to Make a Gift
+              </h2>
+            </div>
             <p className="font-body text-base text-neutral-subtle leading-relaxed">
               Donations to the U.S. Naval Institute provide funding to mission-centric activities,
               preserves our history, and creates useful tools to make information and content

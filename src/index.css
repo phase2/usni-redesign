@@ -32,9 +32,14 @@
     @apply border-t border-border-light;
   }
 
-  /* Eyebrow label pattern */
+  /* Eyebrow label — typography only, no spacing (let .eyebrow-headline or mb-* handle it) */
   .eyebrow {
     @apply font-body text-sm font-medium uppercase tracking-widest text-navy-subtle;
+  }
+
+  /* Tight eyebrow → headline grouping — wraps an .eyebrow + heading element */
+  .eyebrow-headline {
+    @apply flex flex-col gap-2;
   }
 
   /* Section header divider accent */

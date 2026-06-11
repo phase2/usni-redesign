@@ -9,6 +9,8 @@ import ProceedingsCurrentIssue from '@/pages/ProceedingsCurrentIssue'
 import BooksAndPress from '@/pages/BooksAndPress'
 import ProceedingsArticle from '@/pages/ProceedingsArticle'
 import ProceedingsContact from '@/pages/ProceedingsContact'
+import MembershipCart from '@/pages/MembershipCart'
+import BookProduct from '@/pages/BookProduct'
 
 export default function App() {
   return (
@@ -17,6 +19,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/membership" element={<Membership />} />
         <Route path="/membership/join" element={<MembershipJoin />} />
+        <Route path="/membership/cart" element={<MembershipCart />} />
         <Route path="/proceedings" element={<Proceedings />} />
         <Route path="/giving" element={<Giving />} />
         <Route path="/giving/donate" element={<Donate />} />
@@ -24,6 +27,7 @@ export default function App() {
         <Route path="/proceedings/contact" element={<ProceedingsContact />} />
         <Route path="/books" element={<BooksAndPress />} />
         <Route path="/proceedings/three-mefs" element={<ProceedingsArticle />} />
+        <Route path="/books/ai-warfighting" element={<BookProduct />} />
       </Routes>
     </BrowserRouter>
   )

@@ -6,10 +6,8 @@ export default function NavalInstituteAtWork() {
     <section className="bg-surface-subtle py-16 lg:py-20">
       <div className="container-site">
         {/* Section header */}
-        <div className="text-center mb-12">
-          <p className="font-body font-medium text-sm uppercase tracking-[0.08em] text-navy-subtle mb-3">
-            Publishing, Reporting, Educating, and Convening
-          </p>
+        <div className="eyebrow-headline items-center text-center mb-12">
+          <p className="eyebrow">Publishing, Reporting, Educating, and Convening</p>
           <h2 className="font-headline text-4xl lg:text-5xl text-navy-bolder">
             The Naval Institute at work
           </h2>

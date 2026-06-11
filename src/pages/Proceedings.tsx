@@ -1,5 +1,6 @@
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
+import ProceedingsSubNav from '@/sections/ProceedingsSubNav'
 import ProceedingsHero from '@/sections/ProceedingsHero'
 import ProceedingsFeaturedArticles from '@/sections/ProceedingsFeaturedArticles'
 import ProceedingsFeaturedContent from '@/sections/ProceedingsFeaturedContent'
@@ -13,6 +14,7 @@ export default function Proceedings() {
     <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-1">
+        <ProceedingsSubNav />
         <ProceedingsHero />
         <ProceedingsFeaturedArticles />
         <ProceedingsFeaturedContent />

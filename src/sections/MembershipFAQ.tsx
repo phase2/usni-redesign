@@ -77,7 +77,7 @@ function AccordionItem({ question, answer }: { question: string; answer: string 
 
 export default function MembershipFAQ() {
   return (
-    <section className="bg-white py-section">
+    <section className="py-section" style={{ background: 'linear-gradient(71deg, #EBF4FF 8.15%, #FFF 72.81%)' }}>
       <div className="container-site">
         <div className="flex flex-col lg:flex-row gap-12 items-start">
 

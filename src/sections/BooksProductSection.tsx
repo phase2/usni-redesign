@@ -33,6 +33,7 @@ function BookCard({ book }: { book: Book }) {
 
 interface BooksProductSectionProps {
   title: string
+  subtitle?: string
   seeAllLabel: string
   seeAllHref: string
   books: Book[]
@@ -41,6 +42,7 @@ interface BooksProductSectionProps {
 
 export default function BooksProductSection({
   title,
+  subtitle,
   seeAllLabel,
   seeAllHref,
   books,
@@ -78,17 +80,26 @@ export default function BooksProductSection({
       <div className="container-site">
 
         {/* Section header */}
-        <div className="flex items-end justify-between pb-4 border-b-2 border-[#0466C8]">
-          <h2 className="font-headline text-3xl lg:text-4xl text-navy-bolder leading-tight">
-            {title}
-          </h2>
-          <a
-            href={seeAllHref}
-            className="font-body font-semibold text-sm text-[#0466C8] hover:text-navy transition-colors whitespace-nowrap flex items-center gap-1.5"
-          >
-            {seeAllLabel}
-            <i className="fa-solid fa-chevron-right text-xs" aria-hidden="true" />
-          </a>
+        <div className="pb-4 border-b-2 border-[#0466C8]">
+          <div className="flex items-end justify-between gap-6">
+            <div>
+              <h2 className="font-headline text-3xl lg:text-4xl text-navy-bolder leading-tight">
+                {title}
+              </h2>
+              {subtitle && (
+                <p className="font-body font-bold text-base text-neutral-subtle mt-1.5">
+                  {subtitle}
+                </p>
+              )}
+            </div>
+            <a
+              href={seeAllHref}
+              className="font-body font-semibold text-sm text-[#0466C8] hover:text-navy transition-colors whitespace-nowrap flex items-center gap-1.5 flex-shrink-0 pb-0.5"
+            >
+              {seeAllLabel}
+              <i className="fa-solid fa-chevron-right text-xs" aria-hidden="true" />
+            </a>
+          </div>
         </div>
 
         {/* Carousel */}

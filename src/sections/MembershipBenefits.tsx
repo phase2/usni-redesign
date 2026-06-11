@@ -196,7 +196,7 @@ export default function MembershipBenefits() {
 
           {/* Section header */}
           <div className="text-center mb-8">
-            <p className="eyebrow text-navy-subtle mb-3">Membership Benefits</p>
+            <p className="eyebrow text-navy-subtle mb-1.5">Membership Benefits</p>
             <h2 className="font-headline text-5xl xl:text-[56px] text-navy-bolder leading-[1.1]">
               More than a subscription
             </h2>

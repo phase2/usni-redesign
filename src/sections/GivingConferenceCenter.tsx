@@ -11,12 +11,12 @@ export default function GivingConferenceCenter() {
       {/* White card — left side */}
       <div className="relative container-site h-full flex items-center min-h-[520px]">
         <div className="bg-white p-8 lg:p-12 w-full max-w-full md:max-w-[480px] lg:max-w-[520px] my-12">
-          <p className="font-body font-medium text-xs uppercase tracking-widest text-navy-subtle mb-3">
-            Hosting Inspiring Events
-          </p>
-          <h2 className="font-headline text-3xl lg:text-4xl text-navy-bolder leading-tight mb-4">
-            The Jack C. Taylor Conference Center
-          </h2>
+          <div className="eyebrow-headline mb-4">
+            <p className="eyebrow">Hosting Inspiring Events</p>
+            <h2 className="font-headline text-3xl lg:text-4xl text-navy-bolder leading-tight">
+              The Jack C. Taylor Conference Center
+            </h2>
+          </div>
           <p className="font-body text-base text-neutral-subtle leading-relaxed mb-6">
             The Jack C. Taylor Conference Center is a Temporary Secure Working Area capable of
             hosting classified presentations and discussions up to the TS/SCI level. We look

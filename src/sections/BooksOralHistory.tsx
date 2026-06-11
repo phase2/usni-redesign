@@ -8,7 +8,7 @@ export default function BooksOralHistory() {
         {/* Left: content panel */}
         <div className="bg-navy-bolder flex-1 flex items-center">
           <div className="px-10 lg:px-16 py-14 max-w-[560px]">
-            <p className="font-body font-semibold text-xs uppercase tracking-widest text-white/60 mb-4">
+            <p className="font-body font-semibold text-xs uppercase tracking-widest text-white/60 mb-2">
               From the Archives
             </p>
             <h2 className="font-headline text-3xl lg:text-4xl xl:text-[44px] text-white leading-tight mb-5">

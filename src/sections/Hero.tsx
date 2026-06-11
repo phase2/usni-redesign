@@ -15,21 +15,21 @@ export default function Hero() {
                    pr-8 lg:pr-14"
         style={{ paddingLeft: 'clamp(1.5rem, 6.5vw, 7rem)' }}
       >
-        {/* Eyebrow */}
-        <p className="font-body font-medium text-sm uppercase tracking-[0.08em] text-light-blue">
-          U.S. Naval Institute
-        </p>
-
-        {/* Headline + body */}
-        <div className="flex flex-col gap-6">
-          <h1 className="font-headline text-5xl lg:text-6xl xl:text-[64px] text-white leading-[1.1]">
-            An Independent Forum for Those Who Dare to Think Seriously About Sea Power
-          </h1>
-          <p className="font-body text-lg lg:text-xl text-neutral-subtlest leading-relaxed">
-            For more than 150 years, the Naval Institute has provided the open forum where naval
-            professionals read, think, speak, and write — advancing the professional, literary, and
-            scientific understanding of sea power and global security.
+        {/* Eyebrow + Headline + body */}
+        <div className="eyebrow-headline">
+          <p className="eyebrow text-light-blue">
+            U.S. Naval Institute
           </p>
+          <div className="flex flex-col gap-6">
+            <h1 className="font-headline text-5xl lg:text-6xl xl:text-[64px] text-white leading-[1.1]">
+              An Independent Forum for Those Who Dare to Think Seriously About Sea Power
+            </h1>
+            <p className="font-body text-lg lg:text-xl text-neutral-subtlest leading-relaxed">
+              For more than 150 years, the Naval Institute has provided the open forum where naval
+              professionals read, think, speak, and write — advancing the professional, literary, and
+              scientific understanding of sea power and global security.
+            </p>
+          </div>
         </div>
 
         {/* CTAs */}
