@@ -1,7 +1,201 @@
 import { useState, useRef, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
+import { useCart } from '@/context/CartContext'
 import { navItems, archivesDropdown } from '@/data/homepage'
 import type { NavItem, MegaMenuCTA } from '@/types'
+
+/* ─── Site-wide search data ─────────────────────────────────────────────────── */
+type SearchResult = { title: string; subtitle: string; type: 'Book' | 'Article' | 'Page'; href: string }
+
+const SEARCH_DATA: SearchResult[] = [
+  // Books
+  { title: 'AI Warfighting', subtitle: 'Morrison & Chen', type: 'Book', href: '/books/ai-warfighting' },
+  { title: 'Warfare Beneath the Waves', subtitle: 'Axel Niestle', type: 'Book', href: '/books/warfare-beneath-the-waves' },
+  { title: 'Training for Victory', subtitle: 'Frank R. Donche', type: 'Book', href: '/books/training-for-victory' },
+  { title: 'Standing Up the Space Force', subtitle: 'Multiple Authors', type: 'Book', href: '/books/standing-up-space-force' },
+  { title: "The Admiral's Bookshelf", subtitle: 'James Stavridis', type: 'Book', href: '/books/admirals-bookshelf' },
+  { title: 'Cold War Storm', subtitle: 'Multiple Authors', type: 'Book', href: '/books/cold-war-storm' },
+  { title: 'Battleship Diplomat', subtitle: 'Nancy Snow', type: 'Book', href: '/books/battleship-diplomat' },
+  { title: 'Career Compass', subtitle: 'Douglas H. Raugh Jr.', type: 'Book', href: '/books/career-compass' },
+  { title: 'Countering China: The Great Game', subtitle: 'Multiple Authors', type: 'Book', href: '/books/countering-china' },
+  { title: 'Destroyers at War', subtitle: 'Multiple Authors', type: 'Book', href: '/books/destroyers-at-war' },
+  { title: 'Japanese Submarines in World War Two', subtitle: 'Terry C. Treadwell', type: 'Book', href: '/books/japanese-submarines' },
+  { title: 'Greyhounds of the Pacific', subtitle: 'Multiple Authors', type: 'Book', href: '/books/greyhounds-pacific' },
+  { title: 'The Gamble in the Coral Sea', subtitle: 'Multiple Authors', type: 'Book', href: '/books/gamble-coral-sea' },
+  { title: 'United States Marines: A History', subtitle: 'Multiple Authors', type: 'Book', href: '/books/marines-history' },
+  // Articles
+  { title: 'Three MEFs in the Pacific: A Force Design Retrospective', subtitle: 'Proceedings · Apr 2026', type: 'Article', href: '/proceedings/three-mefs' },
+  { title: 'The Drone Swarm Dilemma', subtitle: 'Proceedings · Apr 2026', type: 'Article', href: '/proceedings/apr-2026' },
+  { title: 'Distributed Lethality at Scale', subtitle: 'Proceedings · Apr 2026', type: 'Article', href: '/proceedings/apr-2026' },
+  { title: 'Unmanned Surface Vessels in the Taiwan Strait', subtitle: 'Naval History · Mar 2026', type: 'Article', href: '/naval-history' },
+  { title: 'The Battle of Leyte Gulf Reconsidered', subtitle: 'Naval History · Feb 2026', type: 'Article', href: '/naval-history' },
+  // Pages
+  { title: 'Membership', subtitle: 'Join the U.S. Naval Institute', type: 'Page', href: '/membership' },
+  { title: 'Proceedings Magazine', subtitle: 'Current issue and archives', type: 'Page', href: '/proceedings' },
+  { title: 'Naval History Magazine', subtitle: 'Stories of naval heritage', type: 'Page', href: '/naval-history' },
+  { title: 'Books & Press', subtitle: 'Naval Institute Press catalog', type: 'Page', href: '/books' },
+  { title: 'Giving & Donations', subtitle: 'Support the USNI mission', type: 'Page', href: '/giving' },
+  { title: 'Donate', subtitle: 'Make a gift to USNI', type: 'Page', href: '/giving/donate' },
+  { title: 'Events', subtitle: 'Upcoming USNI events', type: 'Page', href: '/events' },
+]
+
+const TYPE_STYLES: Record<SearchResult['type'], string> = {
+  Book:    'bg-[#e8f0fb] text-[#0466c8]',
+  Article: 'bg-[#edf7f0] text-[#0a7e3f]',
+  Page:    'bg-[#f0f0f0] text-[#4e576a]',
+}
+
+function highlight(text: string, query: string) {
+  const idx = text.toLowerCase().indexOf(query.toLowerCase())
+  if (idx === -1) return <>{text}</>
+  return (
+    <>
+      {text.slice(0, idx)}
+      <mark className="bg-[#0466C8]/15 text-[#0466C8] font-semibold not-italic">{text.slice(idx, idx + query.length)}</mark>
+      {text.slice(idx + query.length)}
+    </>
+  )
+}
+
+/* ─── Search flydown ────────────────────────────────────────────────────────── */
+function SearchFlydown({ onClose }: { onClose: () => void }) {
+  const [query, setQuery] = useState('')
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    inputRef.current?.focus()
+  }, [])
+
+  useEffect(() => {
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') onClose()
+    }
+    document.addEventListener('keydown', handleKey)
+    return () => document.removeEventListener('keydown', handleKey)
+  }, [onClose])
+
+  const suggestions = query.length >= 2
+    ? SEARCH_DATA.filter(r =>
+        r.title.toLowerCase().includes(query.toLowerCase()) ||
+        r.subtitle.toLowerCase().includes(query.toLowerCase())
+      ).slice(0, 7)
+    : []
+
+  return (
+    <>
+      {/* Backdrop — starts below the header, does not cover it */}
+      <div
+        className="absolute left-0 right-0 top-full z-40 bg-navy-boldest/30"
+        style={{ height: '100vh' }}
+        onClick={onClose}
+        aria-hidden="true"
+      />
+
+      {/* Panel — slides down from the header bottom edge */}
+      <div
+        className="absolute left-0 right-0 top-full z-50 bg-white shadow-2xl"
+        style={{ animation: 'searchSlideIn 0.18s ease-out both' }}
+      >
+        <style>{`@keyframes searchSlideIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }`}</style>
+        <div className="container-site py-6">
+
+          {/* Input row */}
+          <div className="flex items-center gap-4">
+            <div className="flex-1 flex items-center border-2 border-[#023e7d] bg-white px-4 py-3">
+              <svg className="w-5 h-5 text-[#0466c8] mr-3 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+              </svg>
+              <input
+                ref={inputRef}
+                type="search"
+                value={query}
+                onChange={e => setQuery(e.target.value)}
+                placeholder="Search books, articles, pages…"
+                className="flex-1 font-body text-[17px] text-navy-bolder placeholder:text-neutral-subtle outline-none bg-transparent"
+                aria-label="Site search"
+                aria-autocomplete="list"
+                aria-expanded={suggestions.length > 0}
+              />
+              {query && (
+                <button
+                  onClick={() => setQuery('')}
+                  className="ml-2 text-neutral-subtle hover:text-navy-bolder transition-colors"
+                  aria-label="Clear"
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                    <path d="M2 2l12 12M14 2L2 14"/>
+                  </svg>
+                </button>
+              )}
+            </div>
+            <button
+              onClick={onClose}
+              className="flex-shrink-0 flex items-center gap-1.5 font-body font-bold text-[15px] text-navy-subtle hover:text-navy-bolder transition-colors"
+              aria-label="Close search"
+            >
+              <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <path d="M2 2l12 12M14 2L2 14"/>
+              </svg>
+              Close
+            </button>
+          </div>
+
+          {/* Suggestions */}
+          {suggestions.length > 0 && (
+            <ul className="mt-2 border border-t-0 border-[#023e7d]" role="listbox">
+              {suggestions.map((item, i) => (
+                <li key={item.href + i} role="option">
+                  <a
+                    href={item.href}
+                    onClick={onClose}
+                    className="flex items-center gap-3 px-4 py-3 hover:bg-surface-subtle transition-colors border-b border-border-light last:border-0"
+                  >
+                    <span className={`flex-shrink-0 font-body font-bold text-[11px] uppercase tracking-wide px-2 py-0.5 ${TYPE_STYLES[item.type]}`}>
+                      {item.type}
+                    </span>
+                    <div className="min-w-0">
+                      <p className="font-body text-[15px] text-navy-bolder leading-snug">
+                        {highlight(item.title, query)}
+                      </p>
+                      <p className="font-body text-[12px] text-neutral-subtle mt-0.5">{item.subtitle}</p>
+                    </div>
+                  </a>
+                </li>
+              ))}
+              <li className="border-t border-[#023e7d]/20">
+                <a
+                  href={`/search?q=${encodeURIComponent(query)}`}
+                  onClick={onClose}
+                  className="flex items-center gap-2 px-4 py-3 font-body font-semibold text-[14px] text-[#0466c8] hover:bg-surface-subtle transition-colors"
+                >
+                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+                  </svg>
+                  See all results for "{query}"
+                </a>
+              </li>
+            </ul>
+          )}
+
+          {/* Empty state hint when no query */}
+          {query.length === 0 && (
+            <p className="mt-3 font-body text-[13px] text-neutral-subtle">
+              Try searching for a book title, author, article, or topic.
+            </p>
+          )}
+
+          {/* No results */}
+          {query.length >= 2 && suggestions.length === 0 && (
+            <p className="mt-3 font-body text-[14px] text-neutral-subtle">
+              No results for "<span className="text-navy-bolder font-semibold">{query}</span>" — try a different term.
+            </p>
+          )}
+
+        </div>
+      </div>
+    </>
+  )
+}
 
 /* ─── Scroll hook ───────────────────────────────────────────────────────────── */
 function useScrolled(threshold = 10) {
@@ -243,11 +437,13 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
 /* ─── Header ────────────────────────────────────────────────────────────────── */
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
   const scrolled = useScrolled(10)
   const { pathname } = useLocation()
+  const { cartCount } = useCart()
 
   return (
-    <header className={`sticky top-0 z-40 bg-white transition-shadow duration-300 ${scrolled ? 'shadow-md' : 'shadow-sm'}`}>
+    <header className={`sticky top-0 z-40 bg-white transition-shadow duration-300 ${scrolled ? 'shadow-md' : 'shadow-sm'} ${searchOpen ? 'z-50' : ''}`}>
 
       {/* ── Utility bar — collapses on scroll ── */}
       <div
@@ -269,12 +465,17 @@ export default function Header() {
                 Ship's Store
               </a>
               <div className="w-px h-5 bg-[#c4c9d4] mx-2" />
-              <a href="/cart" className="flex items-center gap-1.5 font-body font-bold text-[18px] text-navy-subtle px-4 py-2 hover:text-navy-bolder transition-colors whitespace-nowrap leading-none">
+              <a href="/membership/cart" className="flex items-center gap-1.5 font-body font-bold text-[18px] text-navy-subtle px-4 py-2 hover:text-navy-bolder transition-colors whitespace-nowrap leading-none">
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
                   <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
                 </svg>
                 Cart
+                {cartCount > 0 && (
+                  <span className="flex items-center justify-center w-6 h-6 rounded-full bg-gold text-navy-bolder font-body font-bold text-[13px] leading-none flex-shrink-0">
+                    {cartCount}
+                  </span>
+                )}
               </a>
               <a href="/login" className="flex items-center gap-1.5 font-body font-bold text-[18px] text-navy-subtle px-4 py-2 hover:text-navy-bolder transition-colors whitespace-nowrap leading-none">
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -329,8 +530,10 @@ export default function Header() {
 
             {/* Search */}
             <button
-              className="ml-2 p-2 text-navy-subtle hover:text-navy-bolder transition-colors flex-shrink-0"
+              onClick={() => setSearchOpen(o => !o)}
+              className={`ml-2 p-2 transition-colors flex-shrink-0 ${searchOpen ? 'text-[#0466c8]' : 'text-navy-subtle hover:text-navy-bolder'}`}
               aria-label="Search"
+              aria-expanded={searchOpen}
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="11" cy="11" r="8"/>
@@ -352,6 +555,8 @@ export default function Header() {
       </div>
 
       <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} />
+
+      {searchOpen && <SearchFlydown onClose={() => setSearchOpen(false)} />}
     </header>
   )
 }

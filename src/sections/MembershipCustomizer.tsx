@@ -310,14 +310,14 @@ export default function MembershipCustomizer() {
   const isLifetime = term === 'lifetime'
 
   return (
-    <section className="bg-white py-section">
+    <section className="bg-white pt-10 pb-section">
       <div className="container-site">
-        <h2 className="font-headline text-4xl lg:text-[56px] text-navy-bolder leading-[1.1] mb-10">
+        <h2 className="font-headline text-4xl lg:text-[56px] text-navy-bolder leading-[1.1] mb-10 text-center">
           Find the right membership for you
         </h2>
 
         {/* Sentence-style selectors */}
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-4 pb-8 border-b border-[#c4c9d4]">
+        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-4 pb-8 border-b border-[#c4c9d4]">
           <span className="font-headline text-[28px] lg:text-[36px] text-neutral-subtle leading-[1.2]">I live</span>
 
           {!isLifetime && (
@@ -363,7 +363,7 @@ export default function MembershipCustomizer() {
                 features={tier.features}
                 isMostPopular={tier.isMostPopular}
                 cartHref={tier.price !== null
-                  ? `/membership/cart?plan=${tier.plan}&term=${term}&region=${region}&price=${tier.price}`
+                  ? `/membership/magazine-upsell?plan=${tier.plan}&term=${term}&region=${region}&price=${tier.price}`
                   : undefined
                 }
               />

@@ -135,17 +135,17 @@ export default function BookProductHero({ book }: Props) {
               <span className="font-body text-base text-neutral-subtle line-through">
                 ${format.originalPrice.toFixed(2)}
               </span>
-              <span className="font-body text-sm font-bold text-[#0a7e3f] bg-[#e6f7ed] px-2 py-0.5">
-                Save {savePercent}%
+              <span className="font-body text-sm font-bold text-[#0a5c2e] bg-[#e6f7ed] px-2 py-0.5">
+                Members save {savePercent}%
               </span>
             </div>
 
             {/* Member savings note */}
             <p className="font-body text-sm text-neutral-subtle border-l-2 border-gold pl-3">
-              <span className="font-semibold text-navy-bolder">USNI members</span> save an additional 10% on all Press titles.{' '}
-              <a href="/membership/join" className="text-[#023E7D] underline hover:underline">
-                Join today
-              </a>
+              USNI membership savings available —{' '}
+              <a href="/login" className="text-[#023E7D] underline hover:underline">Login</a>
+              {' '}or{' '}
+              <a href="/membership/join" className="text-[#023E7D] underline hover:underline">join today</a>
             </p>
 
             {/* CTA row */}

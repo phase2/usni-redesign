@@ -92,7 +92,7 @@ export const navItems: NavItem[] = [
     href: '/books',
     alignRight: true,
     children: [
-      { label: 'Books', href: '/books' },
+      { label: 'Books', href: '/books/collection' },
       { label: 'New Releases', href: '/books/new-releases' },
       { label: 'Author Events', href: '/books/author-events' },
       { label: 'Professional Military Education', href: '/books/pme' },
@@ -104,7 +104,7 @@ export const navItems: NavItem[] = [
       headline: 'Discover Naval Institute Press',
       body: 'Over 1,000 titles in naval history, strategy, technology, and memoir. The foremost publisher of naval literature.',
       ctaLabel: 'Browse all books',
-      ctaHref: '/books',
+      ctaHref: '/books/collection',
     },
   },
   {

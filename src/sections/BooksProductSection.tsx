@@ -18,7 +18,7 @@ function BookCard({ book }: { book: Book }) {
         />
       </div>
       <div className="flex flex-col gap-1">
-        <h3 className="font-headline text-base lg:text-lg text-navy-bolder leading-snug group-hover:text-navy-subtle transition-colors">
+        <h3 className="font-headline text-[20px] leading-snug text-navy-bolder group-hover:text-navy-subtle transition-colors">
           {book.title}
         </h3>
         <p className="font-body text-sm text-neutral-subtle">{book.format}</p>

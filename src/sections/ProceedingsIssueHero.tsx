@@ -10,7 +10,7 @@ export default function ProceedingsIssueHero() {
           <div className="flex-1 min-w-0 flex flex-col gap-4">
 
             {/* Breadcrumb + divider */}
-            <div className="pb-4 border-b border-[#33415c]">
+            <div className="pb-4 border-b border-[#C2DDFF]">
               <nav className="flex flex-wrap items-center gap-x-2 gap-y-1 font-body font-bold text-base text-white">
                 <a href="/" className="flex items-center gap-1.5 hover:text-white/80 transition-colors">
                   <i className="fa-solid fa-house text-[10px]" aria-hidden="true" />

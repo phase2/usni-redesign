@@ -22,7 +22,7 @@ export default function ProceedingsLatestIssue() {
               />
             </div>
             <a
-              href="/proceedings/current"
+              href="/proceedings/apr-2026"
               className="flex items-center justify-center gap-2 bg-navy-bold text-white font-body font-bold text-sm tracking-[-0.3px] px-5 py-3.5 border border-navy-bold hover:bg-navy transition-colors w-full"
             >
               View the full issue

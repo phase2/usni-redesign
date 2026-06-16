@@ -1,6 +1,6 @@
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
-import ArticleSubNav from '@/sections/ArticleSubNav'
+import ProceedingsSubNav from '@/sections/ProceedingsSubNav'
 import ArticleHeader from '@/sections/ArticleHeader'
 import ArticleHeroImage from '@/sections/ArticleHeroImage'
 import ArticleBody from '@/sections/ArticleBody'
@@ -10,7 +10,7 @@ export default function ProceedingsArticle() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <ArticleSubNav />
+      <ProceedingsSubNav />
       <main className="flex-1">
         <ArticleHeader
           title="Three MEFs Won't Be Enough"

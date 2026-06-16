@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const presetAmounts = [25, 50, 100, 250]
 
@@ -12,9 +13,14 @@ function DocIcon() {
 }
 
 export default function DonateForm() {
+  const navigate = useNavigate()
   const [frequency, setFrequency] = useState<'one-time' | 'monthly'>('one-time')
   const [selected, setSelected] = useState<number | null>(null)
   const [custom, setCustom] = useState('')
+
+  const goToCart = (amount: number) => {
+    navigate(`/giving/donate/cart?amount=${amount}&frequency=${frequency}`)
+  }
 
   return (
     <section className="py-16 lg:py-20 bg-white">
@@ -57,7 +63,7 @@ export default function DonateForm() {
             >
               <p className="font-headline text-3xl text-navy-subtle">${amount}</p>
               <button
-                onClick={() => { setSelected(amount); setCustom('') }}
+                onClick={() => goToCart(amount)}
                 className="flex items-center justify-between w-full bg-navy-bolder text-white font-body font-bold text-sm px-4 py-3 hover:bg-navy transition-colors"
               >
                 Select Amount
@@ -89,8 +95,9 @@ export default function DonateForm() {
               </div>
             </div>
             <button
-              onClick={() => setSelected(-1)}
-              className="flex items-center justify-between w-full bg-navy-bolder text-white font-body font-bold text-sm px-4 py-3 hover:bg-navy transition-colors mt-auto"
+              onClick={() => { if (custom) goToCart(Number(custom)) }}
+              disabled={!custom}
+              className="flex items-center justify-between w-full bg-navy-bolder text-white font-body font-bold text-sm px-4 py-3 hover:bg-navy transition-colors mt-auto disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Select Amount
               <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">

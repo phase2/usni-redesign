@@ -12,7 +12,7 @@ export default function MembershipBody() {
               Dare to make a difference
             </h2>
             <div className="flex flex-col gap-4">
-              <p className="font-body text-xl xl:text-2xl text-navy-bolder leading-[1.4]">
+              <p className="font-body text-[18px] text-navy-bolder leading-[1.4]">
                 U.S. Naval Institute membership is for those individuals who value unbiased reporting,
                 care about national defense, appreciate naval history, and want to be connected to the
                 U.S. Navy, Marine Corps and Coast Guard. All ranks and all components are represented —
@@ -21,7 +21,7 @@ export default function MembershipBody() {
                 interested in a strong maritime defense and those that want to contribute to the
                 dialogue for the advancement of the profession.
               </p>
-              <p className="font-body text-xl xl:text-2xl text-navy-bolder leading-[1.4]">
+              <p className="font-body text-[18px] text-navy-bolder leading-[1.4]">
                 The U.S. Naval Institute was founded in 1873, when Rear Admiral John L. Worden gathered
                 a group of 15 like-minded naval officers who met at the U.S. Naval Academy to discuss
                 the future of the U.S. Navy in the aftermath of the American Civil War. Since then, the
@@ -55,7 +55,7 @@ export default function MembershipBody() {
               <div key={heading} className="flex flex-col gap-6">
                 <h3 className="font-headline text-[48px] text-navy-subtle leading-[1.1]">{heading}</h3>
                 <div className="h-1 w-full bg-gold-subtle" />
-                <p className="font-body text-xl xl:text-2xl text-navy-bolder leading-[1.4]">{body}</p>
+                <p className="font-body text-[18px] text-navy-bolder leading-[1.4]">{body}</p>
               </div>
             ))}
           </div>
