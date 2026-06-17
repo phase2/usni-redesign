@@ -18,6 +18,18 @@ export default function ArticleAuthorBio({ authors }: Props) {
   return (
     <section className="bg-white pb-12 lg:pb-16">
       <div className="container-site">
+
+        {/* Disclaimer */}
+        <div className="flex gap-3 items-start border-l-4 border-[#FFAA00] bg-[#FFF8D6] px-5 py-3.5 mb-4">
+          <i className="fa-solid fa-circle-info text-[#1D2535] text-sm mt-[2px] flex-shrink-0" aria-hidden="true" />
+          <div>
+            <p className="font-body font-bold text-[11px] uppercase tracking-[0.08em] text-[#1D2535] mb-0.5">Disclaimer</p>
+            <p className="font-body text-[12px] text-[#1D2535] leading-relaxed">
+              The U.S. Naval Institute is a private, self-supporting, not-for-profit professional society that publishes Proceedings as part of the open forum it maintains for the Sea Services. The Naval Institute is not an agency of the U.S. government; the opinions expressed in these pages are the personal views of the authors.
+            </p>
+          </div>
+        </div>
+
         <div style={{ backgroundColor: '#F7F7F2' }} className="px-8 lg:px-14 py-10 lg:py-14">
 
           <h2 className="font-headline text-2xl lg:text-3xl text-navy-bolder leading-[1.1] mb-6">
