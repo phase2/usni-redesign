@@ -262,7 +262,7 @@ export default function MitscherArticleBody() {
         </div>
       </section>
 
-      <ArticleAuthorBio authors={articleAuthors} />
+      <ArticleAuthorBio authors={articleAuthors} showDisclaimer={false} />
       <ArticleComments />
     </>
   )
