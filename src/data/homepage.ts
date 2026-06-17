@@ -1,4 +1,10 @@
 import type { Article, NavItem, PlainCardData } from '@/types'
+import img250YearCelebration from '@/assets/images/250-year-celebration.png'
+import imgFortifyingHero from '@/assets/images/Nelson-PRO-4-26-Hero.jpg'
+import imgMitscherHero from '@/assets/images/naval-history-articles/Russell-NH-5-26-1 Hero.jpg'
+import imgAIWarfighting from '@/assets/images/books/ai-warfighting.jpg'
+import imgOurHistory from '@/assets/images/our-histroy-feature-image.png'
+import imgGivingHero from '@/assets/images/demo-hero/giving-hero-feature.png'
 
 import imgCarrierGeorge from '@/assets/images/usni-news-Carrier-USS-George.png'
 import imgAmphibSanAntonio from '@/assets/images/usni-news-Amphib-USS-San-Antonio.png'
@@ -40,10 +46,12 @@ export const navItems: NavItem[] = [
       { label: 'Join', href: '/membership/join' },
     ],
     megaCta: {
-      headline: 'Join the U.S. Naval Institute',
-      body: 'Engage in a community of concerned citizens that care about national defense and global security.',
-      ctaLabel: 'Become a member today',
+      headline: 'Celebrate 250 Years of American Valor',
+      body: 'Join the U.S. Naval Institute at 25% off and connect with the community that has championed sea power since 1873.',
+      ctaLabel: 'Join Today',
       ctaHref: '/membership/join',
+      image: img250YearCelebration,
+      imageAlt: '250th Anniversary of American Independence celebration',
     },
   },
   { label: 'USNI News', href: '/news' },
@@ -62,10 +70,13 @@ export const navItems: NavItem[] = [
       { label: 'Subscribe', href: '/membership/join' },
     ],
     megaCta: {
-      headline: 'Read Proceedings Magazine',
-      body: 'The flagship journal of the U.S. Naval Institute since 1874 — the leading forum for debate on maritime strategy and naval affairs.',
-      ctaLabel: 'Subscribe today',
-      ctaHref: '/membership/join',
+      eyebrow: 'Featured Article',
+      headline: 'Fortifying the Digital Watch',
+      body: 'As adversaries target naval networks before the first shot is fired, fleet cyber readiness demands the same rigor as engineering and damage control.',
+      ctaLabel: 'Read the Article',
+      ctaHref: '/proceedings/fortifying-digital-watch',
+      image: imgFortifyingHero,
+      imageAlt: 'Fortifying the Digital Watch — Proceedings April 2026',
     },
   },
   {
@@ -81,10 +92,13 @@ export const navItems: NavItem[] = [
       { label: 'Subscribe', href: '/membership/join' },
     ],
     megaCta: {
-      headline: 'Explore Naval History Magazine',
-      body: 'Connecting the remarkable stories of the U.S. Navy\'s past to present challenges in maritime affairs.',
-      ctaLabel: 'Subscribe today',
-      ctaHref: '/membership/join',
+      eyebrow: 'Featured Article',
+      headline: 'Mitscher at Midway',
+      body: 'Sixty years of scholarship has yielded no consensus on whether Captain Marc Mitscher\'s decisions aboard USS Hornet determined — or cost — America\'s greatest naval victory.',
+      ctaLabel: 'Read the Article',
+      ctaHref: '/naval-history/mitscher-at-midway',
+      image: imgMitscherHero,
+      imageAlt: 'Mitscher at Midway — Naval History Magazine',
     },
   },
   {
@@ -101,10 +115,14 @@ export const navItems: NavItem[] = [
       { label: 'Contact the Press', href: '/books/contact' },
     ],
     megaCta: {
-      headline: 'Discover Naval Institute Press',
-      body: 'Over 1,000 titles in naval history, strategy, technology, and memoir. The foremost publisher of naval literature.',
-      ctaLabel: 'Browse all books',
-      ctaHref: '/books/collection',
+      eyebrow: 'Featured New Release',
+      headline: 'AI Warfighting',
+      body: 'A timely collection exploring how artificial intelligence is reshaping naval tactics, fleet operations, and the future of maritime conflict.',
+      ctaLabel: 'View Book',
+      ctaHref: '/books/ai-warfighting',
+      image: imgAIWarfighting,
+      imageAlt: 'AI Warfighting — Naval Institute Press',
+      imageLayout: 'side',
     },
   },
   {
@@ -125,8 +143,10 @@ export const navItems: NavItem[] = [
     megaCta: {
       headline: '150+ Years of Independent Thought',
       body: 'The Naval Institute has served as the open forum for those who dare to think seriously about sea power since 1873.',
-      ctaLabel: 'Our story',
+      ctaLabel: 'Discover our story',
       ctaHref: '/about',
+      image: imgOurHistory,
+      imageAlt: 'Our History — U.S. Naval Institute',
     },
   },
   {
@@ -149,6 +169,8 @@ export const navItems: NavItem[] = [
       body: 'Your gift helps fund independent naval debate, preserve maritime heritage, and educate the next generation of naval professionals.',
       ctaLabel: 'Donate today',
       ctaHref: '/giving/donate',
+      image: imgGivingHero,
+      imageAlt: 'Support the Naval Institute Foundation',
     },
   },
 ]

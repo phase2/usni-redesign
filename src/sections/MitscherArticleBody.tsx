@@ -1,6 +1,15 @@
 import inlineImg1 from '@/assets/images/naval-history-articles/Russell-NH-5-26-1 Hero.jpg'
 import SharePopover from '@/components/ui/SharePopover'
 import ArticleComments from '@/sections/ArticleComments'
+import ArticleAuthorBio from '@/sections/ArticleAuthorBio'
+
+const articleAuthors = [
+  {
+    name: 'James D. Russell',
+    role: 'Naval Historian & Retired U.S. Navy Commander',
+    bio: 'James D. Russell is a naval historian and retired U.S. Navy commander who served as a carrier aviator for 22 years. He holds a Ph.D. in military history from the Naval War College and has written extensively on the Pacific War. His previous work includes articles in Naval History, Naval War College Review, and The Journal of Military History.',
+  },
+]
 
 function AdFrame({ children }: { children: React.ReactNode }) {
   return (
@@ -96,7 +105,7 @@ const topics = ['World War II', 'Battle of Midway', 'Naval Aviation', 'Pacific T
 
 function ArticleTopics() {
   return (
-    <div className="pt-8 mt-8 border-t border-[#c4c9d4]">
+    <div className="pt-8 pb-8">
       <p className="font-body font-medium text-[18px] uppercase tracking-[1px] text-[#1d2535] mb-4">Topics</p>
       <div className="flex flex-wrap gap-3">
         {topics.map((tag) => (
@@ -112,25 +121,6 @@ function ArticleTopics() {
     </div>
   )
 }
-
-function ArticleAuthorBio() {
-  return (
-    <div className="pt-8 mt-8 border-t border-[#c4c9d4]">
-      <div className="flex items-start gap-5">
-        <div className="w-16 h-16 rounded-full bg-navy-subtle/20 flex items-center justify-center flex-shrink-0">
-          <i className="fa-solid fa-user text-xl text-navy-subtle/60" aria-hidden="true" />
-        </div>
-        <div className="flex flex-col gap-1.5">
-          <p className="font-headline text-[20px] text-[#001845]">James D. Russell</p>
-          <p className="font-body text-[14px] text-[#4e576a] leading-[1.6]">
-            James D. Russell is a naval historian and retired U.S. Navy commander who served as a carrier aviator for 22 years. He holds a Ph.D. in military history from the Naval War College and has written extensively on the Pacific War. His previous work includes articles in <em>Naval History</em>, <em>Naval War College Review</em>, and <em>The Journal of Military History</em>.
-          </p>
-        </div>
-      </div>
-    </div>
-  )
-}
-
 
 export default function MitscherArticleBody() {
   return (
@@ -262,7 +252,6 @@ export default function MitscherArticleBody() {
                   Mitscher himself never publicly addressed the controversy in detail. He died in February 1947, before the most pointed critiques had been published. His silence — whether the product of discretion, indifference, or calculation — is itself part of the record that historians must interpret.
                 </p>
 
-                <ArticleAuthorBio />
                 <ArticleTopics />
               </div>
             </div>
@@ -273,6 +262,7 @@ export default function MitscherArticleBody() {
         </div>
       </section>
 
+      <ArticleAuthorBio authors={articleAuthors} />
       <ArticleComments />
     </>
   )

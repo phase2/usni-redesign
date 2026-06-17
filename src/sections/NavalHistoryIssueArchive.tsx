@@ -1,8 +1,7 @@
 import { magazineIssues } from '@/data/naval-history'
 
 export default function NavalHistoryIssueArchive() {
-  const row1 = magazineIssues.slice(0, 4)
-  const row2 = magazineIssues.slice(4, 8)
+  const allIssues = magazineIssues.slice(0, 8)
 
   return (
     <section
@@ -14,47 +13,25 @@ export default function NavalHistoryIssueArchive() {
           Issue Archive
         </h2>
 
-        {/* Row 1 */}
-        <div className="flex gap-8 items-start mb-8">
-          {row1.map((issue, i) => (
-            <>
-              {i > 0 && <div key={`sep-${i}`} className="w-px bg-border-light self-stretch flex-none" />}
-              <a key={issue.month} href={issue.href} className="flex-1 min-w-0 flex flex-col gap-4 group">
-                <div className="aspect-[2363/3225] bg-neutral-subtlest overflow-hidden">
-                  <img
-                    src={issue.cover}
-                    alt={`Naval History ${issue.month}`}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <p className="font-headline text-2xl text-navy-bolder leading-[1.1]">{issue.month}</p>
-                  <p className="font-body text-sm text-neutral-subtle">{issue.vol}</p>
-                </div>
-              </a>
-            </>
-          ))}
-        </div>
-
-        {/* Row 2 */}
-        <div className="flex gap-8 items-start mb-10">
-          {row2.map((issue, i) => (
-            <>
-              {i > 0 && <div key={`sep2-${i}`} className="w-px bg-border-light self-stretch flex-none" />}
-              <a key={issue.month} href={issue.href} className="flex-1 min-w-0 flex flex-col gap-4 group">
-                <div className="aspect-[2363/3225] bg-neutral-subtlest overflow-hidden">
-                  <img
-                    src={issue.cover}
-                    alt={`Naval History ${issue.month}`}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <p className="font-headline text-2xl text-navy-bolder leading-[1.1]">{issue.month}</p>
-                  <p className="font-body text-sm text-neutral-subtle">{issue.vol}</p>
-                </div>
-              </a>
-            </>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-8 mb-10">
+          {allIssues.map((issue, i) => (
+            <a
+              key={issue.month}
+              href={issue.href}
+              className={`flex flex-col gap-4 group${i >= 4 ? ' hidden lg:flex' : ''}`}
+            >
+              <div className="aspect-[2363/3225] bg-neutral-subtlest overflow-hidden">
+                <img
+                  src={issue.cover}
+                  alt={`Naval History ${issue.month}`}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <div className="flex flex-col gap-1">
+                <p className="font-headline text-xl lg:text-2xl text-navy-bolder leading-[1.1]">{issue.month}</p>
+                <p className="font-body text-sm text-neutral-subtle">{issue.vol}</p>
+              </div>
+            </a>
           ))}
         </div>
 

@@ -34,9 +34,9 @@ const accordionItems = [
 function AccordionItem({ title, content }: { title: string; content: string }) {
   const [open, setOpen] = useState(false)
   return (
-    <div className="border-b border-border-light last:border-b-0">
+    <div className={`border-b border-border-light last:border-b-0 transition-colors ${open ? 'bg-white' : ''}`}>
       <button
-        className="flex items-center justify-between w-full py-4 px-0 text-left"
+        className={`flex items-center justify-between w-full py-4 px-4 text-left transition-colors ${open ? '' : 'hover:bg-white'}`}
         onClick={() => setOpen(!open)}
         aria-expanded={open}
       >
@@ -50,7 +50,7 @@ function AccordionItem({ title, content }: { title: string; content: string }) {
         </span>
       </button>
       {open && (
-        <div className="pb-5 pr-10">
+        <div className="pb-5 px-4 pr-14">
           <p className="font-body text-base text-neutral-subtle leading-relaxed">{content}</p>
         </div>
       )}

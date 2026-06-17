@@ -3,6 +3,7 @@ import Footer from '@/components/layout/Footer'
 import DonateHero from '@/sections/DonateHero'
 import DonateForm from '@/sections/DonateForm'
 import DonateFAQ from '@/sections/DonateFAQ'
+import DonateDisclosure from '@/sections/DonateDisclosure'
 
 export default function Donate() {
   return (
@@ -12,6 +13,7 @@ export default function Donate() {
         <DonateHero />
         <DonateForm />
         <DonateFAQ />
+        <DonateDisclosure />
       </main>
       <Footer />
     </div>

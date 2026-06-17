@@ -28,13 +28,13 @@ export default function GivingConferenceCenter() {
               href="/giving/donate"
               className="inline-flex items-center justify-center bg-navy-bolder text-white font-body font-bold text-sm tracking-[-0.3px] px-5 py-3.5 hover:bg-navy transition-colors"
             >
-              Donate to the Center
+              Donate to JCTCC
             </a>
             <a
               href="/conference-center"
               className="inline-flex items-center justify-center bg-transparent text-navy-bolder border border-navy-bolder font-body font-bold text-sm tracking-[-0.3px] px-5 py-3.5 hover:bg-navy-bolder hover:text-white transition-colors"
             >
-              Visit the Center Website
+              Visit JCTCC Website
             </a>
           </div>
         </div>

@@ -7,6 +7,7 @@ import GivingWaysToGive from '@/sections/GivingWaysToGive'
 import GivingOpportunities from '@/sections/GivingOpportunities'
 import GivingTaxInfo from '@/sections/GivingTaxInfo'
 import GivingConferenceCenter from '@/sections/GivingConferenceCenter'
+import GivingQuickLinks from '@/sections/GivingQuickLinks'
 
 export default function Giving() {
   return (
@@ -16,6 +17,7 @@ export default function Giving() {
         <GivingHero />
         <GivingJumpNav />
         <GivingAbout />
+        <GivingQuickLinks />
         <GivingWaysToGive />
         <GivingOpportunities />
         <GivingTaxInfo />

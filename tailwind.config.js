@@ -44,6 +44,7 @@ export default {
       fontSize: {
         'eyebrow': ['14px', { lineHeight: '1.5', letterSpacing: '0.08em', fontWeight: '500' }],
         'eyebrow-lg': ['18px', { lineHeight: '1.5', letterSpacing: '0.06em', fontWeight: '500' }],
+        '4xl': ['2.25rem', { lineHeight: '1.1' }],
       },
       maxWidth: {
         container: '1312px',

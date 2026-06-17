@@ -44,9 +44,9 @@ function AccordionItem({ question, answer }: { question: string; answer: string 
   const [open, setOpen] = useState(false)
 
   return (
-    <div className="border-b border-border-light">
+    <div className={`border-b border-border-light transition-colors ${open ? 'bg-white' : ''}`}>
       <button
-        className={`flex items-center justify-between w-full gap-4 px-5 py-5 text-left transition-colors ${open ? 'bg-surface-subtle' : 'hover:bg-surface-subtle'}`}
+        className={`flex items-center justify-between w-full gap-4 px-5 py-5 text-left transition-colors ${open ? 'bg-white' : 'hover:bg-white'}`}
         onClick={() => setOpen(!open)}
         aria-expanded={open}
       >

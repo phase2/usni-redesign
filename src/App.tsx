@@ -27,6 +27,7 @@ import BooksCollection from '@/pages/BooksCollection'
 import BooksNewReleases from '@/pages/BooksNewReleases'
 import BooksCart from '@/pages/BooksCart'
 import NavalHistory from '@/pages/NavalHistory'
+import NavalHistorySubscribe from '@/pages/NavalHistorySubscribe'
 import Login from '@/pages/Login'
 import Archives from '@/pages/Archives'
 import NavalHistoryArticle from '@/pages/NavalHistoryArticle'
@@ -56,6 +57,7 @@ export default function App() {
         <Route path="/books/new-releases" element={<BooksNewReleases />} />
         <Route path="/books/cart" element={<BooksCart />} />
         <Route path="/naval-history" element={<NavalHistory />} />
+        <Route path="/naval-history/subscribe" element={<NavalHistorySubscribe />} />
         <Route path="/login" element={<Login />} />
         <Route path="/proceedings/three-mefs" element={<ProceedingsArticle />} />
         <Route path="/proceedings/fortifying-digital-watch" element={<ProceedingsArticleFortifying />} />

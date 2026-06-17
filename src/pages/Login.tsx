@@ -60,7 +60,7 @@ export default function Login() {
 
               {/* Right — login card */}
               <div className="w-full lg:w-[440px] flex-none">
-                <div className="bg-white border-2 border-[#023e7d] p-8 lg:p-10">
+                <div className="bg-white border border-[#023e7d] p-8 lg:p-10">
                   <h2 className="font-headline text-[32px] text-navy-bolder leading-[1.1] mb-7">
                     Member Sign in
                   </h2>
@@ -130,14 +130,14 @@ export default function Login() {
         </section>
 
         {/* ── Join CTA — contained 50/50 block ── */}
-        <section className="py-16 lg:py-20">
+        <section className="pb-16 lg:pb-20">
           <div className="container-site">
             <div className="flex flex-col lg:flex-row w-full bg-navy-bolder overflow-hidden">
 
               {/* Left — content */}
               <div className="flex-1 flex items-center p-10 lg:p-12">
                 <div className="border border-navy-bold flex flex-col gap-5 px-10 py-14 w-full">
-                  <p className="font-body font-medium text-sm uppercase tracking-[0.05em] text-white/60">
+                  <p className="font-body font-medium text-sm uppercase tracking-[0.05em] text-[#E0E0CC]">
                     Not yet a member?
                   </p>
                   <h2 className="font-headline text-[42px] lg:text-[48px] text-white leading-[1.1]">

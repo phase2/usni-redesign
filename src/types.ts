@@ -11,10 +11,14 @@ export interface Article {
 }
 
 export interface MegaMenuCTA {
+  eyebrow?: string
   headline: string
   body: string
   ctaLabel: string
   ctaHref: string
+  image?: string
+  imageAlt?: string
+  imageLayout?: 'top' | 'side'
 }
 
 export interface NavItem {

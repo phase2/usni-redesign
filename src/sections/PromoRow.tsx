@@ -1,4 +1,4 @@
-import membershipImage from '@/assets/images/membership-home-teaser.png'
+import booksImage from '@/assets/images/books/custom-bookstore-hero.png'
 import donationImage from '@/assets/images/donate-home-teaser.png'
 
 interface PromoCardProps {
@@ -45,13 +45,13 @@ export default function PromoRow() {
       <div className="container-site">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <PromoCard
-            eyebrow="Membership"
-            headline="Join 50,000+ Naval Professionals Worldwide"
-            body="Access Proceedings and Naval History, discounts on Press titles, and become part of the forum that shapes maritime thinking."
-            ctaLabel="Become a member"
-            ctaHref="/membership/join"
-            image={membershipImage}
-            imageAlt="Naval officer on flight deck signaling aircraft launch"
+            eyebrow="Naval Institute Press"
+            headline="125 Years of Stories Worth Telling"
+            body="From The Hunt for Red October to oral histories of the Navy's greatest leaders, Naval Institute Press brings the sea services to life — on the page and on screen."
+            ctaLabel="Discover Books & Press"
+            ctaHref="/books"
+            image={booksImage}
+            imageAlt="Naval Institute Press bookstore"
           />
           <PromoCard
             eyebrow="Support the Mission"

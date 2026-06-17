@@ -115,7 +115,7 @@ const topics = ['Marine Corps', 'Force Structure', 'Pacific Strategy', 'Amphibio
 
 function ArticleTopics() {
   return (
-    <div className="pt-8 mt-8 border-t border-[#c4c9d4]">
+    <div className="pt-8 pb-8">
       <p className="font-body font-medium text-[18px] uppercase tracking-[1px] text-[#1d2535] mb-4">
         Topics
       </p>

@@ -99,44 +99,38 @@ function SearchFlydown({ onClose }: { onClose: () => void }) {
         <style>{`@keyframes searchSlideIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }`}</style>
         <div className="container-site py-6">
 
-          <div className="flex items-center gap-4">
-            <div className="flex-1 flex items-center border-2 border-[#023e7d] bg-white px-4 py-3">
-              <svg className="w-5 h-5 text-[#0466c8] mr-3 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-              </svg>
-              <input
-                ref={inputRef}
-                type="search"
-                value={query}
-                onChange={e => setQuery(e.target.value)}
-                placeholder="Search books, articles, pages…"
-                className="flex-1 font-body text-[17px] text-navy-bolder placeholder:text-neutral-subtle outline-none bg-transparent"
-                aria-label="Site search"
-                aria-autocomplete="list"
-                aria-expanded={suggestions.length > 0}
-              />
-              {query && (
-                <button
-                  onClick={() => setQuery('')}
-                  className="ml-2 text-neutral-subtle hover:text-navy-bolder transition-colors"
-                  aria-label="Clear"
-                >
-                  <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                    <path d="M2 2l12 12M14 2L2 14"/>
-                  </svg>
-                </button>
-              )}
-            </div>
-            <button
-              onClick={onClose}
-              className="flex-shrink-0 flex items-center gap-1.5 font-body font-bold text-[15px] text-navy-subtle hover:text-navy-bolder transition-colors"
-              aria-label="Close search"
+          <div className="flex items-stretch border-2 border-[#023e7d] bg-white">
+            <span className="flex-shrink-0 flex items-center px-4 text-[#0466c8]" aria-hidden="true">
+              <i className="fa-solid fa-magnifying-glass" style={{ fontSize: '1.125rem' }} />
+            </span>
+            <input
+              ref={inputRef}
+              type="search"
+              value={query}
+              onChange={e => setQuery(e.target.value)}
+              placeholder="What can we help you find?"
+              className="flex-1 font-body text-[17px] text-navy-bolder placeholder:text-neutral-subtle outline-none bg-transparent py-3"
+              aria-label="Site search"
+              aria-autocomplete="list"
+              aria-expanded={suggestions.length > 0}
+            />
+            {query && (
+              <button
+                onClick={() => setQuery('')}
+                className="flex-shrink-0 flex items-center px-3 text-neutral-subtle hover:text-navy-bolder transition-colors"
+                aria-label="Clear"
+              >
+                <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                  <path d="M2 2l12 12M14 2L2 14"/>
+                </svg>
+              </button>
+            )}
+            <a
+              href={query ? `/search?q=${encodeURIComponent(query)}` : '/search'}
+              className="flex-shrink-0 flex items-center px-7 bg-navy-bolder text-white font-body font-bold text-[15px] tracking-[-0.3px] hover:bg-navy transition-colors"
             >
-              <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                <path d="M2 2l12 12M14 2L2 14"/>
-              </svg>
-              Close
-            </button>
+              Search
+            </a>
           </div>
 
           {suggestions.length > 0 && (
@@ -173,12 +167,6 @@ function SearchFlydown({ onClose }: { onClose: () => void }) {
                 </a>
               </li>
             </ul>
-          )}
-
-          {query.length === 0 && (
-            <p className="mt-3 font-body text-[13px] text-neutral-subtle">
-              Try searching for a book title, author, article, or topic.
-            </p>
           )}
 
           {query.length >= 2 && suggestions.length === 0 && (
@@ -285,19 +273,50 @@ function MegaMenuPanel({ links, megaCta, alignRight }: {
           ))}
         </div>
         {megaCta && (
-          <div className="w-[380px] flex-shrink-0 bg-navy-boldest p-10 flex flex-col justify-between gap-6">
-            <div className="flex flex-col gap-4">
-              <h3 className="font-headline text-3xl text-white not-italic leading-[1.1]">{megaCta.headline}</h3>
-              <p className="font-body text-base text-white/80 leading-relaxed">{megaCta.body}</p>
+          <div className="w-[380px] flex-shrink-0 bg-navy-boldest flex flex-col">
+            {/* Top-banner image (articles) */}
+            {megaCta.image && megaCta.imageLayout !== 'side' && (
+              <div className="w-full aspect-[16/9] overflow-hidden flex-shrink-0">
+                <img src={megaCta.image} alt={megaCta.imageAlt ?? ''} className="w-full h-full object-cover" />
+              </div>
+            )}
+            <div className="flex flex-col justify-between gap-6 flex-1 p-8">
+              {/* Side-by-side image (books) */}
+              {megaCta.image && megaCta.imageLayout === 'side' ? (
+                <div className="flex gap-5 items-start">
+                  <div className="flex-shrink-0 w-[90px]">
+                    <img src={megaCta.image} alt={megaCta.imageAlt ?? ''} className="w-full h-auto object-contain shadow-lg" />
+                  </div>
+                  <div className="flex flex-col gap-3 min-w-0">
+                    {megaCta.eyebrow && (
+                      <p className="font-body font-medium text-xs uppercase tracking-[0.1em]" style={{ color: '#E0E0CC' }}>
+                        {megaCta.eyebrow}
+                      </p>
+                    )}
+                    <h3 className="font-headline text-2xl text-white not-italic leading-[1.1]">{megaCta.headline}</h3>
+                    <p className="font-body text-sm text-white/80 leading-relaxed">{megaCta.body}</p>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex flex-col gap-4">
+                  {megaCta.eyebrow && (
+                    <p className="font-body font-medium text-xs uppercase tracking-[0.1em]" style={{ color: '#E0E0CC' }}>
+                      {megaCta.eyebrow}
+                    </p>
+                  )}
+                  <h3 className="font-headline text-3xl text-white not-italic leading-[1.1]">{megaCta.headline}</h3>
+                  <p className="font-body text-base text-white/80 leading-relaxed">{megaCta.body}</p>
+                </div>
+              )}
+              <a
+                href={megaCta.ctaHref}
+                className="flex items-center justify-center bg-gold text-navy-bolder
+                           font-body font-bold text-base tracking-[-0.3px]
+                           px-6 py-4 hover:bg-gold-dark transition-colors"
+              >
+                {megaCta.ctaLabel}
+              </a>
             </div>
-            <a
-              href={megaCta.ctaHref}
-              className="flex items-center justify-center bg-gold text-navy-bolder
-                         font-body font-bold text-base tracking-[-0.3px]
-                         px-6 py-4 hover:bg-gold-dark transition-colors"
-            >
-              {megaCta.ctaLabel}
-            </a>
           </div>
         )}
       </div>
@@ -664,11 +683,14 @@ export default function Header() {
 
             <button
               onClick={() => setSearchOpen(o => !o)}
-              className={`ml-2 p-2 transition-colors flex-shrink-0 ${searchOpen ? 'text-[#0466c8]' : 'text-navy-subtle hover:text-navy-bolder'}`}
-              aria-label="Search"
+              className={`ml-2 p-2 transition-colors flex-shrink-0 ${searchOpen ? 'text-navy-bolder' : 'text-navy-subtle hover:text-navy-bolder'}`}
+              aria-label={searchOpen ? 'Close search' : 'Open search'}
               aria-expanded={searchOpen}
             >
-              <i className="fa-solid fa-magnifying-glass" style={{ fontSize: '1.125rem' }} />
+              {searchOpen
+                ? <i className="fa-solid fa-xmark" style={{ fontSize: '1.375rem' }} />
+                : <i className="fa-solid fa-magnifying-glass" style={{ fontSize: '1.125rem' }} />
+              }
             </button>
           </div>
         </div>

@@ -37,7 +37,7 @@ export default function ArticleHeader({
     <section style={{ background: 'linear-gradient(to bottom, #EBF4FF 0%, #FFF 100%)' }}>
 
       {/* Leaderboard ad band */}
-      <div className="flex justify-center py-4 border-b border-border-light overflow-x-auto">
+      <div className="flex justify-center py-4 overflow-x-auto">
         <AdFrame>
           <div
             className="bg-[#DDE1E7] flex flex-col items-center justify-center gap-1"

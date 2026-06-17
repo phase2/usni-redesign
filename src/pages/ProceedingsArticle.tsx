@@ -5,6 +5,7 @@ import ArticleHeader from '@/sections/ArticleHeader'
 import ArticleHeroImage from '@/sections/ArticleHeroImage'
 import ArticleBody from '@/sections/ArticleBody'
 import ArticleRelated from '@/sections/ArticleRelated'
+import heroImg from '@/assets/images/proceedings-Three MEFs Wont Be Enough.png'
 
 export default function ProceedingsArticle() {
   return (
@@ -26,6 +27,8 @@ export default function ProceedingsArticle() {
           ]}
         />
         <ArticleHeroImage
+          src={heroImg}
+          alt="Marines conduct amphibious assault training during Exercise Iron Fist"
           caption="Marines from 2nd Battalion, 4th Marines conduct amphibious assault training during Exercise Iron Fist. Growing Marine Corps expeditionary capacity is central to Pacific deterrence strategy."
           photoCredit="U.S. Marine Corps / Lance Corporal David Intriago"
         />

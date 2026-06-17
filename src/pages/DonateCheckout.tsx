@@ -83,12 +83,18 @@ export default function DonateCheckout() {
   }, [setCartCount])
 
   // ── Account
-  const [activeTab, setActiveTab]       = useState<'create' | 'signin'>('create')
+  const [activeTab, setActiveTab]       = useState<'guest' | 'create' | 'signin'>('guest')
   const [firstName, setFirstName]       = useState('')
   const [lastName, setLastName]         = useState('')
   const [email, setEmail]               = useState('')
   const [confirmEmail, setConfirmEmail] = useState('')
   const [password, setPassword]         = useState('')
+  const [anonymous, setAnonymous]       = useState(isAnonymous)
+  const [service, setService]           = useState('')
+  const [militaryStatus, setMilitary]   = useState('')
+  const [rank, setRank]                 = useState('')
+  const [suffix, setSuffix]             = useState('')
+  const [gradYear, setGradYear]         = useState('')
 
   // ── Payment — card number split into 4 groups
   const [cardGroups, setCardGroups] = useState(['', '', '', ''])
@@ -136,7 +142,7 @@ export default function DonateCheckout() {
                     <h2 className="font-headline text-[28px] text-[#1d2535] leading-[1.2]">Account Information</h2>
 
                     <div className="flex">
-                      {(['create', 'signin'] as const).map(tab => (
+                      {(['guest', 'create', 'signin'] as const).map(tab => (
                         <button
                           key={tab}
                           type="button"
@@ -147,10 +153,8 @@ export default function DonateCheckout() {
                               : 'bg-[#ebf4ff] text-[#1d2535] hover:text-[#023e7d]'
                           }`}
                         >
-                          {tab === 'create' ? 'Create an account' : 'Sign in'}
-                          {/* Continuous bottom border */}
+                          {tab === 'guest' ? 'Checkout as guest' : tab === 'create' ? 'Create an account' : 'Sign in'}
                           <span className={`absolute bottom-0 left-0 right-0 h-[3px] ${activeTab === tab ? 'bg-[#023e7d]' : 'bg-[#c4c9d4]'}`} />
-                          {/* Left-to-right hover underline (inactive only) */}
                           {activeTab !== tab && (
                             <span className="absolute bottom-0 left-0 right-0 h-[3px] bg-[#0466c8] scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 ease-out" />
                           )}
@@ -158,7 +162,7 @@ export default function DonateCheckout() {
                       ))}
                     </div>
 
-                    {activeTab === 'create' ? (
+                    {activeTab === 'guest' && (
                       <div className="flex flex-col gap-5">
                         <div className="flex gap-5">
                           <FormInput label="First Name" placeholder="First name" value={firstName} onChange={setFirstName} className="flex-1" />
@@ -166,11 +170,56 @@ export default function DonateCheckout() {
                         </div>
                         <FormInput label="Email Address" placeholder="your@email.com" value={email} onChange={setEmail} type="email" />
                         <FormInput label="Confirm Email Address" placeholder="your@email.com" value={confirmEmail} onChange={setConfirmEmail} type="email" />
+                        <label className="flex items-center gap-3 cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={anonymous}
+                            onChange={e => setAnonymous(e.target.checked)}
+                            className="w-4 h-4 border border-[#4e576a] accent-[#023e7d] cursor-pointer"
+                          />
+                          <span className="font-body text-[15px] text-[#1d2535]">I would like this donation to be anonymous</span>
+                        </label>
                       </div>
-                    ) : (
+                    )}
+                    {activeTab === 'create' && (
+                      <div className="flex flex-col gap-5">
+                        <div className="flex gap-5">
+                          <FormInput label="First Name" placeholder="First name" value={firstName} onChange={setFirstName} className="flex-1" />
+                          <FormInput label="Last Name" placeholder="Last name" value={lastName} onChange={setLastName} className="flex-1" />
+                        </div>
+                        <FormInput label="Email Address" placeholder="your@email.com" value={email} onChange={setEmail} type="email" />
+                        <FormInput label="Confirm Email Address" placeholder="your@email.com" value={confirmEmail} onChange={setConfirmEmail} type="email" />
+                        <FormInput label="Password" placeholder="Create a password" value={password} onChange={setPassword} type="password" />
+
+                        <div className="border-t border-[#c4c9d4] pt-5">
+                          <p className="font-body font-bold text-[12px] uppercase tracking-[0.08em] text-[#4e576a] mb-4">Service Information</p>
+                          <div className="flex flex-col gap-5">
+                            <div className="flex gap-5">
+                              <div className="flex flex-col gap-1.5 flex-1">
+                                <label className="font-body font-bold text-[14px] text-[#1d2535]">Service <span className="text-red-500">*</span></label>
+                                <InlineSelect placeholder="— Select —" options={['Navy', 'Marine Corps', 'Coast Guard', 'Army', 'Air Force', 'Space Force', 'Civilian']} value={service} onChange={setService} />
+                              </div>
+                              <div className="flex flex-col gap-1.5 flex-1">
+                                <label className="font-body font-bold text-[14px] text-[#1d2535]">Military Status <span className="text-red-500">*</span></label>
+                                <InlineSelect placeholder="— Select —" options={['Active Duty', 'Reserve', 'National Guard', 'Retired', 'Veteran', 'Civilian']} value={militaryStatus} onChange={setMilitary} />
+                              </div>
+                            </div>
+                            <div className="flex gap-5">
+                              <FormInput label="Rank / Title *" placeholder="Enter rank or title" value={rank} onChange={setRank} className="flex-1" />
+                              <FormInput label="Suffix" placeholder="Jr., Sr., III…" value={suffix} onChange={setSuffix} className="flex-1" />
+                              <FormInput label="Graduation Year" placeholder="YYYY" value={gradYear} onChange={setGradYear} className="w-36" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    {activeTab === 'signin' && (
                       <div className="flex flex-col gap-5">
                         <FormInput label="Email Address" placeholder="your@email.com" value={email} onChange={setEmail} type="email" />
-                        <FormInput label="Password" placeholder="••••••••" value={password} onChange={setPassword} type="password" />
+                        <FormInput label="Password" placeholder="Your password" value={password} onChange={setPassword} type="password" />
+                        <a href="/login/forgot" className="font-body text-[15px] text-[#0466c8] hover:underline w-fit">
+                          Forgot your password?
+                        </a>
                       </div>
                     )}
                   </div>

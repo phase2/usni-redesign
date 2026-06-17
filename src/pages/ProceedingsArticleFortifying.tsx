@@ -5,7 +5,7 @@ import ArticleHeader from '@/sections/ArticleHeader'
 import ArticleHeroImage from '@/sections/ArticleHeroImage'
 import FortifyingArticleBody from '@/sections/FortifyingArticleBody'
 import ArticleRelated from '@/sections/ArticleRelated'
-import heroImg from '@/assets/images/proceedings-fortifying-digital-watch.png'
+import heroImg from '@/assets/images/Nelson-PRO-4-26-Hero.jpg'
 
 export default function ProceedingsArticleFortifying() {
   return (

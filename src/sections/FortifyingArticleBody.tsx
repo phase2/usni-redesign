@@ -119,7 +119,7 @@ const topics = ['Cybersecurity', 'Information Warfare', 'Navy', 'Marine Corps', 
 
 function ArticleTopics() {
   return (
-    <div className="pt-8 mt-8 border-t border-[#c4c9d4]">
+    <div className="pt-8 pb-8">
       <p className="font-body font-medium text-[18px] uppercase tracking-[1px] text-[#1d2535] mb-4">
         Topics
       </p>
@@ -153,7 +153,7 @@ export default function FortifyingArticleBody() {
               <AudioPlayer />
 
               {/* Article body */}
-              <div className="font-body text-[20px] text-[#1d2535] leading-[1.5] space-y-6 article-body">
+              <div className="font-body text-[16px] lg:text-[18px] text-[#1d2535] leading-[1.5] space-y-6 article-body">
 
                 {/* Drop cap paragraph */}
                 <div className="relative overflow-hidden">
@@ -300,13 +300,7 @@ export default function FortifyingArticleBody() {
 
               </div>
 
-              {/* Bottom share + topics */}
-              <div className="mt-10 flex items-center justify-between">
-                <SharePopover />
-                <span />
-              </div>
-
-              <div className="bg-[#c4c9d4] h-px w-full mt-6" />
+              <div className="bg-[#c4c9d4] h-px w-full mt-10" />
               <ArticleTopics />
             </div>
 

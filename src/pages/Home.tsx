@@ -2,6 +2,7 @@ import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import Hero from '@/sections/Hero'
 import NavalInstituteAtWork from '@/sections/NavalInstituteAtWork'
+import FeaturedEvent from '@/sections/FeaturedEvent'
 import LatestNews from '@/sections/LatestNews'
 import ProceedingsMagazine from '@/sections/ProceedingsMagazine'
 import NavalHistory from '@/sections/NavalHistory'
@@ -15,7 +16,10 @@ export default function Home() {
       <main className="flex-1">
         <Hero />
         <NavalInstituteAtWork />
-        <LatestNews />
+        <FeaturedEvent />
+        <div className="pt-8">
+          <LatestNews />
+        </div>
         <ProceedingsMagazine />
         <NavalHistory />
         <PromoRow />

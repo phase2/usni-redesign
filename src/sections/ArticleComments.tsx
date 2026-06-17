@@ -1,7 +1,7 @@
 export default function ArticleComments() {
   return (
-    <section id="article-comments" className="bg-white pt-14 pb-0 mt-16">
-      <div className="max-w-[1090px] mx-auto w-full px-4 lg:px-8">
+    <section id="article-comments" className="bg-white pt-14 pb-16 lg:pb-20">
+      <div className="container-site">
 
         {/* Accent line + headline */}
         <div className="border-t-2 border-navy-bolder pt-6 mb-8">

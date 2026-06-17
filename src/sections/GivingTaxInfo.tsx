@@ -21,8 +21,9 @@ export default function GivingTaxInfo() {
         <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] xl:grid-cols-[416px_1fr] gap-12 lg:gap-16">
 
           {/* Left — label */}
-          <div>
-            <h2 className="font-body font-bold text-lg lg:text-xl text-navy-bolder leading-snug">
+          <div className="flex flex-col gap-3">
+            <p className="eyebrow text-navy-subtle">Transparency</p>
+            <h2 className="font-headline text-3xl lg:text-4xl text-navy-bolder leading-[1.1]">
               Naval Institute Foundation Charitable Organization Information
             </h2>
           </div>

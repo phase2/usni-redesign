@@ -1,6 +1,6 @@
-import imgLeft from '@/assets/images/usni-news-article-feature-center.png'
-import imgTopRight from '@/assets/images/community-modal-hero.png'
-import imgBottomRight from '@/assets/images/information-modal-hero.png'
+import imgLeft from '@/assets/images/giving-feature-1.jpg'
+import imgTopRight from '@/assets/images/giving-feature-2.jpg'
+import imgBottomRight from '@/assets/images/giving-feature-4.jpg'
 
 export default function GivingAbout() {
   return (
@@ -40,7 +40,7 @@ export default function GivingAbout() {
             <div className="overflow-hidden row-span-2">
               <img
                 src={imgLeft}
-                alt="Naval forces in action"
+                alt="Military personnel supporting the Naval Institute Foundation"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -48,7 +48,7 @@ export default function GivingAbout() {
             <div className="overflow-hidden">
               <img
                 src={imgTopRight}
-                alt="Naval Institute community"
+                alt="U.S. Naval Institute supporters"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -56,7 +56,7 @@ export default function GivingAbout() {
             <div className="overflow-hidden">
               <img
                 src={imgBottomRight}
-                alt="Naval Institute resources"
+                alt="Naval aviation supporting the Institute's mission"
                 className="w-full h-full object-cover"
               />
             </div>
