@@ -8,7 +8,7 @@ export default function NavalInstituteAtWork() {
         {/* Section header */}
         <div className="eyebrow-headline items-center text-center mb-12">
           <p className="eyebrow">Publishing, Reporting, Educating, and Convening</p>
-          <h2 className="font-headline text-4xl lg:text-5xl text-navy-bolder">
+          <h2 className="font-headline text-4xl lg:text-5xl text-navy-bolder leading-[1.1]">
             The Naval Institute at work
           </h2>
         </div>

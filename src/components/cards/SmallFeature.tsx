@@ -20,15 +20,15 @@ export default function SmallFeature({ article, showImage = true, className = ''
         </a>
       )}
       <div className="flex flex-col gap-2">
-        <p className="font-body font-semibold text-xs uppercase tracking-widest text-navy-subtle">
+        <p className="font-body font-normal text-[14px] uppercase tracking-[0.5px] text-[#0466C8]">
           {article.category}
         </p>
-        <a href={article.href}>
-          <h3 className="font-headline text-lg lg:text-xl text-navy-bolder leading-tight hover:text-navy-subtle transition-colors">
+        <h3 className="font-headline text-[20px] text-[#1d2535] leading-[1.2]">
+          <a href={article.href} className="article-link hover:text-navy-subtle">
             {article.headline}
-          </h3>
-        </a>
-        <p className="font-body text-xs text-neutral-subtle">
+          </a>
+        </h3>
+        <p className="font-body text-[16px] text-neutral-subtle">
           {article.date}{article.author ? ` | by ${article.author}` : ''}
         </p>
       </div>

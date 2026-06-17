@@ -3,7 +3,7 @@ import nhLogo from '@/assets/images/Naval_History_logo_white_500px.webp'
 export default function NavalHistoryHero() {
   return (
     <section
-      className="flex flex-col items-center justify-center py-20"
+      className="flex flex-col items-center justify-center py-12 lg:py-20"
       style={{ background: 'linear-gradient(to bottom, #1d2535, #0e121a)' }}
     >
       <img

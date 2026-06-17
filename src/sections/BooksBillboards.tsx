@@ -33,7 +33,7 @@ export default function BooksBillboards() {
               <div className="pt-3">
                 <a
                   href="/books/oral-histories"
-                  className="inline-flex items-center gap-2 bg-gold text-navy-boldest font-body font-bold text-base tracking-[-0.5px] px-6 py-4 hover:bg-[#FFE566] transition-colors"
+                  className="inline-flex items-center gap-2 bg-gold text-navy-boldest font-body font-bold text-base tracking-[-0.5px] px-6 py-4 hover:bg-gold-dark transition-colors"
                 >
                   View the Oral Histories archive
                   <ArrowIcon />

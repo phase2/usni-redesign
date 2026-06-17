@@ -27,7 +27,7 @@ export default function DonateForm() {
       <div className="container-site">
 
         {/* Heading */}
-        <h2 className="font-headline text-3xl lg:text-4xl xl:text-5xl text-navy-bolder text-center mb-10">
+        <h2 className="font-headline text-3xl lg:text-4xl xl:text-5xl text-navy-bolder leading-[1.1] text-center mb-10">
           Select your donation amount
         </h2>
 

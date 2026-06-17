@@ -5,7 +5,7 @@ export default function BooksTopSubjects() {
     <section className="py-14 lg:py-16 bg-surface-subtle">
       <div className="container-site">
 
-        <h2 className="font-headline text-3xl lg:text-4xl text-navy-bolder leading-tight mb-2 pb-4 border-b-2 border-[#0466C8]">
+        <h2 className="font-headline text-3xl lg:text-4xl text-navy-bolder leading-[1.1] mb-2 pb-4 border-b-2 border-[#0466C8]">
           Top Subjects
         </h2>
 

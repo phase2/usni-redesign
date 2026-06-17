@@ -68,7 +68,7 @@ export default function GivingWaysToGive() {
           <div>
             <div className="eyebrow-headline mb-6">
               <p className="eyebrow">Ways to Give</p>
-              <h2 className="font-headline text-3xl lg:text-4xl text-navy-bolder leading-tight">
+              <h2 className="font-headline text-3xl lg:text-4xl text-navy-bolder leading-[1.1]">
                 There are Many Ways to Make a Gift
               </h2>
             </div>

@@ -13,53 +13,54 @@ interface PromoCardProps {
 
 function PromoCard({ eyebrow, headline, body, ctaLabel, ctaHref, image, imageAlt }: PromoCardProps) {
   return (
-    <div className="flex flex-col gap-0 flex-1">
-      <div className="aspect-[16/9] overflow-hidden bg-neutral-subtlest">
+    <div className="flex flex-col gap-4 flex-1 bg-white border border-navy-subtle p-5">
+      <div className="aspect-[16/9] overflow-hidden bg-neutral-subtlest flex-shrink-0">
         <img src={image} alt={imageAlt} className="w-full h-full object-cover" />
       </div>
-      <div className="flex flex-col gap-4 p-6 lg:p-8 border border-border-light border-t-0 flex-1">
-        <div>
-          <p className="font-body font-medium text-xs uppercase tracking-widest text-navy-subtle mb-2">
-            {eyebrow}
-          </p>
-          <h3 className="font-headline text-2xl lg:text-3xl text-navy-bolder leading-tight">
-            {headline}
-          </h3>
-        </div>
-        <p className="font-body text-sm lg:text-base text-neutral-subtle leading-relaxed flex-1">{body}</p>
-        <a
-          href={ctaHref}
-          className="inline-flex items-center justify-center bg-navy-bolder text-white font-body font-bold text-sm tracking-[-0.3px] px-5 py-3.5 border border-navy-bolder hover:bg-navy transition-colors mt-auto"
-        >
-          {ctaLabel}
-        </a>
+      <div className="border-b border-[#0466c8] pb-4">
+        <p className="font-body font-medium text-[18px] uppercase tracking-[1px] text-navy-subtle mb-1">
+          {eyebrow}
+        </p>
+        <h3 className="font-headline text-[36px] text-navy-bolder leading-[1.2]">
+          {headline}
+        </h3>
       </div>
+      <p className="font-body text-[16px] text-[#1d2535] leading-[1.5] flex-1">{body}</p>
+      <a
+        href={ctaHref}
+        className="flex items-center justify-center bg-navy-bold text-white font-body font-bold text-[16px] tracking-[-0.5px] px-6 py-4 hover:bg-navy transition-colors mt-auto w-full"
+      >
+        {ctaLabel} →
+      </a>
     </div>
   )
 }
 
 export default function PromoRow() {
   return (
-    <section className="bg-white py-16 lg:py-20">
+    <section
+      className="py-16 lg:py-20"
+      style={{ background: 'linear-gradient(52.83deg, #EBF4FF 8.15%, #ffffff 72.81%)' }}
+    >
       <div className="container-site">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <PromoCard
             eyebrow="Membership"
             headline="Join 50,000+ Naval Professionals Worldwide"
-            body="As a member of the U.S. Naval Institute, you'll join a community of naval and maritime professionals who share your commitment to sea power. Enjoy exclusive access to Proceedings and Naval History magazines, discounts, and more."
-            ctaLabel="Become a Member"
+            body="Access Proceedings and Naval History, discounts on Press titles, and become part of the forum that shapes maritime thinking."
+            ctaLabel="Become a member"
             ctaHref="/membership/join"
             image={membershipImage}
-            imageAlt="Naval officers in uniform"
+            imageAlt="Naval officer on flight deck signaling aircraft launch"
           />
           <PromoCard
-            eyebrow="Giving"
+            eyebrow="Support the Mission"
             headline="Help Fund the Open Forum"
-            body="Your donation to the Naval Institute supports the publication of Proceedings and Naval History magazines, the continuation of the oral history collection, and the preservation of naval heritage for future generations."
-            ctaLabel="Donate Today"
+            body="As a nonprofit, the Naval Institute depends on the generosity of donors to sustain the independent forum, oral history archives, and educational programs that serve the sea services community."
+            ctaLabel="Donate today"
             ctaHref="/giving/donate"
             image={donationImage}
-            imageAlt="U.S. Naval vessel at sea"
+            imageAlt="U.S. sailors and marines in dress uniform"
           />
         </div>
       </div>

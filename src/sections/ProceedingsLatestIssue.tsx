@@ -7,7 +7,7 @@ export default function ProceedingsLatestIssue() {
     <section className="bg-white py-16 lg:py-20">
       <div className="container-site">
         {/* Section heading */}
-        <h2 className="font-headline text-5xl lg:text-[56px] text-navy-bolder text-center leading-tight mb-8">
+        <h2 className="font-headline text-5xl lg:text-[56px] text-navy-bolder text-center leading-[1.1] mb-8">
           Latest Issue
         </h2>
 

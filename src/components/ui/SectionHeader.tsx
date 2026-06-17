@@ -1,4 +1,4 @@
-import { ButtonLink } from '@/components/ui/Button'
+import ButtonLinkCTA from '@/components/ui/ButtonLinkCTA'
 
 interface SectionHeaderProps {
   eyebrow?: string
@@ -24,7 +24,7 @@ export default function SectionHeader({
       <div className={`text-center ${className}`}>
         <div className="eyebrow-headline items-center">
           {eyebrow && <p className="eyebrow">{eyebrow}</p>}
-          <h2 className="font-headline text-4xl lg:text-5xl text-navy-bolder">{headline}</h2>
+          <h2 className="font-headline text-4xl lg:text-5xl text-navy-bolder leading-[1.1]">{headline}</h2>
         </div>
       </div>
     )
@@ -36,7 +36,7 @@ export default function SectionHeader({
         <div className="flex-1">
           <div className="eyebrow-headline">
             {eyebrow && <p className="eyebrow">{eyebrow}</p>}
-            <h2 className="font-headline text-4xl lg:text-5xl text-navy-bolder leading-tight">
+            <h2 className="font-headline text-4xl lg:text-5xl text-navy-bolder leading-[1.1]">
               {headline}
             </h2>
           </div>
@@ -49,11 +49,7 @@ export default function SectionHeader({
               </p>
             )}
             {ctaLabel && ctaHref && (
-              <div>
-                <ButtonLink href={ctaHref} variant="link" size="sm" className="font-bold text-navy-subtle">
-                  {ctaLabel} →
-                </ButtonLink>
-              </div>
+              <ButtonLinkCTA href={ctaHref}>{ctaLabel}</ButtonLinkCTA>
             )}
           </div>
         )}

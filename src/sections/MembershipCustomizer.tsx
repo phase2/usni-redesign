@@ -206,7 +206,7 @@ function TierCard({
       <div className="flex flex-col flex-1 px-5 py-6 gap-5">
         {/* Title + price */}
         <div className="flex items-start justify-between gap-3">
-          <h3 className="font-headline text-[26px] text-navy-bolder leading-tight">{name}</h3>
+          <h3 className="font-headline text-[26px] text-navy-bolder leading-[1.1]">{name}</h3>
 
           {price !== null && (
             <div className="flex flex-col items-end flex-shrink-0">

@@ -18,14 +18,14 @@ export default function LargeFeature({ article, className = '' }: LargeFeaturePr
         </a>
       )}
       <div className="flex flex-col gap-3">
-        <p className="font-body font-semibold text-xs uppercase tracking-widest text-navy-subtle">
+        <p className="font-body font-normal text-[14px] uppercase tracking-[0.5px] text-[#0466C8]">
           {article.category}
         </p>
-        <a href={article.href}>
-          <h3 className="font-headline text-2xl lg:text-3xl text-navy-bolder leading-tight hover:text-navy-subtle transition-colors">
+        <h3 className="font-headline text-2xl lg:text-3xl text-navy-bolder leading-[1.1]">
+          <a href={article.href} className="article-link hover:text-navy-subtle">
             {article.headline}
-          </h3>
-        </a>
+          </a>
+        </h3>
         {article.excerpt && (
           <p className="font-body text-sm text-neutral-subtle leading-relaxed line-clamp-3">{article.excerpt}</p>
         )}

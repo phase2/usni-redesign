@@ -9,7 +9,7 @@ export default function ArchivesAbout() {
 
           {/* Left — text */}
           <div className="flex flex-col gap-6">
-            <h2 className="font-headline text-4xl lg:text-5xl text-navy-bolder leading-tight">
+            <h2 className="font-headline text-4xl lg:text-5xl text-navy-bolder leading-[1.1]">
               Preserving 150 Years of Naval History
             </h2>
             <p className="font-body text-base lg:text-lg text-neutral-subtle leading-relaxed">

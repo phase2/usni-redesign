@@ -1,4 +1,11 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
+
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => { window.scrollTo(0, 0) }, [pathname])
+  return null
+}
 import { CartProvider } from '@/context/CartContext'
 import Home from '@/pages/Home'
 import Membership from '@/pages/Membership'
@@ -22,11 +29,14 @@ import BooksCart from '@/pages/BooksCart'
 import NavalHistory from '@/pages/NavalHistory'
 import Login from '@/pages/Login'
 import Archives from '@/pages/Archives'
+import NavalHistoryArticle from '@/pages/NavalHistoryArticle'
+import ProceedingsArticleFortifying from '@/pages/ProceedingsArticleFortifying'
 
 export default function App() {
   return (
     <CartProvider>
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/membership" element={<Membership />} />
@@ -48,8 +58,10 @@ export default function App() {
         <Route path="/naval-history" element={<NavalHistory />} />
         <Route path="/login" element={<Login />} />
         <Route path="/proceedings/three-mefs" element={<ProceedingsArticle />} />
+        <Route path="/proceedings/fortifying-digital-watch" element={<ProceedingsArticleFortifying />} />
         <Route path="/books/ai-warfighting" element={<BookProduct />} />
         <Route path="/archives" element={<Archives />} />
+        <Route path="/naval-history/mitscher-at-midway" element={<NavalHistoryArticle />} />
       </Routes>
     </BrowserRouter>
     </CartProvider>

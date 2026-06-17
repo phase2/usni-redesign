@@ -64,7 +64,7 @@ export default function DonateFAQ() {
 
           {/* Left */}
           <div>
-            <h2 className="font-headline text-3xl lg:text-4xl text-navy-bolder leading-tight mb-6">
+            <h2 className="font-headline text-3xl lg:text-4xl text-navy-bolder leading-[1.1] mb-6">
               Foundation Frequently Asked Questions
             </h2>
             <a

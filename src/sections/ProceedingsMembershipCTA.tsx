@@ -12,7 +12,7 @@ export default function ProceedingsMembershipCTA() {
         <div className="bg-white p-8 lg:p-12 w-full max-w-full md:max-w-[480px] lg:max-w-[560px] my-20">
           <div className="eyebrow-headline mb-4">
             <p className="eyebrow">Join USNI & Subscribe</p>
-            <h2 className="font-headline text-4xl lg:text-5xl text-navy-bolder leading-tight">
+            <h2 className="font-headline text-4xl lg:text-5xl text-navy-bolder leading-[1.1]">
               Proceedings goes deeper. So should you.
             </h2>
           </div>

@@ -158,8 +158,19 @@ export default function MembershipCheckout() {
   const [expiryYear, setExpiryYear]   = useState('')
   const [cvv, setCvv]                 = useState('')
 
+  // ── Gift recipient
+  const isGift = searchParams.get('gift') === 'true'
+  const [editingGift, setEditingGift] = useState(false)
+  const [giftName, setGiftName]       = useState('Matt Curtin')
+  const [giftEmail, setGiftEmail]     = useState('mjcurtin1@gmail.com')
+  const [giftStreet, setGiftStreet]   = useState('401 South Bouldin Street')
+  const [giftCity, setGiftCity]       = useState('Baltimore')
+  const [giftState, setGiftState]     = useState('MD')
+  const [giftZip, setGiftZip]         = useState('21224')
+
   // ── Order summary
-  const [autoRenew, setAutoRenew] = useState(true)
+  const [autoRenew, setAutoRenew]       = useState(true)
+  const [autoRenewMag, setAutoRenewMag] = useState(true)
 
   const handleCardGroup = (idx: number) => (raw: string) => {
     const digits = raw.replace(/\D/g, '').slice(0, 4)
@@ -194,19 +205,25 @@ export default function MembershipCheckout() {
                     <h2 className="font-headline text-[28px] text-[#1d2535] leading-[1.2]">Account Information</h2>
 
                     {/* Tab group */}
-                    <div className="flex border-b border-[#c4c9d4]">
+                    <div className="flex">
                       {(['create', 'signin'] as const).map((tab) => (
                         <button
                           key={tab}
                           type="button"
                           onClick={() => setActiveTab(tab)}
-                          className={`flex-1 py-4 font-body font-bold text-[17px] text-[#1d2535] transition-colors ${
+                          className={`relative group flex-1 py-4 font-body font-bold text-[17px] transition-colors ${
                             activeTab === tab
-                              ? 'bg-[#cde4f8] border-b-[3px] border-[#023e7d]'
-                              : 'bg-[#ebf4ff] border-b-[3px] border-transparent hover:bg-[#d8edf9]'
+                              ? 'bg-[#cde4f8] text-[#1d2535]'
+                              : 'bg-[#ebf4ff] text-[#1d2535] hover:text-[#023e7d]'
                           }`}
                         >
                           {tab === 'create' ? 'Create an account' : 'Sign in'}
+                          {/* Continuous bottom border */}
+                          <span className={`absolute bottom-0 left-0 right-0 h-[3px] ${activeTab === tab ? 'bg-[#023e7d]' : 'bg-[#c4c9d4]'}`} />
+                          {/* Left-to-right hover underline (inactive only) */}
+                          {activeTab !== tab && (
+                            <span className="absolute bottom-0 left-0 right-0 h-[3px] bg-[#0466c8] scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 ease-out" />
+                          )}
                         </button>
                       ))}
                     </div>
@@ -245,6 +262,67 @@ export default function MembershipCheckout() {
                         <FormSelect label="State" placeholder="Select State" options={US_STATES} value={state} onChange={setState} className="w-44" />
                         <FormInput label="ZIP" placeholder="Enter zip code" value={zip} onChange={setZip} className="w-36" />
                       </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Card: Gift Recipient */}
+                {isGift && (
+                  <div className="border border-[#c4c9d4]">
+                    <div className="p-6 flex flex-col gap-5">
+                      <div className="flex items-start justify-between gap-4">
+                        <div>
+                          <h2 className="font-headline text-[28px] text-[#1d2535] leading-[1.2]">Gift Recipient</h2>
+                          <p className="font-body text-[14px] text-[#4e576a] mt-1 leading-[1.5]">Please confirm the recipient's details before completing checkout.</p>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => setEditingGift(!editingGift)}
+                          className="flex-shrink-0 border border-[#c4c9d4] p-2.5 hover:bg-[#f4f4f6] transition-colors"
+                          aria-label="Edit gift recipient"
+                        >
+                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#4e576a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M11.5 2.5a1.414 1.414 0 012 2L5 13H2v-3L11.5 2.5z"/>
+                          </svg>
+                        </button>
+                      </div>
+
+                      {editingGift ? (
+                        <div className="flex flex-col gap-4">
+                          <FormInput label="Full Name" placeholder="Recipient name" value={giftName} onChange={setGiftName} />
+                          <FormInput label="Email Address" placeholder="recipient@email.com" value={giftEmail} onChange={setGiftEmail} type="email" />
+                          <FormInput label="Street Address" placeholder="123 Main Street" value={giftStreet} onChange={setGiftStreet} />
+                          <div className="flex gap-4">
+                            <FormInput label="City" placeholder="Enter city" value={giftCity} onChange={setGiftCity} className="flex-1" />
+                            <FormSelect label="State" placeholder="Select State" options={US_STATES} value={giftState} onChange={setGiftState} className="w-44" />
+                            <FormInput label="ZIP" placeholder="Enter zip" value={giftZip} onChange={setGiftZip} className="w-36" />
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => setEditingGift(false)}
+                            className="self-start bg-[#002b5c] text-white font-body font-bold text-[14px] px-6 py-2.5 hover:bg-[#023e7d] transition-colors"
+                          >
+                            Save
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="border border-[#c4c9d4]">
+                          <div className="flex border-b border-[#c4c9d4]">
+                            <div className="w-32 flex-shrink-0 px-4 py-3 font-body font-bold text-[15px] text-[#1d2535] border-r border-[#c4c9d4]">Name</div>
+                            <div className="flex-1 px-4 py-3 font-body text-[15px] text-[#4e576a]">{giftName}</div>
+                          </div>
+                          <div className="flex border-b border-[#c4c9d4]">
+                            <div className="w-32 flex-shrink-0 px-4 py-3 font-body font-bold text-[15px] text-[#1d2535] border-r border-[#c4c9d4]">Email</div>
+                            <div className="flex-1 px-4 py-3 font-body text-[15px] text-[#4e576a]">{giftEmail}</div>
+                          </div>
+                          <div className="flex">
+                            <div className="w-32 flex-shrink-0 px-4 py-3 font-body font-bold text-[15px] text-[#1d2535] border-r border-[#c4c9d4]">Address</div>
+                            <div className="flex-1 px-4 py-3 font-body text-[15px] text-[#4e576a] leading-[1.7]">
+                              {giftStreet}<br />{giftCity}, {giftState} {giftZip}<br />United States
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 )}
@@ -357,25 +435,47 @@ export default function MembershipCheckout() {
                       </div>
                     </div>
 
-                    {/* Auto-renew toggle */}
-                    <button
-                      type="button"
-                      onClick={() => setAutoRenew(!autoRenew)}
-                      className="flex items-start gap-3 text-left group"
-                      aria-pressed={autoRenew}
-                    >
-                      <div className="relative flex-shrink-0 mt-0.5">
-                        <div className={`w-11 h-6 rounded-full transition-colors ${autoRenew ? 'bg-[#023e7d]' : 'bg-[#c4c9d4]'}`} />
-                        <div className={`absolute top-1 w-4 h-4 bg-white rounded-full shadow transition-transform ${autoRenew ? 'translate-x-6' : 'translate-x-1'}`} />
-                      </div>
-                      <span className="font-body text-[13px] text-[#4e576a] leading-[1.5]">
-                        This membership is set to auto-renew on Tuesday, March 12, 2027. Cancel anytime in the account settings.
-                      </span>
-                    </button>
+                    {/* Auto-renew toggles */}
+                    <div className="flex flex-col gap-0 -mx-6">
+                      <div className="h-[2px] bg-[#FFD000]" />
+                      <button
+                        type="button"
+                        onClick={() => setAutoRenew(!autoRenew)}
+                        className="flex items-start gap-4 text-left px-6 py-4 group"
+                        aria-pressed={autoRenew}
+                      >
+                        <div className="relative flex-shrink-0 mt-0.5">
+                          <div className={`w-11 h-6 rounded-full transition-colors ${autoRenew ? 'bg-[#1d2535]' : 'bg-[#c4c9d4]'}`} />
+                          <div className={`absolute top-1 w-4 h-4 bg-white rounded-full shadow transition-transform ${autoRenew ? 'translate-x-6' : 'translate-x-1'}`} />
+                        </div>
+                        <span className="font-body text-[14px] text-[#4e576a] leading-[1.5]">
+                          This membership is set to auto-renew on January 1, 2027. Cancel anytime in the account settings.
+                        </span>
+                      </button>
+                      {magPrice && (
+                        <>
+                          <div className="h-[2px] bg-[#FFD000]" />
+                          <button
+                            type="button"
+                            onClick={() => setAutoRenewMag(!autoRenewMag)}
+                            className="flex items-start gap-4 text-left px-6 py-4 group"
+                            aria-pressed={autoRenewMag}
+                          >
+                            <div className="relative flex-shrink-0 mt-0.5">
+                              <div className={`w-11 h-6 rounded-full transition-colors ${autoRenewMag ? 'bg-[#1d2535]' : 'bg-[#c4c9d4]'}`} />
+                              <div className={`absolute top-1 w-4 h-4 bg-white rounded-full shadow transition-transform ${autoRenewMag ? 'translate-x-6' : 'translate-x-1'}`} />
+                            </div>
+                            <span className="font-body text-[14px] text-[#4e576a] leading-[1.5]">
+                              Naval History Magazine is set to auto-renew on January 1, 2027. Cancel anytime in the account settings.
+                            </span>
+                          </button>
+                        </>
+                      )}
+                    </div>
 
                     <button
                       type="button"
-                      className="w-full bg-[#002b5c] text-white font-body font-extrabold text-[18px] py-4 px-6 hover:bg-[#001845] transition-colors"
+                      className="w-full bg-[#002b5c] text-white font-body font-extrabold text-[18px] py-4 px-6 hover:bg-[#023e7d] transition-colors"
                     >
                       Complete Checkout
                     </button>

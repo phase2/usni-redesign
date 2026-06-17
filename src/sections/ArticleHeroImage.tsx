@@ -1,11 +1,15 @@
-import heroImg from '@/assets/images/Three MEFs Wont Be Enough.png'
+import defaultHeroImg from '@/assets/images/Nelson-PRO-4-26-Hero.jpg'
 
 interface ArticleHeroImageProps {
+  src?: string
+  alt?: string
   caption?: string
   photoCredit?: string
 }
 
 export default function ArticleHeroImage({
+  src,
+  alt = 'Article hero image',
   caption = 'Marines from 2nd Battalion, 4th Marines conduct amphibious assault training during Exercise Iron Fist. Growing Marine Corps expeditionary capacity is central to Pacific deterrence strategy.',
   photoCredit = 'U.S. Marine Corps / Lance Corporal David Intriago',
 }: ArticleHeroImageProps) {
@@ -15,8 +19,8 @@ export default function ArticleHeroImage({
         <figure>
           <div className="aspect-[16/7] overflow-hidden bg-neutral-subtlest">
             <img
-              src={heroImg}
-              alt="Three MEFs Won't Be Enough — Marines conducting amphibious operations"
+              src={src ?? defaultHeroImg}
+              alt={alt}
               className="w-full h-full object-cover"
             />
           </div>

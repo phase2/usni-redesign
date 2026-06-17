@@ -4,6 +4,7 @@ import imgOnOurScope    from '@/assets/images/nh-on-our-scope.png'
 import imgShipwrecks    from '@/assets/images/nh-holy-grail-shipwrecks.png'
 import imgArizona       from '@/assets/images/nh-uss-arizona.png'
 import imgClashFleets   from '@/assets/images/nh-clash-fleets-south-china-sea.png'
+import imgMitscher      from '@/assets/images/naval-history-articles/Russell-NH-5-26-1 Hero.jpg'
 
 import imgCvrMJ26  from '@/assets/images/nh-magazine-covers/NH_Cvr_MJ26.webp'
 import imgCvrMA26  from '@/assets/images/nh-magazine-covers/NH_Cvr_MA26.webp'
@@ -40,14 +41,14 @@ export const featuredArticlesLeft: Article[] = [
 
 export const featuredArticleCenter: Article = {
   id: 'nh-f3',
-  category: 'Classic Sea Fights',
-  headline: 'Clash of Fleets in the South China Sea',
-  excerpt: 'A historical analysis of great naval encounters that shaped control of the Indo-Pacific, with lessons that resonate for today\'s maritime strategists.',
-  date: 'April 2026',
-  author: 'Cadet Brandon H. Tran, U.S. Military Academy',
-  image: imgClashFleets,
-  imageAlt: 'Naval battle painting in the South China Sea',
-  href: '/naval-history/clash-fleets-south-china-sea',
+  category: 'Battle of Midway',
+  headline: 'Mitscher at Midway: The Controversy and Continuing Debate',
+  excerpt: 'Sixty years of scholarship has yielded no consensus on whether Captain Marc Mitscher\'s decisions aboard USS Hornet determined — or cost — America\'s greatest naval victory.',
+  date: 'June 2026',
+  author: 'James D. Russell',
+  image: imgMitscher,
+  imageAlt: 'Carrier aircraft being prepared for launch on USS Hornet flight deck before Midway',
+  href: '/naval-history/mitscher-at-midway',
 }
 
 export const featuredArticlesRight: Article[] = [

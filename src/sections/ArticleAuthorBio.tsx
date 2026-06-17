@@ -16,26 +16,25 @@ export default function ArticleAuthorBio({ authors }: Props) {
   const isMulti = authors.length > 1
 
   return (
-    <section className="bg-[#f7f7f2] py-10">
+    <section className="bg-white py-12 lg:py-16">
       <div className="container-site">
-        <div className="border border-[#d9d7bf] p-8 lg:p-10">
+        <div style={{ backgroundColor: '#001845' }} className="px-8 lg:px-14 py-10 lg:py-14">
 
-          {/* Header row */}
-          <p className="font-body font-medium text-[14px] uppercase tracking-[0.5px] text-[#0466c8] leading-[1.5] mb-4">
+          <h2 className="font-headline text-2xl lg:text-3xl text-white leading-[1.1] mb-6">
             About the {isMulti ? 'Authors' : 'Author'}
-          </p>
+          </h2>
 
           {/* Tabs — only shown for multiple authors */}
           {isMulti && (
-            <div className="flex flex-wrap gap-1 border-b border-[#d9d7bf] mb-7">
+            <div className="flex flex-wrap gap-1 border-b border-white/20 mb-8">
               {authors.map((author, i) => (
                 <button
                   key={author.name}
                   onClick={() => setActiveIndex(i)}
                   className={`px-5 py-3 font-body font-semibold text-sm whitespace-nowrap border-b-2 -mb-px transition-colors
                     ${activeIndex === i
-                      ? 'border-[#023E7D] text-[#1d2535] bg-white/50'
-                      : 'border-transparent text-neutral-subtle hover:text-[#1d2535]'
+                      ? 'border-gold text-white bg-white/10'
+                      : 'border-transparent text-white/50 hover:text-white/80'
                     }`}
                 >
                   {author.name}
@@ -46,29 +45,15 @@ export default function ArticleAuthorBio({ authors }: Props) {
 
           {/* Active author */}
           <div className="max-w-3xl">
-            <h3 className="font-headline text-[36px] text-[#1d2535] leading-[1.2]">
+            <p className="font-headline text-xl lg:text-2xl text-white leading-snug">
               {active.name}
-            </h3>
-            <p className="font-body font-semibold text-sm text-[#0466c8] uppercase tracking-[0.04em] mt-1 mb-5">
+            </p>
+            <p className="font-body text-sm font-semibold text-gold mt-1 mb-5">
               {active.role}
             </p>
-            <p className="font-body text-[20px] text-neutral-subtle leading-[1.4]">
+            <p className="font-body text-base text-white/80 leading-[1.75]">
               {active.bio}
             </p>
-            <div className="flex flex-wrap items-center gap-4 pt-6">
-              <a
-                href={`/author/${active.name.toLowerCase().replace(/\s+/g, '-')}`}
-                className="inline-flex items-center justify-center bg-navy-bolder text-white font-body font-bold text-base tracking-[-0.5px] px-6 py-4 hover:bg-navy-bold transition-colors"
-              >
-                More stories from this author
-              </a>
-              <a
-                href={`/author/${active.name.toLowerCase().replace(/\s+/g, '-')}/biography`}
-                className="inline-flex items-center justify-center border border-navy-bolder text-navy-bolder font-body font-bold text-base tracking-[-0.5px] px-6 py-4 hover:bg-white transition-colors"
-              >
-                View Biography
-              </a>
-            </div>
           </div>
 
         </div>

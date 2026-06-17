@@ -13,7 +13,7 @@ export default function GivingConferenceCenter() {
         <div className="bg-white p-8 lg:p-12 w-full max-w-full md:max-w-[480px] lg:max-w-[520px] my-12">
           <div className="eyebrow-headline mb-4">
             <p className="eyebrow">Hosting Inspiring Events</p>
-            <h2 className="font-headline text-3xl lg:text-4xl text-navy-bolder leading-tight">
+            <h2 className="font-headline text-3xl lg:text-4xl text-navy-bolder leading-[1.1]">
               The Jack C. Taylor Conference Center
             </h2>
           </div>

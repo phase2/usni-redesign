@@ -16,7 +16,7 @@ export default function ProceedingsMagazine() {
             <p className="font-body font-semibold text-sm uppercase tracking-[0.08em] text-navy-subtle mb-2">
               April 2026 Edition
             </p>
-            <h2 className="font-headline text-4xl lg:text-5xl text-navy-bolder leading-tight">
+            <h2 className="font-headline text-4xl lg:text-5xl text-navy-bolder leading-[1.1]">
               Proceedings Magazine
             </h2>
           </div>

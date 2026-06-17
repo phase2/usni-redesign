@@ -10,6 +10,57 @@ const COUNTRIES = [
   'Poland', 'Norway', 'Denmark', 'Sweden', 'Finland', 'Israel', 'India', 'Other',
 ]
 
+const INTERESTS = [
+  {
+    id: 'usni-news',
+    name: 'USNI News',
+    frequency: 'Daily',
+    description: 'Breaking defense and naval news from our award-winning journalism team.',
+    icon: 'fa-newspaper',
+    accent: '#023E7D',
+  },
+  {
+    id: 'proceedings',
+    name: 'Proceedings',
+    frequency: 'Monthly',
+    description: 'New articles and highlights from the flagship professional naval journal.',
+    icon: 'fa-anchor',
+    accent: '#0B3D8F',
+  },
+  {
+    id: 'naval-history',
+    name: 'Naval History',
+    frequency: 'Bimonthly',
+    description: 'Stories exploring the rich heritage of the sea services since 1873.',
+    icon: 'fa-ship',
+    accent: '#7B4F2E',
+  },
+  {
+    id: 'books-press',
+    name: 'Books & Press',
+    frequency: 'Regularly',
+    description: 'New releases, author events, and offers from Naval Institute Press.',
+    icon: 'fa-book-open',
+    accent: '#1A5C3A',
+  },
+  {
+    id: 'member-updates',
+    name: 'Member Updates',
+    frequency: 'Monthly',
+    description: 'Membership news, exclusive benefits, and Institute announcements.',
+    icon: 'fa-id-card',
+    accent: '#4A1E8B',
+  },
+  {
+    id: 'events',
+    name: 'Events',
+    frequency: 'As scheduled',
+    description: 'USNI forums, symposia, and conferences throughout the year.',
+    icon: 'fa-calendar-days',
+    accent: '#B5451B',
+  },
+]
+
 interface FormState {
   email: string
   firstName: string
@@ -35,10 +86,10 @@ interface NewsletterModalProps {
 
 export default function NewsletterModal({ open, onClose }: NewsletterModalProps) {
   const [form, setForm] = useState<FormState>(EMPTY)
+  const [interests, setInterests] = useState<Set<string>>(new Set())
   const [submitted, setSubmitted] = useState(false)
   const firstInputRef = useRef<HTMLInputElement>(null)
 
-  // Focus first input when opened, close on Escape
   useEffect(() => {
     if (!open) return
     const handleKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
@@ -51,15 +102,21 @@ export default function NewsletterModal({ open, onClose }: NewsletterModalProps)
     }
   }, [open, onClose])
 
-  // Reset on close
   useEffect(() => {
-    if (!open) { setForm(EMPTY); setSubmitted(false) }
+    if (!open) { setForm(EMPTY); setInterests(new Set()); setSubmitted(false) }
   }, [open])
 
   if (!open) return null
 
   const set = (field: keyof FormState, value: string) =>
     setForm(prev => ({ ...prev, [field]: value }))
+
+  const toggleInterest = (id: string) =>
+    setInterests(prev => {
+      const next = new Set(prev)
+      next.has(id) ? next.delete(id) : next.add(id)
+      return next
+    })
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -71,13 +128,14 @@ export default function NewsletterModal({ open, onClose }: NewsletterModalProps)
 
   const modal = (
     <div
-      className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-navy-boldest/75"
+      className="fixed inset-0 z-[200] flex items-center justify-center p-4"
       aria-modal="true"
       role="dialog"
       aria-labelledby="newsletter-modal-title"
       onClick={e => { if (e.target === e.currentTarget) onClose() }}
     >
-      <div className="bg-white w-full max-w-[680px] shadow-2xl flex flex-col max-h-[90vh]">
+      <div className="absolute inset-0 bg-navy-boldest/70" onClick={onClose} />
+      <div className="relative bg-white w-full max-w-[680px] shadow-2xl flex flex-col max-h-[90vh]">
 
         {/* Header */}
         <div
@@ -86,7 +144,7 @@ export default function NewsletterModal({ open, onClose }: NewsletterModalProps)
         >
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 w-9 h-9 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 transition-colors"
+            className="absolute top-4 right-4 w-9 h-9 flex items-center justify-center bg-white text-navy-bolder hover:bg-neutral-100 transition-colors"
             aria-label="Close newsletter signup"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -98,7 +156,7 @@ export default function NewsletterModal({ open, onClose }: NewsletterModalProps)
           </p>
           <h2
             id="newsletter-modal-title"
-            className="font-headline text-3xl lg:text-4xl text-white not-italic leading-tight"
+            className="font-headline text-3xl lg:text-4xl text-white not-italic leading-[1.1]"
           >
             Subscribe to Our Newsletter
           </h2>
@@ -147,6 +205,66 @@ export default function NewsletterModal({ open, onClose }: NewsletterModalProps)
                   placeholder="your@email.com"
                   className={inputCls}
                 />
+              </div>
+
+              {/* Interests */}
+              <div>
+                <p className={labelCls}>Interests</p>
+                <p className="font-body text-xs text-neutral-subtle mb-3 -mt-1">
+                  Select the newsletters you'd like to receive.
+                </p>
+                <div className="grid grid-cols-2 gap-3">
+                  {INTERESTS.map(item => {
+                    const selected = interests.has(item.id)
+                    return (
+                      <button
+                        key={item.id}
+                        type="button"
+                        onClick={() => toggleInterest(item.id)}
+                        className={`relative text-left border p-4 transition-colors ${
+                          selected
+                            ? 'border-[#023E7D] bg-[#EBF4FF]'
+                            : 'border-[#C4C9D4] bg-white hover:border-[#023E7D] hover:bg-[#F5F8FF]'
+                        }`}
+                      >
+                        {/* Icon badge */}
+                        <div
+                          className="w-9 h-9 flex items-center justify-center mb-3 flex-shrink-0"
+                          style={{ backgroundColor: item.accent }}
+                        >
+                          <i className={`fa-solid ${item.icon} text-white text-sm`} aria-hidden="true" />
+                        </div>
+
+                        {/* Frequency */}
+                        <p className="font-body font-semibold text-[10px] uppercase tracking-widest text-neutral-subtle mb-0.5">
+                          {item.frequency}
+                        </p>
+
+                        {/* Name */}
+                        <p className="font-body font-bold text-sm text-navy-bolder leading-snug mb-1">
+                          {item.name}
+                        </p>
+
+                        {/* Description */}
+                        <p className="font-body text-xs text-neutral-subtle leading-relaxed">
+                          {item.description}
+                        </p>
+
+                        {/* Toggle indicator */}
+                        <div className={`absolute top-3 right-3 w-6 h-6 flex items-center justify-center border transition-colors ${
+                          selected
+                            ? 'bg-[#023E7D] border-[#023E7D] text-white'
+                            : 'bg-white border-[#94A3B8] text-neutral-subtle'
+                        }`}>
+                          {selected
+                            ? <i className="fa-solid fa-check text-[10px]" aria-hidden="true" />
+                            : <i className="fa-solid fa-plus text-[10px]" aria-hidden="true" />
+                          }
+                        </div>
+                      </button>
+                    )
+                  })}
+                </div>
               </div>
 
               {/* First + Last name */}
@@ -258,7 +376,9 @@ export default function NewsletterModal({ open, onClose }: NewsletterModalProps)
                         onChange={() => set('emailFormat', fmt)}
                         className="w-4 h-4 accent-navy-bolder"
                       />
-                      <span className="font-body text-sm text-navy-bolder capitalize">{fmt}</span>
+                      <span className="font-body text-sm text-navy-bolder">
+                        {fmt === 'html' ? 'HTML' : 'Text'}
+                      </span>
                     </label>
                   ))}
                 </div>
@@ -270,7 +390,7 @@ export default function NewsletterModal({ open, onClose }: NewsletterModalProps)
                   type="submit"
                   className="w-full flex items-center justify-center gap-2 bg-gold text-navy-bolder
                              font-body font-bold text-base tracking-[-0.3px] px-6 py-4
-                             hover:bg-[#FFE566] transition-colors"
+                             hover:bg-gold-dark transition-colors"
                 >
                   <svg className="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>

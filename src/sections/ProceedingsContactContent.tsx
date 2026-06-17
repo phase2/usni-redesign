@@ -87,26 +87,6 @@ export default function ProceedingsContactContent() {
               </div>
             </div>
 
-            {/* Media Inquiries */}
-            <div className="flex flex-col gap-6">
-              <SectionHeading>Media Inquiries</SectionHeading>
-              <div className="font-body text-base text-[#1d2535] leading-relaxed flex flex-col gap-2">
-                <p className="font-bold">Contact the Communications Team</p>
-                <p>
-                  Phone Number:{' '}
-                  <a href="tel:4102951026" className="font-bold text-navy-subtle underline underline-offset-2 hover:text-navy-bolder transition-colors">
-                    (410) 295-1026
-                  </a>
-                </p>
-                <p>
-                  Email:{' '}
-                  <a href="mailto:media@usni.org" className="font-bold text-navy-subtle underline underline-offset-2 hover:text-navy-bolder transition-colors">
-                    media@usni.org
-                  </a>
-                </p>
-              </div>
-            </div>
-
           </div>
         </div>
 

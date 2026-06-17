@@ -183,7 +183,7 @@ export default function MembershipMagazineUpsell() {
 
               {/* Title + price */}
               <div className="flex items-start justify-between gap-4">
-                <h2 className="font-headline text-[32px] text-navy-bolder leading-tight">Print &amp; Digital</h2>
+                <h2 className="font-headline text-[32px] text-navy-bolder leading-[1.1]">Print &amp; Digital</h2>
 
                 <div className="flex flex-col items-end flex-shrink-0">
                   <span className="bg-gold font-body font-bold text-[11px] uppercase tracking-[0.12em] text-navy-bolder px-2 py-1 mb-2">

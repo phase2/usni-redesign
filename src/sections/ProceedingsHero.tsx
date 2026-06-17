@@ -3,7 +3,7 @@ import proceedingsLogo from '@/assets/images/Proceedings_logo_white.png'
 export default function ProceedingsHero() {
   return (
     <section
-      className="flex flex-col items-center justify-center py-20"
+      className="flex flex-col items-center justify-center py-12 lg:py-20"
       style={{ background: 'linear-gradient(to bottom, #1d2535, #0e121a)' }}
     >
       <img

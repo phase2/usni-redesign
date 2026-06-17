@@ -75,7 +75,7 @@ export default function ArchivesFAQ() {
           <div>
             <div className="flex flex-col gap-4 mb-6">
               <p className="eyebrow text-navy-subtle">FAQ</p>
-              <h2 className="font-headline text-3xl lg:text-4xl text-navy-bolder leading-tight">
+              <h2 className="font-headline text-3xl lg:text-4xl text-navy-bolder leading-[1.1]">
                 Frequently Asked Questions
               </h2>
             </div>

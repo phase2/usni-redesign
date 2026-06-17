@@ -1,5 +1,7 @@
 import inlineImg from '@/assets/images/proceedings-prepare-marine-corps.png'
 import ArticleAuthorBio from '@/sections/ArticleAuthorBio'
+import SharePopover from '@/components/ui/SharePopover'
+import ArticleComments from '@/sections/ArticleComments'
 
 const articleAuthors = [
   {
@@ -132,71 +134,6 @@ function ArticleTopics() {
   )
 }
 
-// ── Comments ──────────────────────────────────────────────────────────────────
-
-function ArticleComments() {
-  return (
-    <section className="bg-white pt-14 pb-16 border-t border-border-light mt-16">
-      <div className="max-w-[1090px] mx-auto w-full px-4 lg:px-8">
-        <h2 className="font-headline text-[48px] text-navy-bolder leading-[1.2] mb-8">Comments</h2>
-
-        <div className="bg-surface-subtle border border-border-light p-5 mb-8 flex items-start justify-between gap-6">
-          <div>
-            <p className="font-body font-semibold text-sm text-navy-bolder mb-1">U.S. Naval Institute Comment Policy</p>
-            <p className="font-body text-sm text-neutral-subtle leading-relaxed">
-              We encourage open discussion. Comments deemed inappropriate may be removed. Please read our{' '}
-              <a href="/comment-policy" className="text-navy-subtle underline hover:no-underline">comment policy</a>{' '}
-              before contributing.
-            </p>
-          </div>
-          <button
-            type="button"
-            className="flex-shrink-0 bg-navy-bolder text-white font-body font-semibold text-sm px-5 py-2 hover:bg-navy transition-colors"
-          >
-            Got it
-          </button>
-        </div>
-
-        <div className="mb-6">
-          <p className="font-body text-sm text-neutral-subtle mb-5">0 Comments</p>
-          <div className="flex items-start gap-4">
-            <div className="w-9 h-9 rounded-full bg-navy-subtle/20 flex-shrink-0 flex items-center justify-center">
-              <i className="fa-solid fa-user text-sm text-navy-subtle/60" aria-hidden="true" />
-            </div>
-            <input
-              type="text"
-              placeholder="Add a comment..."
-              className="flex-1 border border-border-light font-body text-sm text-navy-bolder px-4 py-3 focus:outline-none focus:border-navy-subtle transition-colors bg-white"
-            />
-          </div>
-        </div>
-
-        <div className="flex items-center gap-4 pt-6 border-t border-border-light">
-          <span className="font-body text-sm font-semibold text-neutral-subtle">Share this article:</span>
-          <div className="flex items-center gap-3">
-            {[
-              { icon: 'fa-brands fa-facebook-f', label: 'Share on Facebook', color: '#1877F2' },
-              { icon: 'fa-brands fa-x-twitter', label: 'Share on X', color: '#000' },
-              { icon: 'fa-brands fa-linkedin-in', label: 'Share on LinkedIn', color: '#0A66C2' },
-              { icon: 'fa-solid fa-envelope', label: 'Share by email', color: '#4E576A' },
-              { icon: 'fa-solid fa-print', label: 'Print article', color: '#4E576A' },
-            ].map((item) => (
-              <button
-                key={item.label}
-                type="button"
-                aria-label={item.label}
-                className="w-8 h-8 border border-border-light flex items-center justify-center hover:bg-surface-subtle transition-colors"
-              >
-                <i className={`${item.icon} text-xs`} style={{ color: item.color }} aria-hidden="true" />
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
 // ── Main Component ────────────────────────────────────────────────────────────
 
 export default function ArticleBody() {
@@ -212,7 +149,7 @@ export default function ArticleBody() {
               <AudioPlayer />
 
               {/* Article body */}
-              <div className="font-body text-[20px] text-[#1d2535] leading-[1.5] space-y-6 article-body">
+              <div className="font-body text-[16px] lg:text-[18px] text-[#1d2535] leading-[1.5] space-y-6 article-body">
 
                 {/* Drop cap paragraph */}
                 <div className="relative overflow-hidden">

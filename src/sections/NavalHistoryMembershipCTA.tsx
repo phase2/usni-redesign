@@ -12,7 +12,7 @@ export default function NavalHistoryMembershipCTA() {
         <div className="bg-white p-8 lg:p-12 w-full max-w-full md:max-w-[480px] lg:max-w-[560px] my-20">
           <div className="eyebrow-headline mb-4">
             <p className="eyebrow">Subscribe to Naval History</p>
-            <h2 className="font-headline text-4xl lg:text-5xl text-navy-bolder leading-tight">
+            <h2 className="font-headline text-4xl lg:text-5xl text-navy-bolder leading-[1.1]">
               History lives in every issue.
             </h2>
           </div>

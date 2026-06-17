@@ -167,7 +167,7 @@ export default function BooksCartItems() {
           <button
             type="button"
             onClick={handleCheckout}
-            className="flex items-center gap-2 bg-[#002b5c] text-white font-body font-extrabold text-[20px] py-4 px-8 hover:bg-[#001845] transition-colors"
+            className="flex items-center gap-2 bg-[#002b5c] text-white font-body font-extrabold text-[20px] py-4 px-8 hover:bg-[#023e7d] transition-colors"
           >
             Continue to Checkout
             <svg className="w-3 h-3 flex-shrink-0" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">

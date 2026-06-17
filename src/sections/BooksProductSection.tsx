@@ -83,7 +83,7 @@ export default function BooksProductSection({
         <div className="pb-4 border-b-2 border-[#0466C8]">
           <div className="flex items-end justify-between gap-6">
             <div>
-              <h2 className="font-headline text-3xl lg:text-4xl text-navy-bolder leading-tight">
+              <h2 className="font-headline text-3xl lg:text-4xl text-navy-bolder leading-[1.1]">
                 {title}
               </h2>
               {subtitle && (

@@ -35,7 +35,7 @@ export default function ProceedingsSponsoredBillboard() {
                 <p className="font-body font-medium text-xs text-navy-subtle uppercase tracking-widest">
                   Sponsored Content
                 </p>
-                <h2 className="font-headline text-3xl text-navy-bolder leading-tight">
+                <h2 className="font-headline text-3xl text-navy-bolder leading-[1.1]">
                   Extending the MOC's Reach: How Marines Can Keep the Fleet Connected—From Land to Sea
                 </h2>
               </div>

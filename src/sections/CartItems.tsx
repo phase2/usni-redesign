@@ -7,12 +7,17 @@ const PLAN_LABELS: Record<string, string> = {
   full: 'Full Membership',
   student: 'Student Membership',
   life: 'Life Membership',
+  'full-life': 'Full Life Membership',
+  'online-life': 'Online Life Membership',
+  'senior-life': 'Senior Life Membership',
+  'senior-online-life': 'Senior Online Life Membership',
 }
 
 const TERM_LABELS: Record<string, string> = {
   '1': '1 year',
   '3': '3 years',
   life: 'Lifetime',
+  lifetime: 'Lifetime',
 }
 
 const US_STATES = [
@@ -163,8 +168,9 @@ export default function CartItems() {
 
   const planLabel  = PLAN_LABELS[plan]  ?? 'Full Membership'
   const termLabel  = TERM_LABELS[term]  ?? '1 year'
-  const priceLabel = plan === 'life'
-    ? `$${price} one-time`
+  const isLifetime = term === 'lifetime' || term === 'life' || plan.endsWith('-life') || plan === 'life'
+  const priceLabel = isLifetime
+    ? `$${Number(price).toLocaleString()} one-time`
     : term === '1'
     ? `$${price}/yr`
     : `$${price} for 3 years`
@@ -297,21 +303,46 @@ export default function CartItems() {
         </div>
 
         {/* Membership item row */}
-        <div className="flex flex-col gap-2">
-          <h3 className="font-headline text-[36px] text-[#023e7d] leading-[1.2]">{planLabel}</h3>
-          <div className="flex items-center gap-6">
-            <p className="font-body text-[20px] text-[#4e576a]">
-              <span className="font-bold">Term:</span> {termLabel}
-            </p>
-            <div className="w-px h-7 bg-[#d9d9d9]" aria-hidden />
-            <p className="font-body text-[20px] text-[#4e576a]">
-              <span className="font-bold">Price:</span> {priceLabel}
-            </p>
+        <div className="flex items-start justify-between gap-4">
+          <div className="flex flex-col gap-1">
+            <h3 className="font-headline text-[26px] text-[#023e7d] leading-[1.2]">{planLabel}</h3>
+            <div className="flex items-center gap-4">
+              <p className="font-body text-[17px] text-[#4e576a]">
+                <span className="font-bold">Term:</span> {termLabel}
+              </p>
+              <div className="w-px h-5 bg-[#d9d9d9]" aria-hidden />
+              <p className="font-body text-[17px] text-[#4e576a]">
+                <span className="font-bold">Price:</span> {priceLabel}
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 flex-shrink-0 pt-1">
+            <button
+              type="button"
+              onClick={() => navigate('/membership/join')}
+              className="flex items-center gap-1.5 border border-[#002b5c] text-[#002b5c] font-body font-bold text-[13px] px-4 py-2 hover:bg-[#f0f4f8] transition-colors"
+            >
+              <svg className="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+              </svg>
+              Edit
+            </button>
+            <button
+              type="button"
+              onClick={() => navigate('/membership/join')}
+              className="flex items-center gap-1.5 border border-[#c1121f] text-[#c1121f] font-body font-bold text-[13px] px-4 py-2 hover:bg-[#fff5f5] transition-colors"
+            >
+              <svg className="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M1 1l12 12M13 1L1 13" />
+              </svg>
+              Remove
+            </button>
           </div>
         </div>
 
         {/* Membership auto-renew */}
-        <label className="flex items-center gap-2 cursor-pointer select-none">
+        {!isLifetime && <label className="flex items-center gap-2 cursor-pointer select-none">
           <input
             type="checkbox"
             checked={isAutoRenew}
@@ -319,7 +350,7 @@ export default function CartItems() {
             className="w-5 h-5 accent-[#023e7d] cursor-pointer flex-shrink-0"
           />
           <span className="font-body font-bold text-[16px] text-[#1d2535]">Set to Auto-Renew</span>
-        </label>
+        </label>}
 
         {/* Gift checkbox */}
         <label className="flex items-center gap-2 cursor-pointer select-none">
@@ -483,28 +514,41 @@ export default function CartItems() {
         {/* Naval History Magazine section */}
         {magPrice && !magRemoved && (
           <>
-            <div className="flex flex-col gap-2 border-t border-[#c4c9d4] pt-8">
-              <div className="flex items-baseline justify-between gap-4">
-                <h3 className="font-headline text-[36px] text-[#023e7d] leading-[1.2]">Naval History Magazine — Print &amp; Digital</h3>
+            <div className="flex items-start justify-between gap-4 border-t border-[#c4c9d4] pt-8">
+              <div className="flex flex-col gap-1">
+                <h3 className="font-headline text-[26px] text-[#023e7d] leading-[1.2]">Naval History Magazine — Print &amp; Digital</h3>
+                <div className="flex items-center gap-4">
+                  <p className="font-body text-[17px] text-[#4e576a]">
+                    <span className="font-bold">Term:</span> {magTermLabel}
+                  </p>
+                  <div className="w-px h-5 bg-[#d9d9d9]" aria-hidden />
+                  <p className="font-body text-[17px] text-[#4e576a]">
+                    <span className="font-bold">Price:</span> {magPriceLabel}
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 flex-shrink-0 pt-1">
+                <button
+                  type="button"
+                  onClick={() => navigate('/membership/magazine-upsell')}
+                  className="flex items-center gap-1.5 border border-[#002b5c] text-[#002b5c] font-body font-bold text-[13px] px-4 py-2 hover:bg-[#f0f4f8] transition-colors"
+                >
+                  <svg className="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                  </svg>
+                  Edit
+                </button>
                 <button
                   type="button"
                   onClick={() => { setMagRemoved(true); setIsMagGift(false); setMagGiftSubmitted(false); setMagGiftRecipient(EMPTY_GIFT) }}
-                  className="flex items-center gap-1.5 font-body text-[14px] text-[#c0392b] hover:text-[#922b21] transition-colors flex-shrink-0"
+                  className="flex items-center gap-1.5 border border-[#c1121f] text-[#c1121f] font-body font-bold text-[13px] px-4 py-2 hover:bg-[#fff5f5] transition-colors"
                 >
                   <svg className="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M1 1l12 12M13 1L1 13" />
                   </svg>
                   Remove
                 </button>
-              </div>
-              <div className="flex items-center gap-6">
-                <p className="font-body text-[20px] text-[#4e576a]">
-                  <span className="font-bold">Term:</span> {magTermLabel}
-                </p>
-                <div className="w-px h-7 bg-[#d9d9d9]" aria-hidden />
-                <p className="font-body text-[20px] text-[#4e576a]">
-                  <span className="font-bold">Price:</span> {magPriceLabel}
-                </p>
               </div>
             </div>
 
@@ -633,7 +677,7 @@ export default function CartItems() {
             className={`flex items-center gap-2 font-body font-extrabold text-[20px] py-8 px-8 transition-colors ${
               checkoutBlocked
                 ? 'bg-[#c4c9d4] text-white cursor-not-allowed'
-                : 'bg-[#002b5c] text-white hover:bg-[#001845]'
+                : 'bg-[#002b5c] text-white hover:bg-[#023e7d]'
             }`}
           >
             Continue to Checkout

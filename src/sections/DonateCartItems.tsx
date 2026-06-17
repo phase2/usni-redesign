@@ -43,24 +43,6 @@ function Toggle({ on, onToggle }: { on: boolean; onToggle: () => void }) {
   )
 }
 
-function TextInput({
-  label, placeholder, value, onChange, className = '',
-}: {
-  label: string; placeholder: string; value: string; onChange: (v: string) => void; className?: string
-}) {
-  return (
-    <div className={`flex flex-col gap-1.5 ${className}`}>
-      <label className="font-body font-bold text-[14px] text-[#1d2535]">{label}</label>
-      <input
-        type="text"
-        placeholder={placeholder}
-        value={value}
-        onChange={e => onChange(e.target.value)}
-        className="w-full border border-[#4e576a] bg-white px-4 py-3 font-body text-[16px] text-[#4e576a] placeholder:text-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#023e7d]/30 focus:border-[#023e7d] rounded-none min-h-[44px]"
-      />
-    </div>
-  )
-}
 
 export default function DonateCartItems() {
   const [searchParams] = useSearchParams()
@@ -73,16 +55,12 @@ export default function DonateCartItems() {
   const amountNum      = Number(amount)
   const frequencyLabel = frequency === 'monthly' ? 'Monthly' : 'One-Time'
 
-  const [removed, setRemoved]             = useState(false)
+  const [removed, setRemoved]               = useState(false)
   const [useWhereNeeded, setUseWhereNeeded] = useState(true)
-  const [priorities, setPriorities]       = useState<Set<string>>(new Set())
-  const [isInHonor, setIsInHonor]         = useState(false)
-  const [honorType, setHonorType]         = useState<'honor' | 'memory'>('honor')
-  const [honorName, setHonorName]         = useState('')
-  const [notifyName, setNotifyName]       = useState('')
-  const [notifyEmail, setNotifyEmail]     = useState('')
-  const [sendMessage, setSendMessage]     = useState(false)
-  const [message, setMessage]             = useState('')
+  const [priorities, setPriorities]         = useState<Set<string>>(new Set())
+  const [isAnonymous, setIsAnonymous]       = useState(false)
+  const [sendMessage, setSendMessage]       = useState(false)
+  const [message, setMessage]               = useState('')
 
   useEffect(() => {
     setCartCount(removed ? 0 : 1)
@@ -91,14 +69,14 @@ export default function DonateCartItems() {
   const togglePriority = (id: string) => {
     setPriorities(prev => {
       const next = new Set(prev)
-      next.has(id) ? next.delete(id) : next.add(id)
+      if (next.has(id)) {
+        next.delete(id)
+      } else {
+        next.add(id)
+        setUseWhereNeeded(false)
+      }
       return next
     })
-  }
-
-  const handleInHonorToggle = (checked: boolean) => {
-    setIsInHonor(checked)
-    if (!checked) { setHonorName(''); setNotifyName(''); setNotifyEmail('') }
   }
 
   const handleCheckout = () => {
@@ -106,7 +84,7 @@ export default function DonateCartItems() {
     if (!useWhereNeeded && priorities.size > 0) {
       params.set('priorities', Array.from(priorities).join(','))
     }
-    if (isInHonor && honorName) params.set('honorName', honorName)
+    if (isAnonymous) params.set('anonymous', 'true')
     navigate(`/giving/donate/checkout?${params.toString()}`)
   }
 
@@ -157,28 +135,41 @@ export default function DonateCartItems() {
         </div>
 
         {/* Gift item */}
-        <div className="flex flex-col gap-3">
-          <div className="flex items-baseline justify-between gap-4">
-            <h3 className="font-headline text-[32px] text-[#023e7d] leading-[1.2]">Gift to the U.S. Naval Institute</h3>
+        <div className="flex items-start justify-between gap-4">
+          <div className="flex flex-col gap-1">
+            <h3 className="font-headline text-[26px] text-[#023e7d] leading-[1.2]">Gift to the U.S. Naval Institute</h3>
+            <div className="flex items-center gap-4">
+              <p className="font-body text-[17px] text-[#1d2535]">
+                <span className="font-bold">Frequency:</span> {frequencyLabel}
+              </p>
+              <div className="w-px h-5 bg-[#c4c9d4]" aria-hidden />
+              <p className="font-body text-[17px] text-[#1d2535]">
+                <span className="font-bold">Amount:</span> ${amountNum.toLocaleString()}
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 flex-shrink-0 pt-1">
+            <button
+              type="button"
+              onClick={() => navigate('/giving/donate')}
+              className="flex items-center gap-1.5 border border-[#002b5c] text-[#002b5c] font-body font-bold text-[13px] px-4 py-2 hover:bg-[#f0f4f8] transition-colors"
+            >
+              <svg className="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+              </svg>
+              Edit
+            </button>
             <button
               type="button"
               onClick={() => setRemoved(true)}
-              className="flex items-center gap-1.5 font-body text-[14px] text-[#c0392b] hover:text-[#922b21] transition-colors flex-shrink-0"
+              className="flex items-center gap-1.5 border border-[#c1121f] text-[#c1121f] font-body font-bold text-[13px] px-4 py-2 hover:bg-[#fff5f5] transition-colors"
             >
               <svg className="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M1 1l12 12M13 1L1 13" />
               </svg>
               Remove
             </button>
-          </div>
-          <div className="flex items-center gap-4">
-            <p className="font-body text-[17px] text-[#1d2535]">
-              <span className="font-bold">Frequency:</span> {frequencyLabel}
-            </p>
-            <div className="w-px h-5 bg-[#c4c9d4]" aria-hidden />
-            <p className="font-body text-[17px] text-[#1d2535]">
-              <span className="font-bold">Amount:</span> ${amountNum.toLocaleString()}
-            </p>
           </div>
         </div>
 
@@ -230,58 +221,16 @@ export default function DonateCartItems() {
           )}
         </div>
 
-        {/* In honor / in memory */}
+        {/* Anonymous gift */}
         <label className="flex items-center gap-2 cursor-pointer select-none">
           <input
             type="checkbox"
-            checked={isInHonor}
-            onChange={e => handleInHonorToggle(e.target.checked)}
+            checked={isAnonymous}
+            onChange={e => setIsAnonymous(e.target.checked)}
             className="w-5 h-5 accent-[#023e7d] cursor-pointer flex-shrink-0"
           />
-          <span className="font-body text-[16px] text-[#1d2535]">Make this gift in honor or memory of someone</span>
+          <span className="font-body text-[16px] text-[#1d2535]">I wish my gift to remain anonymous</span>
         </label>
-
-        {isInHonor && (
-          <div className="border border-[#999fad]">
-            <div className="p-6 flex flex-col gap-5">
-              <h3 className="font-headline text-[28px] text-[#1d2535] leading-[1.2]">Honoree Information</h3>
-
-              <div className="flex gap-6">
-                {(['honor', 'memory'] as const).map(type => (
-                  <label key={type} className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="honorType"
-                      value={type}
-                      checked={honorType === type}
-                      onChange={() => setHonorType(type)}
-                      className="accent-[#023e7d]"
-                    />
-                    <span className="font-body font-bold text-[16px] text-[#1d2535]">
-                      In {type === 'honor' ? 'Honor' : 'Memory'} of
-                    </span>
-                  </label>
-                ))}
-              </div>
-
-              <TextInput
-                label={`${honorType === 'honor' ? 'Honor' : 'Memory'} of (Name)`}
-                placeholder="Enter full name"
-                value={honorName}
-                onChange={setHonorName}
-                className="max-w-lg"
-              />
-
-              <div className="h-px bg-[#c4c9d4]" />
-
-              <p className="font-body text-[15px] text-[#4e576a]">Optionally notify someone about this gift:</p>
-              <div className="flex gap-6">
-                <TextInput label="Notify (Name)" placeholder="Enter name" value={notifyName} onChange={setNotifyName} className="flex-1" />
-                <TextInput label="Notify (Email)" placeholder="Enter email" value={notifyEmail} onChange={setNotifyEmail} className="flex-1" />
-              </div>
-            </div>
-          </div>
-        )}
 
         {/* Navigation */}
         <div className="border-t border-[#999fad] pt-8 flex items-center justify-between gap-8">
@@ -298,7 +247,7 @@ export default function DonateCartItems() {
           <button
             type="button"
             onClick={handleCheckout}
-            className="flex items-center gap-2 bg-[#002b5c] text-white font-body font-extrabold text-[20px] py-4 px-8 hover:bg-[#001845] transition-colors"
+            className="flex items-center gap-2 bg-[#002b5c] text-white font-body font-extrabold text-[20px] py-4 px-8 hover:bg-[#023e7d] transition-colors"
           >
             Continue to Checkout
             <svg className="w-3 h-3 flex-shrink-0" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">

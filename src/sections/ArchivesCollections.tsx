@@ -42,7 +42,7 @@ export default function ArchivesCollections() {
 
         <div className="flex flex-col gap-3 mb-10">
           <p className="eyebrow text-navy-subtle">Our Collections</p>
-          <h2 className="font-headline text-4xl lg:text-5xl text-navy-bolder leading-tight">
+          <h2 className="font-headline text-4xl lg:text-5xl text-navy-bolder leading-[1.1]">
             Explore the Archives
           </h2>
         </div>

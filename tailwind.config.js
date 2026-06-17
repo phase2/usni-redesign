@@ -23,7 +23,7 @@ export default {
         gold: {
           DEFAULT: '#FFD000',
           subtle: '#FFC425',
-          dark: '#C49A00',
+          dark: '#FFEC99',
         },
         // Tan / tertiary accent
         tan: {

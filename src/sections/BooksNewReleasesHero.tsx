@@ -14,7 +14,7 @@ export default function BooksNewReleasesHero() {
 
         {/* Title + CTA row */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 lg:gap-10">
-          <h1 className="font-headline text-[48px] lg:text-[64px] text-navy-bolder leading-[1.1] flex-shrink-0">
+          <h1 className="font-headline text-[32px] lg:text-[48px] xl:text-[64px] text-navy-bolder leading-[1.1] flex-shrink-0">
             New Releases
           </h1>
           <div className="lg:pb-2 flex-shrink-0">

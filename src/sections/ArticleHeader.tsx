@@ -1,3 +1,5 @@
+import SharePopover from '@/components/ui/SharePopover'
+
 interface ArticleHeaderProps {
   publication?: string
   breadcrumbs?: { label: string; href?: string }[]
@@ -112,15 +114,10 @@ export default function ArticleHeader({
 
             {/* Buttons — outline blue, right-aligned */}
             <div className="flex items-center gap-3 flex-shrink-0">
+              <SharePopover title={title} />
               <button
                 type="button"
-                className="inline-flex items-center gap-2 border border-navy-bolder text-navy-bolder font-body font-bold text-sm px-5 py-3 hover:bg-[#EBF4FF] transition-colors"
-              >
-                Share
-                <i className="fa-solid fa-arrow-up-from-bracket text-xs" aria-hidden="true" />
-              </button>
-              <button
-                type="button"
+                onClick={() => document.getElementById('article-comments')?.scrollIntoView({ behavior: 'smooth' })}
                 className="inline-flex items-center gap-2 border border-navy-bolder text-navy-bolder font-body font-bold text-sm px-5 py-3 hover:bg-[#EBF4FF] transition-colors"
               >
                 Comments{commentCount > 0 ? ` (${commentCount})` : ''}

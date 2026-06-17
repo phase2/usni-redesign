@@ -1,4 +1,5 @@
 import { featuredArticlesLeft, latestIssueCol1, latestIssueCol2 } from '@/data/proceedings'
+import ButtonLinkCTA from '@/components/ui/ButtonLinkCTA'
 
 const relatedArticles = [
   featuredArticlesLeft[0],   // Fortifying the Digital Watch
@@ -26,11 +27,11 @@ function RelatedArticleCard({ article }: RelatedArticleCardProps) {
         <p className="font-body font-semibold text-xs uppercase tracking-widest text-navy-subtle">
           {article.category}
         </p>
-        <a href={article.href}>
-          <h3 className="font-headline text-lg lg:text-xl text-navy-bolder leading-tight hover:text-navy-subtle transition-colors">
+        <h3 className="font-headline text-lg lg:text-xl text-navy-bolder leading-[1.1]">
+          <a href={article.href} className="article-link hover:text-navy-subtle">
             {article.headline}
-          </h3>
-        </a>
+          </a>
+        </h3>
         <p className="font-body text-xs text-neutral-subtle">
           {article.date}{article.author ? ` | by ${article.author}` : ''}
         </p>
@@ -41,18 +42,13 @@ function RelatedArticleCard({ article }: RelatedArticleCardProps) {
 
 export default function ArticleRelated() {
   return (
-    <section className="bg-white pt-12 pb-20 border-t border-border-light">
+    <section className="pt-12 pb-20" style={{ backgroundColor: '#EBF4FF' }}>
       <div className="container-site">
+
         {/* Section header */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="border-t border-navy-bolder pt-6 mb-8 flex items-center justify-between">
           <h2 className="font-headline text-3xl lg:text-4xl text-navy-bolder">Related Articles</h2>
-          <a
-            href="/proceedings/apr-2026"
-            className="font-body font-semibold text-sm text-navy-subtle hover:text-navy-bolder transition-colors flex items-center gap-1.5"
-          >
-            See all articles
-            <i className="fa-solid fa-arrow-right text-xs" aria-hidden="true" />
-          </a>
+          <ButtonLinkCTA href="/proceedings/apr-2026">See all articles</ButtonLinkCTA>
         </div>
 
         {/* 3-column grid */}

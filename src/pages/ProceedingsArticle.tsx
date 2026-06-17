@@ -20,7 +20,6 @@ export default function ProceedingsArticle() {
           author="Corporal Richard Sweeney III, U.S. Marine Corps Reserve"
           breadcrumbs={[
             { label: 'Home', href: '/' },
-            { label: 'Publications', href: '/publications' },
             { label: 'Proceedings', href: '/proceedings' },
             { label: 'April 2026', href: '/proceedings/apr-2026' },
             { label: "Three MEFs Won't Be Enough" },

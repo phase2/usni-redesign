@@ -19,7 +19,7 @@ function FeatureCard({ image, imageAlt, title, body, ctaLabel, ctaHref }: Featur
       </div>
       <div className="flex flex-col gap-4 p-5 flex-1">
         <div className="border-b border-navy-subtle pb-4">
-          <h3 className="font-headline text-3xl text-navy-bolder leading-tight">{title}</h3>
+          <h3 className="font-headline text-3xl text-navy-bolder leading-[1.1]">{title}</h3>
         </div>
         <p className="font-body text-sm text-neutral-subtle leading-relaxed flex-1">{body}</p>
         <a

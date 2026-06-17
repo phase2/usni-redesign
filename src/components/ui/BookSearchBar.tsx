@@ -81,7 +81,7 @@ export default function BookSearchBar({ className = '' }: BookSearchBarProps) {
           aria-hidden="true"
         />
         <input
-          type="search"
+          type="text"
           value={query}
           placeholder="Search full collection by keyword"
           className="flex-1 font-body text-base text-navy-bolder placeholder:text-neutral-subtle outline-none bg-transparent"

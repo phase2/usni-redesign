@@ -10,7 +10,7 @@ export default function NavalHistoryIssueArchive() {
       style={{ background: 'linear-gradient(65deg, #ebf4ff 8%, #ffffff 73%)' }}
     >
       <div className="container-site">
-        <h2 className="font-headline text-5xl lg:text-[56px] text-navy-bolder text-center leading-tight mb-10">
+        <h2 className="font-headline text-5xl lg:text-[56px] text-navy-bolder text-center leading-[1.1] mb-10">
           Issue Archive
         </h2>
 
@@ -28,7 +28,7 @@ export default function NavalHistoryIssueArchive() {
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <p className="font-headline text-2xl text-navy-bolder leading-tight">{issue.month}</p>
+                  <p className="font-headline text-2xl text-navy-bolder leading-[1.1]">{issue.month}</p>
                   <p className="font-body text-sm text-neutral-subtle">{issue.vol}</p>
                 </div>
               </a>
@@ -50,7 +50,7 @@ export default function NavalHistoryIssueArchive() {
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <p className="font-headline text-2xl text-navy-bolder leading-tight">{issue.month}</p>
+                  <p className="font-headline text-2xl text-navy-bolder leading-[1.1]">{issue.month}</p>
                   <p className="font-body text-sm text-neutral-subtle">{issue.vol}</p>
                 </div>
               </a>

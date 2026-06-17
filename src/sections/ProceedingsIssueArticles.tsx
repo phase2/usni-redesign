@@ -34,11 +34,11 @@ function GridArticleCard({ article }: { article: Article }) {
         <p className="font-body font-semibold text-xs uppercase tracking-widest text-navy-subtle">
           {article.category}
         </p>
-        <a href={article.href}>
-          <h3 className="font-headline text-lg lg:text-xl text-navy-bolder leading-tight hover:text-navy-subtle transition-colors">
+        <h3 className="font-headline text-lg lg:text-xl text-navy-bolder leading-[1.1]">
+          <a href={article.href} className="article-link hover:text-navy-subtle">
             {article.headline}
-          </h3>
-        </a>
+          </a>
+        </h3>
         {article.author && (
           <p className="font-body text-sm font-semibold text-navy-bolder leading-snug">{article.author}</p>
         )}
@@ -66,11 +66,11 @@ function ListArticleRow({ article }: { article: Article }) {
         <p className="font-body font-medium text-[14px] text-[#0466c8] uppercase tracking-[0.5px] leading-[1.5]">
           {article.category}
         </p>
-        <a href={article.href}>
-          <h3 className="font-headline text-[24px] text-navy-bolder leading-[1.3] hover:text-navy-subtle transition-colors">
+        <h3 className="font-headline text-[24px] text-navy-bolder leading-[1.3]">
+          <a href={article.href} className="article-link hover:text-navy-subtle">
             {article.headline}
-          </h3>
-        </a>
+          </a>
+        </h3>
         <div className="flex flex-col gap-1.5">
           <p className="font-body text-sm text-neutral-subtle">{article.date}</p>
           {article.author && (

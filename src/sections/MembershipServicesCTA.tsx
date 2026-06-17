@@ -16,7 +16,7 @@ export default function MembershipServicesCTA() {
         <div className="bg-navy-boldest p-8 lg:p-12 w-full max-w-full md:max-w-[520px] my-12">
           <div className="eyebrow-headline mb-4">
             <p className="eyebrow text-light-blue">Have additional questions?</p>
-            <h2 className="font-headline text-3xl lg:text-4xl text-white leading-tight">
+            <h2 className="font-headline text-3xl lg:text-4xl text-white leading-[1.1]">
               Our membership services team is here to assist you.
             </h2>
           </div>

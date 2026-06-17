@@ -13,16 +13,19 @@ export default function JoinHero() {
         aria-hidden="true"
       />
 
-      {/* White content card — centered, overlaps bottom of image */}
-      <div className="relative z-10 flex justify-center" style={{ marginTop: 'clamp(-200px, -18vw, -300px)' }}>
-        <div className="bg-white text-center px-12 lg:px-20 py-12 lg:py-16 w-full max-w-[860px] mx-4 lg:mx-8">
+      {/* White card — on mobile: minimal overlap; on desktop: deep overlap */}
+      <div
+        className="relative z-10 flex justify-center"
+        style={{ marginTop: 'clamp(-200px, calc(-28vw + 110px), 0px)' }}
+      >
+        <div className="bg-white text-center px-6 sm:px-12 lg:px-20 py-10 lg:py-16 w-full max-w-[860px] mx-4 lg:mx-8">
           <div className="eyebrow-headline items-center">
             <p className="eyebrow">Membership</p>
-            <h1 className="font-headline text-4xl lg:text-5xl xl:text-[56px] text-navy-bolder leading-[1.1]">
+            <h1 className="font-headline text-[32px] lg:text-4xl xl:text-[56px] text-navy-bolder leading-[1.1]">
               Join the Naval Institute Today
             </h1>
           </div>
-          <p className="font-body text-base lg:text-lg text-neutral-subtle leading-relaxed max-w-[620px] mx-auto mt-6">
+          <p className="font-body text-[18px] lg:text-lg text-neutral-subtle leading-relaxed max-w-[620px] mx-auto mt-5 lg:mt-6">
             Join the U.S. Naval Institute and add your voice to strengthen the naval profession.
             Dare to make a difference.
           </p>
