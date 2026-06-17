@@ -5,6 +5,10 @@ import imgShipwrecks    from '@/assets/images/nh-holy-grail-shipwrecks.png'
 import imgArizona       from '@/assets/images/nh-uss-arizona.png'
 import imgClashFleets   from '@/assets/images/nh-clash-fleets-south-china-sea.png'
 import imgMitscher      from '@/assets/images/naval-history-articles/Russell-NH-5-26-1 Hero.jpg'
+import imgRochefort     from '@/assets/images/naval-history-articles/Justice for Joe Rochefort.jpg'
+import imgMarianas      from '@/assets/images/naval-history-articles/Friendly Fire Over the Marianas.webp'
+import imgUC5           from '@/assets/images/naval-history-articles/The Ill-Fated UC-5 .jpg'
+import imgAviator       from '@/assets/images/naval-history-articles/At 100 Years Old, a Korean War Aviator Receives a Long-Overdue Medal of Honor.webp'
 
 import imgCvrMJ26  from '@/assets/images/nh-magazine-covers/NH_Cvr_MJ26.webp'
 import imgCvrMA26  from '@/assets/images/nh-magazine-covers/NH_Cvr_MA26.webp'
@@ -19,23 +23,23 @@ import imgCvrMA25  from '@/assets/images/nh-magazine-covers/NH_Cvr MA25.jpg'
 export const featuredArticlesLeft: Article[] = [
   {
     id: 'nh-f1',
-    category: 'Naval History News',
-    headline: "Recovery of the 'Holy Grail of Shipwrecks' Begins amid Decades-Long Legal Battle",
-    excerpt: 'After years of litigation over the rights to its contents, crews have finally begun work to salvage the legendary vessel.',
-    date: 'April 2026',
-    image: imgShipwrecks,
-    imageAlt: 'Historic naval battle painting of tall ships',
-    href: '/naval-history/holy-grail-shipwrecks',
+    category: 'NH Featured Article',
+    headline: 'Justice for Joe Rochefort',
+    excerpt: 'For more than four decades, former colleagues fought for proper recognition of the unsung codebreaking hero of Midway.',
+    author: 'Ed Offley',
+    image: imgRochefort,
+    imageAlt: 'Joe Rochefort, codebreaking hero of the Battle of Midway',
+    href: '/naval-history/justice-for-joe-rochefort',
   },
   {
     id: 'nh-f2',
-    category: 'Naval History News',
-    headline: 'More Than 100 Tons of Concrete Removed from the USS Arizona',
-    excerpt: 'Preservation work at the Pearl Harbor memorial enters a new phase as crews clear decades of accretion from the iconic wreck.',
-    date: 'April 2026',
-    image: imgArizona,
-    imageAlt: 'Workers removing concrete from the USS Arizona memorial',
-    href: '/naval-history/uss-arizona-concrete',
+    category: 'NH Featured Article',
+    headline: 'At 100 Years Old, a Korean War Aviator Receives a Long-Overdue Medal of Honor',
+    excerpt: 'Williams becomes the oldest person to receive the highest military decoration.',
+    date: 'June 2026',
+    image: imgAviator,
+    imageAlt: 'Korean War aviator receiving the Medal of Honor at 100 years old',
+    href: '/naval-history/korean-war-aviator-medal-of-honor',
   },
 ]
 
@@ -54,13 +58,23 @@ export const featuredArticleCenter: Article = {
 export const featuredArticlesRight: Article[] = [
   {
     id: 'nh-f4',
-    category: 'On Our Scope',
-    headline: 'On Our Scope',
-    excerpt: 'The editors of Naval History reflect on the stories and themes shaping this issue, from forgotten battles to emerging scholarship.',
-    date: 'April 2026',
-    image: imgOnOurScope,
-    imageAlt: 'Naval officer looking through binoculars on a ship',
-    href: '/naval-history/on-our-scope',
+    category: 'NH Featured Article',
+    headline: 'Friendly Fire Over the Marianas',
+    excerpt: 'In the summer of 1944, tragedy strikes thrice for Patrol Squadron 16 in this tale of mixed signals and malfunctioning equipment.',
+    author: 'Colonel Geoffrey Anthony, U.S. Marine Corps (Retired)',
+    image: imgMarianas,
+    imageAlt: 'Patrol aircraft over the Marianas in 1944',
+    href: '/naval-history/friendly-fire-over-the-marianas',
+  },
+  {
+    id: 'nh-f5',
+    category: 'NH Featured Article',
+    headline: 'The Ill-Fated UC-5',
+    excerpt: 'The brief, yet lethal career of the first German submarine minelayer to penetrate the English Channel during World War I.',
+    author: 'Thomas Wildenberg',
+    image: imgUC5,
+    imageAlt: 'German submarine UC-5, the first minelayer to penetrate the English Channel',
+    href: '/naval-history/the-ill-fated-uc-5',
   },
 ]
 
