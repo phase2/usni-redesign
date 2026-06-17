@@ -9,7 +9,7 @@ export default function NavalHistoryIssueArchive() {
       style={{ background: 'linear-gradient(65deg, #ebf4ff 8%, #ffffff 73%)' }}
     >
       <div className="container-site">
-        <h2 className="font-headline text-5xl lg:text-[56px] text-navy-bolder text-center leading-[1.1] mb-10">
+        <h2 className="font-headline text-4xl lg:text-[56px] text-navy-bolder text-center leading-[1.1] mb-10">
           Issue Archive
         </h2>
 
@@ -39,7 +39,7 @@ export default function NavalHistoryIssueArchive() {
         <div className="flex justify-center">
           <a
             href="/naval-history/archive"
-            className="inline-flex items-center justify-center bg-navy-bold text-white font-body font-bold text-sm tracking-[-0.3px] px-8 py-3.5 border border-navy-bold hover:bg-navy transition-colors w-[350px]"
+            className="inline-flex items-center justify-center bg-navy-bold text-white font-body font-bold text-sm tracking-[-0.3px] px-8 py-3.5 border border-navy-bold hover:bg-navy transition-colors w-full sm:w-[350px]"
           >
             View the full archive
           </a>

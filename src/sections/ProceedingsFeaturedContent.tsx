@@ -35,9 +35,9 @@ function FeatureCard({ image, imageAlt, title, body, ctaLabel, ctaHref }: Featur
 
 export default function ProceedingsFeaturedContent() {
   return (
-    <section className="bg-surface-subtle py-16">
+    <section className="bg-surface-subtle py-10 lg:py-16">
       <div className="container-site">
-        <div className="flex gap-8 items-stretch">
+        <div className="flex flex-col gap-6 lg:flex-row lg:gap-8 lg:items-stretch">
           <FeatureCard
             image={podcastImg}
             imageAlt="The Proceedings Podcast"

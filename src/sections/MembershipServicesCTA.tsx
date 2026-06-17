@@ -1,4 +1,4 @@
-import bgImage from '@/assets/images/jackctaylorcenter-extended.jpg'
+import bgImage from '@/assets/images/corporate-opportunities.webp'
 
 export default function MembershipServicesCTA() {
   return (
