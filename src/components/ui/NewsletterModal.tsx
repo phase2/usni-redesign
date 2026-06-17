@@ -134,7 +134,7 @@ export default function NewsletterModal({ open, onClose }: NewsletterModalProps)
       aria-labelledby="newsletter-modal-title"
       onClick={e => { if (e.target === e.currentTarget) onClose() }}
     >
-      <div className="absolute inset-0 bg-navy-boldest/70" onClick={onClose} />
+      <div className="absolute inset-0 bg-navy-boldest/70 backdrop-blur-sm" onClick={onClose} />
       <div className="relative bg-white w-full max-w-[680px] shadow-2xl flex flex-col max-h-[90vh]">
 
         {/* Header */}

@@ -36,19 +36,6 @@ export default function ArticleHeader({
   return (
     <section style={{ background: 'linear-gradient(to bottom, #EBF4FF 0%, #FFF 100%)' }}>
 
-      {/* Leaderboard ad band */}
-      <div className="flex justify-center py-4 overflow-x-auto">
-        <AdFrame>
-          <div
-            className="bg-[#DDE1E7] flex flex-col items-center justify-center gap-1"
-            style={{ width: 728, height: 90 }}
-          >
-            <span className="font-body text-xs font-semibold text-neutral-subtle uppercase tracking-wider">Advertisement</span>
-            <span className="font-body text-[11px] text-neutral-subtle/60">Leaderboard · 728 × 90</span>
-          </div>
-        </AdFrame>
-      </div>
-
       <div className="container-site">
 
         {/* Breadcrumb — light blue bottom border */}
@@ -74,6 +61,19 @@ export default function ArticleHeader({
             </span>
           ))}
         </nav>
+
+        {/* Leaderboard ad — below breadcrumb */}
+        <div className="flex justify-center py-4 overflow-x-auto">
+          <AdFrame>
+            <div
+              className="bg-[#DDE1E7] flex flex-col items-center justify-center gap-1"
+              style={{ width: 728, height: 90 }}
+            >
+              <span className="font-body text-xs font-semibold text-neutral-subtle uppercase tracking-wider">Advertisement</span>
+              <span className="font-body text-[11px] text-neutral-subtle/60">Leaderboard · 728 × 90</span>
+            </div>
+          </AdFrame>
+        </div>
 
         {/* Narrow article hero — 864px centered */}
         <div className="max-w-[864px] mx-auto pt-8 pb-10">

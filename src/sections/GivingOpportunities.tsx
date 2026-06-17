@@ -264,7 +264,7 @@ function OpportunityModal({ opp, onClose }: { opp: Opportunity; onClose: () => v
     >
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-navy-boldest/70"
+        className="absolute inset-0 bg-navy-boldest/70 backdrop-blur-sm"
         onClick={onClose}
         aria-hidden="true"
       />

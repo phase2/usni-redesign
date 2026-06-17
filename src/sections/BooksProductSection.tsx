@@ -5,7 +5,7 @@ function BookCard({ book }: { book: Book }) {
   return (
     <a
       href={book.href}
-      className="group flex flex-col gap-3 flex-shrink-0
+      className="group flex flex-col gap-3 flex-shrink-0 snap-start
         w-[calc((100%-2*1.5rem)/3)]
         sm:w-[calc((100%-3*1.5rem)/4)]
         lg:w-[calc((100%-5*1.5rem)/6)]"
@@ -71,7 +71,7 @@ export default function BooksProductSection({
   const scroll = (dir: 'left' | 'right') => {
     const el = scrollRef.current
     if (!el) return
-    el.scrollBy({ left: dir === 'right' ? el.clientWidth * 0.75 : -el.clientWidth * 0.75, behavior: 'smooth' })
+    el.scrollBy({ left: dir === 'right' ? el.clientWidth : -el.clientWidth, behavior: 'smooth' })
     setTimeout(updateArrows, 420)
   }
 
@@ -94,22 +94,25 @@ export default function BooksProductSection({
             </div>
             <a
               href={seeAllHref}
-              className="font-body font-semibold text-sm text-[#0466C8] hover:text-navy transition-colors whitespace-nowrap flex items-center gap-1.5 flex-shrink-0 pb-0.5"
+              className="group font-body font-semibold text-sm text-[#0466C8] hover:text-navy transition-colors whitespace-nowrap flex items-center gap-1.5 flex-shrink-0 pb-0.5"
             >
-              {seeAllLabel}
+              <span className="relative">
+                {seeAllLabel}
+                <span className="absolute bottom-0 left-0 h-px w-full bg-current scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 ease-out" />
+              </span>
               <i className="fa-solid fa-chevron-right text-xs" aria-hidden="true" />
             </a>
           </div>
         </div>
 
         {/* Carousel */}
-        <div className="relative mt-8">
+        <div className="relative mt-8 px-14 lg:px-0">
           {canScrollLeft && (
             <button
               onClick={() => scroll('left')}
-              className="absolute left-0 top-[40%] -translate-y-1/2 z-10
-                         w-10 h-10 rounded-full bg-white border border-border-light shadow-md
-                         flex items-center justify-center text-navy-bolder hover:bg-surface-subtle
+              className="absolute left-0 lg:-left-14 top-1/2 -translate-y-1/2 z-10
+                         w-10 h-10 rounded-full bg-white border border-[#0466C8]
+                         flex items-center justify-center text-navy-bolder hover:bg-[#EBF4FF]
                          transition-colors"
               aria-label="Scroll left"
             >
@@ -119,7 +122,7 @@ export default function BooksProductSection({
 
           <div
             ref={scrollRef}
-            className="flex gap-6 overflow-x-auto scrollbar-hide"
+            className="flex gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory"
             onScroll={updateArrows}
           >
             {books.map((book) => (
@@ -130,9 +133,9 @@ export default function BooksProductSection({
           {canScrollRight && (
             <button
               onClick={() => scroll('right')}
-              className="absolute right-0 top-[40%] -translate-y-1/2 z-10
-                         w-10 h-10 rounded-full bg-white border border-border-light shadow-md
-                         flex items-center justify-center text-navy-bolder hover:bg-surface-subtle
+              className="absolute right-0 lg:-right-14 top-1/2 -translate-y-1/2 z-10
+                         w-10 h-10 rounded-full bg-white border border-[#0466C8]
+                         flex items-center justify-center text-navy-bolder hover:bg-[#EBF4FF]
                          transition-colors"
               aria-label="Scroll right"
             >

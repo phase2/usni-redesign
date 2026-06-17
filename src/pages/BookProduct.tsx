@@ -4,7 +4,6 @@ import BooksSubNav from '@/sections/BooksSubNav'
 import BookProductHero from '@/sections/BookProductHero'
 import BookProductOverview from '@/sections/BookProductOverview'
 import BookProductAuthorBios from '@/sections/BookProductAuthorBios'
-import BookProductDetails from '@/sections/BookProductDetails'
 import BookProductCategoryTags from '@/sections/BookProductCategoryTags'
 import BooksProductSection from '@/sections/BooksProductSection'
 import { aiWarfightingBook, ausaSeriesBooks } from '@/data/bookProductData'
@@ -19,8 +18,7 @@ export default function BookProduct() {
       <main className="flex-1">
         <BooksSubNav />
         <BookProductHero book={book} />
-        <BookProductOverview overview={book.overview} />
-        <BookProductDetails book={book} />
+        <BookProductOverview overview={book.overview} book={book} />
         <BookProductAuthorBios authors={book.authors} />
         {book.series && (
           <BooksProductSection

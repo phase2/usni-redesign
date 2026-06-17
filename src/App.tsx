@@ -32,6 +32,7 @@ import Login from '@/pages/Login'
 import Archives from '@/pages/Archives'
 import NavalHistoryArticle from '@/pages/NavalHistoryArticle'
 import ProceedingsArticleFortifying from '@/pages/ProceedingsArticleFortifying'
+import NewsletterJoin from '@/pages/NewsletterJoin'
 
 export default function App() {
   return (
@@ -64,6 +65,7 @@ export default function App() {
         <Route path="/books/ai-warfighting" element={<BookProduct />} />
         <Route path="/archives" element={<Archives />} />
         <Route path="/naval-history/mitscher-at-midway" element={<NavalHistoryArticle />} />
+        <Route path="/newsletter" element={<NewsletterJoin />} />
       </Routes>
     </BrowserRouter>
     </CartProvider>

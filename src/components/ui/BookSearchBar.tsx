@@ -116,10 +116,10 @@ export default function BookSearchBar({ className = '' }: BookSearchBarProps) {
                 onClick={() => setOpen(false)}
               >
                 <div className="min-w-0">
-                  <p className="font-body text-sm text-navy-bolder leading-snug">
+                  <p className="font-body text-base text-navy-bolder leading-snug">
                     {highlight(item.title, query)}
                   </p>
-                  <p className="font-body text-xs text-neutral-subtle mt-0.5">{item.author}</p>
+                  <p className="font-body text-base text-neutral-subtle mt-0.5">{item.author}</p>
                 </div>
               </a>
             </li>
@@ -127,7 +127,7 @@ export default function BookSearchBar({ className = '' }: BookSearchBarProps) {
           <li className="border-t border-border-light">
             <a
               href={`/books/collection?q=${encodeURIComponent(query)}`}
-              className="flex items-center gap-2 px-4 py-3 font-body font-semibold text-sm text-[#0466C8] hover:bg-surface-subtle transition-colors"
+              className="flex items-center gap-2 px-4 py-3 font-body font-semibold text-base text-[#0466C8] hover:bg-surface-subtle transition-colors"
               onClick={() => setOpen(false)}
             >
               <i className="fa-solid fa-magnifying-glass text-xs" aria-hidden="true" />

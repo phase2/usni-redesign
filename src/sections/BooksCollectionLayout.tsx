@@ -385,7 +385,7 @@ export default function BooksCollectionLayout({
       <div className="flex gap-8 lg:gap-10 items-start">
 
         {/* ── Sidebar ── */}
-        <aside className="hidden lg:block w-[220px] xl:w-[240px] flex-shrink-0 sticky top-[120px] self-start">
+        <aside className="hidden lg:block w-[220px] xl:w-[240px] flex-shrink-0">
 
           <div className="flex items-center justify-between mb-3 pb-3 border-b-2 border-[#0466C8]">
             <h2 className="font-body font-extrabold text-sm uppercase tracking-[0.08em] text-navy-bolder">

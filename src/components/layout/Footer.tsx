@@ -1,9 +1,7 @@
-import { useState } from 'react'
 import facebookIcon from '@/assets/images/facebook.svg'
 import instagramIcon from '@/assets/images/instagram.svg'
 import youtubeIcon from '@/assets/images/youtube.svg'
 import linkedinIcon from '@/assets/images/linkedin.svg'
-import NewsletterModal from '@/components/ui/NewsletterModal'
 
 const aboutLinks = [
   { label: 'About the Naval Institute', href: '/about' },
@@ -49,8 +47,6 @@ function FooterNavColumn({ title, links }: { title: string; links: typeof aboutL
 }
 
 export default function Footer() {
-  const [newsletterOpen, setNewsletterOpen] = useState(false)
-
   return (
     <footer
       className="text-white py-[80px]"
@@ -103,8 +99,8 @@ export default function Footer() {
               <p className="font-body text-[20px] text-white leading-[1.4]">
                 Sign up to get updates about new releases and event invitations.
               </p>
-              <button
-                onClick={() => setNewsletterOpen(true)}
+              <a
+                href="/newsletter"
                 className="flex items-center justify-center gap-2 w-full bg-gold text-navy-bolder
                            font-body font-bold text-base tracking-[-0.5px] px-6 py-4
                            hover:bg-gold-dark transition-colors"
@@ -114,7 +110,7 @@ export default function Footer() {
                   <polyline points="22,6 12,13 2,6"/>
                 </svg>
                 Join The List
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -177,7 +173,6 @@ export default function Footer() {
         </div>
       </div>
 
-      <NewsletterModal open={newsletterOpen} onClose={() => setNewsletterOpen(false)} />
     </footer>
   )
 }

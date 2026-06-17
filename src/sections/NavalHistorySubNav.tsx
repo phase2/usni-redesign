@@ -3,11 +3,10 @@ import { useLocation } from 'react-router-dom'
 const navItems = [
   { label: 'Current Issue', href: '/naval-history/mar-apr-2026' },
   { label: 'All Issues', href: '/naval-history/all-issues' },
-  { label: 'Naval History Podcast', href: '/naval-history/podcast' },
   { label: 'Essay Contests', href: '/essay-contests' },
   { label: 'Submission Guidelines', href: '/naval-history/submissions' },
   { label: 'Contact Naval History', href: '/naval-history/contact' },
-  { label: 'Subscribe', href: '/membership/magazine-upsell?plan=full&term=1&region=us&price=75' },
+  { label: 'Subscribe', href: '/naval-history/subscribe' },
 ]
 
 export default function NavalHistorySubNav() {

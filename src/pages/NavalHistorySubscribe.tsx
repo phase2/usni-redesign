@@ -1,7 +1,6 @@
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
-import nhLogo from '@/assets/images/Naval_History_logo_white_500px.webp'
-import nhMagazineGrid from '@/assets/images/nh-magazine-covers/nh-magazine-grid.png'
+import NavalHistorySubNav from '@/sections/NavalHistorySubNav'
 
 const CHECK_ICON = (
   <svg className="w-4 h-4 flex-shrink-0 text-[#0466c8] mt-0.5" viewBox="0 0 16 16" fill="none">
@@ -81,17 +80,13 @@ export default function NavalHistorySubscribe() {
       <Header />
 
       <main className="flex-1">
+        <NavalHistorySubNav />
 
         {/* ── Hero ── */}
         <section
           className="py-16 lg:py-24 flex flex-col items-center text-center"
           style={{ background: 'linear-gradient(to bottom, #1d2535, #0e121a)' }}
         >
-          <img
-            src={nhLogo}
-            alt="Naval History Magazine"
-            className="h-[52px] w-auto object-contain mb-8"
-          />
           <h1 className="font-headline text-[42px] lg:text-[56px] text-white leading-[1.1] mb-5 px-6">
             Subscribe to Naval History
           </h1>
@@ -103,24 +98,24 @@ export default function NavalHistorySubscribe() {
         {/* ── Magazine preview + features ── */}
         <section className="py-16 lg:py-20 bg-white">
           <div className="container-site">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
-              {/* SCRIBD embed — replace the placeholder div below with the embed code */}
+              {/* SCRIBD embed */}
               <div>
                 <p className="font-body font-medium text-sm uppercase tracking-[0.08em] text-[#0466c8] mb-4">
                   Preview the Magazine
                 </p>
-                {/* ─── SCRIBD EMBED GOES HERE ─────────────────────────────────────
-                    Replace this placeholder with the <iframe> or <script> embed
-                    code provided by SCRIBD.
-                ─────────────────────────────────────────────────────────────────── */}
-                <div className="w-full aspect-[3/4] bg-[#f4f4f6] border border-[#c4c9d4] flex flex-col items-center justify-center gap-3 text-center px-6">
-                  <svg className="w-10 h-10 text-neutral-subtle/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
-                  </svg>
-                  <p className="font-body font-bold text-sm text-neutral-subtle">SCRIBD embed</p>
-                  <p className="font-body text-xs text-neutral-subtle/60">Embed code to be provided</p>
-                </div>
+                <iframe
+                  className="scribd_iframe_embed"
+                  title="Naval History - Sample Content"
+                  src="https://www.scribd.com/embeds/373263301/content?start_page=1&view_mode=scroll&show_recommendations=false&access_key=key-S02HJSqvYI5Ej4kRve5J"
+                  data-auto-height="true"
+                  data-aspect-ratio="null"
+                  scrolling="no"
+                  width="100%"
+                  height="780"
+                  frameBorder="0"
+                />
               </div>
 
               {/* Features */}
@@ -141,13 +136,6 @@ export default function NavalHistorySubscribe() {
                     </li>
                   ))}
                 </ul>
-                <div>
-                  <img
-                    src={nhMagazineGrid}
-                    alt="Recent issues of Naval History Magazine"
-                    className="w-full h-auto"
-                  />
-                </div>
               </div>
 
             </div>

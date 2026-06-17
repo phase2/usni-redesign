@@ -28,6 +28,7 @@ import imgNHArizona from '@/assets/images/nh-uss-arizona.png'
 import imgNHClashFleets from '@/assets/images/nh-clash-fleets-south-china-sea.png'
 
 export const archivesDropdown: NavItem[] = [
+  { label: 'About the Archives', href: '/archives' },
   { label: 'Oral Histories', href: '/archive/oral-histories' },
   { label: 'Memoirs', href: '/archive/memoirs' },
   { label: 'Photos', href: '/archive/photos' },
@@ -89,7 +90,7 @@ export const navItems: NavItem[] = [
       { label: 'Essay Contests', href: '/essay-contests' },
       { label: 'Submission Guidelines', href: '/naval-history/submissions' },
       { label: 'Contact Naval History', href: '/naval-history/contact' },
-      { label: 'Subscribe', href: '/membership/join' },
+      { label: 'Subscribe', href: '/naval-history/subscribe' },
     ],
     megaCta: {
       eyebrow: 'Featured Article',
