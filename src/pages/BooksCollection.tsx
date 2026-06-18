@@ -9,7 +9,7 @@ export default function BooksCollection() {
     <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-1 bg-white">
-        <BooksSubNav activeHref="/books/collection" />
+        <BooksSubNav />
         <BooksCollectionHero />
         <BooksCollectionLayout pageSize={16} />
       </main>

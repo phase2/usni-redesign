@@ -509,7 +509,7 @@ function MobileMenu({ open, onClose, onSearchOpen, cartCount }: {
                     <span className="font-body font-extrabold text-[1.125rem] text-navy-subtle">
                       {item.label}
                     </span>
-                    <span className={`flex-shrink-0 w-9 h-9 flex items-center justify-center rounded bg-surface-subtle text-navy-subtle transition-transform duration-200 ${expandedItem === item.href ? 'rotate-180' : ''}`}>
+                    <span className={`flex-shrink-0 w-9 h-9 flex items-center justify-center bg-surface-subtle text-navy-subtle transition-transform duration-200 ${expandedItem === item.href ? 'rotate-180' : ''}`}>
                       <svg className="w-3.5 h-3.5" viewBox="0 0 12 12" fill="none">
                         <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                       </svg>

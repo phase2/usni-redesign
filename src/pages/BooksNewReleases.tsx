@@ -10,7 +10,7 @@ export default function BooksNewReleases() {
     <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-1 bg-white">
-        <BooksSubNav activeHref="/books/new-releases" />
+        <BooksSubNav />
         <BooksNewReleasesHero />
         <BooksCollectionLayout
           books={newReleases}
