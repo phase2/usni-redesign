@@ -5,6 +5,7 @@ import ArticleHeader from '@/sections/ArticleHeader'
 import ArticleHeroImage from '@/sections/ArticleHeroImage'
 import ArticleBody from '@/sections/ArticleBody'
 import ArticleRelated from '@/sections/ArticleRelated'
+import AdUnit from '@/components/ui/AdUnit'
 import heroImg from '@/assets/images/proceedings-Three MEFs Wont Be Enough.png'
 
 export default function ProceedingsArticle() {
@@ -33,6 +34,7 @@ export default function ProceedingsArticle() {
           photoCredit="U.S. Marine Corps / Lance Corporal David Intriago"
         />
         <ArticleBody />
+        <AdUnit size="rectangle" />
         <ArticleRelated />
       </main>
       <Footer />

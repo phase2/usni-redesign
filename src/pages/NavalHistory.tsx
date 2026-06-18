@@ -7,6 +7,7 @@ import NavalHistoryFeaturedContent from '@/sections/NavalHistoryFeaturedContent'
 import NavalHistoryLatestIssue from '@/sections/NavalHistoryLatestIssue'
 import NavalHistoryIssueArchive from '@/sections/NavalHistoryIssueArchive'
 import NavalHistoryMembershipCTA from '@/sections/NavalHistoryMembershipCTA'
+import AdUnit from '@/components/ui/AdUnit'
 
 export default function NavalHistory() {
   return (
@@ -17,6 +18,7 @@ export default function NavalHistory() {
         <NavalHistoryHero />
         <NavalHistoryFeaturedArticles />
         <NavalHistoryFeaturedContent />
+        <AdUnit />
         <NavalHistoryLatestIssue />
         <NavalHistoryIssueArchive />
         <NavalHistoryMembershipCTA />

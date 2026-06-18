@@ -3,6 +3,7 @@ import Footer from '@/components/layout/Footer'
 import NavalHistorySubNav from '@/sections/NavalHistorySubNav'
 import ArticleHeader from '@/sections/ArticleHeader'
 import MitscherArticleBody from '@/sections/MitscherArticleBody'
+import AdUnit from '@/components/ui/AdUnit'
 import heroImg from '@/assets/images/naval-history-articles/Russell-NH-5-26-1 Hero.jpg'
 
 export default function NavalHistoryArticle() {
@@ -49,6 +50,7 @@ export default function NavalHistoryArticle() {
         </section>
 
         <MitscherArticleBody />
+        <AdUnit size="rectangle" />
       </main>
       <Footer />
     </div>

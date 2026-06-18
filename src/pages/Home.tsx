@@ -8,6 +8,7 @@ import ProceedingsMagazine from '@/sections/ProceedingsMagazine'
 import NavalHistory from '@/sections/NavalHistory'
 import PromoRow from '@/sections/PromoRow'
 import SplitFeature from '@/sections/SplitFeature'
+import AdUnit from '@/components/ui/AdUnit'
 
 export default function Home() {
   return (
@@ -20,8 +21,10 @@ export default function Home() {
         <div className="pt-8">
           <LatestNews />
         </div>
+        <AdUnit />
         <ProceedingsMagazine />
         <NavalHistory />
+        <AdUnit />
         <PromoRow />
         <SplitFeature />
       </main>

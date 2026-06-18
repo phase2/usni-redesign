@@ -5,6 +5,7 @@ import BooksHero from '@/sections/BooksHero'
 import BooksProductSection from '@/sections/BooksProductSection'
 import BooksTopSubjects from '@/sections/BooksTopSubjects'
 import BooksBillboards from '@/sections/BooksBillboards'
+import AdUnit from '@/components/ui/AdUnit'
 import { newReleases, bestSellers } from '@/data/books'
 
 export default function BooksAndPress() {
@@ -20,6 +21,7 @@ export default function BooksAndPress() {
           seeAllHref="/books/new-releases"
           books={newReleases}
         />
+        <AdUnit />
         <BooksTopSubjects />
         <BooksProductSection
           title="Best sellers"

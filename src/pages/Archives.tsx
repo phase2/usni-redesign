@@ -5,6 +5,7 @@ import ArchivesSubNav from '@/sections/ArchivesSubNav'
 import ArchivesAbout from '@/sections/ArchivesAbout'
 import ArchivesCollections from '@/sections/ArchivesCollections'
 import ArchivesFAQ from '@/sections/ArchivesFAQ'
+import AdUnit from '@/components/ui/AdUnit'
 
 export default function Archives() {
   return (
@@ -15,6 +16,7 @@ export default function Archives() {
         <ArchivesHero />
         <ArchivesAbout />
         <ArchivesCollections />
+        <AdUnit />
         <ArchivesFAQ />
       </main>
       <Footer />
