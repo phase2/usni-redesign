@@ -16,6 +16,7 @@ export default function NavalHistory() {
       <main className="flex-1">
         <NavalHistorySubNav />
         <NavalHistoryHero />
+        <AdUnit />
         <NavalHistoryFeaturedArticles />
         <NavalHistoryFeaturedContent />
         <AdUnit />

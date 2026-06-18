@@ -8,6 +8,7 @@ import ProceedingsLatestIssue from '@/sections/ProceedingsLatestIssue'
 import ProceedingsIssueArchive from '@/sections/ProceedingsIssueArchive'
 import ProceedingsSponsoredBillboard from '@/sections/ProceedingsSponsoredBillboard'
 import ProceedingsMembershipCTA from '@/sections/ProceedingsMembershipCTA'
+import AdUnit from '@/components/ui/AdUnit'
 
 export default function Proceedings() {
   return (
@@ -16,6 +17,7 @@ export default function Proceedings() {
       <main className="flex-1">
         <ProceedingsSubNav />
         <ProceedingsHero />
+        <AdUnit />
         <ProceedingsFeaturedArticles />
         <ProceedingsFeaturedContent />
         <ProceedingsLatestIssue />
