@@ -17,6 +17,7 @@ export default function Home() {
       <main className="flex-1">
         <Hero />
         <NavalInstituteAtWork />
+        <AdUnit />
         <FeaturedEvent />
         <div className="pt-8">
           <LatestNews />
