@@ -1,8 +1,10 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useCart } from '@/context/CartContext'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
+import { Button } from '@/components/ui/Button'
+import CreditCardModal from '@/components/ui/CreditCardModal'
 
 const PLAN_LABELS: Record<string, string> = {
   digital: 'Digital Membership',
@@ -23,9 +25,6 @@ const US_STATES = [
   'NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT',
   'VA','WA','WV','WI','WY',
 ]
-
-const MONTHS = ['01','02','03','04','05','06','07','08','09','10','11','12']
-const YEARS = Array.from({ length: 12 }, (_, i) => String(2025 + i))
 
 // ─── Field components ──────────────────────────────────────────────────────────
 
@@ -77,30 +76,6 @@ function FormSelect({
   )
 }
 
-function InlineSelect({
-  placeholder, options, value, onChange, className = '',
-}: {
-  placeholder: string; options: string[]; value: string; onChange: (v: string) => void; className?: string
-}) {
-  return (
-    <div className={`relative ${className}`}>
-      <select
-        value={value}
-        onChange={e => onChange(e.target.value)}
-        className="w-full appearance-none bg-white border border-[#4e576a] px-3 py-3 pr-8 font-body text-[16px] text-[#4e576a] focus:outline-none focus:ring-2 focus:ring-[#023e7d]/30 focus:border-[#023e7d] min-h-[44px] rounded-none"
-      >
-        <option value="" disabled>{placeholder}</option>
-        {options.map(o => <option key={o} value={o}>{o}</option>)}
-      </select>
-      <div className="pointer-events-none absolute inset-y-0 right-2 flex items-center">
-        <svg className="w-3 h-3 text-[#33415c]" viewBox="0 0 12 10" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M1 3l5 5 5-5" />
-        </svg>
-      </div>
-    </div>
-  )
-}
-
 // ─── Main page ────────────────────────────────────────────────────────────────
 
 export default function MembershipCheckout() {
@@ -145,18 +120,10 @@ export default function MembershipCheckout() {
   const [state, setState]   = useState('')
   const [zip, setZip]       = useState('')
 
-  // ── Payment — card number split into 4 groups
-  const [cardGroups, setCardGroups] = useState(['', '', '', ''])
-  const cardRef0 = useRef<HTMLInputElement>(null)
-  const cardRef1 = useRef<HTMLInputElement>(null)
-  const cardRef2 = useRef<HTMLInputElement>(null)
-  const cardRef3 = useRef<HTMLInputElement>(null)
-  const cardRefs = [cardRef0, cardRef1, cardRef2, cardRef3]
-
-  const [nameOnCard, setNameOnCard]   = useState('')
-  const [expiryMonth, setExpiryMonth] = useState('')
-  const [expiryYear, setExpiryYear]   = useState('')
-  const [cvv, setCvv]                 = useState('')
+  // ── Payment
+  const [cardModalOpen, setCardModalOpen]                 = useState(false)
+  const [savedCardLast4, setSavedCardLast4]               = useState<string | null>(null)
+  const [billingSameAsShipping, setBillingSameAsShipping] = useState(true)
 
   // ── Gift recipient
   const isGift = searchParams.get('gift') === 'true'
@@ -171,12 +138,6 @@ export default function MembershipCheckout() {
   // ── Order summary
   const [autoRenew, setAutoRenew]       = useState(true)
   const [autoRenewMag, setAutoRenewMag] = useState(true)
-
-  const handleCardGroup = (idx: number) => (raw: string) => {
-    const digits = raw.replace(/\D/g, '').slice(0, 4)
-    setCardGroups(prev => { const next = [...prev]; next[idx] = digits; return next })
-    if (digits.length === 4 && idx < 3) cardRefs[idx + 1].current?.focus()
-  }
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -341,48 +302,35 @@ export default function MembershipCheckout() {
                       </div>
                     </div>
 
-                    {/* Card number */}
-                    <div className="flex flex-col gap-1.5">
-                      <label className="font-body font-bold text-[14px] text-[#1d2535]">Card Number</label>
-                      <div className="flex items-center gap-2">
-                        {cardGroups.map((grp, i) => (
-                          <div key={i} className="flex items-center gap-2">
-                            <input
-                              ref={cardRefs[i]}
-                              type="text"
-                              inputMode="numeric"
-                              placeholder="0000"
-                              maxLength={4}
-                              value={grp}
-                              onChange={e => handleCardGroup(i)(e.target.value)}
-                              className="w-16 border border-[#4e576a] bg-white px-2 py-3 font-body text-[16px] text-[#1d2535] text-center placeholder:text-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#023e7d]/30 focus:border-[#023e7d] rounded-none min-h-[44px] tracking-widest"
-                            />
-                            {i < 3 && <span className="font-body text-[18px] text-[#4e576a] select-none leading-none">–</span>}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
+                    {savedCardLast4 && (
+                      <p className="font-body text-[15px] text-[#1d2535]">
+                        The credit card ending in <span className="font-bold">{savedCardLast4}</span> was successfully added.
+                      </p>
+                    )}
 
-                    {/* Name, expiry, CVV */}
-                    <div className="flex gap-4 items-end">
-                      <FormInput
-                        label="Name on Card"
-                        placeholder="First and Last Name"
-                        value={nameOnCard}
-                        onChange={setNameOnCard}
-                        className="flex-1"
-                      />
-                      <div className="flex flex-col gap-1.5">
-                        <label className="font-body font-bold text-[14px] text-[#1d2535]">Expires</label>
-                        <div className="flex gap-2">
-                          <InlineSelect placeholder="Month" options={MONTHS} value={expiryMonth} onChange={setExpiryMonth} className="w-28" />
-                          <InlineSelect placeholder="Year" options={YEARS} value={expiryYear} onChange={setExpiryYear} className="w-28" />
-                        </div>
-                      </div>
-                      <FormInput label="CVV" placeholder="•••" value={cvv} onChange={setCvv} className="w-24" />
+                    <div className="flex flex-col items-start gap-4">
+                      <Button type="button" variant="primary" size="lg" onClick={() => setCardModalOpen(true)}>
+                        {savedCardLast4 ? 'Change Your Credit Card Details' : 'Pay with Credit Card'}
+                      </Button>
+
+                      <label className="flex items-center gap-3 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={billingSameAsShipping}
+                          onChange={e => setBillingSameAsShipping(e.target.checked)}
+                          className="w-4 h-4 border border-[#4e576a] accent-[#023e7d] cursor-pointer"
+                        />
+                        <span className="font-body text-[15px] text-[#1d2535]">My billing information is the same as my shipping information.</span>
+                      </label>
                     </div>
                   </div>
                 </div>
+
+                <CreditCardModal
+                  open={cardModalOpen}
+                  onClose={() => setCardModalOpen(false)}
+                  onSuccess={last4 => { setSavedCardLast4(last4); setCardModalOpen(false) }}
+                />
 
               </div>
 

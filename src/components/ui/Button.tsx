@@ -12,7 +12,7 @@ interface ButtonBaseProps {
 type ButtonProps = ButtonBaseProps & ButtonHTMLAttributes<HTMLButtonElement>
 type AnchorProps = ButtonBaseProps & AnchorHTMLAttributes<HTMLAnchorElement> & { href: string }
 
-const base = 'inline-flex items-center justify-center gap-2 font-body font-bold transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2'
+const base = 'inline-flex items-center justify-center gap-2 font-body font-bold transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-50 disabled:cursor-not-allowed'
 
 const variants: Record<ButtonVariant, string> = {
   primary: 'bg-gold text-navy-bolder hover:bg-gold-dark border border-gold',
