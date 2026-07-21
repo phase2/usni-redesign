@@ -15,6 +15,7 @@ export default {
           DEFAULT: '#012A74',
           subtle: '#023E7D',
           subtler: '#2B5496',
+          bright: '#0466C8', // hover state for solid dark-blue buttons
         },
         // Text tokens
         'text-primary': '#001845',

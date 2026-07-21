@@ -110,14 +110,14 @@ export default function NewsletterJoin() {
 
         {/* Hero */}
         <div style={{ background: 'radial-gradient(ellipse at 50% 0%, #023E7D 0%, #012B61 50%, #001845 100%)' }}>
-          <div className="container-site py-14 lg:py-20">
+          <div className="container-site py-14 lg:py-20 text-center">
             <p className="font-body font-medium text-sm uppercase tracking-[0.08em] text-[#A8C8F0] mb-3">
               Naval Institute Press
             </p>
             <h1 className="font-headline text-4xl lg:text-5xl text-white not-italic leading-[1.1] mb-4">
               Subscribe to Our Newsletter
             </h1>
-            <p className="font-body text-lg text-white/75 leading-relaxed max-w-[560px]">
+            <p className="font-body text-lg text-white/75 leading-relaxed max-w-[560px] mx-auto">
               Get updates on new releases, author events, and exclusive member content.
             </p>
           </div>

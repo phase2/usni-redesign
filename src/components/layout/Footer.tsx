@@ -37,7 +37,7 @@ function FooterNavColumn({ title, links }: { title: string; links: typeof aboutL
           key={link.href}
           href={link.href}
           className="flex items-center min-h-[44px] font-body font-normal text-base text-white/90
-                     hover:text-white transition-colors"
+                     hover:text-white hover:underline underline-offset-2 transition-colors"
         >
           {link.label}
         </a>
@@ -144,7 +144,7 @@ export default function Footer() {
             </div>
 
             {/* Connect with us + social icons */}
-            <div className="flex items-center gap-4">
+            <div className="flex flex-wrap items-center gap-4">
               <div className="flex items-center gap-4">
                 <p className="font-body font-medium text-[18px] text-tan-subtle uppercase tracking-[0.06em] whitespace-nowrap">
                   Connect with us

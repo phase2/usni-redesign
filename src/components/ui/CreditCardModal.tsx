@@ -99,7 +99,7 @@ export default function CreditCardModal({ open, onClose, onSuccess }: CreditCard
       {/* Modal card */}
       <div className="relative bg-white w-full max-w-[560px] shadow-2xl z-10">
         <button
-          className="absolute top-4 right-4 flex items-center justify-center w-10 h-10 bg-navy-subtle text-white hover:bg-navy transition-colors"
+          className="absolute top-4 right-4 flex items-center justify-center w-10 h-10 bg-navy-subtle text-white hover:bg-navy-bright transition-colors"
           onClick={onClose}
           aria-label="Close"
         >

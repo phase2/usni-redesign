@@ -73,7 +73,7 @@ function AudioPlayer() {
 
 function ArticleSidebar() {
   return (
-    <aside className="flex flex-col gap-6">
+    <aside className="hidden lg:flex flex-col gap-6">
       <AdPlaceholder width={300} height={250} label="Posterboard" />
       <div className="flex justify-center">
         <AdPlaceholder width={160} height={600} label="Skyscraper" />

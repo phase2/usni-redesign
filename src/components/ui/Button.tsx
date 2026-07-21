@@ -51,7 +51,7 @@ export function NavyButtonLink({ children, href, fullWidth, className = '' }: { 
   return (
     <a
       href={href}
-      className={`inline-flex items-center justify-center gap-2 bg-navy-bolder text-white font-body font-bold text-base tracking-[-0.5px] px-5 py-4 border border-navy-bolder hover:bg-navy transition-colors duration-150 ${fullWidth ? 'w-full' : ''} ${className}`}
+      className={`inline-flex items-center justify-center gap-2 bg-navy-bolder text-white font-body font-bold text-base tracking-[-0.5px] px-5 py-4 border border-navy-bolder hover:bg-navy-bright hover:border-navy-bright transition-colors duration-150 ${fullWidth ? 'w-full' : ''} ${className}`}
     >
       {children}
     </a>

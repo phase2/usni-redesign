@@ -16,8 +16,8 @@ export default function BooksBillboards() {
 
         {/* Oral History — navy left / photo right (matches NavalHistoryBillboard pattern) */}
         <div className="bg-navy-bolder flex flex-col lg:flex-row w-full">
-          <div className="flex-1 flex items-center p-12">
-            <div className="border border-navy-bold flex flex-col gap-4 px-12 py-16 w-full">
+          <div className="flex-1 flex items-center p-6 lg:p-12">
+            <div className="border border-navy-bold flex flex-col gap-4 px-6 py-10 lg:px-12 lg:py-16 w-full">
               <div className="flex flex-col gap-2">
                 <p className="font-body font-medium text-sm uppercase tracking-[0.05em] text-[#e0e0cc]">
                   From the Archives
@@ -59,8 +59,8 @@ export default function BooksBillboards() {
               className="absolute inset-0 w-full h-full object-cover"
             />
           </div>
-          <div className="flex-1 flex items-center p-12">
-            <div className="border border-tan-subtle flex flex-col gap-4 px-12 py-16 w-full">
+          <div className="flex-1 flex items-center p-6 lg:p-12">
+            <div className="border border-tan-subtle flex flex-col gap-4 px-6 py-10 lg:px-12 lg:py-16 w-full">
               <div className="flex flex-col gap-2">
                 <p className="font-body font-medium text-sm uppercase tracking-[0.05em] text-[#0466c8]">
                   USNI Store
@@ -79,7 +79,7 @@ export default function BooksBillboards() {
               <div className="pt-3">
                 <a
                   href="/ships-store"
-                  className="inline-flex items-center gap-2 bg-navy-bold text-white font-body font-bold text-base tracking-[-0.5px] px-6 py-4 border border-navy-bold hover:bg-navy transition-colors"
+                  className="inline-flex items-center gap-2 bg-navy-bold text-white font-body font-bold text-base tracking-[-0.5px] px-6 py-4 border border-navy-bold hover:bg-navy-bright hover:border-navy-bright transition-colors"
                 >
                   Shop now
                   <ArrowIcon />

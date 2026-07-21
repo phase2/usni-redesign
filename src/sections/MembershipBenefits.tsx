@@ -165,7 +165,7 @@ function BenefitModal({ benefit, onClose }: { benefit: Benefit; onClose: () => v
               href={benefit.primaryHref}
               className="inline-flex items-center justify-center bg-navy-bold text-white
                          font-body font-bold text-base tracking-[-0.5px] px-6 py-4
-                         border border-navy-bold hover:bg-navy transition-colors"
+                         border border-navy-bold hover:bg-navy-bright hover:border-navy-bright transition-colors"
             >
               {benefit.primaryLabel}
             </a>
@@ -225,7 +225,7 @@ export default function MembershipBenefits() {
                 <button
                   className="w-full flex items-center justify-center gap-2 bg-navy-bold text-white
                              font-body font-bold text-base tracking-[-0.5px] px-6 py-3.5
-                             border border-navy-bold hover:bg-navy transition-colors"
+                             border border-navy-bold hover:bg-navy-bright hover:border-navy-bright transition-colors"
                   onClick={() => setActiveId(benefit.id)}
                 >
                   <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">

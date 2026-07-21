@@ -6,6 +6,7 @@ import ArticleHeroImage from '@/sections/ArticleHeroImage'
 import FortifyingArticleBody from '@/sections/FortifyingArticleBody'
 import ArticleRelated from '@/sections/ArticleRelated'
 import heroImg from '@/assets/images/Nelson-PRO-4-26-Hero.jpg'
+import ArticleMeterBanner from '@/components/ui/ArticleMeterBanner'
 
 export default function ProceedingsArticleFortifying() {
   return (
@@ -15,10 +16,11 @@ export default function ProceedingsArticleFortifying() {
       <main className="flex-1">
         <ArticleHeader
           title="Fortifying the Digital Watch"
-          deck="As adversaries target naval networks before the first shot is fired, fleet cyber readiness demands the same rigor as engineering and damage control."
+          deck="To retain cyber talent, the Navy needs a Warrior Toughness refit for keyboard warriors—and a TOPGUN for hackers."
           date="April 2026"
           magazineName="Proceedings Magazine"
-          author="CDR James M. Thornton, USN; LCDR Sarah K. Reyes, USN; Maj David L. Park, USMC"
+          author="Lieutenant Commanders Keith Nelson, Andrew Forester, and Yojana Garcia, U.S. Navy"
+          readTime="11 min read"
           breadcrumbs={[
             { label: 'Home', href: '/' },
             { label: 'Proceedings', href: '/proceedings' },
@@ -28,14 +30,15 @@ export default function ProceedingsArticleFortifying() {
         />
         <ArticleHeroImage
           src={heroImg}
-          alt="Navy cyber operations center with multiple screens displaying network telemetry"
-          caption="Sailors monitor network telemetry at Fleet Cyber Command. Continuous monitoring has become as operationally critical as traditional combat systems readiness."
-          photoCredit="U.S. Navy / Mass Communication Specialist 1st Class Nathan Burke"
+          alt="Sailors stand watch at U.S. Fleet Cyber Command / U.S. Tenth Fleet"
+          caption="The Navy needs more than policy fixes to retain the best cyber talent. It needs a unique and enduring cyber warrior culture."
+          photoCredit="U.S. Fleet Cyber Command/U.S. Tenth Fleet"
         />
         <FortifyingArticleBody />
         <ArticleRelated />
       </main>
       <Footer />
+      <ArticleMeterBanner magazine="Proceedings" />
     </div>
   )
 }

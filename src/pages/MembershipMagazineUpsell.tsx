@@ -213,7 +213,7 @@ export default function MembershipMagazineUpsell() {
               <button
                 type="button"
                 onClick={handleAdd}
-                className="flex items-center justify-center w-full bg-navy-bolder text-white font-body font-bold text-base px-6 py-4 hover:bg-navy transition-colors"
+                className="flex items-center justify-center w-full bg-navy-bolder text-white font-body font-bold text-base px-6 py-4 hover:bg-navy-bright transition-colors"
               >
                 Add to Cart
               </button>

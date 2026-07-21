@@ -22,7 +22,7 @@ export default function NavalHistoryMembershipCTA() {
           <div className="flex flex-col sm:flex-row gap-4">
             <a
               href="/membership/magazine-upsell?plan=full&term=1&region=us&price=75"
-              className="inline-flex items-center justify-center gap-2 bg-navy-bolder text-white font-body font-bold text-sm tracking-[-0.3px] px-6 py-3.5 border border-navy-bolder hover:bg-navy transition-colors"
+              className="inline-flex items-center justify-center gap-2 bg-navy-bolder text-white font-body font-bold text-sm tracking-[-0.3px] px-6 py-3.5 border border-navy-bolder hover:bg-navy-bright hover:border-navy-bright transition-colors"
             >
               Subscribe now →
             </a>

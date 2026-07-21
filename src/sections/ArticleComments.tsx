@@ -1,6 +1,6 @@
 export default function ArticleComments() {
   return (
-    <section id="article-comments" className="bg-white pt-14 pb-16 lg:pb-20">
+    <section id="article-comments" className="bg-white pb-16 lg:pb-20">
       <div className="container-site">
 
         {/* Accent line + headline */}

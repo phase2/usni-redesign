@@ -20,7 +20,7 @@ export default function BooksNewReleasesHero() {
           <div className="lg:pb-2 flex-shrink-0">
             <a
               href="/books/collection"
-              className="inline-flex items-center gap-2.5 bg-navy-bolder text-white font-body font-bold text-sm tracking-[-0.2px] px-6 py-4 hover:bg-navy transition-colors"
+              className="inline-flex items-center gap-2.5 bg-navy-bolder text-white font-body font-bold text-sm tracking-[-0.2px] px-6 py-4 hover:bg-navy-bright transition-colors"
             >
               Browse all books
               <i className="fa-solid fa-arrow-right text-xs" aria-hidden="true" />

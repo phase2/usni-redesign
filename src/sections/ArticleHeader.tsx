@@ -9,11 +9,12 @@ interface ArticleHeaderProps {
   magazineName?: string
   author: string
   commentCount?: number
+  readTime?: string
 }
 
 function AdFrame({ children }: { children: React.ReactNode }) {
   return (
-    <div className="bg-[#F4F4F6] p-2 border border-[#C4C9D4]">
+    <div className="bg-[#F4F4F6] p-2 border border-[#C4C9D4] max-w-full">
       {children}
     </div>
   )
@@ -32,6 +33,7 @@ export default function ArticleHeader({
   magazineName = 'Proceedings Magazine',
   author = 'Corporal Richard Sweeney III, U.S. Marine Corps Reserve',
   commentCount = 0,
+  readTime,
 }: ArticleHeaderProps) {
   return (
     <section style={{ background: 'linear-gradient(to bottom, #EBF4FF 0%, #FFF 100%)' }}>
@@ -63,12 +65,9 @@ export default function ArticleHeader({
         </nav>
 
         {/* Leaderboard ad — below breadcrumb */}
-        <div className="flex justify-center py-4 overflow-x-auto">
+        <div className="flex justify-center py-4">
           <AdFrame>
-            <div
-              className="bg-[#DDE1E7] flex flex-col items-center justify-center gap-1"
-              style={{ width: 728, height: 90 }}
-            >
+            <div className="bg-[#DDE1E7] flex flex-col items-center justify-center gap-1 w-[728px] max-w-full h-[90px]">
               <span className="font-body text-xs font-semibold text-neutral-subtle uppercase tracking-wider">Advertisement</span>
               <span className="font-body text-[11px] text-neutral-subtle/60">Leaderboard · 728 × 90</span>
             </div>
@@ -89,7 +88,7 @@ export default function ArticleHeader({
           </p>
 
           {/* Date/Author + right-aligned buttons */}
-          <div className="flex items-end justify-between gap-6">
+          <div className="flex flex-wrap items-end justify-between gap-6">
 
             <div>
               {/* Date + Publication */}
@@ -103,6 +102,16 @@ export default function ArticleHeader({
                       aria-hidden="true"
                     />
                     <span className="font-body font-bold text-sm text-navy-bolder">{magazineName}</span>
+                  </>
+                )}
+                {readTime && (
+                  <>
+                    <span
+                      className="inline-block flex-shrink-0 bg-navy-bolder"
+                      style={{ width: 7, height: 7 }}
+                      aria-hidden="true"
+                    />
+                    <span className="font-body text-sm text-neutral-subtle">{readTime}</span>
                   </>
                 )}
               </div>

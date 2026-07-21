@@ -5,6 +5,7 @@ import ArticleHeader from '@/sections/ArticleHeader'
 import MitscherArticleBody from '@/sections/MitscherArticleBody'
 import AdUnit from '@/components/ui/AdUnit'
 import heroImg from '@/assets/images/naval-history-articles/Russell-NH-5-26-1 Hero.jpg'
+import ArticleMeterBanner from '@/components/ui/ArticleMeterBanner'
 
 export default function NavalHistoryArticle() {
   return (
@@ -53,6 +54,7 @@ export default function NavalHistoryArticle() {
         <AdUnit size="rectangle" />
       </main>
       <Footer />
+      <ArticleMeterBanner magazine="Naval History" />
     </div>
   )
 }

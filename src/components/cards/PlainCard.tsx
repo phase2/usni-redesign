@@ -9,7 +9,7 @@ export default function PlainCard({ headline, body, cta, href }: PlainCardProps)
       <p className="font-body text-sm text-neutral-subtle leading-relaxed mb-8 flex-1">{body}</p>
       <a
         href={href}
-        className="inline-flex items-center justify-center gap-2 bg-navy-bolder text-white font-body font-bold text-sm tracking-[-0.3px] px-5 py-3.5 border border-navy-bolder hover:bg-navy transition-colors duration-150 w-full"
+        className="inline-flex items-center justify-center gap-2 bg-navy-bolder text-white font-body font-bold text-sm tracking-[-0.3px] px-5 py-3.5 border border-navy-bolder hover:bg-navy-bright hover:border-navy-bright transition-colors duration-150 w-full"
       >
         {cta} →
       </a>

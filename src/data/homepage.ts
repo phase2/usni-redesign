@@ -1,6 +1,6 @@
 import type { Article, NavItem, PlainCardData } from '@/types'
 import img250YearCelebration from '@/assets/images/250-year-celebration.png'
-import imgFortifyingHero from '@/assets/images/Nelson-PRO-4-26-Hero.jpg'
+import imgGrubbHero from '@/assets/images/proceedings-articles/grubb/crash-onboard.jpg'
 import imgMitscherHero from '@/assets/images/naval-history-articles/Russell-NH-5-26-1 Hero.jpg'
 import imgAIWarfighting from '@/assets/images/books/ai-warfighting.jpg'
 import imgOurHistory from '@/assets/images/our-histroy-feature-image.png'
@@ -72,12 +72,12 @@ export const navItems: NavItem[] = [
     ],
     megaCta: {
       eyebrow: 'Featured Article',
-      headline: 'Fortifying the Digital Watch',
-      body: 'As adversaries target naval networks before the first shot is fired, fleet cyber readiness demands the same rigor as engineering and damage control.',
+      headline: 'Get Real about How Naval Aviation Got Better',
+      body: "Safety doesn't come from magic bullets, but from organizational learning.",
       ctaLabel: 'Read the Article',
-      ctaHref: '/proceedings/fortifying-digital-watch',
-      image: imgFortifyingHero,
-      imageAlt: 'Fortifying the Digital Watch — Proceedings April 2026',
+      ctaHref: '/proceedings/naval-aviation-got-better',
+      image: imgGrubbHero,
+      imageAlt: 'Get Real about How Naval Aviation Got Better — Proceedings July 2026',
     },
   },
   {

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useCart } from '@/context/CartContext'
 import Header from '@/components/layout/Header'
@@ -19,36 +19,48 @@ const PRIORITY_LABELS: Record<string, string> = {
 // ─── Field components ──────────────────────────────────────────────────────────
 
 function FormInput({
-  label, placeholder, value, onChange, type = 'text', className = '',
+  label, placeholder, value, onChange, type = 'text', className = '', required = false, error = false,
 }: {
   label: string; placeholder: string; value: string; onChange: (v: string) => void
-  type?: string; className?: string
+  type?: string; className?: string; required?: boolean; error?: boolean
 }) {
   return (
     <div className={`flex flex-col gap-1.5 ${className}`}>
-      <label className="font-body font-bold text-[14px] text-[#1d2535]">{label}</label>
+      <label className="font-body font-bold text-[14px] text-[#1d2535]">
+        {label}{required && <span className="text-red-500"> *</span>}
+      </label>
       <input
         type={type}
         placeholder={placeholder}
         value={value}
         onChange={e => onChange(e.target.value)}
-        className="w-full border border-[#4e576a] bg-white px-4 py-3 font-body text-[16px] text-[#4e576a] placeholder:text-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#023e7d]/30 focus:border-[#023e7d] rounded-none min-h-[44px]"
+        aria-invalid={error || undefined}
+        className={`w-full border bg-white px-4 py-3 font-body text-[16px] text-[#4e576a] placeholder:text-[#9ca3af] focus:outline-none focus:ring-2 rounded-none min-h-[44px] ${
+          error
+            ? 'border-red-600 focus:ring-red-600/30 focus:border-red-600'
+            : 'border-[#4e576a] focus:ring-[#023e7d]/30 focus:border-[#023e7d]'
+        }`}
       />
     </div>
   )
 }
 
 function InlineSelect({
-  placeholder, options, value, onChange, className = '',
+  placeholder, options, value, onChange, className = '', error = false,
 }: {
-  placeholder: string; options: string[]; value: string; onChange: (v: string) => void; className?: string
+  placeholder: string; options: string[]; value: string; onChange: (v: string) => void; className?: string; error?: boolean
 }) {
   return (
     <div className={`relative ${className}`}>
       <select
         value={value}
         onChange={e => onChange(e.target.value)}
-        className="w-full appearance-none bg-white border border-[#4e576a] px-3 py-3 pr-8 font-body text-[16px] text-[#4e576a] focus:outline-none focus:ring-2 focus:ring-[#023e7d]/30 focus:border-[#023e7d] min-h-[44px] rounded-none"
+        aria-invalid={error || undefined}
+        className={`w-full appearance-none bg-white border px-3 py-3 pr-8 font-body text-[16px] text-[#4e576a] focus:outline-none focus:ring-2 min-h-[44px] rounded-none ${
+          error
+            ? 'border-red-600 focus:ring-red-600/30 focus:border-red-600'
+            : 'border-[#4e576a] focus:ring-[#023e7d]/30 focus:border-[#023e7d]'
+        }`}
       >
         <option value="" disabled>{placeholder}</option>
         {options.map(o => <option key={o} value={o}>{o}</option>)}
@@ -57,6 +69,28 @@ function InlineSelect({
         <svg className="w-3 h-3 text-[#33415c]" viewBox="0 0 12 10" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
           <path d="M1 3l5 5 5-5" />
         </svg>
+      </div>
+    </div>
+  )
+}
+
+function RequiredFieldsAlert({
+  missingFields, alertRef,
+}: {
+  missingFields: string[]; alertRef: React.RefObject<HTMLDivElement>
+}) {
+  return (
+    <div
+      ref={alertRef}
+      role="alert"
+      className="flex gap-3 items-start border-l-4 border-red-600 bg-red-50 px-5 py-4 scroll-mt-28"
+    >
+      <i className="fa-solid fa-circle-exclamation text-red-600 text-[15px] mt-[3px] flex-shrink-0" aria-hidden="true" />
+      <div>
+        <p className="font-body font-bold text-[15px] text-[#1d2535] mb-0.5">Please complete the required fields</p>
+        <p className="font-body text-[14px] text-[#1d2535] leading-relaxed">
+          The following {missingFields.length === 1 ? 'item is' : 'items are'} required: {missingFields.join(', ')}.
+        </p>
       </div>
     </div>
   )
@@ -87,6 +121,7 @@ export default function DonateCheckout() {
   const [lastName, setLastName]         = useState('')
   const [email, setEmail]               = useState('')
   const [confirmEmail, setConfirmEmail] = useState('')
+  const [phone, setPhone]               = useState('')
   const [password, setPassword]         = useState('')
   const [anonymous, setAnonymous]       = useState(isAnonymous)
   const [service, setService]           = useState('')
@@ -99,6 +134,40 @@ export default function DonateCheckout() {
   const [cardModalOpen, setCardModalOpen]                 = useState(false)
   const [savedCardLast4, setSavedCardLast4]               = useState<string | null>(null)
   const [billingSameAsShipping, setBillingSameAsShipping] = useState(true)
+
+  // ── Required-field validation
+  const [showErrors, setShowErrors] = useState(false)
+  const errorAlertRef = useRef<HTMLDivElement>(null)
+
+  const missingFields: string[] = []
+  if (activeTab === 'guest' || activeTab === 'create') {
+    if (!firstName.trim())    missingFields.push('First Name')
+    if (!lastName.trim())     missingFields.push('Last Name')
+    if (!email.trim())        missingFields.push('Email Address')
+    if (!confirmEmail.trim()) missingFields.push('Confirm Email Address')
+  }
+  if (activeTab === 'create') {
+    if (!password.trim())   missingFields.push('Password')
+    if (!service)           missingFields.push('Service')
+    if (!militaryStatus)    missingFields.push('Military Status')
+    if (!rank.trim())       missingFields.push('Rank / Title')
+  }
+  if (activeTab === 'signin') {
+    if (!email.trim())    missingFields.push('Email Address')
+    if (!password.trim()) missingFields.push('Password')
+  }
+  if (!savedCardLast4) missingFields.push('Credit Card Payment')
+
+  const fieldError = (value: string) => showErrors && !value.trim()
+
+  const handleCompleteDonation = () => {
+    if (missingFields.length > 0) {
+      setShowErrors(true)
+      setTimeout(() => errorAlertRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50)
+    } else {
+      setShowErrors(false)
+    }
+  }
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -116,10 +185,14 @@ export default function DonateCheckout() {
         {/* Checkout body */}
         <section className="bg-white py-16">
           <div className="container-site">
-            <div className="flex gap-12 items-start">
+            <div className="flex flex-col lg:flex-row gap-12 lg:items-start">
 
               {/* ── Left column – forms ───────────────────────────────── */}
               <div className="flex-1 min-w-0 flex flex-col gap-8">
+
+                {showErrors && missingFields.length > 0 && (
+                  <RequiredFieldsAlert missingFields={missingFields} alertRef={errorAlertRef} />
+                )}
 
                 {/* Card: Account Information */}
                 <div className="border border-[#c4c9d4]">
@@ -150,11 +223,12 @@ export default function DonateCheckout() {
                     {activeTab === 'guest' && (
                       <div className="flex flex-col gap-5">
                         <div className="flex gap-5">
-                          <FormInput label="First Name" placeholder="First name" value={firstName} onChange={setFirstName} className="flex-1" />
-                          <FormInput label="Last Name" placeholder="Last name" value={lastName} onChange={setLastName} className="flex-1" />
+                          <FormInput label="First Name" placeholder="First name" value={firstName} onChange={setFirstName} className="flex-1" required error={fieldError(firstName)} />
+                          <FormInput label="Last Name" placeholder="Last name" value={lastName} onChange={setLastName} className="flex-1" required error={fieldError(lastName)} />
                         </div>
-                        <FormInput label="Email Address" placeholder="your@email.com" value={email} onChange={setEmail} type="email" />
-                        <FormInput label="Confirm Email Address" placeholder="your@email.com" value={confirmEmail} onChange={setConfirmEmail} type="email" />
+                        <FormInput label="Email Address" placeholder="your@email.com" value={email} onChange={setEmail} type="email" required error={fieldError(email)} />
+                        <FormInput label="Confirm Email Address" placeholder="your@email.com" value={confirmEmail} onChange={setConfirmEmail} type="email" required error={fieldError(confirmEmail)} />
+                        <FormInput label="Phone Number (Optional)" placeholder="(555) 555-1234" value={phone} onChange={setPhone} type="tel" />
                         <label className="flex items-center gap-3 cursor-pointer">
                           <input
                             type="checkbox"
@@ -169,12 +243,13 @@ export default function DonateCheckout() {
                     {activeTab === 'create' && (
                       <div className="flex flex-col gap-5">
                         <div className="flex gap-5">
-                          <FormInput label="First Name" placeholder="First name" value={firstName} onChange={setFirstName} className="flex-1" />
-                          <FormInput label="Last Name" placeholder="Last name" value={lastName} onChange={setLastName} className="flex-1" />
+                          <FormInput label="First Name" placeholder="First name" value={firstName} onChange={setFirstName} className="flex-1" required error={fieldError(firstName)} />
+                          <FormInput label="Last Name" placeholder="Last name" value={lastName} onChange={setLastName} className="flex-1" required error={fieldError(lastName)} />
                         </div>
-                        <FormInput label="Email Address" placeholder="your@email.com" value={email} onChange={setEmail} type="email" />
-                        <FormInput label="Confirm Email Address" placeholder="your@email.com" value={confirmEmail} onChange={setConfirmEmail} type="email" />
-                        <FormInput label="Password" placeholder="Create a password" value={password} onChange={setPassword} type="password" />
+                        <FormInput label="Email Address" placeholder="your@email.com" value={email} onChange={setEmail} type="email" required error={fieldError(email)} />
+                        <FormInput label="Confirm Email Address" placeholder="your@email.com" value={confirmEmail} onChange={setConfirmEmail} type="email" required error={fieldError(confirmEmail)} />
+                        <FormInput label="Phone Number (Optional)" placeholder="(555) 555-1234" value={phone} onChange={setPhone} type="tel" />
+                        <FormInput label="Password" placeholder="Create a password" value={password} onChange={setPassword} type="password" required error={fieldError(password)} />
 
                         <div className="border-t border-[#c4c9d4] pt-5">
                           <p className="font-body font-bold text-[12px] uppercase tracking-[0.08em] text-[#4e576a] mb-4">Service Information</p>
@@ -182,15 +257,15 @@ export default function DonateCheckout() {
                             <div className="flex gap-5">
                               <div className="flex flex-col gap-1.5 flex-1">
                                 <label className="font-body font-bold text-[14px] text-[#1d2535]">Service <span className="text-red-500">*</span></label>
-                                <InlineSelect placeholder="— Select —" options={['Navy', 'Marine Corps', 'Coast Guard', 'Army', 'Air Force', 'Space Force', 'Civilian']} value={service} onChange={setService} />
+                                <InlineSelect placeholder="— Select —" options={['Navy', 'Marine Corps', 'Coast Guard', 'Army', 'Air Force', 'Space Force', 'Civilian']} value={service} onChange={setService} error={showErrors && !service} />
                               </div>
                               <div className="flex flex-col gap-1.5 flex-1">
                                 <label className="font-body font-bold text-[14px] text-[#1d2535]">Military Status <span className="text-red-500">*</span></label>
-                                <InlineSelect placeholder="— Select —" options={['Active Duty', 'Reserve', 'National Guard', 'Retired', 'Veteran', 'Civilian']} value={militaryStatus} onChange={setMilitary} />
+                                <InlineSelect placeholder="— Select —" options={['Active Duty', 'Reserve', 'National Guard', 'Retired', 'Veteran', 'Civilian']} value={militaryStatus} onChange={setMilitary} error={showErrors && !militaryStatus} />
                               </div>
                             </div>
                             <div className="flex gap-5">
-                              <FormInput label="Rank / Title *" placeholder="Enter rank or title" value={rank} onChange={setRank} className="flex-1" />
+                              <FormInput label="Rank / Title" placeholder="Enter rank or title" value={rank} onChange={setRank} className="flex-1" required error={fieldError(rank)} />
                               <FormInput label="Suffix" placeholder="Jr., Sr., III…" value={suffix} onChange={setSuffix} className="flex-1" />
                               <FormInput label="Graduation Year" placeholder="YYYY" value={gradYear} onChange={setGradYear} className="w-36" />
                             </div>
@@ -200,8 +275,8 @@ export default function DonateCheckout() {
                     )}
                     {activeTab === 'signin' && (
                       <div className="flex flex-col gap-5">
-                        <FormInput label="Email Address" placeholder="your@email.com" value={email} onChange={setEmail} type="email" />
-                        <FormInput label="Password" placeholder="Your password" value={password} onChange={setPassword} type="password" />
+                        <FormInput label="Email Address" placeholder="your@email.com" value={email} onChange={setEmail} type="email" required error={fieldError(email)} />
+                        <FormInput label="Password" placeholder="Your password" value={password} onChange={setPassword} type="password" required error={fieldError(password)} />
                         <a href="/login/forgot" className="font-body text-[15px] text-[#0466c8] hover:underline w-fit">
                           Forgot your password?
                         </a>
@@ -211,7 +286,7 @@ export default function DonateCheckout() {
                 </div>
 
                 {/* Card: Payment Details */}
-                <div className="border border-[#c4c9d4]">
+                <div className={`border ${showErrors && !savedCardLast4 ? 'border-red-600' : 'border-[#c4c9d4]'}`}>
                   <div className="p-6 flex flex-col gap-6">
                     <div className="flex items-center justify-between">
                       <h2 className="font-headline text-[28px] text-[#1d2535] leading-[1.2]">Payment Details</h2>
@@ -257,7 +332,7 @@ export default function DonateCheckout() {
               </div>
 
               {/* ── Right column – order summary ──────────────────────── */}
-              <div className="w-[360px] flex-shrink-0 sticky top-8">
+              <div className="w-full lg:w-[360px] lg:flex-shrink-0 lg:sticky top-8">
                 <div className="border border-[#c4c9d4]">
                   <div className="p-6 flex flex-col gap-6">
                     <h2 className="font-headline text-[24px] text-[#1d2535] leading-[1.2]">Order summary</h2>
@@ -305,7 +380,8 @@ export default function DonateCheckout() {
 
                     <button
                       type="button"
-                      className="w-full bg-[#002b5c] text-white font-body font-extrabold text-[18px] py-4 px-6 hover:bg-[#023e7d] transition-colors"
+                      onClick={handleCompleteDonation}
+                      className="w-full bg-[#002b5c] text-white font-body font-extrabold text-[18px] py-4 px-6 hover:bg-navy-bright transition-colors"
                     >
                       Complete Donation
                     </button>

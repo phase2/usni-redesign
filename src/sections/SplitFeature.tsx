@@ -22,7 +22,7 @@ export default function SplitFeature() {
           </p>
           <a
             href="/membership/join"
-            className="inline-flex items-center justify-center bg-navy-bolder text-white font-body font-bold text-sm tracking-[-0.3px] px-5 py-3.5 border border-navy-bolder hover:bg-navy transition-colors"
+            className="inline-flex items-center justify-center bg-navy-bolder text-white font-body font-bold text-sm tracking-[-0.3px] px-5 py-3.5 border border-navy-bolder hover:bg-navy-bright hover:border-navy-bright transition-colors"
           >
             Become a member
           </a>

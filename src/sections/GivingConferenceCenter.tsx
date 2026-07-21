@@ -26,7 +26,7 @@ export default function GivingConferenceCenter() {
           <div className="flex flex-wrap gap-3">
             <a
               href="/giving/donate"
-              className="inline-flex items-center justify-center bg-navy-bolder text-white font-body font-bold text-sm tracking-[-0.3px] px-5 py-3.5 hover:bg-navy transition-colors"
+              className="inline-flex items-center justify-center bg-navy-bolder text-white font-body font-bold text-sm tracking-[-0.3px] px-5 py-3.5 hover:bg-navy-bright transition-colors"
             >
               Donate to JCTCC
             </a>

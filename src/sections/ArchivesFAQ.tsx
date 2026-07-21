@@ -86,7 +86,7 @@ export default function ArchivesFAQ() {
               href="/archives/contact"
               className="inline-flex items-center justify-center bg-navy-bolder text-white
                          font-body font-bold text-base tracking-[-0.5px] px-6 py-4
-                         hover:bg-navy transition-colors"
+                         hover:bg-navy-bright transition-colors"
             >
               Contact the Archives
             </a>

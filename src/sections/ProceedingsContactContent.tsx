@@ -29,12 +29,12 @@ export default function ProceedingsContactContent() {
       <div className="container-site flex flex-col gap-16">
 
         {/* Staff + Sidebar grid */}
-        <div className="flex gap-8 items-start">
+        <div className="flex flex-col lg:flex-row gap-8 lg:items-start">
 
           {/* Left: Staff grid */}
           <div className="flex-1 min-w-0 flex flex-col gap-8">
             <SectionHeading>Proceedings Staff</SectionHeading>
-            <div className="grid grid-cols-3 gap-x-8 gap-y-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-8">
               {staff.map((person) => (
                 <div key={person.email} className="flex flex-col gap-0.5">
                   <p className="font-headline text-[20px] text-[#1d2535] leading-[1.2]">
@@ -55,7 +55,7 @@ export default function ProceedingsContactContent() {
           </div>
 
           {/* Right: Sticky sidebar */}
-          <div className="flex-none w-[350px] sticky top-[96px] flex flex-col gap-6">
+          <div className="flex-none w-full lg:w-[350px] lg:sticky top-[96px] flex flex-col gap-6">
 
             {/* Mailing Address */}
             <div className="flex flex-col gap-6">
@@ -91,7 +91,7 @@ export default function ProceedingsContactContent() {
         </div>
 
         {/* Submission Guidelines alert banner */}
-        <div className="bg-[#fff8d6] border-l-4 border-[#ffaa00] flex items-center gap-6 px-8 py-8">
+        <div className="bg-[#fff8d6] border-l-4 border-[#ffaa00] flex flex-col lg:flex-row lg:items-center gap-6 px-6 py-6 lg:px-8 lg:py-8">
           <div className="flex-1 min-w-0 flex flex-col gap-4">
             <h2 className="font-headline text-[36px] text-[#1d2535] leading-[1.2]">
               Proceedings Submission Guidelines
@@ -100,10 +100,10 @@ export default function ProceedingsContactContent() {
               Proceedings is built on the ideas of those who serve. If you have something to say — a fresh argument, a hard-won lesson, or a challenge to conventional thinking — here's how to put it in front of the naval community that reads us.
             </p>
           </div>
-          <div className="flex-none w-[350px]">
+          <div className="flex-none w-full lg:w-[350px]">
             <a
               href="/proceedings/submissions"
-              className="flex items-center justify-center w-full bg-navy-bold text-white font-body font-bold text-base tracking-[-0.5px] px-6 py-4 hover:bg-navy transition-colors"
+              className="flex items-center justify-center w-full bg-navy-bold text-white font-body font-bold text-base tracking-[-0.5px] px-6 py-4 hover:bg-navy-bright transition-colors"
             >
               View our submission guidelines
             </a>

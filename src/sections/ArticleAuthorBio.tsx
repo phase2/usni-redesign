@@ -11,6 +11,10 @@ interface Props {
   showDisclaimer?: boolean
 }
 
+function slugify(name: string) {
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+}
+
 export default function ArticleAuthorBio({ authors, showDisclaimer = true }: Props) {
   const [activeIndex, setActiveIndex] = useState(0)
   const active = authors[activeIndex]
@@ -46,7 +50,7 @@ export default function ArticleAuthorBio({ authors, showDisclaimer = true }: Pro
                 <button
                   key={author.name}
                   onClick={() => setActiveIndex(i)}
-                  className={`px-5 py-3 font-body font-semibold text-sm whitespace-nowrap border-b-2 -mb-px transition-colors
+                  className={`px-5 py-3 font-body font-semibold text-sm text-left sm:whitespace-nowrap border-b-2 -mb-px transition-colors
                     ${activeIndex === i
                       ? 'border-[#0466C8] text-navy-bolder bg-[#E0E0CC]'
                       : 'border-transparent text-navy-bolder/40 hover:text-navy-bolder/70'
@@ -69,6 +73,20 @@ export default function ArticleAuthorBio({ authors, showDisclaimer = true }: Pro
             <p className="font-body text-base text-neutral-subtle leading-[1.75]">
               {active.bio}
             </p>
+            <div className="flex flex-wrap items-center gap-3 mt-6">
+              <a
+                href={`/authors/${slugify(active.name)}`}
+                className="inline-flex items-center gap-2 bg-navy-bolder border border-navy-bolder text-white font-body font-bold text-sm px-5 py-3 hover:bg-navy-bright hover:border-navy-bright transition-colors"
+              >
+                View Biography
+              </a>
+              <a
+                href={`/authors/${slugify(active.name)}#stories`}
+                className="inline-flex items-center gap-2 border border-navy-bolder text-navy-bolder font-body font-bold text-sm px-5 py-3 hover:bg-[#EBF4FF] transition-colors"
+              >
+                More Stories From This Author
+              </a>
+            </div>
           </div>
 
         </div>

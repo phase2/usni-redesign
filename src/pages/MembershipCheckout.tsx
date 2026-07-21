@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useCart } from '@/context/CartContext'
 import Header from '@/components/layout/Header'
@@ -29,39 +29,53 @@ const US_STATES = [
 // ─── Field components ──────────────────────────────────────────────────────────
 
 function FormInput({
-  label, placeholder, value, onChange, type = 'text', className = '',
+  label, placeholder, value, onChange, type = 'text', className = '', required = false, error = false,
 }: {
   label: string; placeholder: string; value: string; onChange: (v: string) => void
-  type?: string; className?: string
+  type?: string; className?: string; required?: boolean; error?: boolean
 }) {
   return (
     <div className={`flex flex-col gap-1.5 ${className}`}>
-      <label className="font-body font-bold text-[14px] text-[#1d2535]">{label}</label>
+      <label className="font-body font-bold text-[14px] text-[#1d2535]">
+        {label}{required && <span className="text-red-500"> *</span>}
+      </label>
       <input
         type={type}
         placeholder={placeholder}
         value={value}
         onChange={e => onChange(e.target.value)}
-        className="w-full border border-[#4e576a] bg-white px-4 py-3 font-body text-[16px] text-[#4e576a] placeholder:text-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#023e7d]/30 focus:border-[#023e7d] rounded-none min-h-[44px]"
+        aria-invalid={error || undefined}
+        className={`w-full border bg-white px-4 py-3 font-body text-[16px] text-[#4e576a] placeholder:text-[#9ca3af] focus:outline-none focus:ring-2 rounded-none min-h-[44px] ${
+          error
+            ? 'border-red-600 focus:ring-red-600/30 focus:border-red-600'
+            : 'border-[#4e576a] focus:ring-[#023e7d]/30 focus:border-[#023e7d]'
+        }`}
       />
     </div>
   )
 }
 
 function FormSelect({
-  label, placeholder, options, value, onChange, className = '',
+  label, placeholder, options, value, onChange, className = '', required = false, error = false,
 }: {
   label: string; placeholder: string; options: string[]
-  value: string; onChange: (v: string) => void; className?: string
+  value: string; onChange: (v: string) => void; className?: string; required?: boolean; error?: boolean
 }) {
   return (
     <div className={`flex flex-col gap-1.5 ${className}`}>
-      <label className="font-body font-bold text-[14px] text-[#1d2535]">{label}</label>
+      <label className="font-body font-bold text-[14px] text-[#1d2535]">
+        {label}{required && <span className="text-red-500"> *</span>}
+      </label>
       <div className="relative">
         <select
           value={value}
           onChange={e => onChange(e.target.value)}
-          className="w-full appearance-none bg-white border border-[#4e576a] px-4 py-3 pr-10 font-body text-[16px] text-[#4e576a] focus:outline-none focus:ring-2 focus:ring-[#023e7d]/30 focus:border-[#023e7d] min-h-[44px] rounded-none"
+          aria-invalid={error || undefined}
+          className={`w-full appearance-none bg-white border px-4 py-3 pr-10 font-body text-[16px] text-[#4e576a] focus:outline-none focus:ring-2 min-h-[44px] rounded-none ${
+            error
+              ? 'border-red-600 focus:ring-red-600/30 focus:border-red-600'
+              : 'border-[#4e576a] focus:ring-[#023e7d]/30 focus:border-[#023e7d]'
+          }`}
         >
           <option value="" disabled>{placeholder}</option>
           {options.map(o => <option key={o} value={o}>{o}</option>)}
@@ -71,6 +85,28 @@ function FormSelect({
             <path d="M1 3l5 5 5-5" />
           </svg>
         </div>
+      </div>
+    </div>
+  )
+}
+
+function RequiredFieldsAlert({
+  missingFields, alertRef,
+}: {
+  missingFields: string[]; alertRef: React.RefObject<HTMLDivElement>
+}) {
+  return (
+    <div
+      ref={alertRef}
+      role="alert"
+      className="flex gap-3 items-start border-l-4 border-red-600 bg-red-50 px-5 py-4 scroll-mt-28"
+    >
+      <i className="fa-solid fa-circle-exclamation text-red-600 text-[15px] mt-[3px] flex-shrink-0" aria-hidden="true" />
+      <div>
+        <p className="font-body font-bold text-[15px] text-[#1d2535] mb-0.5">Please complete the required fields</p>
+        <p className="font-body text-[14px] text-[#1d2535] leading-relaxed">
+          The following {missingFields.length === 1 ? 'item is' : 'items are'} required: {missingFields.join(', ')}.
+        </p>
       </div>
     </div>
   )
@@ -112,6 +148,7 @@ export default function MembershipCheckout() {
   const [lastName, setLastName]         = useState('')
   const [email, setEmail]               = useState('')
   const [confirmEmail, setConfirmEmail] = useState('')
+  const [phone, setPhone]               = useState('')
   const [password, setPassword]         = useState('')
 
   // ── Address
@@ -139,6 +176,47 @@ export default function MembershipCheckout() {
   const [autoRenew, setAutoRenew]       = useState(true)
   const [autoRenewMag, setAutoRenewMag] = useState(true)
 
+  // ── Required-field validation
+  const [showErrors, setShowErrors] = useState(false)
+  const errorAlertRef = useRef<HTMLDivElement>(null)
+
+  const missingFields: string[] = []
+  if (activeTab === 'create') {
+    if (!firstName.trim())    missingFields.push('First Name')
+    if (!lastName.trim())     missingFields.push('Last Name')
+    if (!email.trim())        missingFields.push('Email Address')
+    if (!confirmEmail.trim()) missingFields.push('Confirm Email Address')
+  } else {
+    if (!email.trim())    missingFields.push('Email Address')
+    if (!password.trim()) missingFields.push('Password')
+  }
+  if (isPrint) {
+    if (!street.trim()) missingFields.push('Street Address')
+    if (!city.trim())   missingFields.push('City')
+    if (!state)         missingFields.push('State')
+    if (!zip.trim())    missingFields.push('ZIP')
+  }
+  if (isGift) {
+    if (!giftName.trim())   missingFields.push('Recipient Name')
+    if (!giftEmail.trim())  missingFields.push('Recipient Email Address')
+    if (!giftStreet.trim()) missingFields.push('Recipient Street Address')
+    if (!giftCity.trim())   missingFields.push('Recipient City')
+    if (!giftState)         missingFields.push('Recipient State')
+    if (!giftZip.trim())    missingFields.push('Recipient ZIP')
+  }
+  if (!savedCardLast4) missingFields.push('Credit Card Payment')
+
+  const fieldError = (value: string) => showErrors && !value.trim()
+
+  const handleCompleteCheckout = () => {
+    if (missingFields.length > 0) {
+      setShowErrors(true)
+      setTimeout(() => errorAlertRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50)
+    } else {
+      setShowErrors(false)
+    }
+  }
+
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
@@ -155,10 +233,14 @@ export default function MembershipCheckout() {
         {/* Checkout body */}
         <section className="bg-white py-16">
           <div className="container-site">
-            <div className="flex gap-12 items-start">
+            <div className="flex flex-col lg:flex-row gap-12 lg:items-start">
 
               {/* ── Left column – forms ───────────────────────────────── */}
               <div className="flex-1 min-w-0 flex flex-col gap-8">
+
+                {showErrors && missingFields.length > 0 && (
+                  <RequiredFieldsAlert missingFields={missingFields} alertRef={errorAlertRef} />
+                )}
 
                 {/* Card: Account Information */}
                 <div className="border border-[#c4c9d4]">
@@ -192,16 +274,17 @@ export default function MembershipCheckout() {
                     {activeTab === 'create' ? (
                       <div className="flex flex-col gap-5">
                         <div className="flex gap-5">
-                          <FormInput label="First Name" placeholder="First name" value={firstName} onChange={setFirstName} className="flex-1" />
-                          <FormInput label="Last Name" placeholder="Last name" value={lastName} onChange={setLastName} className="flex-1" />
+                          <FormInput label="First Name" placeholder="First name" value={firstName} onChange={setFirstName} className="flex-1" required error={fieldError(firstName)} />
+                          <FormInput label="Last Name" placeholder="Last name" value={lastName} onChange={setLastName} className="flex-1" required error={fieldError(lastName)} />
                         </div>
-                        <FormInput label="Email Address" placeholder="your@email.com" value={email} onChange={setEmail} type="email" />
-                        <FormInput label="Confirm Email Address" placeholder="your@email.com" value={confirmEmail} onChange={setConfirmEmail} type="email" />
+                        <FormInput label="Email Address" placeholder="your@email.com" value={email} onChange={setEmail} type="email" required error={fieldError(email)} />
+                        <FormInput label="Confirm Email Address" placeholder="your@email.com" value={confirmEmail} onChange={setConfirmEmail} type="email" required error={fieldError(confirmEmail)} />
+                        <FormInput label="Phone Number (Optional)" placeholder="(555) 555-1234" value={phone} onChange={setPhone} type="tel" />
                       </div>
                     ) : (
                       <div className="flex flex-col gap-5">
-                        <FormInput label="Email Address" placeholder="your@email.com" value={email} onChange={setEmail} type="email" />
-                        <FormInput label="Password" placeholder="••••••••" value={password} onChange={setPassword} type="password" />
+                        <FormInput label="Email Address" placeholder="your@email.com" value={email} onChange={setEmail} type="email" required error={fieldError(email)} />
+                        <FormInput label="Password" placeholder="••••••••" value={password} onChange={setPassword} type="password" required error={fieldError(password)} />
                       </div>
                     )}
                   </div>
@@ -217,11 +300,11 @@ export default function MembershipCheckout() {
                           Required for your print edition of Proceedings. Address auto-populates shipping cost.
                         </p>
                       </div>
-                      <FormInput label="Street Address" placeholder="123 Main Street" value={street} onChange={setStreet} />
+                      <FormInput label="Street Address" placeholder="123 Main Street" value={street} onChange={setStreet} required error={fieldError(street)} />
                       <div className="flex gap-4">
-                        <FormInput label="City" placeholder="Enter city" value={city} onChange={setCity} className="flex-1" />
-                        <FormSelect label="State" placeholder="Select State" options={US_STATES} value={state} onChange={setState} className="w-44" />
-                        <FormInput label="ZIP" placeholder="Enter zip code" value={zip} onChange={setZip} className="w-36" />
+                        <FormInput label="City" placeholder="Enter city" value={city} onChange={setCity} className="flex-1" required error={fieldError(city)} />
+                        <FormSelect label="State" placeholder="Select State" options={US_STATES} value={state} onChange={setState} className="w-44" required error={showErrors && !state} />
+                        <FormInput label="ZIP" placeholder="Enter zip code" value={zip} onChange={setZip} className="w-36" required error={fieldError(zip)} />
                       </div>
                     </div>
                   </div>
@@ -250,18 +333,18 @@ export default function MembershipCheckout() {
 
                       {editingGift ? (
                         <div className="flex flex-col gap-4">
-                          <FormInput label="Full Name" placeholder="Recipient name" value={giftName} onChange={setGiftName} />
-                          <FormInput label="Email Address" placeholder="recipient@email.com" value={giftEmail} onChange={setGiftEmail} type="email" />
-                          <FormInput label="Street Address" placeholder="123 Main Street" value={giftStreet} onChange={setGiftStreet} />
+                          <FormInput label="Full Name" placeholder="Recipient name" value={giftName} onChange={setGiftName} required error={fieldError(giftName)} />
+                          <FormInput label="Email Address" placeholder="recipient@email.com" value={giftEmail} onChange={setGiftEmail} type="email" required error={fieldError(giftEmail)} />
+                          <FormInput label="Street Address" placeholder="123 Main Street" value={giftStreet} onChange={setGiftStreet} required error={fieldError(giftStreet)} />
                           <div className="flex gap-4">
-                            <FormInput label="City" placeholder="Enter city" value={giftCity} onChange={setGiftCity} className="flex-1" />
-                            <FormSelect label="State" placeholder="Select State" options={US_STATES} value={giftState} onChange={setGiftState} className="w-44" />
-                            <FormInput label="ZIP" placeholder="Enter zip" value={giftZip} onChange={setGiftZip} className="w-36" />
+                            <FormInput label="City" placeholder="Enter city" value={giftCity} onChange={setGiftCity} className="flex-1" required error={fieldError(giftCity)} />
+                            <FormSelect label="State" placeholder="Select State" options={US_STATES} value={giftState} onChange={setGiftState} className="w-44" required error={showErrors && !giftState} />
+                            <FormInput label="ZIP" placeholder="Enter zip" value={giftZip} onChange={setGiftZip} className="w-36" required error={fieldError(giftZip)} />
                           </div>
                           <button
                             type="button"
                             onClick={() => setEditingGift(false)}
-                            className="self-start bg-[#002b5c] text-white font-body font-bold text-[14px] px-6 py-2.5 hover:bg-[#023e7d] transition-colors"
+                            className="self-start bg-[#002b5c] text-white font-body font-bold text-[14px] px-6 py-2.5 hover:bg-navy-bright transition-colors"
                           >
                             Save
                           </button>
@@ -289,7 +372,7 @@ export default function MembershipCheckout() {
                 )}
 
                 {/* Card: Payment Details */}
-                <div className="border border-[#c4c9d4]">
+                <div className={`border ${showErrors && !savedCardLast4 ? 'border-red-600' : 'border-[#c4c9d4]'}`}>
                   <div className="p-6 flex flex-col gap-6">
                     <div className="flex items-center justify-between">
                       <h2 className="font-headline text-[28px] text-[#1d2535] leading-[1.2]">Payment Details</h2>
@@ -335,7 +418,7 @@ export default function MembershipCheckout() {
               </div>
 
               {/* ── Right column – order summary ──────────────────────── */}
-              <div className="w-[360px] flex-shrink-0 sticky top-8">
+              <div className="w-full lg:w-[360px] lg:flex-shrink-0 lg:sticky top-8">
                 <div className="border border-[#c4c9d4]">
                   <div className="p-6 flex flex-col gap-6">
                     <h2 className="font-headline text-[24px] text-[#1d2535] leading-[1.2]">Order summary</h2>
@@ -423,7 +506,8 @@ export default function MembershipCheckout() {
 
                     <button
                       type="button"
-                      className="w-full bg-[#002b5c] text-white font-body font-extrabold text-[18px] py-4 px-6 hover:bg-[#023e7d] transition-colors"
+                      onClick={handleCompleteCheckout}
+                      className="w-full bg-[#002b5c] text-white font-body font-extrabold text-[18px] py-4 px-6 hover:bg-navy-bright transition-colors"
                     >
                       Complete Checkout
                     </button>

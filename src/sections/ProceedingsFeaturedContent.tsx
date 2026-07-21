@@ -24,7 +24,7 @@ function FeatureCard({ image, imageAlt, title, body, ctaLabel, ctaHref }: Featur
         <p className="font-body text-sm text-neutral-subtle leading-relaxed flex-1">{body}</p>
         <a
           href={ctaHref}
-          className="flex items-center justify-center gap-2 bg-navy-bold text-white font-body font-bold text-sm tracking-[-0.3px] px-5 py-3.5 border border-navy-bold hover:bg-navy transition-colors"
+          className="flex items-center justify-center gap-2 bg-navy-bold text-white font-body font-bold text-sm tracking-[-0.3px] px-5 py-3.5 border border-navy-bold hover:bg-navy-bright hover:border-navy-bright transition-colors"
         >
           {ctaLabel} →
         </a>

@@ -41,7 +41,7 @@ export default function BooksHero() {
         <div className="flex flex-col lg:flex-row gap-3 lg:gap-4">
           <a
             href="/books/collection"
-            className="flex items-center justify-center bg-navy-bolder text-white font-body font-bold text-sm tracking-[-0.2px] px-6 py-4 hover:bg-navy transition-colors"
+            className="flex items-center justify-center bg-navy-bolder text-white font-body font-bold text-sm tracking-[-0.2px] px-6 py-4 hover:bg-navy-bright transition-colors"
           >
             Browse full collection
           </a>

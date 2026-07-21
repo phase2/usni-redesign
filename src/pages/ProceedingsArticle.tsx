@@ -5,8 +5,8 @@ import ArticleHeader from '@/sections/ArticleHeader'
 import ArticleHeroImage from '@/sections/ArticleHeroImage'
 import ArticleBody from '@/sections/ArticleBody'
 import ArticleRelated from '@/sections/ArticleRelated'
-import AdUnit from '@/components/ui/AdUnit'
-import heroImg from '@/assets/images/proceedings-Three MEFs Wont Be Enough.png'
+import heroImg from '@/assets/images/proceedings-articles/mefs/hero.jpg'
+import ArticleMeterBanner from '@/components/ui/ArticleMeterBanner'
 
 export default function ProceedingsArticle() {
   return (
@@ -16,10 +16,11 @@ export default function ProceedingsArticle() {
       <main className="flex-1">
         <ArticleHeader
           title="Three MEFs Won't Be Enough"
-          deck="The Marine Corps' current three-MEF structure cannot meet simultaneous crises across competing theaters — a fourth expeditionary force is no longer optional."
+          deck="To replace mass casualties in a great power war, the Marine Corps should reactivate the 5th and 6th Marine Divisions as the core of two new MEFs."
           date="April 2026"
           magazineName="Proceedings Magazine"
           author="Corporal Richard Sweeney III, U.S. Marine Corps Reserve"
+          readTime="8 min read"
           breadcrumbs={[
             { label: 'Home', href: '/' },
             { label: 'Proceedings', href: '/proceedings' },
@@ -29,15 +30,15 @@ export default function ProceedingsArticle() {
         />
         <ArticleHeroImage
           src={heroImg}
-          alt="Marines conduct amphibious assault training during Exercise Iron Fist"
-          caption="Marines from 2nd Battalion, 4th Marines conduct amphibious assault training during Exercise Iron Fist. Growing Marine Corps expeditionary capacity is central to Pacific deterrence strategy."
-          photoCredit="U.S. Marine Corps / Lance Corporal David Intriago"
+          alt="A mass casualty exercise with U.S. Marines and soldiers from the Australian Defence Force during Southern Jackaroo"
+          caption="A mass casualty exercise with U.S. Marines and soldiers from the Australian Defence Force during Southern Jackaroo at Shoalwater Bay Training Area, Queensland, Australia."
+          photoCredit="U.S. Marine Corps (Cedar Barnes)"
         />
         <ArticleBody />
-        <AdUnit size="rectangle" />
         <ArticleRelated />
       </main>
       <Footer />
+      <ArticleMeterBanner magazine="Proceedings" />
     </div>
   )
 }

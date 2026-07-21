@@ -28,7 +28,7 @@ function PromoCard({ eyebrow, headline, body, ctaLabel, ctaHref, image, imageAlt
       <p className="font-body text-[16px] text-[#1d2535] leading-[1.5] flex-1">{body}</p>
       <a
         href={ctaHref}
-        className="flex items-center justify-center bg-navy-bold text-white font-body font-bold text-[16px] tracking-[-0.5px] px-6 py-4 hover:bg-navy transition-colors mt-auto w-full"
+        className="flex items-center justify-center bg-navy-bold text-white font-body font-bold text-[16px] tracking-[-0.5px] px-6 py-4 hover:bg-navy-bright transition-colors mt-auto w-full"
       >
         {ctaLabel} →
       </a>

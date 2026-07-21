@@ -3,7 +3,9 @@ import { useEffect } from 'react'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
-  useEffect(() => { window.scrollTo(0, 0) }, [pathname])
+  // 'instant' overrides the global scroll-behavior: smooth so route changes
+  // land at the top immediately instead of animating up the old page.
+  useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' }) }, [pathname])
   return null
 }
 import { CartProvider } from '@/context/CartContext'
@@ -32,6 +34,7 @@ import Login from '@/pages/Login'
 import Archives from '@/pages/Archives'
 import NavalHistoryArticle from '@/pages/NavalHistoryArticle'
 import ProceedingsArticleFortifying from '@/pages/ProceedingsArticleFortifying'
+import ProceedingsArticleGrubb from '@/pages/ProceedingsArticleGrubb'
 import NewsletterJoin from '@/pages/NewsletterJoin'
 
 export default function App() {
@@ -62,6 +65,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/proceedings/three-mefs" element={<ProceedingsArticle />} />
         <Route path="/proceedings/fortifying-digital-watch" element={<ProceedingsArticleFortifying />} />
+        <Route path="/proceedings/naval-aviation-got-better" element={<ProceedingsArticleGrubb />} />
         <Route path="/books/ai-warfighting" element={<BookProduct />} />
         <Route path="/archives" element={<Archives />} />
         <Route path="/naval-history/mitscher-at-midway" element={<NavalHistoryArticle />} />

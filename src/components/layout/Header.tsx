@@ -127,7 +127,7 @@ function SearchFlydown({ onClose }: { onClose: () => void }) {
             )}
             <a
               href={query ? `/search?q=${encodeURIComponent(query)}` : '/search'}
-              className="flex-shrink-0 flex items-center px-7 bg-navy-bolder text-white font-body font-bold text-[15px] tracking-[-0.3px] hover:bg-navy transition-colors"
+              className="flex-shrink-0 flex items-center px-7 bg-navy-bolder text-white font-body font-bold text-[15px] tracking-[-0.3px] hover:bg-navy-bright transition-colors"
             >
               Search
             </a>
@@ -196,7 +196,7 @@ function useScrolled(threshold = 10) {
 function FullLogo() {
   return (
     <a href="/" className="flex-shrink-0" aria-label="U.S. Naval Institute home">
-      <img src="/usni-logo-full.svg" alt="U.S. Naval Institute" className="w-auto h-[52px] lg:h-[69px]" />
+      <img src="/usni-logo-full.svg" alt="U.S. Naval Institute" className="w-auto h-[52px] lg:h-[56px] min-[1330px]:h-[69px]" />
     </a>
   )
 }
@@ -365,9 +365,9 @@ function NavLink({ item, compact, isActive }: { item: NavItem; compact: boolean;
     >
       <a
         href={item.href}
-        className={`flex items-center gap-[10px] font-body font-extrabold whitespace-nowrap leading-none
+        className={`flex items-center gap-1.5 min-[1330px]:gap-[10px] font-body font-extrabold whitespace-nowrap leading-none
                     transition-colors duration-150
-                    ${compact ? 'text-[18px] px-4 py-8' : 'text-[21px] px-5 py-6'}
+                    ${compact ? 'text-[15px] px-2.5 py-8 min-[1330px]:text-[18px] min-[1330px]:px-4' : 'text-[16px] px-2.5 py-6 min-[1330px]:text-[21px] min-[1330px]:px-5'}
                     ${open ? 'bg-navy-bolder text-white' : 'text-navy-subtle hover:text-navy-bolder'}`}
         aria-haspopup={item.children ? 'true' : undefined}
         aria-expanded={item.children ? open : undefined}
@@ -396,10 +396,10 @@ function ArchivesLink() {
     >
       <a
         href="/archives"
-        className="flex items-center gap-1.5 font-body font-bold text-[18px] text-navy-subtle
-                   px-4 py-2 hover:text-navy-bolder transition-colors whitespace-nowrap leading-none"
+        className="group/nav flex items-center gap-1.5 font-body font-bold text-[15px] min-[1330px]:text-[18px] text-navy-subtle
+                   px-2.5 min-[1330px]:px-4 py-2 hover:text-navy-bolder transition-colors whitespace-nowrap leading-none"
       >
-        Archives
+        <span className="article-link article-link--nav pb-0.5">Archives</span>
         <Chevron open={open} />
       </a>
       {open && <SimpleDropdown items={archivesDropdown} />}
@@ -474,19 +474,19 @@ function MobileMenu({ open, onClose, onSearchOpen, cartCount }: {
     <div className="fixed inset-0 z-[60] lg:hidden flex flex-col bg-white">
 
       {/* Header bar */}
-      <div className="flex items-center justify-between px-5 py-4 border-b border-border-light flex-shrink-0">
+      <div className="flex items-center justify-between px-5 py-3.5 border-b border-border-light flex-shrink-0">
         <FullLogo />
         <div className="flex items-center gap-1">
           <button
             onClick={() => { onClose(); onSearchOpen() }}
-            className="p-2.5 text-navy-bolder hover:text-navy-subtle transition-colors"
+            className="w-11 h-11 flex items-center justify-center text-navy-bolder hover:text-navy-subtle transition-colors"
             aria-label="Search"
           >
             <IconSearch />
           </button>
           <button
             onClick={onClose}
-            className="p-2.5 text-navy-bolder hover:text-navy-subtle transition-colors"
+            className="w-11 h-11 flex items-center justify-center text-navy-bolder hover:text-navy-subtle transition-colors"
             aria-label="Close menu"
           >
             <IconClose />
@@ -589,7 +589,7 @@ export default function Header() {
         <div className="flex items-center gap-1">
           <button
             onClick={openSearch}
-            className="p-2.5 text-navy-bolder hover:text-navy-subtle transition-colors"
+            className="w-11 h-11 flex items-center justify-center text-navy-bolder hover:text-navy-subtle transition-colors"
             aria-label="Search"
             aria-expanded={searchOpen}
           >
@@ -597,7 +597,7 @@ export default function Header() {
           </button>
           <button
             onClick={() => setMobileOpen(true)}
-            className="p-2.5 text-navy-bolder hover:text-navy-subtle transition-colors"
+            className="w-11 h-11 flex items-center justify-center text-navy-bolder hover:text-navy-subtle transition-colors"
             aria-label="Open menu"
           >
             <IconMenu />
@@ -618,36 +618,36 @@ export default function Header() {
             <FullLogo />
             <div className="flex items-center">
               <ArchivesLink />
-              <a href="/events" className="font-body font-bold text-[18px] text-navy-subtle px-4 py-2 hover:text-navy-bolder transition-colors whitespace-nowrap leading-none">
-                Events
+              <a href="/events" className="group/nav font-body font-bold text-[15px] min-[1330px]:text-[18px] text-navy-subtle px-2.5 min-[1330px]:px-4 py-2 hover:text-navy-bolder transition-colors whitespace-nowrap leading-none">
+                <span className="article-link article-link--nav pb-0.5">Events</span>
               </a>
-              <a href="/ships-store" className="font-body font-bold text-[18px] text-navy-subtle px-4 py-2 hover:text-navy-bolder transition-colors whitespace-nowrap leading-none">
-                Ship's Store
+              <a href="/ships-store" className="group/nav font-body font-bold text-[15px] min-[1330px]:text-[18px] text-navy-subtle px-2.5 min-[1330px]:px-4 py-2 hover:text-navy-bolder transition-colors whitespace-nowrap leading-none">
+                <span className="article-link article-link--nav pb-0.5">Ship's Store</span>
               </a>
               <div className="w-px h-5 bg-[#c4c9d4] mx-2" />
-              <a href="/membership/cart" className="flex items-center gap-1.5 font-body font-bold text-[18px] text-navy-subtle px-4 py-2 hover:text-navy-bolder transition-colors whitespace-nowrap leading-none">
+              <a href="/membership/cart" className="group/nav flex items-center gap-1.5 font-body font-bold text-[15px] min-[1330px]:text-[18px] text-navy-subtle px-2.5 min-[1330px]:px-4 py-2 hover:text-navy-bolder transition-colors whitespace-nowrap leading-none">
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
                   <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
                 </svg>
-                Cart
+                <span className="article-link article-link--nav pb-0.5">Cart</span>
                 {cartCount > 0 && (
                   <span className="flex items-center justify-center w-6 h-6 rounded-full bg-gold text-navy-bolder font-body font-bold text-[13px] leading-none flex-shrink-0">
                     {cartCount}
                   </span>
                 )}
               </a>
-              <a href="/login" className="flex items-center gap-1.5 font-body font-bold text-[18px] text-navy-subtle px-4 py-2 hover:text-navy-bolder transition-colors whitespace-nowrap leading-none">
+              <a href="/login" className="group/nav flex items-center gap-1.5 font-body font-bold text-[15px] min-[1330px]:text-[18px] text-navy-subtle px-2.5 min-[1330px]:px-4 py-2 hover:text-navy-bolder transition-colors whitespace-nowrap leading-none">
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                   <circle cx="12" cy="7" r="4"/>
                 </svg>
-                Login/Register
+                <span className="article-link article-link--nav pb-0.5">Login/Register</span>
               </a>
               <a
                 href="/giving/donate"
                 className="ml-3 flex items-center gap-2.5 bg-gold text-navy-bolder font-body font-bold
-                           text-[18px] px-6 py-3.5 hover:bg-gold-dark transition-colors whitespace-nowrap leading-none"
+                           text-[15px] min-[1330px]:text-[18px] px-4 min-[1330px]:px-6 py-3 min-[1330px]:py-3.5 hover:bg-gold-dark transition-colors whitespace-nowrap leading-none"
               >
                 <img src="/donate-button-logo.svg" alt="" style={{ height: '1.4rem' }} className="w-auto" aria-hidden="true" />
                 Donate

@@ -47,7 +47,7 @@ export default function ProceedingsMagazine() {
             </a>
             <a
               href="/proceedings"
-              className="flex items-center justify-center bg-navy-bolder text-white font-body font-bold text-sm py-4 px-5 w-full hover:bg-navy transition-colors"
+              className="flex items-center justify-center bg-navy-bolder text-white font-body font-bold text-sm py-4 px-5 w-full hover:bg-navy-bright transition-colors"
             >
               Read the latest edition
             </a>

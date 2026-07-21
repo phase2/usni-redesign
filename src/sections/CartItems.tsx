@@ -433,7 +433,7 @@ export default function CartItems() {
                   <button
                     type="button"
                     onClick={handleGiftSubmit}
-                    className="flex items-center gap-2 bg-navy-bold text-white font-body font-bold text-[16px] tracking-[-0.5px] px-6 py-4 hover:bg-navy transition-colors"
+                    className="flex items-center gap-2 bg-navy-bold text-white font-body font-bold text-[16px] tracking-[-0.5px] px-6 py-4 hover:bg-navy-bright transition-colors"
                   >
                     <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/>
@@ -634,7 +634,7 @@ export default function CartItems() {
                       <button
                         type="button"
                         onClick={handleMagGiftSubmit}
-                        className="flex items-center gap-2 bg-navy-bold text-white font-body font-bold text-[16px] tracking-[-0.5px] px-6 py-4 hover:bg-navy transition-colors"
+                        className="flex items-center gap-2 bg-navy-bold text-white font-body font-bold text-[16px] tracking-[-0.5px] px-6 py-4 hover:bg-navy-bright transition-colors"
                       >
                         Save Gift Recipient
                         <svg className="w-3 h-3 flex-shrink-0" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
@@ -650,11 +650,11 @@ export default function CartItems() {
         )}
 
         {/* Step navigation buttons */}
-        <div className="border-t border-[#999fad] pt-8 flex items-center justify-end gap-8">
+        <div className="border-t border-[#999fad] pt-8 flex flex-wrap items-center justify-end gap-4 sm:gap-8">
           <button
             type="button"
             onClick={() => navigate('/membership/join')}
-            className="flex items-center gap-2 border border-[#002b5c] text-[#001845] font-body font-extrabold text-[20px] py-8 px-8 hover:bg-[#f0f4f8] transition-colors"
+            className="flex items-center gap-2 border border-[#002b5c] text-[#001845] font-body font-extrabold text-[17px] sm:text-[20px] py-4 px-5 sm:px-8 hover:bg-[#f0f4f8] transition-colors"
           >
             <svg className="w-3 h-3 flex-shrink-0" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
               <path d="M10 6H2M6 2L2 6l4 4" />
@@ -674,10 +674,10 @@ export default function CartItems() {
               if (donationAmount > 0) params.set('donation', String(donationAmount))
               navigate(`/membership/checkout?${params.toString()}`)
             }}
-            className={`flex items-center gap-2 font-body font-extrabold text-[20px] py-8 px-8 transition-colors ${
+            className={`flex items-center gap-2 font-body font-extrabold text-[17px] sm:text-[20px] py-4 px-5 sm:px-8 transition-colors ${
               checkoutBlocked
                 ? 'bg-[#c4c9d4] text-white cursor-not-allowed'
-                : 'bg-[#002b5c] text-white hover:bg-[#023e7d]'
+                : 'bg-[#002b5c] text-white hover:bg-navy-bright'
             }`}
           >
             Continue to Checkout

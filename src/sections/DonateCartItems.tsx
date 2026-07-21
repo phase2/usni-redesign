@@ -135,10 +135,10 @@ export default function DonateCartItems() {
         </div>
 
         {/* Gift item */}
-        <div className="flex items-start justify-between gap-4">
+        <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="flex flex-col gap-1">
             <h3 className="font-headline text-[26px] text-[#023e7d] leading-[1.2]">Gift to the U.S. Naval Institute</h3>
-            <div className="flex items-center gap-4">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
               <p className="font-body text-[17px] text-[#1d2535]">
                 <span className="font-bold">Frequency:</span> {frequencyLabel}
               </p>
@@ -189,7 +189,7 @@ export default function DonateCartItems() {
           </div>
 
           {/* Other priorities — 3-column grid */}
-          <div className="grid grid-cols-3 gap-x-8 gap-y-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4">
             {PRIORITY_OPTIONS.map(opt => (
               <div key={opt.id} className="flex items-center gap-3">
                 <Toggle on={priorities.has(opt.id)} onToggle={() => togglePriority(opt.id)} />
@@ -233,7 +233,7 @@ export default function DonateCartItems() {
         </label>
 
         {/* Navigation */}
-        <div className="border-t border-[#999fad] pt-8 flex items-center justify-between gap-8">
+        <div className="border-t border-[#999fad] pt-8 flex flex-wrap items-center justify-between gap-4 sm:gap-8">
           <button
             type="button"
             onClick={() => navigate('/giving/donate')}
@@ -247,7 +247,7 @@ export default function DonateCartItems() {
           <button
             type="button"
             onClick={handleCheckout}
-            className="flex items-center gap-2 bg-[#002b5c] text-white font-body font-extrabold text-[20px] py-4 px-8 hover:bg-[#023e7d] transition-colors"
+            className="flex items-center gap-2 bg-[#002b5c] text-white font-body font-extrabold text-[20px] py-4 px-8 hover:bg-navy-bright transition-colors"
           >
             Continue to Checkout
             <svg className="w-3 h-3 flex-shrink-0" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">

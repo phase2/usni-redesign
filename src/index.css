@@ -85,6 +85,16 @@
   .article-link:hover {
     background-size: 100% 1px;
   }
+
+  /* Header utility links: a hover anywhere on the padded link (group/nav)
+     animates the underline on the inner label span. 2px to suit bold nav text. */
+  .article-link--nav {
+    background-size: 0% 2px;
+  }
+
+  .group\/nav:hover .article-link--nav {
+    background-size: 100% 2px;
+  }
 }
 
 /* Unlayered — wins over all @layer utilities regardless of Tailwind's generated value */

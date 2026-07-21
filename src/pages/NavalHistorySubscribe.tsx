@@ -60,7 +60,7 @@ function PricingCard({ term, region, price, memberPrice, originalPrice }: Pricin
       </ul>
       <a
         href="/membership/join?magazine=naval-history"
-        className="mt-auto flex items-center justify-center bg-navy-bolder text-white font-body font-bold text-base tracking-[-0.3px] px-6 py-4 hover:bg-navy transition-colors"
+        className="mt-auto flex items-center justify-center bg-navy-bolder text-white font-body font-bold text-base tracking-[-0.3px] px-6 py-4 hover:bg-navy-bright transition-colors"
       >
         Subscribe for {term === '1' ? '1 Year' : '3 Years'} →
       </a>

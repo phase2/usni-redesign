@@ -13,8 +13,8 @@ export function NavalHistoryBillboard() {
   return (
     <div className="bg-navy-bolder flex flex-col lg:flex-row w-full">
       {/* Content — left */}
-      <div className="flex-1 flex items-center p-12">
-        <div className="border border-navy-bold flex flex-col gap-4 px-12 py-16 w-full">
+      <div className="flex-1 flex items-center p-6 lg:p-12">
+        <div className="border border-navy-bold flex flex-col gap-4 px-6 py-10 lg:px-12 lg:py-16 w-full">
           <div className="flex flex-col gap-2">
             <p className="font-body font-medium text-sm uppercase tracking-[0.05em] text-[#e0e0cc]">
               Naval History
@@ -65,8 +65,8 @@ export function OrgMembershipBillboard() {
       </div>
 
       {/* Content — right */}
-      <div className="flex-1 flex items-center p-12">
-        <div className="border border-tan-subtle flex flex-col gap-4 px-12 py-16 w-full">
+      <div className="flex-1 flex items-center p-6 lg:p-12">
+        <div className="border border-tan-subtle flex flex-col gap-4 px-6 py-10 lg:px-12 lg:py-16 w-full">
           <div className="flex flex-col gap-2">
             <p className="font-body font-medium text-sm uppercase tracking-[0.05em] text-[#0466c8]">
               More Ways to Join
@@ -82,7 +82,7 @@ export function OrgMembershipBillboard() {
           <div className="pt-3">
             <a
               href="/membership/contact"
-              className="inline-flex items-center gap-2 bg-navy-bold text-white font-body font-bold text-base tracking-[-0.5px] px-6 py-4 border border-navy-bold hover:bg-navy transition-colors"
+              className="inline-flex items-center gap-2 bg-navy-bold text-white font-body font-bold text-base tracking-[-0.5px] px-6 py-4 border border-navy-bold hover:bg-navy-bright hover:border-navy-bright transition-colors"
             >
               Contact member services
               <CheckIcon />

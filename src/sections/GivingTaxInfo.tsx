@@ -45,10 +45,10 @@ export default function GivingTaxInfo() {
                   {i > 0 && <div className="h-px bg-border-light" />}
                   <a
                     href={link.href}
-                    className="flex items-center gap-3 py-3.5 font-body font-semibold text-base text-navy-subtle hover:text-navy transition-colors"
+                    className="group flex items-center gap-3 py-3.5 font-body font-semibold text-base text-navy-subtle hover:text-navy transition-colors"
                   >
                     <DocIcon />
-                    {link.label}
+                    <span className="group-hover:underline underline-offset-2">{link.label}</span>
                   </a>
                 </div>
               ))}

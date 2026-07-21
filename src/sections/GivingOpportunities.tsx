@@ -324,7 +324,7 @@ function OpportunityModal({ opp, onClose }: { opp: Opportunity; onClose: () => v
                 href={opp.primaryHref}
                 className="inline-flex items-center justify-center bg-navy-bold text-white
                            font-body font-bold text-base tracking-[-0.5px] px-6 py-4
-                           border border-navy-bold hover:bg-navy transition-colors"
+                           border border-navy-bold hover:bg-navy-bright hover:border-navy-bright transition-colors"
               >
                 {opp.primaryLabel}
               </a>

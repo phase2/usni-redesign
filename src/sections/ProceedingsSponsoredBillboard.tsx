@@ -45,7 +45,7 @@ export default function ProceedingsSponsoredBillboard() {
               <div className="flex flex-col sm:flex-row gap-4 pt-3">
                 <a
                   href="/proceedings/sponsored/moc-reach"
-                  className="inline-flex items-center justify-center bg-navy-bold text-white font-body font-bold text-sm tracking-[-0.3px] px-5 py-3.5 border border-navy-bold hover:bg-navy transition-colors"
+                  className="inline-flex items-center justify-center bg-navy-bold text-white font-body font-bold text-sm tracking-[-0.3px] px-5 py-3.5 border border-navy-bold hover:bg-navy-bright hover:border-navy-bright transition-colors"
                 >
                   Read this article
                 </a>
