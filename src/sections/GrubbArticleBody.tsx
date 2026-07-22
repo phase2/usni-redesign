@@ -103,7 +103,7 @@ export default function GrubbArticleBody() {
             </div>
 
             <div className="mt-6">
-              <ArticleAudioPlayer src="https://player.instaread.co/player?article=get-real-about-how-naval-aviation-got-better&amp;publication=usni.org&amp;article_url=https%3A%2F%2Fwww.usni.org%2Fmagazines%2Fproceedings%2F2026%2Fjuly%2Fget-real-about-how-naval-aviation-got-better&amp;pay_wall=true&amp;redirect=https%3A%2F%2Fwww.usni.org%2Fjoin&amp;locked_message=Members%3A%20Sign%20in%20to%20listen&amp;version=1784742000000" />
+              <ArticleAudioPlayer />
             </div>
 
             <div className="font-body text-[16px] lg:text-[18px] text-[#1d2535] leading-[1.5] space-y-8 article-body mt-6">

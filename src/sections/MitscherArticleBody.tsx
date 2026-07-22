@@ -95,7 +95,7 @@ export default function MitscherArticleBody() {
             {/* ── Main article content ── */}
             <div className="flex-1 min-w-0">
               <div className="mb-8">
-                <ArticleAudioPlayer src="https://player.instaread.co/player?article=strike-fighter-aviations-expertise-crisis&amp;publication=usni.org&amp;article_url=https%3A%2F%2Fwww.usni.org%2Fmagazines%2Fproceedings%2F2026%2Fjuly%2Fstrike-fighter-aviations-expertise-crisis&amp;pay_wall=true&amp;redirect=https%3A%2F%2Fwww.usni.org%2Fjoin&amp;locked_message=Members%3A%20Sign%20in%20to%20listen&amp;version=1784737200000" />
+                <ArticleAudioPlayer />
               </div>
 
               <div className="font-body text-[16px] lg:text-[18px] text-[#1d2535] leading-[1.75] flex flex-col gap-5">
