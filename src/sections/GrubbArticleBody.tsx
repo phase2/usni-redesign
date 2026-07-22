@@ -5,6 +5,7 @@ import ArticleImagePair from '@/sections/ArticleImagePair'
 import ArticleInBrief from '@/sections/ArticleInBrief'
 import ArticlePullQuote from '@/sections/ArticlePullQuote'
 import ArticleTimeline from '@/sections/ArticleTimeline'
+import ArticleAudioPlayer from '@/sections/ArticleAudioPlayer'
 import AdUnit from '@/components/ui/AdUnit'
 
 import antietamImg from '@/assets/images/proceedings-articles/grubb/uss-antietam.jpg'
@@ -28,49 +29,6 @@ const articleAuthors = [
 // column + 30px gap + 300px ad rail. All body content — text, figures, charts,
 // color blocks — stays inside the left-aligned 864px column; the rail carries
 // nothing but ads. Below xl the rail is hidden and the column centers itself.
-
-// ── Audio Player ─────────────────────────────────────────────────────────────
-
-function AudioPlayer() {
-  return (
-    <div className="border-l-4 border-[#023e7d]">
-      <div className="bg-white border border-[#023e7d] border-l-0 p-4">
-        <div className="flex items-center gap-4">
-          <div className="flex flex-col gap-1 flex-1 min-w-0">
-            <p className="font-body font-medium text-[14px] uppercase tracking-[0.5px] text-[#0466c8] leading-[1.5]">
-              Members-only Feature
-            </p>
-            <p className="font-headline text-[28px] text-[#1d2535] leading-[1.2]">
-              Listen to this story
-            </p>
-          </div>
-          <div className="flex items-center gap-3 flex-shrink-0">
-            <button
-              type="button"
-              aria-label="Play audio"
-              className="w-9 h-9 rounded-full bg-[#E85D04] flex items-center justify-center hover:brightness-90 transition-all flex-shrink-0"
-            >
-              <i className="fa-solid fa-play text-white text-xs ml-0.5" aria-hidden="true" />
-            </button>
-            <div className="flex items-end gap-[3px] h-7">
-              {[4,6,10,8,12,7,9,14,11,8,6,10,13,9,7,11,8,5,9,12,10,7,11,8,6,9,12,10,8,6].map((h, i) => (
-                <div
-                  key={i}
-                  className="w-[3px] rounded-sm flex-shrink-0"
-                  style={{
-                    height: `${h * 2}px`,
-                    backgroundColor: i < 8 ? '#E85D04' : '#C0B9A8',
-                  }}
-                />
-              ))}
-            </div>
-            <span className="font-body text-xs text-neutral-subtle flex-shrink-0">11:20</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
 
 // ── Chart figure (bordered, matches print treatment) ──────────────────────────
 
@@ -145,7 +103,7 @@ export default function GrubbArticleBody() {
             </div>
 
             <div className="mt-6">
-              <AudioPlayer />
+              <ArticleAudioPlayer src="https://player.instaread.co/player?article=get-real-about-how-naval-aviation-got-better&amp;publication=usni.org&amp;article_url=https%3A%2F%2Fwww.usni.org%2Fmagazines%2Fproceedings%2F2026%2Fjuly%2Fget-real-about-how-naval-aviation-got-better&amp;pay_wall=true&amp;redirect=https%3A%2F%2Fwww.usni.org%2Fjoin&amp;locked_message=Members%3A%20Sign%20in%20to%20listen&amp;version=1784742000000" />
             </div>
 
             <div className="font-body text-[16px] lg:text-[18px] text-[#1d2535] leading-[1.5] space-y-8 article-body mt-6">

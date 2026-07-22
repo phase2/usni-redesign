@@ -2,6 +2,7 @@ import inlineImg1 from '@/assets/images/naval-history-articles/Russell-NH-5-26-1
 import SharePopover from '@/components/ui/SharePopover'
 import ArticleComments from '@/sections/ArticleComments'
 import ArticleAuthorBio from '@/sections/ArticleAuthorBio'
+import ArticleAudioPlayer from '@/sections/ArticleAudioPlayer'
 
 const articleAuthors = [
   {
@@ -30,44 +31,6 @@ function AdPlaceholder({ width, height, label }: { width: number; height: number
         <span className="font-body text-[11px] text-neutral-subtle/60">{label} · {width} × {height}</span>
       </div>
     </AdFrame>
-  )
-}
-
-function AudioPlayer() {
-  return (
-    <div className="border-l-4 border-[#023e7d]">
-      <div className="bg-white border border-[#023e7d] border-l-0 p-4 mb-8">
-        <div className="flex items-center gap-4">
-          <div className="flex flex-col gap-1 flex-1 min-w-0">
-            <p className="font-body font-medium text-[14px] uppercase tracking-[0.5px] text-[#0466c8] leading-[1.5]">
-              Members-only Feature
-            </p>
-            <p className="font-headline text-[28px] text-[#1d2535] leading-[1.2]">
-              Listen to this story
-            </p>
-          </div>
-          <div className="flex items-center gap-3 flex-shrink-0">
-            <button
-              type="button"
-              aria-label="Play audio"
-              className="w-9 h-9 rounded-full bg-[#E85D04] flex items-center justify-center hover:brightness-90 transition-all flex-shrink-0"
-            >
-              <i className="fa-solid fa-play text-white text-xs ml-0.5" aria-hidden="true" />
-            </button>
-            <div className="flex items-end gap-[3px] h-7">
-              {[4,7,11,8,13,6,9,14,10,8,5,11,13,8,6,10,9,5,8,12,11,6,10,9,7,12,11,9,7,5].map((h, i) => (
-                <div
-                  key={i}
-                  className="w-[3px] rounded-sm flex-shrink-0"
-                  style={{ height: `${h * 2}px`, backgroundColor: i < 8 ? '#E85D04' : '#C0B9A8' }}
-                />
-              ))}
-            </div>
-            <span className="font-body text-xs text-neutral-subtle flex-shrink-0">12:17</span>
-          </div>
-        </div>
-      </div>
-    </div>
   )
 }
 
@@ -131,7 +94,9 @@ export default function MitscherArticleBody() {
 
             {/* ── Main article content ── */}
             <div className="flex-1 min-w-0">
-              <AudioPlayer />
+              <div className="mb-8">
+                <ArticleAudioPlayer src="https://player.instaread.co/player?article=strike-fighter-aviations-expertise-crisis&amp;publication=usni.org&amp;article_url=https%3A%2F%2Fwww.usni.org%2Fmagazines%2Fproceedings%2F2026%2Fjuly%2Fstrike-fighter-aviations-expertise-crisis&amp;pay_wall=true&amp;redirect=https%3A%2F%2Fwww.usni.org%2Fjoin&amp;locked_message=Members%3A%20Sign%20in%20to%20listen&amp;version=1784737200000" />
+              </div>
 
               <div className="font-body text-[16px] lg:text-[18px] text-[#1d2535] leading-[1.75] flex flex-col gap-5">
 
