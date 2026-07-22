@@ -46,7 +46,7 @@ export default function Navigation() {
                 src="/design-system/preview/header"
                 width={1280}
                 title="Header — desktop default"
-                className="border border-border-light"
+                className="border border-border-light bg-white"
               />
             </div>
             <div>
@@ -55,7 +55,7 @@ export default function Navigation() {
                 src="/design-system/preview/header?previewNavOpen=Membership"
                 width={1280}
                 title="Header — desktop mega-menu open"
-                className="border border-border-light"
+                className="border border-border-light bg-white"
               />
             </div>
           </div>
@@ -68,7 +68,7 @@ export default function Navigation() {
                 src="/design-system/preview/header"
                 width={375}
                 title="Header — mobile default"
-                className="border border-border-light"
+                className="border border-border-light bg-white"
               />
             </div>
             <div>
@@ -78,7 +78,7 @@ export default function Navigation() {
                 width={375}
                 height={640}
                 title="Header — mobile menu open"
-                className="border border-border-light"
+                className="border border-border-light bg-white"
               />
             </div>
           </div>
@@ -98,7 +98,7 @@ export default function Navigation() {
               src="/design-system/preview/footer"
               width={1280}
               title="Footer — desktop"
-              className="border border-border-light"
+              className="border border-border-light bg-white"
             />
           </div>
 
@@ -107,7 +107,7 @@ export default function Navigation() {
             src="/design-system/preview/footer"
             width={375}
             title="Footer — mobile"
-            className="border border-border-light"
+            className="border border-border-light bg-white"
           />
         </DocSection>
 

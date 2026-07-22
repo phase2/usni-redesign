@@ -13,11 +13,13 @@ interface PreviewFrameProps {
   height?: number
   title: string
   /** Applied to the visible (border/background) box, which is sized to the actual scaled-down
-   *  dimensions — not to the invisible full-width measuring wrapper. */
+   *  dimensions plus padding — not to the invisible full-width measuring wrapper. */
   className?: string
+  /** Breathing room in px between the box edge and the scaled component. Default 24. */
+  padding?: number
 }
 
-export default function PreviewFrame({ src, width, height, title, className = '' }: PreviewFrameProps) {
+export default function PreviewFrame({ src, width, height, title, className = '', padding = 24 }: PreviewFrameProps) {
   const measureRef = useRef<HTMLDivElement>(null)
   const iframeRef = useRef<HTMLIFrameElement>(null)
   const [availableWidth, setAvailableWidth] = useState(width)
@@ -39,11 +41,16 @@ export default function PreviewFrame({ src, width, height, title, className = ''
   }
 
   const naturalHeight = height ?? measuredHeight
-  const scale = Math.min(1, availableWidth / width)
+  const scale = Math.min(1, (availableWidth - padding * 2) / width)
+  const scaledWidth = width * scale
+  const scaledHeight = naturalHeight * scale
 
   return (
     <div ref={measureRef} style={{ width: '100%' }}>
-      <div className={className} style={{ width: width * scale, height: naturalHeight * scale, overflow: 'hidden' }}>
+      <div
+        className={className}
+        style={{ width: scaledWidth + padding * 2, height: scaledHeight + padding * 2, overflow: 'hidden', padding }}
+      >
         <div style={{ width, height: naturalHeight, transform: `scale(${scale})`, transformOrigin: 'top left' }}>
           <iframe
             ref={iframeRef}
