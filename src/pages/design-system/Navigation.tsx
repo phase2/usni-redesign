@@ -44,18 +44,20 @@ export default function Navigation() {
               <DocLabel className="mb-2">Default</DocLabel>
               <PreviewFrame
                 src="/design-system/preview/header"
-                width={1280}
+                width={1200}
+                height={157}
                 title="Header — desktop default"
-                className="border border-border-light bg-white"
+                className="border border-border-light bg-white p-6"
               />
             </div>
             <div>
               <DocLabel className="mb-2">Mega-menu open (Membership)</DocLabel>
               <PreviewFrame
                 src="/design-system/preview/header?previewNavOpen=Membership"
-                width={1280}
+                width={1200}
+                height={673}
                 title="Header — desktop mega-menu open"
-                className="border border-border-light bg-white"
+                className="border border-border-light bg-white p-6"
               />
             </div>
           </div>
@@ -67,8 +69,9 @@ export default function Navigation() {
               <PreviewFrame
                 src="/design-system/preview/header"
                 width={375}
+                height={81}
                 title="Header — mobile default"
-                className="border border-border-light bg-white"
+                className="border border-border-light bg-white p-6"
               />
             </div>
             <div>
@@ -78,7 +81,7 @@ export default function Navigation() {
                 width={375}
                 height={640}
                 title="Header — mobile menu open"
-                className="border border-border-light bg-white"
+                className="border border-border-light bg-white p-6"
               />
             </div>
           </div>
@@ -96,9 +99,10 @@ export default function Navigation() {
           <div className="mb-10">
             <PreviewFrame
               src="/design-system/preview/footer"
-              width={1280}
+              width={1200}
+              height={725}
               title="Footer — desktop"
-              className="border border-border-light bg-white"
+              className="border border-border-light bg-white p-6"
             />
           </div>
 
@@ -106,8 +110,9 @@ export default function Navigation() {
           <PreviewFrame
             src="/design-system/preview/footer"
             width={375}
+            height={1714}
             title="Footer — mobile"
-            className="border border-border-light bg-white"
+            className="border border-border-light bg-white p-6"
           />
         </DocSection>
 
