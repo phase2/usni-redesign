@@ -344,8 +344,8 @@ function SimpleDropdown({ items }: { items: NavItem[] }) {
 }
 
 /* ─── Nav link (desktop) ──────────────────────────────────────────────────────── */
-function NavLink({ item, compact, isActive }: { item: NavItem; compact: boolean; isActive: boolean }) {
-  const [open, setOpen] = useState(false)
+function NavLink({ item, compact, isActive, forceOpen }: { item: NavItem; compact: boolean; isActive: boolean; forceOpen?: boolean }) {
+  const [open, setOpen] = useState(!!forceOpen)
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const handleEnter = () => {
@@ -569,10 +569,15 @@ function MobileMenu({ open, onClose, onSearchOpen, cartCount }: {
 
 /* ─── Header ────────────────────────────────────────────────────────────────── */
 export default function Header() {
-  const [mobileOpen, setMobileOpen] = useState(false)
-  const [searchOpen, setSearchOpen] = useState(false)
+  const { pathname, search } = useLocation()
+  /* Preview-only query params (?previewMobileOpen=1, ?previewSearchOpen=1, ?previewNavOpen=Membership)
+     let the design-system docs force a specific interactive state open on mount. Unused in production. */
+  const previewParams = new URLSearchParams(search)
+  const previewNavOpen = previewParams.get('previewNavOpen')
+
+  const [mobileOpen, setMobileOpen] = useState(previewParams.get('previewMobileOpen') === '1')
+  const [searchOpen, setSearchOpen] = useState(previewParams.get('previewSearchOpen') === '1')
   const scrolled = useScrolled(10)
-  const { pathname } = useLocation()
   const { cartCount } = useCart()
 
   const openSearch = () => {
@@ -677,6 +682,7 @@ export default function Header() {
                   item={item}
                   compact={scrolled}
                   isActive={pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href + '/'))}
+                  forceOpen={item.label === previewNavOpen}
                 />
               ))}
             </nav>

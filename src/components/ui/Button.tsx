@@ -16,7 +16,7 @@ const base = 'inline-flex items-center justify-center gap-2 font-body font-bold 
 
 const variants: Record<ButtonVariant, string> = {
   primary: 'bg-gold text-navy-bolder hover:bg-gold-dark border border-gold',
-  outline: 'bg-transparent text-white border border-white hover:bg-white/10',
+  outline: 'bg-transparent text-white border border-white hover:bg-white hover:text-navy-bright',
   'outline-dark': 'bg-transparent text-navy-bolder border border-navy-bolder hover:bg-navy-bolder hover:text-white',
   link: 'bg-transparent text-navy-subtle underline-offset-2 hover:underline p-0',
 }

@@ -36,6 +36,15 @@ import NavalHistoryArticle from '@/pages/NavalHistoryArticle'
 import ProceedingsArticleFortifying from '@/pages/ProceedingsArticleFortifying'
 import ProceedingsArticleGrubb from '@/pages/ProceedingsArticleGrubb'
 import NewsletterJoin from '@/pages/NewsletterJoin'
+import DesignSystemHome from '@/pages/design-system/DesignSystemHome'
+import StyleGuide from '@/pages/design-system/StyleGuide'
+import DesignSystemButtons from '@/pages/design-system/Buttons'
+import DesignSystemCards from '@/pages/design-system/Cards'
+import DesignSystemForms from '@/pages/design-system/Forms'
+import DesignSystemNavigation from '@/pages/design-system/Navigation'
+import DesignSystemIconography from '@/pages/design-system/Iconography'
+import HeaderPreview from '@/pages/design-system/preview/HeaderPreview'
+import FooterPreview from '@/pages/design-system/preview/FooterPreview'
 
 export default function App() {
   return (
@@ -70,6 +79,15 @@ export default function App() {
         <Route path="/archives" element={<Archives />} />
         <Route path="/naval-history/mitscher-at-midway" element={<NavalHistoryArticle />} />
         <Route path="/newsletter" element={<NewsletterJoin />} />
+        <Route path="/design-system" element={<DesignSystemHome />} />
+        <Route path="/design-system/style-guide" element={<StyleGuide />} />
+        <Route path="/design-system/buttons" element={<DesignSystemButtons />} />
+        <Route path="/design-system/cards" element={<DesignSystemCards />} />
+        <Route path="/design-system/forms" element={<DesignSystemForms />} />
+        <Route path="/design-system/navigation" element={<DesignSystemNavigation />} />
+        <Route path="/design-system/iconography" element={<DesignSystemIconography />} />
+        <Route path="/design-system/preview/header" element={<HeaderPreview />} />
+        <Route path="/design-system/preview/footer" element={<FooterPreview />} />
       </Routes>
     </BrowserRouter>
     </CartProvider>

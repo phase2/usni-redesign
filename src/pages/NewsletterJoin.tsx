@@ -80,7 +80,7 @@ const EMPTY: FormState = {
   emailFormat: 'html',
 }
 
-const inputCls = 'w-full font-body text-sm text-navy-bolder border border-[#94A3B8] px-3 py-2.5 outline-none focus:border-2 focus:border-[#023E7D] bg-white placeholder:text-neutral-subtle transition-colors'
+const inputCls = 'w-full font-body text-sm text-navy-bolder border border-[#94A3B8] px-3 py-2.5 outline-none focus:border-navy-bright focus:shadow-[0_0_0_3px_rgba(4,102,200,0.15)] bg-white placeholder:text-neutral-subtle transition'
 const labelCls = 'block font-body font-semibold text-xs text-navy-bolder uppercase tracking-[0.06em] mb-1.5'
 
 export default function NewsletterJoin() {
