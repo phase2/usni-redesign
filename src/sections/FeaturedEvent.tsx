@@ -7,7 +7,7 @@ export default function FeaturedEvent() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
           {/* Content */}
-          <div>
+          <div className="order-2 lg:order-1">
             <p className="font-body font-medium text-sm uppercase tracking-[1.5px] text-[#0466c8] mb-3">
               Upcoming Featured Event
             </p>
@@ -40,7 +40,7 @@ export default function FeaturedEvent() {
           </div>
 
           {/* Image */}
-          <div className="aspect-[4/3] overflow-hidden">
+          <div className="order-1 lg:order-2 aspect-[4/3] overflow-hidden">
             <img
               src={eventImage}
               alt="Maritime Security Dialogue panel discussion"
