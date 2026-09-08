@@ -11,7 +11,7 @@ function CheckIcon() {
 
 export function NavalHistoryBillboard() {
   return (
-    <div className="bg-navy-bolder flex flex-col lg:flex-row w-full">
+    <div className="bg-navy-bolder flex flex-col-reverse lg:flex-row w-full">
       {/* Content — left */}
       <div className="flex-1 flex items-center p-6 lg:p-12">
         <div className="border border-navy-bold flex flex-col gap-4 px-6 py-10 lg:px-12 lg:py-16 w-full">

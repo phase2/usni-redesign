@@ -99,7 +99,7 @@ export default function Footer() {
           </div>
 
           {/* Middle — nav columns */}
-          <div className="flex flex-1 gap-10 lg:gap-10">
+          <div className="flex flex-col md:flex-row flex-1 gap-10">
             <FooterNavColumn title="About USNI" links={aboutLinks} />
             <FooterNavColumn title="Content & Resources" links={contentLinks} />
           </div>

@@ -15,7 +15,7 @@ export default function BooksBillboards() {
       <div className="container-site flex flex-col gap-8">
 
         {/* Oral History — navy left / photo right (matches NavalHistoryBillboard pattern) */}
-        <div className="bg-navy-bolder flex flex-col lg:flex-row w-full">
+        <div className="bg-navy-bolder flex flex-col-reverse lg:flex-row w-full">
           <div className="flex-1 flex items-center p-6 lg:p-12">
             <div className="border border-navy-bold flex flex-col gap-4 px-6 py-10 lg:px-12 lg:py-16 w-full">
               <div className="flex flex-col gap-2">
