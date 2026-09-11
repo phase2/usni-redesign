@@ -7,7 +7,7 @@ import GivingSubNav from '@/sections/GivingSubNav'
 import { givingImage, givingSocietiesLanding } from '@/data/givingSocieties'
 
 /**
- * Giving Societies — the hub over the three recognition society pages.
+ * Donor Recognition — the hub over the three recognition society pages.
  *
  * The live equivalent (/donate/donor-recognition) is three callout blocks and
  * nothing else, one per society type. Those are `PlainCard`s here, the same
@@ -34,7 +34,7 @@ export default function GivingSocieties() {
                 { label: 'Home', href: '/' },
                 { label: 'Giving', href: '/giving' },
               ]}
-              current="Giving Societies"
+              current="Donor Recognition"
               tone="dark"
               className="pb-4 border-b border-white/25"
             />

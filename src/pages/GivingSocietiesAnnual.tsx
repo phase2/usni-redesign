@@ -70,7 +70,7 @@ export default function GivingSocietiesAnnual() {
               trail={[
                 { label: 'Home', href: '/' },
                 { label: 'Giving', href: '/giving' },
-                { label: 'Giving Societies', href: '/giving/societies' },
+                { label: 'Donor Recognition', href: '/giving/societies' },
               ]}
               current={page.breadcrumbLabel}
               className="pb-4 border-b border-[#C2DDFF]"
