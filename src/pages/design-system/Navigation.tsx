@@ -166,7 +166,7 @@ export default function Navigation() {
               label="Giving"
               items={[
                 { label: 'Overview', href: '/giving', exact: true },
-                { label: 'Donor Recognition', href: '/giving/societies' },
+                { label: 'Donor Recognition', href: '/giving/donor-recognition' },
                 { label: 'Corporate Partners', href: '/giving/corporate' },
                 { label: 'Donate', href: '/giving/donate' },
                 { label: 'Contact the Foundation', href: '/contact#foundation' },
@@ -180,7 +180,7 @@ export default function Navigation() {
   label="Giving"
   items={[
     { label: 'Overview', href: '/giving', exact: true },
-    { label: 'Donor Recognition', href: '/giving/societies' },
+    { label: 'Donor Recognition', href: '/giving/donor-recognition' },
     { label: 'Photos', href: 'https://photos.usni.org', external: true },
   ]}
 />`} />

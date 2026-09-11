@@ -21,7 +21,7 @@ const links = [
     headline: 'Donor Recognition',
     body: "Learn about the Naval Institute's premier giving societies and the special benefits extended to our most generous supporters.",
     cta: 'View Donor Recognition',
-    href: '/giving/societies',
+    href: '/giving/donor-recognition',
     icon: 'fa-solid fa-award',
   },
   {

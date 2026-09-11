@@ -11,7 +11,7 @@ import SectionSubNav from '@/components/layout/SectionSubNav'
 const items = [
   { label: 'Overview', href: '/giving', exact: true },
   { label: 'Giving Opportunities', href: '/giving/opportunities' },
-  { label: 'Donor Recognition', href: '/giving/societies' },
+  { label: 'Donor Recognition', href: '/giving/donor-recognition' },
   { label: 'Corporate Partners', href: '/giving/corporate' },
   { label: 'Donate', href: '/giving/donate' },
   { label: 'Contact the Foundation', href: '/contact#foundation' },

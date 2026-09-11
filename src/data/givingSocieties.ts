@@ -87,7 +87,7 @@ export interface GivingBodyBlock {
 const societiesDeck =
   'We are grateful to all our members and donors who give to the Naval Institute. Annual and lifetime giving societies have been established to recognize and honor donors who contribute philanthropically to the Naval Institute.'
 
-const societiesParent = { label: 'Donor Recognition', href: '/giving/societies' }
+const societiesParent = { label: 'Donor Recognition', href: '/giving/donor-recognition' }
 
 export const givingSubPages: Record<string, GivingSubPage> = {
   annual: {
@@ -102,7 +102,7 @@ export const givingSubPages: Record<string, GivingSubPage> = {
         image: 'mahan-society.jpg',
         imageAlt: 'Alfred Thayer Mahan Society',
         ctaLabel: 'View donor courtesies and donor listing',
-        ctaHref: '/giving/societies/annual/alfred-thayer-mahan-society',
+        ctaHref: '/giving/donor-recognition/annual/alfred-thayer-mahan-society',
       },
       {
         title: 'Stephen B. Luce Society',
@@ -110,7 +110,7 @@ export const givingSubPages: Record<string, GivingSubPage> = {
         image: 'luce-society.jpg',
         imageAlt: 'Stephen B. Luce Society',
         ctaLabel: 'View donor courtesies and donor listing',
-        ctaHref: '/giving/societies/annual/stephen-b-luce-society',
+        ctaHref: '/giving/donor-recognition/annual/stephen-b-luce-society',
       },
       {
         title: '1873 Society',
@@ -118,7 +118,7 @@ export const givingSubPages: Record<string, GivingSubPage> = {
         image: '1873-society.jpg',
         imageAlt: '1873 Society',
         ctaLabel: 'View donor courtesies and donor listing',
-        ctaHref: '/giving/societies/annual/1873-society',
+        ctaHref: '/giving/donor-recognition/annual/1873-society',
       },
       {
         title: 'Leadership Circle',
@@ -126,7 +126,7 @@ export const givingSubPages: Record<string, GivingSubPage> = {
         image: 'leadership-circle.jpg',
         imageAlt: 'Leadership Circle',
         ctaLabel: 'View donor courtesies and donor listing',
-        ctaHref: '/giving/societies/annual/leadership-circle',
+        ctaHref: '/giving/donor-recognition/annual/leadership-circle',
       },
     ],
   },
@@ -144,7 +144,7 @@ export const givingSubPages: Record<string, GivingSubPage> = {
         imageAlt: 'Great White Fleet Society',
         ctaLabel: 'View donor listing',
         ctaHref:
-          '/giving/societies/lifetime/president-theodore-roosevelt-great-white-fleet-society',
+          '/giving/donor-recognition/lifetime/president-theodore-roosevelt-great-white-fleet-society',
       },
       {
         title: 'Rear Admiral John L. Worden Ironclad Society',
@@ -152,7 +152,7 @@ export const givingSubPages: Record<string, GivingSubPage> = {
         image: 'worden-society.jpg',
         imageAlt: 'Worden Society',
         ctaLabel: 'View donor listing',
-        ctaHref: '/giving/societies/lifetime/rear-admiral-john-l-worden-ironclad-society',
+        ctaHref: '/giving/donor-recognition/lifetime/rear-admiral-john-l-worden-ironclad-society',
       },
       {
         title: 'Admiral Arleigh A. “31-Knot” Burke Society',
@@ -160,7 +160,7 @@ export const givingSubPages: Record<string, GivingSubPage> = {
         image: 'burke-society.jpg',
         imageAlt: 'Burke Society',
         ctaLabel: 'View donor listing',
-        ctaHref: '/giving/societies/lifetime/admiral-arleigh-burke-society',
+        ctaHref: '/giving/donor-recognition/lifetime/admiral-arleigh-burke-society',
       },
       {
         title: 'General John A. Lejeune Society',
@@ -168,7 +168,7 @@ export const givingSubPages: Record<string, GivingSubPage> = {
         image: 'lejeune-society.jpg',
         imageAlt: 'Lejeune Society',
         ctaLabel: 'View donor listing',
-        ctaHref: '/giving/societies/lifetime/general-john-lejeune-society',
+        ctaHref: '/giving/donor-recognition/lifetime/general-john-lejeune-society',
       },
       {
         title: 'Captain Joshua James Society',
@@ -176,7 +176,7 @@ export const givingSubPages: Record<string, GivingSubPage> = {
         image: 'james-society.jpg',
         imageAlt: 'James Society',
         ctaLabel: 'View donor listing',
-        ctaHref: '/giving/societies/lifetime/captain-joshua-james-society',
+        ctaHref: '/giving/donor-recognition/lifetime/captain-joshua-james-society',
       },
     ],
   },
@@ -308,7 +308,7 @@ export const givingSubPages: Record<string, GivingSubPage> = {
     title: 'President Theodore Roosevelt Great White Fleet Society',
     description: 'Lifetime recognition society for gifts totaling $5 million or more.',
     breadcrumbLabel: 'President Theodore Roosevelt Great White Fleet Society',
-    breadcrumbParent: { label: 'Lifetime Giving Societies', href: '/giving/societies/lifetime' },
+    breadcrumbParent: { label: 'Lifetime Giving Societies', href: '/giving/donor-recognition/lifetime' },
     promos: [],
     donorList: {
       heading: 'Donor Listing',
@@ -323,7 +323,7 @@ export const givingSubPages: Record<string, GivingSubPage> = {
     title: 'Rear Admiral John L. Worden Ironclad Society',
     description: 'Lifetime recognition society for gifts totaling $1 million – $4.999 million.',
     breadcrumbLabel: 'Rear Admiral John L. Worden Ironclad Society',
-    breadcrumbParent: { label: 'Lifetime Giving Societies', href: '/giving/societies/lifetime' },
+    breadcrumbParent: { label: 'Lifetime Giving Societies', href: '/giving/donor-recognition/lifetime' },
     promos: [],
     donorList: {
       heading: 'Donor Listing',
@@ -348,7 +348,7 @@ export const givingSubPages: Record<string, GivingSubPage> = {
     title: 'Admiral Arleigh A. “31-Knot” Burke Society',
     description: 'Lifetime recognition society for gifts totaling $500,000 – $999,999.',
     breadcrumbLabel: 'Admiral Arleigh A. “31-Knot” Burke Society',
-    breadcrumbParent: { label: 'Lifetime Giving Societies', href: '/giving/societies/lifetime' },
+    breadcrumbParent: { label: 'Lifetime Giving Societies', href: '/giving/donor-recognition/lifetime' },
     promos: [],
     donorList: {
       heading: 'Donor Listing',
@@ -374,7 +374,7 @@ export const givingSubPages: Record<string, GivingSubPage> = {
     title: 'General John A. Lejeune Society',
     description: 'Lifetime recognition society for gifts totaling $100,000 – $499,999.',
     breadcrumbLabel: 'General John A. Lejeune Society',
-    breadcrumbParent: { label: 'Lifetime Giving Societies', href: '/giving/societies/lifetime' },
+    breadcrumbParent: { label: 'Lifetime Giving Societies', href: '/giving/donor-recognition/lifetime' },
     promos: [],
     donorList: {
       heading: 'Donor Listing',
@@ -450,7 +450,7 @@ export const givingSubPages: Record<string, GivingSubPage> = {
     title: 'Captain Joshua James Society',
     description: 'Lifetime recognition society for gifts totaling $25,000 – $99,999.',
     breadcrumbLabel: 'Captain Joshua James Society',
-    breadcrumbParent: { label: 'Lifetime Giving Societies', href: '/giving/societies/lifetime' },
+    breadcrumbParent: { label: 'Lifetime Giving Societies', href: '/giving/donor-recognition/lifetime' },
     promos: [],
     donorList: {
       heading: 'Donor Listing',
@@ -629,19 +629,19 @@ export const givingSocietiesLanding = {
       headline: 'Annual Recognition Societies',
       body: 'Recognition societies for individuals who contribute more than $1,000 in a given calendar year.',
       cta: 'View Annual Recognition Societies',
-      href: '/giving/societies/annual',
+      href: '/giving/donor-recognition/annual',
     },
     {
       headline: 'Lifetime Giving Societies',
       body: 'Lifetime giving societies recognize and honor donors who have contributed $25,000 or more to the Naval Institute.',
       cta: 'View Lifetime Giving Societies',
-      href: '/giving/societies/lifetime',
+      href: '/giving/donor-recognition/lifetime',
     },
     {
       headline: 'Planned Giving Societies',
       body: 'Planned giving societies recognize all individuals who make a planned gift to benefit the Naval Institute.',
       cta: 'View Planned Giving Societies',
-      href: '/giving/societies/planned',
+      href: '/giving/donor-recognition/planned',
     },
   ],
 }
