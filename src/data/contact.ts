@@ -17,6 +17,8 @@ export interface ContactPerson {
   role: string
   email?: string
   phone?: string
+  /** Headshot, or the watermark stand-in where we have none. */
+  image?: string
 }
 
 export interface ContactGroup {
@@ -45,6 +47,19 @@ export const memberServices = {
 
 /* ── Naval Institute Foundation (giving) ─────────────────────────────────── */
 
+import imgLauraMccullough from '@/assets/images/team/mccullough_laura.jpg'
+import imgAmandaOjeda from '@/assets/images/team/amanda-ojeda.jpeg'
+/*
+ * Stand-in for a staff member without a headshot — the same watermark the
+ * leadership roster uses. Imported straight from assets rather than through
+ * `leadership.ts`, which eagerly imports a hundred portraits and would drag all
+ * of them into the Giving page's bundle.
+ */
+import imgWatermark from '@/assets/images/new-usni-default-watermark.png'
+
+/** True for anyone rendering the watermark rather than a real portrait. */
+export const CONTACT_PLACEHOLDER_IMAGE = imgWatermark
+
 export const foundationContact = {
   blurb:
     'The Naval Institute Foundation raises the funds behind the Institute’s educational and preservation work — the essay contests, the oral histories, the photo archive, and the forum itself.',
@@ -57,10 +72,10 @@ export const foundationContact = {
 }
 
 export const foundationStaff: ContactPerson[] = [
-  { name: 'Laura McCullough', role: 'Chief Development Officer', phone: '(814) 341-1707', email: 'lmccullough@usni.org' },
-  { name: 'Rebecca Lee', role: 'Director of Annual Giving', phone: '(410) 295-1056', email: 'rlee@usni.org' },
-  { name: 'Amanda Ojeda', role: 'Development and Grant Manager', phone: '(410) 295-1062', email: 'aojeda@usni.org' },
-  { name: 'Schuyler Tose', role: 'Prospect and Database Coordinator', phone: '(410) 295-1035', email: 'stose@usni.org' },
+  { name: 'Laura McCullough', role: 'Chief Development Officer', phone: '(814) 341-1707', email: 'lmccullough@usni.org', image: imgLauraMccullough },
+  { name: 'Rebecca Lee', role: 'Director of Annual Giving', phone: '(410) 295-1056', email: 'rlee@usni.org', image: imgWatermark },
+  { name: 'Amanda Ojeda', role: 'Development and Grant Manager', phone: '(410) 295-1062', email: 'aojeda@usni.org', image: imgAmandaOjeda },
+  { name: 'Schuyler Tose', role: 'Prospect and Database Coordinator', phone: '(410) 295-1035', email: 'stose@usni.org', image: imgWatermark },
 ]
 
 /* ── Naval Institute Press ───────────────────────────────────────────────── */

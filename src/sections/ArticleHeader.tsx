@@ -1,5 +1,6 @@
 import SharePopover from '@/components/ui/SharePopover'
 import SaveArticleButton from '@/components/ui/SaveArticleButton'
+import { Button } from '@/components/ui/Button'
 
 interface ArticleHeaderProps {
   publication?: string
@@ -128,14 +129,15 @@ export default function ArticleHeader({
             <div className="flex flex-wrap items-center gap-3 flex-shrink-0">
               <SharePopover title={title} />
               <SaveArticleButton />
-              <button
+              <Button
                 type="button"
+                variant="outline-dark"
+                size="sm"
                 onClick={() => document.getElementById('article-comments')?.scrollIntoView({ behavior: 'smooth' })}
-                className="inline-flex items-center gap-2 border border-navy-bolder text-navy-bolder font-body font-bold text-sm px-5 py-3 hover:bg-[#EBF4FF] transition-colors"
               >
                 Comments{commentCount > 0 ? ` (${commentCount})` : ''}
                 <i className="fa-regular fa-comment text-xs" aria-hidden="true" />
-              </button>
+              </Button>
             </div>
 
           </div>

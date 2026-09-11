@@ -4,7 +4,7 @@ import DocLabel from '@/components/design-system/DocLabel'
 import CodeBlock from '@/components/design-system/CodeBlock'
 import PropsTable from '@/components/design-system/PropsTable'
 import { Button, ButtonLink, NavyButtonLink } from '@/components/ui/Button'
-import ButtonLinkCTA from '@/components/ui/ButtonLinkCTA'
+import CardCta from '@/components/ui/CardCta'
 import SharePopover from '@/components/ui/SharePopover'
 import SaveArticleButton from '@/components/ui/SaveArticleButton'
 
@@ -106,18 +106,67 @@ export default function Buttons() {
 <NavyButtonLink href="/proceedings">View All Articles</NavyButtonLink>`} />
         </DocSection>
 
-        <DocSection title="Arrow-Badge CTA (ButtonLinkCTA)">
+        <DocSection title="Stylized Link (CardCta)">
           <p className="font-body text-sm text-neutral-subtle leading-relaxed mb-6 max-w-2xl">
-            A text link with a blue arrow badge and an animated underline on hover. Used in{' '}
-            <code className="font-mono text-xs bg-neutral-subtlest px-1.5 py-0.5">SectionHeader</code> and
-            wherever a lighter-weight "read more" affordance fits better than a boxed button.
+            The site's one "read more" affordance: a bold blue label whose underline sweeps in from
+            the left, with an arrow that nudges right. Used wherever a lighter-weight link fits better
+            than a boxed button — section headers, card footers, and{' '}
+            <code className="font-mono text-xs bg-neutral-subtlest px-1.5 py-0.5">SectionHeader</code>.
+            It replaced the blue arrow-badge CTA that used to sit in section headers, so there is now
+            one stylized link rather than two.
           </p>
-          <div className="border border-border-light bg-white p-8 mb-6">
-            <ButtonLinkCTA href="#">Explore the Archives</ButtonLinkCTA>
-          </div>
-          <CodeBlock code={`import ButtonLinkCTA from '@/components/ui/ButtonLinkCTA'
+          <p className="font-body text-sm text-neutral-subtle leading-relaxed mb-6 max-w-2xl">
+            Two forms, one treatment. Standalone, it takes an{' '}
+            <code className="font-mono text-xs bg-neutral-subtlest px-1.5 py-0.5">href</code> and is its
+            own link. Inside a card, the card wrapper is already the link, so the href is omitted and
+            the wrapper carries{' '}
+            <code className="font-mono text-xs bg-neutral-subtlest px-1.5 py-0.5">group</code> — hovering
+            anywhere on the card drives the animation.
+          </p>
 
-<ButtonLinkCTA href="/archives">Explore the Archives</ButtonLinkCTA>`} />
+          <DocLabel>Standalone (with href)</DocLabel>
+          <div className="border border-border-light bg-white p-8 mb-6">
+            <CardCta href="#">Explore the Archives</CardCta>
+          </div>
+
+          <DocLabel>External</DocLabel>
+          <div className="border border-border-light bg-white p-8 mb-6">
+            <CardCta href="https://photos.usni.org" external>Photos &amp; Historical Prints</CardCta>
+          </div>
+
+          <DocLabel>In a card — hover anywhere on the card</DocLabel>
+          <div className="border border-border-light bg-neutral-subtlest p-8 mb-6">
+            <a href="#" className="group block max-w-sm bg-white border border-navy-subtle p-6 hover:shadow-md transition-shadow">
+              <h3 className="font-headline text-xl text-navy-bolder leading-[1.2] mb-2">
+                Stephen B. Luce Society
+              </h3>
+              <p className="font-body text-sm text-neutral-subtle leading-relaxed mb-4">
+                Card headlines stay dark and static. Only the stylized link animates.
+              </p>
+              <CardCta>View donor courtesies and donor listing</CardCta>
+            </a>
+          </div>
+
+          <CodeBlock code={`import CardCta from '@/components/ui/CardCta'
+
+// Standalone — renders its own anchor
+<CardCta href="/archives">Explore the Archives</CardCta>
+
+// Inside a card — the card wrapper is the link and carries \`group\`
+<a href={href} className="group ... hover:shadow-md transition-shadow">
+  ...
+  <CardCta>View donor listing</CardCta>
+</a>`} />
+          <div className="mt-6">
+            <PropsTable
+              rows={[
+                { name: 'children', type: 'ReactNode', description: 'Required. The link label.' },
+                { name: 'href', type: 'string', description: 'Supply when the link stands alone. Omit inside a card that is itself a link — an anchor cannot nest inside another.' },
+                { name: 'external', type: 'boolean', default: 'false', description: 'Swaps the arrow for the external-link glyph, opens in a new tab, and adds a screen-reader note.' },
+                { name: 'className', type: 'string', description: 'Extra layout classes on the link itself.' },
+              ]}
+            />
+          </div>
         </DocSection>
 
         <DocSection title="Share Popover">

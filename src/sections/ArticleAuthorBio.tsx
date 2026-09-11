@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { ButtonLink } from '@/components/ui/Button'
 
 export interface ArticleAuthor {
   name: string
@@ -74,18 +75,16 @@ export default function ArticleAuthorBio({ authors, showDisclaimer = true }: Pro
               {active.bio}
             </p>
             <div className="flex flex-wrap items-center gap-3 mt-6">
-              <a
-                href={`/authors/${slugify(active.name)}`}
-                className="inline-flex items-center gap-2 bg-navy-bolder border border-navy-bolder text-white font-body font-bold text-sm px-5 py-3 hover:bg-navy-bright hover:border-navy-bright transition-colors"
-              >
+              <ButtonLink href={`/authors/${slugify(active.name)}`} variant="navy" size="sm">
                 View Biography
-              </a>
-              <a
+              </ButtonLink>
+              <ButtonLink
                 href={`/authors/${slugify(active.name)}#stories`}
-                className="inline-flex items-center gap-2 border border-navy-bolder text-navy-bolder font-body font-bold text-sm px-5 py-3 hover:bg-[#EBF4FF] transition-colors"
+                variant="outline-dark"
+                size="sm"
               >
                 More Stories From This Author
-              </a>
+              </ButtonLink>
             </div>
           </div>
 
