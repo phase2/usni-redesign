@@ -51,7 +51,7 @@ export interface GivingSubPage {
   description?: string
   /**
    * Banner art, which selects the photo hero. Only a section front carries one:
-   * Corporate Partners and the Giving Societies landing sit directly in the
+   * Corporate Partners and the Donor Recognition landing sit directly in the
    * section nav, while the three society pages below the landing take the
    * site's default light-blue interior header, as every other interior page in
    * Proceedings, Naval History, and Books & Press does.
@@ -87,7 +87,7 @@ export interface GivingBodyBlock {
 const societiesDeck =
   'We are grateful to all our members and donors who give to the Naval Institute. Annual and lifetime giving societies have been established to recognize and honor donors who contribute philanthropically to the Naval Institute.'
 
-const societiesParent = { label: 'Giving Societies', href: '/giving/societies' }
+const societiesParent = { label: 'Donor Recognition', href: '/giving/societies' }
 
 export const givingSubPages: Record<string, GivingSubPage> = {
   annual: {
@@ -610,10 +610,10 @@ export const givingSubPages: Record<string, GivingSubPage> = {
   },
 }
 
-/* ── Giving Societies landing ───────────────────────────────────────────────── */
+/* ── Donor Recognition landing ──────────────────────────────────────────────── */
 
 export const givingSocietiesLanding = {
-  title: 'Giving Societies',
+  title: 'Donor Recognition',
   description: societiesDeck,
   /*
    * The section front gets the colour guard rather than the ship the three

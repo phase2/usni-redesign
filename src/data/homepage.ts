@@ -161,7 +161,7 @@ export const navItems: NavItem[] = [
       { label: 'Giving Opportunities', href: '/giving/opportunities' },
       { label: 'Sponsor Student Memberships', href: '/giving/student-memberships' },
       { label: 'Leadership & Staff', href: '/about/leadership#foundation-trustees' },
-      { label: 'Giving Societies', href: '/giving/societies' },
+      { label: 'Donor Recognition', href: '/giving/societies' },
       { label: 'Corporate Partners', href: '/giving/corporate' },
       { label: 'Contact the Foundation', href: '/contact#foundation' },
       { label: 'Donate Today', href: '/giving/donate' },

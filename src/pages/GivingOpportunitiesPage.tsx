@@ -50,7 +50,7 @@ export default function GivingOpportunitiesPage() {
         >
           <div>
             <ButtonLink href="/giving/donate" variant="primary" size="md">
-              Make a Gift
+              Donate Today
             </ButtonLink>
           </div>
         </PageHero>

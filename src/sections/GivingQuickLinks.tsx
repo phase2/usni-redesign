@@ -18,9 +18,9 @@ const links = [
   },
   {
     eyebrow: 'Recognition',
-    headline: 'Giving Societies',
+    headline: 'Donor Recognition',
     body: "Learn about the Naval Institute's premier giving societies and the special benefits extended to our most generous supporters.",
-    cta: 'View Giving Societies',
+    cta: 'View Donor Recognition',
     href: '/giving/societies',
     icon: 'fa-solid fa-award',
   },
