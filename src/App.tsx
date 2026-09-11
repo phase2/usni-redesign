@@ -122,22 +122,22 @@ export default function App() {
         <Route path="/giving" element={<Giving />} />
         <Route path="/giving/opportunities" element={<GivingOpportunitiesPage />} />
         <Route path="/giving/student-memberships" element={<GivingStudentMemberships />} />
-        <Route path="/giving/societies" element={<GivingSocieties />} />
+        <Route path="/giving/donor-recognition" element={<GivingSocieties />} />
         {/* One template, four detail pages — see src/data/givingSocieties.ts */}
-        <Route path="/giving/societies/annual" element={<GivingSocietiesAnnual />} />
-        <Route path="/giving/societies/lifetime" element={<GivingSubPage slug="lifetime" />} />
+        <Route path="/giving/donor-recognition/annual" element={<GivingSocietiesAnnual />} />
+        <Route path="/giving/donor-recognition/lifetime" element={<GivingSubPage slug="lifetime" />} />
         {/* The four annual societies were consolidated onto one page; their
             old URLs keep working by landing on the matching section. */}
-        <Route path="/giving/societies/annual/alfred-thayer-mahan-society" element={<Navigate replace to="/giving/societies/annual#alfred-thayer-mahan-society" />} />
-        <Route path="/giving/societies/annual/stephen-b-luce-society" element={<Navigate replace to="/giving/societies/annual#stephen-b-luce-society" />} />
-        <Route path="/giving/societies/annual/1873-society" element={<Navigate replace to="/giving/societies/annual#1873-society" />} />
-        <Route path="/giving/societies/annual/leadership-circle" element={<Navigate replace to="/giving/societies/annual#leadership-circle" />} />
-        <Route path="/giving/societies/lifetime/president-theodore-roosevelt-great-white-fleet-society" element={<GivingSubPage slug="president-theodore-roosevelt-great-white-fleet-society" />} />
-        <Route path="/giving/societies/lifetime/rear-admiral-john-l-worden-ironclad-society" element={<GivingSubPage slug="rear-admiral-john-l-worden-ironclad-society" />} />
-        <Route path="/giving/societies/lifetime/admiral-arleigh-burke-society" element={<GivingSubPage slug="admiral-arleigh-burke-society" />} />
-        <Route path="/giving/societies/lifetime/general-john-lejeune-society" element={<GivingSubPage slug="general-john-lejeune-society" />} />
-        <Route path="/giving/societies/lifetime/captain-joshua-james-society" element={<GivingSubPage slug="captain-joshua-james-society" />} />
-        <Route path="/giving/societies/planned" element={<GivingSubPage slug="planned" />} />
+        <Route path="/giving/donor-recognition/annual/alfred-thayer-mahan-society" element={<Navigate replace to="/giving/donor-recognition/annual#alfred-thayer-mahan-society" />} />
+        <Route path="/giving/donor-recognition/annual/stephen-b-luce-society" element={<Navigate replace to="/giving/donor-recognition/annual#stephen-b-luce-society" />} />
+        <Route path="/giving/donor-recognition/annual/1873-society" element={<Navigate replace to="/giving/donor-recognition/annual#1873-society" />} />
+        <Route path="/giving/donor-recognition/annual/leadership-circle" element={<Navigate replace to="/giving/donor-recognition/annual#leadership-circle" />} />
+        <Route path="/giving/donor-recognition/lifetime/president-theodore-roosevelt-great-white-fleet-society" element={<GivingSubPage slug="president-theodore-roosevelt-great-white-fleet-society" />} />
+        <Route path="/giving/donor-recognition/lifetime/rear-admiral-john-l-worden-ironclad-society" element={<GivingSubPage slug="rear-admiral-john-l-worden-ironclad-society" />} />
+        <Route path="/giving/donor-recognition/lifetime/admiral-arleigh-burke-society" element={<GivingSubPage slug="admiral-arleigh-burke-society" />} />
+        <Route path="/giving/donor-recognition/lifetime/general-john-lejeune-society" element={<GivingSubPage slug="general-john-lejeune-society" />} />
+        <Route path="/giving/donor-recognition/lifetime/captain-joshua-james-society" element={<GivingSubPage slug="captain-joshua-james-society" />} />
+        <Route path="/giving/donor-recognition/planned" element={<GivingSubPage slug="planned" />} />
         <Route path="/giving/corporate" element={<GivingSubPage slug="corporate" />} />
         <Route path="/giving/donate" element={<Donate />} />
         <Route path="/giving/donate/cart" element={<DonateCart />} />
