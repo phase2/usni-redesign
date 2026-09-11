@@ -180,6 +180,16 @@ export default function DonateCartItems() {
             <p className="font-body text-[14px] text-[#4e576a] leading-[1.5]">
               Select where your donation will be used. If more than one priority is selected, your donation will be split evenly between the selections.
             </p>
+            <p className="font-body text-[14px] text-[#4e576a] leading-[1.5]">
+              If you do not see your desired priority in the list,{' '}
+              <a
+                href="mailto:foundation@usni.org?subject=Donation%20priority%20inquiry"
+                className="text-link"
+              >
+                contact us
+              </a>
+              .
+            </p>
           </div>
 
           {/* "Use where most needed" — full-width row */}
