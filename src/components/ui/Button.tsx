@@ -27,7 +27,11 @@ const variants: Record<ButtonVariant, string> = {
 }
 
 const sizes: Record<ButtonSize, string> = {
-  sm: 'px-4 py-2 text-sm tracking-[-0.3px]',
+  // The article-toolbar size: Share, Save, Comments, and the author-bio pair
+  // were each hand-rolled at these values before this token existed. Nothing
+  // rendered `sm` at the time, so it was redefined to match them rather than
+  // adding a fourth size beside one nothing used.
+  sm: 'px-5 py-3 text-sm',
   md: 'px-5 py-4 text-base tracking-[-0.5px]',
   lg: 'px-6 py-4 text-base tracking-[-0.5px]',
 }

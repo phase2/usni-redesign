@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import TabNav, { panelId, tabId } from '@/components/ui/TabNav'
+import { ButtonLink } from '@/components/ui/Button'
 import type { BookAuthor } from '@/data/bookProductData'
 
 interface Props {
@@ -25,25 +27,26 @@ export default function BookProductAuthorBios({ authors }: Props) {
 
           {/* Author name tabs */}
           {isMulti && (
-            <div className="flex flex-wrap gap-1 border-b border-navy-bolder/20 mb-8">
-              {authors.map((author, i) => (
-                <button
-                  key={author.name}
-                  onClick={() => setActiveIndex(i)}
-                  className={`px-5 py-3 font-body font-semibold text-sm text-left sm:whitespace-nowrap border-b-2 -mb-px transition-colors
-                    ${activeIndex === i
-                      ? 'border-[#0466C8] text-navy-bolder bg-[#E0E0CC]'
-                      : 'border-transparent text-navy-bolder/40 hover:text-navy-bolder/70'
-                    }`}
-                >
-                  {author.name}
-                </button>
-              ))}
-            </div>
+            <TabNav
+              label="Authors"
+              tabs={authors.map((a) => ({ id: slugify(a.name), label: a.name }))}
+              activeId={slugify(active.name)}
+              onChange={(id) => setActiveIndex(authors.findIndex((a) => slugify(a.name) === id))}
+              className="mb-8"
+            />
           )}
 
           {/* Active author bio */}
-          <div className="max-w-3xl">
+          <div
+            className="max-w-3xl"
+            {...(isMulti
+              ? {
+                  role: 'tabpanel',
+                  id: panelId(slugify(active.name)),
+                  'aria-labelledby': tabId(slugify(active.name)),
+                }
+              : {})}
+          >
             <p className="font-headline text-xl lg:text-2xl text-navy-bolder leading-snug">
               {active.name}
             </p>
@@ -54,18 +57,16 @@ export default function BookProductAuthorBios({ authors }: Props) {
               {active.bio}
             </p>
             <div className="flex flex-wrap items-center gap-3 mt-6">
-              <a
-                href={`/authors/${slugify(active.name)}`}
-                className="inline-flex items-center gap-2 bg-navy-bolder border border-navy-bolder text-white font-body font-bold text-sm px-5 py-3 hover:bg-navy-bright hover:border-navy-bright transition-colors"
-              >
+              <ButtonLink href={`/authors/${slugify(active.name)}`} variant="navy" size="sm">
                 View Biography
-              </a>
-              <a
+              </ButtonLink>
+              <ButtonLink
                 href={`/authors/${slugify(active.name)}#stories`}
-                className="inline-flex items-center gap-2 border border-navy-bolder text-navy-bolder font-body font-bold text-sm px-5 py-3 hover:bg-[#EBF4FF] transition-colors"
+                variant="outline-dark"
+                size="sm"
               >
                 More Stories From This Author
-              </a>
+              </ButtonLink>
             </div>
           </div>
 

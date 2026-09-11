@@ -5,11 +5,39 @@ import DocLabel from '@/components/design-system/DocLabel'
 import CodeBlock from '@/components/design-system/CodeBlock'
 import PropsTable from '@/components/design-system/PropsTable'
 import Breadcrumb from '@/components/ui/Breadcrumb'
+import SectionSubNav from '@/components/layout/SectionSubNav'
+import TabNav, { panelId, tabId } from '@/components/ui/TabNav'
 import BreakpointLabel from '@/components/design-system/BreakpointLabel'
 import PreviewFrame from '@/components/design-system/PreviewFrame'
 import { Button } from '@/components/ui/Button'
 import ArticleMeterBanner from '@/components/ui/ArticleMeterBanner'
 import ArticlePaywall from '@/components/ui/ArticlePaywall'
+
+function TabNavDemo() {
+  const [active, setActive] = useState('2024')
+  const years = ['2024', '2023', '2022', '2021', '2020']
+  return (
+    <>
+      <TabNav
+        label="Donor listing by year"
+        tabs={years.map((y) => ({ id: y, label: y }))}
+        activeId={active}
+        onChange={setActive}
+      />
+      <div
+        role="tabpanel"
+        id={panelId(active)}
+        aria-labelledby={tabId(active)}
+        className="bg-white border border-t-0 border-border-light p-6 font-body text-sm text-neutral-subtle"
+      >
+        Panel content for {active}. The caller owns the panel — give it{' '}
+        <code className="font-mono text-xs">role="tabpanel"</code>,{' '}
+        <code className="font-mono text-xs">id={'{panelId(activeId)}'}</code> and{' '}
+        <code className="font-mono text-xs">aria-labelledby={'{tabId(activeId)}'}</code>.
+      </div>
+    </>
+  )
+}
 
 export default function Navigation() {
   const [meterVisible, setMeterVisible] = useState(false)
@@ -118,6 +146,99 @@ export default function Navigation() {
             title="Footer — mobile"
             className="border border-border-light bg-white p-6"
           />
+        </DocSection>
+
+        <DocSection title="Section Sub-Nav">
+          <p className="font-body text-sm text-neutral-subtle leading-relaxed mb-6 max-w-2xl">
+            The tan bar that sits under the site header on an interior page — the section's own pages
+            as a centred row on desktop, and a labelled toggle below{' '}
+            <code className="font-mono text-sm">lg</code>. Proceedings, Naval History, Books &amp; Press,
+            About, Archives, and Essay Contests each still carry a hand-written copy of this markup;
+            this is the shared component they can move to, and the one Giving uses. Active state is
+            derived from the current path — <code className="font-mono text-sm">exact</code> for a
+            landing tab whose href prefixes its siblings, <code className="font-mono text-sm">matchPrefix</code>{' '}
+            for a tab whose child pages live elsewhere.
+          </p>
+
+          <DocLabel>Desktop</DocLabel>
+          <div className="border border-border-light mb-6 overflow-x-auto">
+            <SectionSubNav
+              label="Giving"
+              items={[
+                { label: 'Overview', href: '/giving', exact: true },
+                { label: 'Giving Societies', href: '/giving/societies' },
+                { label: 'Corporate Partners', href: '/giving/corporate' },
+                { label: 'Donate', href: '/giving/donate' },
+                { label: 'Contact the Foundation', href: '/contact#foundation' },
+              ]}
+            />
+          </div>
+
+          <CodeBlock code={`import SectionSubNav from '@/components/layout/SectionSubNav'
+
+<SectionSubNav
+  label="Giving"
+  items={[
+    { label: 'Overview', href: '/giving', exact: true },
+    { label: 'Giving Societies', href: '/giving/societies' },
+    { label: 'Photos', href: 'https://photos.usni.org', external: true },
+  ]}
+/>`} />
+          <div className="mt-6">
+            <PropsTable
+              rows={[
+                { name: 'label', type: 'string', description: "Required. The section's name — labels the mobile toggle and both nav landmarks." },
+                { name: 'items', type: 'SectionNavItem[]', description: 'Required. Each item takes label and href.' },
+                { name: 'items[].exact', type: 'boolean', default: 'false', description: "Match the path exactly. Needed on a landing tab whose href is a prefix of every sibling page." },
+                { name: 'items[].matchPrefix', type: 'string', description: "Stay active across pages under this prefix, when they don't sit beneath the item's own href." },
+                { name: 'items[].external', type: 'boolean', default: 'false', description: 'Opens in a new tab and gets the external-link marker.' },
+              ]}
+            />
+          </div>
+        </DocSection>
+
+        <DocSection title="Tab Nav">
+          <p className="font-body text-sm text-neutral-subtle leading-relaxed mb-6 max-w-2xl">
+            A row of labels over a hairline rule, the selected one carrying a blue underline and a tan
+            ground. The treatment comes from the author tabs on a book product page, which was the only
+            place the site had tabs; the donor listings on the recognition society pages render the same
+            component, so there is one tab bar rather than two that drift.
+          </p>
+          <p className="font-body text-sm text-neutral-subtle leading-relaxed mb-6 max-w-2xl">
+            Keyboard behaviour follows the tabs pattern: arrow keys move between tabs, Home and End jump
+            to the ends, and only the selected tab is in the tab order — a keyboard user tabs past the
+            bar rather than through every label. Try it below.
+          </p>
+
+          <DocLabel>Live</DocLabel>
+          <div className="border border-border-light bg-surface-subtle p-8 mb-6">
+            <TabNavDemo />
+          </div>
+
+          <CodeBlock code={`import TabNav, { panelId, tabId } from '@/components/ui/TabNav'
+
+const [active, setActive] = useState('2024')
+
+<TabNav
+  label="Donor listing by year"
+  tabs={years.map((y) => ({ id: y.year, label: y.year }))}
+  activeId={active}
+  onChange={setActive}
+/>
+<div role="tabpanel" id={panelId(active)} aria-labelledby={tabId(active)}>
+  ...
+</div>`} />
+          <div className="mt-6">
+            <PropsTable
+              rows={[
+                { name: 'tabs', type: 'TabItem[]', description: 'Required. Each takes an id (stable key, and the basis of the tab/panel element ids) and a label.' },
+                { name: 'activeId', type: 'string', description: "Required. The selected tab's id — the component is controlled." },
+                { name: 'onChange', type: '(id: string) => void', description: 'Required. Called with the newly selected id, by click or arrow key.' },
+                { name: 'label', type: 'string', description: 'Required. Accessible name for the tab list, e.g. "Donor listing by year".' },
+                { name: 'className', type: 'string', description: 'Extra layout classes on the bar, typically a margin.' },
+              ]}
+            />
+          </div>
         </DocSection>
 
         <DocSection title="Breadcrumb">

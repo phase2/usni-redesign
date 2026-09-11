@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import ButtonLinkCTA from '@/components/ui/ButtonLinkCTA'
+import CardCta from '@/components/ui/CardCta'
 import { allBooks, type Book } from '@/data/books'
 
 // Homepage concept block for the Naval Institute Press team: a featured
@@ -89,9 +89,9 @@ export default function FromThePress() {
               the sea services &mdash; from professional guides and history to the ideas defining
               tomorrow's fight.
             </p>
-            <ButtonLinkCTA href="/books">
+            <CardCta href="/books">
               Browse Books &amp; Press
-            </ButtonLinkCTA>
+            </CardCta>
           </div>
         </div>
 

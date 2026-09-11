@@ -1,5 +1,5 @@
 import { featuredArticlesLeft, latestIssueCol1, latestIssueCol2 } from '@/data/proceedings'
-import ButtonLinkCTA from '@/components/ui/ButtonLinkCTA'
+import CardCta from '@/components/ui/CardCta'
 
 const relatedArticles = [
   featuredArticlesLeft[0],   // Fortifying the Digital Watch
@@ -48,7 +48,7 @@ export default function ArticleRelated() {
         {/* Section header */}
         <div className="border-t border-navy-bolder pt-6 mb-8 flex items-center justify-between">
           <h2 className="font-headline text-3xl lg:text-4xl text-navy-bolder">Related Articles</h2>
-          <ButtonLinkCTA href="/proceedings/apr-2026">See all articles</ButtonLinkCTA>
+          <CardCta href="/proceedings/apr-2026">See all articles</CardCta>
         </div>
 
         {/* 3-column grid */}

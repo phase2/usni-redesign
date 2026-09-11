@@ -1,5 +1,5 @@
 import SmallFeature from '@/components/cards/SmallFeature'
-import ButtonLinkCTA from '@/components/ui/ButtonLinkCTA'
+import CardCta from '@/components/ui/CardCta'
 import { navalHistoryArticles, navalHistoryCoverImage } from '@/data/homepage'
 
 export default function NavalHistory() {
@@ -27,9 +27,9 @@ export default function NavalHistory() {
               battles to the Cold War beneath the waves, each issue illuminates the events, commanders,
               and vessels that forged the world's greatest naval powers.
             </p>
-            <ButtonLinkCTA href="/naval-history">
+            <CardCta href="/naval-history">
               Explore Naval History
-            </ButtonLinkCTA>
+            </CardCta>
           </div>
         </div>
 

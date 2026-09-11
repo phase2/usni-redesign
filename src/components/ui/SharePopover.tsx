@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { Button } from '@/components/ui/Button'
 
 interface SharePopoverProps {
   title?: string
@@ -68,16 +69,17 @@ export default function SharePopover({ title, url }: SharePopoverProps) {
 
   return (
     <div ref={containerRef} className="relative">
-      <button
+      <Button
         type="button"
+        variant="outline-dark"
+        size="sm"
         onClick={() => setOpen(v => !v)}
         aria-expanded={open}
         aria-haspopup="dialog"
-        className="inline-flex items-center gap-2 border border-navy-bolder text-navy-bolder font-body font-bold text-sm px-5 py-3 hover:bg-[#EBF4FF] transition-colors"
       >
         Share
         <i className="fa-solid fa-arrow-up-from-bracket text-xs" aria-hidden="true" />
-      </button>
+      </Button>
 
       {open && (
         <div

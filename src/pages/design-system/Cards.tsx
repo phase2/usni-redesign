@@ -114,10 +114,15 @@ export default function Cards() {
           <div className="border border-border-light bg-white p-8 mb-6 max-w-xs">
             <SmallFeature article={demoArticle} showImage={false} />
           </div>
+          <DocLabel>showExcerpt</DocLabel>
+          <div className="border border-border-light bg-white p-8 mb-6 max-w-xs">
+            <SmallFeature article={demoArticle} showExcerpt />
+          </div>
           <CodeBlock code={`import SmallFeature from '@/components/cards/SmallFeature'
 
 <SmallFeature article={article} />
 <SmallFeature article={article} showImage={false} />
+<SmallFeature article={article} showExcerpt />
 <SmallFeature article={article} aspectRatio="aspect-[16/9]" />`} />
           <div className="mt-6">
             <PropsTable
@@ -125,6 +130,7 @@ export default function Cards() {
                 { name: 'article', type: 'Article', description: 'Required. category, headline, date, author, image, href.' },
                 { name: 'showImage', type: 'boolean', default: 'true', description: 'Hides the thumbnail entirely when false.' },
                 { name: 'aspectRatio', type: 'string', default: "'aspect-[4/3]'", description: 'Tailwind aspect-ratio class applied to the image container.' },
+                { name: 'showExcerpt', type: 'boolean', default: 'false', description: "Adds the article's dek under the date line. Opt-in, because most records already carry an excerpt for other layouts." },
               ]}
             />
           </div>

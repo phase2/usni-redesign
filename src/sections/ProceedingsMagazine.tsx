@@ -1,5 +1,5 @@
 import SmallFeature from '@/components/cards/SmallFeature'
-import ButtonLinkCTA from '@/components/ui/ButtonLinkCTA'
+import CardCta from '@/components/ui/CardCta'
 import { proceedingsArticles, proceedingsCoverImage } from '@/data/homepage'
 
 export default function ProceedingsMagazine() {
@@ -27,9 +27,9 @@ export default function ProceedingsMagazine() {
               naval and maritime defense. Every issue delivers peer-reviewed analysis, firsthand
               perspective, and bold argument.
             </p>
-            <ButtonLinkCTA href="/proceedings">
+            <CardCta href="/proceedings">
               Explore Proceedings Magazine
-            </ButtonLinkCTA>
+            </CardCta>
           </div>
         </div>
 

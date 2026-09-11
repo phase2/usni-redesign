@@ -14,6 +14,7 @@ export default function ArticleVideo({
   posterAlt,
   title,
   caption,
+  className = 'my-10',
 }: {
   /** The v= / youtu.be id, not a full URL. */
   youtubeId: string
@@ -22,11 +23,17 @@ export default function ArticleVideo({
   /** Accessible name for the iframe and the play button. */
   title: string
   caption?: string
+  /**
+   * Layout for the figure. Defaults to the article body's vertical rhythm;
+   * pass your own when the player is a grid cell rather than a break in a
+   * reading column, where that margin fights the grid's own gap.
+   */
+  className?: string
 }) {
   const [playing, setPlaying] = useState(false)
 
   return (
-    <figure className="my-10 flex flex-col gap-3">
+    <figure className={`flex flex-col gap-3 ${className}`}>
       <div className="relative w-full aspect-video bg-navy-boldest overflow-hidden">
         {playing ? (
           <iframe

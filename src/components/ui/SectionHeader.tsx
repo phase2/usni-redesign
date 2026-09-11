@@ -1,4 +1,4 @@
-import ButtonLinkCTA from '@/components/ui/ButtonLinkCTA'
+import CardCta from '@/components/ui/CardCta'
 
 interface SectionHeaderProps {
   eyebrow?: string
@@ -49,7 +49,7 @@ export default function SectionHeader({
               </p>
             )}
             {ctaLabel && ctaHref && (
-              <ButtonLinkCTA href={ctaHref}>{ctaLabel}</ButtonLinkCTA>
+              <CardCta href={ctaHref}>{ctaLabel}</CardCta>
             )}
           </div>
         )}

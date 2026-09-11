@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import DesignSystemLayout from '@/components/design-system/DesignSystemLayout'
 import DocSection from '@/components/design-system/DocSection'
 import { Button, ButtonLink, NavyButtonLink } from '@/components/ui/Button'
-import ButtonLinkCTA from '@/components/ui/ButtonLinkCTA'
+import CardCta from '@/components/ui/CardCta'
 import Eyebrow from '@/components/ui/Eyebrow'
 import SectionHeader from '@/components/ui/SectionHeader'
 import PlainCard from '@/components/cards/PlainCard'
@@ -198,7 +198,7 @@ export default function StyleGuide() {
                 <NavyButtonLink href="#">Navy Button</NavyButtonLink>
               </div>
               <div className="mt-6">
-                <ButtonLinkCTA href="#">Learn More</ButtonLinkCTA>
+                <CardCta href="#">Learn More</CardCta>
               </div>
             </div>
             <div className="border border-border-light bg-navy-bolder p-8">
