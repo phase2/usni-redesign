@@ -1,5 +1,6 @@
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
+import GivingSubNav from '@/sections/GivingSubNav'
 import DonateHero from '@/sections/DonateHero'
 import DonateForm from '@/sections/DonateForm'
 import DonateFAQ from '@/sections/DonateFAQ'
@@ -11,6 +12,7 @@ export default function Donate() {
     <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-1">
+        <GivingSubNav />
         <DonateHero />
         <DonateForm />
         <DonateFAQ />

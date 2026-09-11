@@ -156,11 +156,13 @@ export const navItems: NavItem[] = [
     alignRight: true,
     children: [
       { label: 'Overview', href: '/giving' },
-      { label: 'Ways to Give', href: '/giving/ways-to-give' },
+      // Ways to Give is a section of the Giving landing page in the redesign.
+      { label: 'Ways to Give', href: '/giving#ways-to-give' },
       { label: 'Giving Opportunities', href: '/giving/opportunities' },
-      { label: 'Leadership & Staff', href: '/giving/leadership' },
-      { label: 'Recognition Societies', href: '/giving/recognition' },
-      { label: 'Corporate', href: '/giving/corporate' },
+      { label: 'Sponsor Student Memberships', href: '/giving/student-memberships' },
+      { label: 'Leadership & Staff', href: '/about/leadership#foundation-trustees' },
+      { label: 'Giving Societies', href: '/giving/societies' },
+      { label: 'Corporate Partners', href: '/giving/corporate' },
       { label: 'Contact the Foundation', href: '/contact#foundation' },
       { label: 'Donate Today', href: '/giving/donate' },
     ],

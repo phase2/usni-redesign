@@ -22,7 +22,6 @@ export default function GivingTaxInfo() {
 
           {/* Left — label */}
           <div className="flex flex-col gap-3">
-            <p className="eyebrow text-navy-subtle">Transparency</p>
             <h2 className="font-headline text-3xl lg:text-4xl text-navy-bolder leading-[1.1]">
               Naval Institute Foundation Charitable Organization Information
             </h2>

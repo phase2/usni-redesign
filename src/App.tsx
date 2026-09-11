@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 
 function ScrollToTop() {
@@ -29,6 +29,11 @@ import EventsPast from '@/pages/EventsPast'
 import MembershipJoin from '@/pages/MembershipJoin'
 import Proceedings from '@/pages/Proceedings'
 import Giving from '@/pages/Giving'
+import GivingSocieties from '@/pages/GivingSocieties'
+import GivingSubPage from '@/pages/GivingSubPage'
+import GivingSocietiesAnnual from '@/pages/GivingSocietiesAnnual'
+import GivingOpportunitiesPage from '@/pages/GivingOpportunitiesPage'
+import GivingStudentMemberships from '@/pages/GivingStudentMemberships'
 import Donate from '@/pages/Donate'
 import DonateCart from '@/pages/DonateCart'
 import DonateCheckout from '@/pages/DonateCheckout'
@@ -40,6 +45,7 @@ import BooksAndPress from '@/pages/BooksAndPress'
 import ProceedingsArticle from '@/pages/ProceedingsArticle'
 import ProceedingsContact from '@/pages/ProceedingsContact'
 import ProceedingsSubmissions from '@/pages/ProceedingsSubmissions'
+import SeaPowerProject from '@/pages/SeaPowerProject'
 import MembershipCart from '@/pages/MembershipCart'
 import MembershipCheckout from '@/pages/MembershipCheckout'
 import MembershipConfirmation from '@/pages/MembershipConfirmation'
@@ -114,6 +120,25 @@ export default function App() {
         <Route path="/membership/magazine-upsell" element={<MembershipMagazineUpsell />} />
         <Route path="/proceedings" element={<Proceedings />} />
         <Route path="/giving" element={<Giving />} />
+        <Route path="/giving/opportunities" element={<GivingOpportunitiesPage />} />
+        <Route path="/giving/student-memberships" element={<GivingStudentMemberships />} />
+        <Route path="/giving/societies" element={<GivingSocieties />} />
+        {/* One template, four detail pages — see src/data/givingSocieties.ts */}
+        <Route path="/giving/societies/annual" element={<GivingSocietiesAnnual />} />
+        <Route path="/giving/societies/lifetime" element={<GivingSubPage slug="lifetime" />} />
+        {/* The four annual societies were consolidated onto one page; their
+            old URLs keep working by landing on the matching section. */}
+        <Route path="/giving/societies/annual/alfred-thayer-mahan-society" element={<Navigate replace to="/giving/societies/annual#alfred-thayer-mahan-society" />} />
+        <Route path="/giving/societies/annual/stephen-b-luce-society" element={<Navigate replace to="/giving/societies/annual#stephen-b-luce-society" />} />
+        <Route path="/giving/societies/annual/1873-society" element={<Navigate replace to="/giving/societies/annual#1873-society" />} />
+        <Route path="/giving/societies/annual/leadership-circle" element={<Navigate replace to="/giving/societies/annual#leadership-circle" />} />
+        <Route path="/giving/societies/lifetime/president-theodore-roosevelt-great-white-fleet-society" element={<GivingSubPage slug="president-theodore-roosevelt-great-white-fleet-society" />} />
+        <Route path="/giving/societies/lifetime/rear-admiral-john-l-worden-ironclad-society" element={<GivingSubPage slug="rear-admiral-john-l-worden-ironclad-society" />} />
+        <Route path="/giving/societies/lifetime/admiral-arleigh-burke-society" element={<GivingSubPage slug="admiral-arleigh-burke-society" />} />
+        <Route path="/giving/societies/lifetime/general-john-lejeune-society" element={<GivingSubPage slug="general-john-lejeune-society" />} />
+        <Route path="/giving/societies/lifetime/captain-joshua-james-society" element={<GivingSubPage slug="captain-joshua-james-society" />} />
+        <Route path="/giving/societies/planned" element={<GivingSubPage slug="planned" />} />
+        <Route path="/giving/corporate" element={<GivingSubPage slug="corporate" />} />
         <Route path="/giving/donate" element={<Donate />} />
         <Route path="/giving/donate/cart" element={<DonateCart />} />
         <Route path="/giving/donate/checkout" element={<DonateCheckout />} />
@@ -123,6 +148,7 @@ export default function App() {
         <Route path="/proceedings/podcast" element={<ProceedingsPodcast />} />
         <Route path="/proceedings/contact" element={<ProceedingsContact />} />
         <Route path="/proceedings/submissions" element={<ProceedingsSubmissions />} />
+        <Route path="/proceedings/sea-power-project" element={<SeaPowerProject />} />
         <Route path="/books" element={<BooksAndPress />} />
         <Route path="/books/collection" element={<BooksCollection />} />
         <Route path="/books/new-releases" element={<BooksNewReleases />} />
