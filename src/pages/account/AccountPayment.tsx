@@ -10,19 +10,15 @@ export default function AccountPayment() {
   const [modalOpen, setModalOpen] = useState(false)
   const [saved, setSaved] = useState<string | null>(null)
 
-  /** A card added here is not yet carrying any renewal, so usedFor is empty. */
-  const handleAdd = ({ setAsDefault, ...card }: CardDetails) => {
-    setMethods(prev => [
-      // Default is exclusive: promoting the new card has to demote the old one,
-      // or two rows come back wearing the Default badge.
-      ...(setAsDefault ? prev.map(m => ({ ...m, isDefault: false })) : prev),
-      { ...card, isDefault: setAsDefault, usedFor: [] },
-    ])
-    setSaved(
-      setAsDefault
-        ? `${card.brand} ending in ${card.last4} added and set as your default.`
-        : `${card.brand} ending in ${card.last4} added.`,
-    )
+  /**
+   * A card added here is not yet carrying any renewal, so usedFor is empty.
+   * It only becomes the default when there is no default to displace — the
+   * add-a-card form no longer asks, and an existing default should not be
+   * demoted by a card the member added for something else.
+   */
+  const handleAdd = (card: CardDetails) => {
+    setMethods(prev => [...prev, { ...card, isDefault: prev.length === 0, usedFor: [] }])
+    setSaved(`${card.brand} ending in ${card.last4} added.`)
     setModalOpen(false)
   }
 
