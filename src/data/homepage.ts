@@ -137,7 +137,6 @@ export const navItems: NavItem[] = [
       { label: 'Strategic Plan', href: '/about/strategic-plan' },
       { label: 'State of the Institution', href: '/about/state-of-institution' },
       { label: 'Leadership', href: '/about/leadership' },
-      { label: 'Jack C. Taylor Conference Center', href: '/about/taylor-conference-center' },
       { label: 'Media Inquiries', href: '/about/media' },
       { label: 'Contact USNI', href: '/contact#general' },
     ],
@@ -163,6 +162,9 @@ export const navItems: NavItem[] = [
       { label: 'Leadership & Staff', href: '/about/leadership#foundation-trustees' },
       { label: 'Donor Recognition', href: '/giving/donor-recognition' },
       { label: 'Corporate Partners', href: '/giving/corporate' },
+      // Moved out of the About menu: the Center's page is a giving page now,
+      // not an institutional-background one.
+      { label: 'Jack C. Taylor Conference Center', href: '/giving/taylor-conference-center' },
       { label: 'Contact the Foundation', href: '/contact#foundation' },
       { label: 'Donate Today', href: '/giving/donate' },
     ],

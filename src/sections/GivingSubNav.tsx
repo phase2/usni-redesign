@@ -13,6 +13,7 @@ const items = [
   { label: 'Giving Opportunities', href: '/giving/opportunities' },
   { label: 'Donor Recognition', href: '/giving/donor-recognition' },
   { label: 'Corporate Partners', href: '/giving/corporate' },
+  { label: 'Taylor Conference Center', href: '/giving/taylor-conference-center' },
   { label: 'Donate', href: '/giving/donate' },
   { label: 'Contact the Foundation', href: '/contact#foundation' },
 ]

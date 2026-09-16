@@ -8,7 +8,7 @@ export default function ExternalLinkIcon({
   /**
    * Height and width, relative to the surrounding type. The 0.75em default is
    * right for an inline link; inside a button the glyph needs more to be
-   * recognisable, so callers there pass a larger value.
+   * recognisable, so callers there pass 1.1em.
    */
   size = '0.75em',
 }: {

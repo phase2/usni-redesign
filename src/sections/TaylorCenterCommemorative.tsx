@@ -1,57 +1,51 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import imgChairs from '@/assets/images/giving-opps-modal-hero-Conferences GO.jpg'
-import imgBricks from '@/assets/images/jackctaylorcenter-extended.jpg'
+import imgChairs from '@/assets/images/taylor-center/jctcc-chair-nameplate.webp'
+import imgBricks from '@/assets/images/taylor-center/jctcc-commemorative-brick-wall.webp'
+import {
+  COMMEMORATIVE_GIFTS,
+  COMMEMORATIVE_PRIORITY_ID,
+  type CommemorativeGift,
+} from '@/data/commemorativeGifts'
 
 /**
  * Commemorative bricks and chairs at the Jack C. Taylor Conference Center.
  *
- * On the live /foundation page these sit inside the main donation form. Here
- * they are a section of their own below the FAQs, with a running subtotal that
- * carries into the donation cart — the prototype's donate page hands its amount
- * to the cart by query string rather than holding form state.
+ * On the live /foundation page these sit inside the main donation form, and in
+ * the prototype they sat below the donate page's FAQs. Both arrangements put a
+ * named gift to one building in the middle of the ask for unrestricted support.
+ * They belong with the building, so the section now lives on the Taylor Center
+ * page, after the rooms it names — the reader meets "the auditorium" and "the
+ * rooftop terrace" before being offered a seat in one and a brick on the other.
  *
- * TODO: photography is standing in. The live page shows an engraved nameplate on
- * an auditorium seat and the commemorative brick wall on the rooftop terrace.
+ * The running subtotal still hands its amount to the donation cart by query
+ * string rather than holding form state, now carrying `priority=taylor-conference-center`
+ * so the gift arrives designated to the Center's Maintenance & Technology Fund.
+ *
+ * Photography is the real thing as of 16 September 2026: an engraved seat
+ * nameplate, and the commemorative brick wall itself.
+ *
+ * NOTE for USNI: the brick recognition copy, transcribed from the live site,
+ * places the donor wall "on the rooftop terrace", but the wall in the supplied
+ * photograph is an interior one. Worth confirming which is current before
+ * launch — the copy is left as the live site has it.
  */
 
-interface Option {
-  id: 'chairs' | 'bricks'
-  unitPrice: number
-  unitLabel: string
-  countLabel: string
-  recognition: string
-  footnote: string
-  image: string
-  imageAlt: string
+/** The photograph each gift carries, keyed to the shared definitions. */
+const IMAGES: Record<CommemorativeGift['id'], { src: string; alt: string }> = {
+  chairs: {
+    src: imgChairs,
+    alt: 'An engraved silver nameplate on an auditorium seat, reading "In honor of Admiral Chuck Larson, USN (Ret.), a great leader and super submariner!"',
+  },
+  bricks: {
+    src: imgBricks,
+    alt: 'The Jack C. Taylor Conference Center commemorative brick wall, its engraved donor names arranged in columns',
+  },
 }
 
-const OPTIONS: Option[] = [
-  {
-    id: 'chairs',
-    unitPrice: 2500,
-    unitLabel: 'chair(s)',
-    countLabel: 'Number of chairs',
-    recognition:
-      'Gift to be recognized with an engraved silver plate, permanently affixed to a seat in the Conference Center auditorium.*',
-    footnote: '*We will be in touch with you regarding text for the nameplate.',
-    image: imgChairs,
-    imageAlt: 'The auditorium at the Jack C. Taylor Conference Center',
-  },
-  {
-    id: 'bricks',
-    unitPrice: 1000,
-    unitLabel: 'brick(s)',
-    countLabel: 'Number of bricks',
-    recognition:
-      'Gift to be recognized with my name or that of a loved one, featured on a donor wall on the rooftop terrace.*',
-    footnote: '*We will be in touch with you regarding text for the donor wall.',
-    image: imgBricks,
-    imageAlt: 'The Jack C. Taylor Conference Center',
-  },
-]
+const OPTIONS = COMMEMORATIVE_GIFTS.map(gift => ({ ...gift, ...IMAGES[gift.id] }))
 
-export default function DonateCommemorative() {
+export default function TaylorCenterCommemorative() {
   const navigate = useNavigate()
   const [selected, setSelected] = useState<Record<string, boolean>>({ chairs: false, bricks: false })
   const [counts, setCounts] = useState<Record<string, number>>({ chairs: 1, bricks: 1 })
@@ -67,17 +61,35 @@ export default function DonateCommemorative() {
     setCounts(prev => ({ ...prev, [id]: clamp(Number(raw.replace(/[^0-9]/g, '')) || 1) }))
   }
 
+  /**
+   * The cart is told what was bought, not just what it costs — a quantity of
+   * each gift alongside the total, so the cart can itemise the bricks and
+   * chairs rather than showing the donation form's priority picker for a gift
+   * that is already designated.
+   */
+  const cartParams = () => {
+    const params = new URLSearchParams({
+      amount: String(subtotal),
+      frequency: 'one-time',
+      priority: COMMEMORATIVE_PRIORITY_ID,
+    })
+    OPTIONS.forEach(o => {
+      if (selected[o.id]) params.set(o.id, String(counts[o.id]))
+    })
+    return params.toString()
+  }
+
 
   return (
-    <section id="commemorative-gifts" className="py-16 lg:py-20 bg-[#f7f7f2] scroll-mt-[120px]">
+    <section id="commemorative-gifts" className="py-12 lg:py-16 bg-tan-subtlest scroll-mt-32">
       <div className="container-site">
-        <h2 className="font-headline text-3xl lg:text-4xl text-navy-bolder leading-[1.1]">
-          Purchase a brick or chair at the Jack C. Taylor Conference Center
+        <h2 className="font-headline text-[26px] lg:text-[32px] text-navy-bolder leading-[1.15] pb-4 border-b-2 border-[#0466C8]">
+          Purchase a Brick or Chair at the new Jack C. Taylor Conference Center
         </h2>
-        <p className="font-body text-base lg:text-lg text-neutral-subtle leading-relaxed mt-4 max-w-[820px]">
-          In <strong className="text-navy-bolder">addition</strong> to your gift, consider honoring or
-          memorializing someone in your life with a personalized brick or chair at the Jack C. Taylor
-          Conference Center.
+        <p className="font-body text-base lg:text-[17px] text-neutral-bold leading-[1.7] mt-6 max-w-[820px]">
+          Honor or memorialize someone in your life with a personalized chair in the auditorium or a
+          brick on the rooftop terrace. Both are permanent, both carry the name you choose, and both
+          support the Center that carries the Naval Institute&rsquo;s forum into its next century.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
@@ -129,8 +141,8 @@ export default function DonateCommemorative() {
                 </div>
 
                 <img
-                  src={option.image}
-                  alt={option.imageAlt}
+                  src={option.src}
+                  alt={option.alt}
                   loading="lazy"
                   className="w-full h-[280px] object-cover"
                 />
@@ -141,11 +153,14 @@ export default function DonateCommemorative() {
 
         {/* Running total and hand-off to the cart */}
         <div className="mt-8 border-t border-[#c4c9d4] pt-6 flex flex-wrap items-center justify-between gap-4">
-          <p className="font-body text-base text-neutral-subtle">
+          {/* Label and amount share a baseline — the amount is more than twice
+              the label's size, so it needs `items-baseline` to sit on the line
+              rather than beside it. */}
+          <p className="font-body text-base text-neutral-subtle flex flex-wrap items-baseline gap-x-2">
             {subtotal > 0 ? (
               <>
-                Commemorative gift total{' '}
-                <span className="font-headline text-[28px] text-[#023e7d] align-middle ml-1">
+                <span>Commemorative gift total:</span>
+                <span className="font-headline text-[28px] text-[#023e7d] leading-none">
                   ${subtotal.toLocaleString()}
                 </span>
               </>
@@ -156,14 +171,14 @@ export default function DonateCommemorative() {
           <button
             type="button"
             disabled={subtotal === 0}
-            onClick={() => navigate(`/giving/donate/cart?amount=${subtotal}&frequency=one-time`)}
+            onClick={() => navigate(`/giving/donate/cart?${cartParams()}`)}
             className={`inline-flex items-center justify-center gap-2 font-body font-bold text-base px-6 py-4 border transition-colors ${
               subtotal === 0
                 ? 'bg-[#c4c9d4] text-white border-[#c4c9d4] cursor-not-allowed'
                 : 'bg-navy-bolder text-white border-navy-bolder hover:bg-navy-bright hover:border-navy-bright'
             }`}
           >
-            Add to my donation
+            Continue to cart
             <svg className="w-3 h-3 flex-shrink-0" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
               <path d="M2 6h8M6 2l4 4-4 4" />
             </svg>

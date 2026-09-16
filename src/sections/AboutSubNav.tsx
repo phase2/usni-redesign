@@ -6,14 +6,15 @@ import { useLocation } from 'react-router-dom'
  * Proceedings, Naval History, and Essay Contests.
  *
  * "Mission & Vision" is deliberately absent — that page is being retired and
- * its content now lives on the About landing page.
+ * its content now lives on the About landing page. The Taylor Conference
+ * Center has moved to the Giving section; the About landing still cards
+ * across to it, but it is no longer a stop in this nav.
  */
 const navItems = [
   { label: 'Overview', href: '/about' },
   { label: 'History', href: '/about/history' },
   { label: 'Strategic Plan', href: '/about/strategic-plan' },
   { label: 'Leadership & Staff', href: '/about/leadership' },
-  { label: 'Jack C. Taylor Conference Center', href: '/about/taylor-conference-center' },
   { label: 'Media Inquiries', href: '/about/media' },
   { label: 'Contact USNI', href: '/contact#general' },
 ]

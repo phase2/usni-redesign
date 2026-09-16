@@ -1,3 +1,5 @@
+import { DONATION_PRIORITIES } from '@/data/givingOpportunities'
+
 /**
  * Labels and receipt helpers shared by the membership and donation purchase
  * flows — cart, checkout, and confirmation.
@@ -27,14 +29,19 @@ export const TERM_LABELS: Record<string, string> = {
   lifetime: 'Lifetime',
 }
 
-export const PRIORITY_LABELS: Record<string, string> = {
-  'usni-news':         'USNI News',
-  'proceedings':       'Proceedings Magazine',
-  'sponsored-student': 'Sponsored Student Program',
-  'naval-history':     'Naval History',
-  'oral-history':      'Oral History Program',
-  'photo-archives':    'Photo Archives',
-  'taylor-center':     'Jack C. Taylor Conference Center',
+/**
+ * Built from the same list the cart offers, so a priority cannot be selectable
+ * under one name and appear on the receipt under another — which is what
+ * happened while this map and the cart's options were maintained separately.
+ */
+export const PRIORITY_LABELS: Record<string, string> = Object.fromEntries(
+  DONATION_PRIORITIES.map(({ id, label }) => [id, label]),
+)
+
+/** Tribute gifts: how the dedication reads on a summary or receipt. */
+export const TRIBUTE_LABELS: Record<string, string> = {
+  honor: 'In honor of',
+  memory: 'In memory of',
 }
 
 /** Naval Institute Foundation, per the figures on /giving. */

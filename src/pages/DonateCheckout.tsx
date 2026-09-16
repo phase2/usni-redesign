@@ -6,7 +6,12 @@ import Footer from '@/components/layout/Footer'
 import { Button } from '@/components/ui/Button'
 import CreditCardModal from '@/components/ui/CreditCardModal'
 import { AcceptedCards } from '@/components/ui/CardBrandIcons'
-import { PRIORITY_LABELS, makeOrderNumber } from '@/data/transactions'
+import { PRIORITY_LABELS, TRIBUTE_LABELS, makeOrderNumber } from '@/data/transactions'
+import {
+  appendCommemorativeParams,
+  commemorativeLineLabel,
+  readCommemorativeLines,
+} from '@/data/commemorativeGifts'
 import { countries, militaryStatuses, ranksForService, services, suffixes, usStates } from '@/data/essaySubmission'
 import { GradYearHelpTooltip, ServiceHelpTooltip } from '@/components/ui/FieldHelp'
 import { ACCOUNT_ADDRESS, ACCOUNT_CARD, isTestLogin } from '@/data/testAccount'
@@ -158,11 +163,16 @@ export default function DonateCheckout() {
   const amount      = searchParams.get('amount')    ?? '100'
   const frequency   = searchParams.get('frequency') ?? 'one-time'
   const isAnonymous = searchParams.get('anonymous') === 'true'
+  const tributeType = searchParams.get('tribute')
+  const tributeName = searchParams.get('tributeName')?.trim() ?? ''
   const priorityIds = searchParams.get('priorities')?.split(',').filter(Boolean) ?? []
 
   const amountNum      = Number(amount)
   const frequencyLabel = frequency === 'monthly' ? 'Monthly' : 'One-Time'
   const priorityLabels = priorityIds.map(id => PRIORITY_LABELS[id] ?? id)
+
+  /** A commemorative gift itemises what was bought in place of the priority list. */
+  const commemorativeLines = readCommemorativeLines(searchParams)
 
   useEffect(() => {
     setCartCount(1)
@@ -176,7 +186,6 @@ export default function DonateCheckout() {
   const [confirmEmail, setConfirmEmail] = useState('')
   const [phone, setPhone]               = useState('')
   const [password, setPassword]         = useState('')
-  const [anonymous, setAnonymous]       = useState(isAnonymous)
   const [service, setService]           = useState('')
   const [militaryStatus, setMilitary]   = useState('')
   const [rank, setRank]                 = useState('')
@@ -280,7 +289,12 @@ export default function DonateCheckout() {
       order: makeOrderNumber('NIF'),
     })
     if (priorityIds.length > 0) params.set('priorities', priorityIds.join(','))
-    if (anonymous) params.set('anonymous', 'true')
+    appendCommemorativeParams(params, commemorativeLines)
+    if (isAnonymous) params.set('anonymous', 'true')
+    if (tributeName) {
+      params.set('tribute', tributeType ?? 'honor')
+      params.set('tributeName', tributeName)
+    }
     if (email.trim()) params.set('email', email.trim())
     if (firstName.trim()) params.set('name', firstName.trim())
     if (savedCardLast4) params.set('card', savedCardLast4)
@@ -348,15 +362,11 @@ export default function DonateCheckout() {
                         <FormInput label="Email Address" placeholder="your@email.com" value={email} onChange={setEmail} type="email" required error={fieldError(email)} />
                         <FormInput label="Confirm Email Address" placeholder="your@email.com" value={confirmEmail} onChange={setConfirmEmail} type="email" required error={fieldError(confirmEmail)} />
                         <FormInput label="Phone" placeholder="(555) 555-1234" value={phone} onChange={setPhone} type="tel" />
-                        <label className="flex items-center gap-3 cursor-pointer">
-                          <input
-                            type="checkbox"
-                            checked={anonymous}
-                            onChange={e => setAnonymous(e.target.checked)}
-                            className="w-4 h-4 border border-[#4e576a] accent-[#023e7d] cursor-pointer"
-                          />
-                          <span className="font-body text-[15px] text-[#1d2535]">I would like this donation to be anonymous</span>
-                        </label>
+                        {/* The anonymous choice was offered here as well as in
+                            the cart, in two different wordings, with the cart's
+                            answer silently overwritten by whatever this one was
+                            left at. It is the cart's question now; the order
+                            summary on the right reports the answer. */}
                       </div>
                     )}
                     {activeTab === 'create' && (
@@ -555,9 +565,28 @@ export default function DonateCheckout() {
 
                     <div className="h-px bg-[#c4c9d4]" />
 
-                    {/* Investment priorities or default fund */}
+                    {/* What the gift buys: the bricks and chairs where there
+                        are any, otherwise the priorities or the default fund. */}
                     <div className="flex flex-col gap-2">
-                      {priorityLabels.length > 0 ? (
+                      {commemorativeLines.length > 0 ? (
+                        <>
+                          <span className="font-body font-bold text-[15px] text-[#1d2535]">Commemorative gift</span>
+                          <div className="flex flex-col gap-1.5 mt-1">
+                            {commemorativeLines.map(line => (
+                              <span
+                                key={line.gift.id}
+                                className="font-body text-[14px] text-[#4e576a] flex justify-between gap-3"
+                              >
+                                <span className="capitalize">{commemorativeLineLabel(line)}</span>
+                                <span>${line.subtotal.toLocaleString()}</span>
+                              </span>
+                            ))}
+                          </div>
+                          <span className="font-body text-[13px] text-[#4e576a] mt-1 italic">
+                            Jack C. Taylor Conference Center Maintenance &amp; Technology Fund
+                          </span>
+                        </>
+                      ) : priorityLabels.length > 0 ? (
                         <>
                           <span className="font-body font-bold text-[15px] text-[#1d2535]">Investment Priorities</span>
                           <div className="flex flex-col gap-1.5 mt-1">
@@ -571,6 +600,14 @@ export default function DonateCheckout() {
                           <span className="font-body font-bold text-[15px] text-[#1d2535]">Fund</span>
                           <span className="font-body text-[15px] text-[#4e576a]">Most Needed</span>
                         </div>
+                      )}
+                      {/* The two choices made back in the cart, reported here
+                          rather than asked again. */}
+                      {tributeName && (
+                        <span className="font-body text-[13px] text-[#4e576a] mt-1 italic">
+                          {TRIBUTE_LABELS[tributeType ?? 'honor'] ?? TRIBUTE_LABELS.honor}{' '}
+                          {tributeName}
+                        </span>
                       )}
                       {isAnonymous && (
                         <span className="font-body text-[13px] text-[#4e576a] mt-1 italic">Anonymous gift</span>
