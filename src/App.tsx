@@ -34,6 +34,7 @@ import GivingSubPage from '@/pages/GivingSubPage'
 import GivingSocietiesAnnual from '@/pages/GivingSocietiesAnnual'
 import GivingOpportunitiesPage from '@/pages/GivingOpportunitiesPage'
 import GivingStudentMemberships from '@/pages/GivingStudentMemberships'
+import GivingTaylorCenter from '@/pages/GivingTaylorCenter'
 import Donate from '@/pages/Donate'
 import DonateCart from '@/pages/DonateCart'
 import DonateCheckout from '@/pages/DonateCheckout'
@@ -122,6 +123,7 @@ export default function App() {
         <Route path="/giving" element={<Giving />} />
         <Route path="/giving/opportunities" element={<GivingOpportunitiesPage />} />
         <Route path="/giving/student-memberships" element={<GivingStudentMemberships />} />
+        <Route path="/giving/taylor-conference-center" element={<GivingTaylorCenter />} />
         <Route path="/giving/donor-recognition" element={<GivingSocieties />} />
         {/* One template, four detail pages — see src/data/givingSocieties.ts */}
         <Route path="/giving/donor-recognition/annual" element={<GivingSocietiesAnnual />} />

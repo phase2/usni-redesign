@@ -1,5 +1,14 @@
 import conferenceCenterImage from '@/assets/images/jackctaylorcenter-extended.jpg'
+import ExternalLinkIcon from '@/components/ui/ExternalLinkIcon'
+import { JCTCC_URL } from '@/sections/TaylorCenterAbout'
 
+/**
+ * The Taylor Center, closing the Giving landing.
+ *
+ * The secondary button used to point at `/conference-center`, a route that was
+ * never built. It now leads to the Center's page in this section, and the
+ * outbound link to the Center's own site is the one marked external.
+ */
 export default function GivingConferenceCenter() {
   return (
     <section
@@ -25,16 +34,20 @@ export default function GivingConferenceCenter() {
           </p>
           <div className="flex flex-wrap gap-3">
             <a
-              href="/giving/donate"
-              className="inline-flex items-center justify-center bg-navy-bolder text-white font-body font-bold text-sm tracking-[-0.3px] px-5 py-3.5 hover:bg-navy-bright transition-colors"
+              href="/giving/taylor-conference-center"
+              className="inline-flex items-center justify-center bg-navy-bolder text-white font-body font-bold text-sm tracking-[-0.3px] px-5 py-3.5 border border-navy-bolder hover:bg-navy-bright hover:border-navy-bright transition-colors"
             >
-              Donate to JCTCC
+              About the Center
             </a>
             <a
-              href="/conference-center"
-              className="inline-flex items-center justify-center bg-transparent text-navy-bolder border border-navy-bolder font-body font-bold text-sm tracking-[-0.3px] px-5 py-3.5 hover:bg-navy-bright hover:text-white hover:border-navy-bright transition-colors"
+              href={JCTCC_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 bg-transparent text-navy-bolder border border-navy-bolder font-body font-bold text-sm tracking-[-0.3px] px-5 py-3.5 hover:bg-navy-bright hover:text-white hover:border-navy-bright transition-colors"
             >
-              Visit JCTCC Website
+              Host an event
+              <ExternalLinkIcon size="1.1em" />
+              <span className="sr-only">(opens in a new tab)</span>
             </a>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useCart } from '@/context/CartContext'
+import { commemorativeLineLabel, readCommemorativeLines } from '@/data/commemorativeGifts'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import {
@@ -18,6 +19,7 @@ import {
   FOUNDATION_PHONE,
   FOUNDATION_TAX_ID,
   PRIORITY_LABELS,
+  TRIBUTE_LABELS,
   formatNextChargeDate,
   formatReceiptDate,
 } from '@/data/transactions'
@@ -37,6 +39,8 @@ export default function DonateConfirmation() {
   const amount      = searchParams.get('amount')    ?? '100'
   const frequency   = searchParams.get('frequency') ?? 'one-time'
   const isAnonymous = searchParams.get('anonymous') === 'true'
+  const tributeType = searchParams.get('tribute')
+  const tributeName = searchParams.get('tributeName')?.trim() ?? ''
   const priorityIds = searchParams.get('priorities')?.split(',').filter(Boolean) ?? []
 
   const orderNumber = searchParams.get('order') ?? 'NIF-2026-317604'
@@ -48,6 +52,13 @@ export default function DonateConfirmation() {
   const isMonthly      = frequency === 'monthly'
   const frequencyLabel = isMonthly ? 'Monthly recurring' : 'One-time'
   const priorityLabels = priorityIds.map(id => PRIORITY_LABELS[id] ?? id)
+
+  /**
+   * A commemorative gift names what it bought on the receipt — the donor needs
+   * the record to say "2 commemorative chairs", not only the fund the money
+   * landed in, since the Foundation follows up about nameplate text.
+   */
+  const commemorativeLines = readCommemorativeLines(searchParams)
 
   const giftDate = formatReceiptDate()
 
@@ -128,6 +139,14 @@ export default function DonateConfirmation() {
               <ReceiptCard title="Your gift" action={<PrintReceiptButton />}>
                 <div className="flex flex-col gap-0">
                   <ReceiptRow label="Frequency" value={frequencyLabel} />
+                  {commemorativeLines.length > 0 && (
+                    <ReceiptRow
+                      label="Commemorative gift"
+                      value={commemorativeLines
+                        .map(line => commemorativeLineLabel(line))
+                        .join(', ')}
+                    />
+                  )}
                   <ReceiptRow
                     label="Designation"
                     value={
@@ -136,6 +155,12 @@ export default function DonateConfirmation() {
                         : 'Most Needed'
                     }
                   />
+                  {tributeName && (
+                    <ReceiptRow
+                      label="Dedication"
+                      value={`${TRIBUTE_LABELS[tributeType ?? 'honor'] ?? TRIBUTE_LABELS.honor} ${tributeName}`}
+                    />
+                  )}
                   <ReceiptRow
                     label="Payment method"
                     value={cardLast4 ? `Credit card ending in ${cardLast4}` : 'Credit card'}

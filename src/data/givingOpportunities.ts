@@ -1,5 +1,5 @@
 /**
- * Giving Opportunities — the nine programmes the Foundation raises for, beside
+ * Giving Opportunities — the ten programmes the Foundation raises for, beside
  * Sponsor Student Memberships, which has a page of its own.
  *
  * Transcribed from /donate/giving-opportunities and its nine child pages on the
@@ -7,7 +7,11 @@
  * `teaser` is the one-liner the index card carries; `body` is that child page's
  * copy in full. Each child page ends with a "Donate Now" button, which is not
  * stored here — the accordion renders its own so the label and destination stay
- * consistent across all nine.
+ * consistent across all ten.
+ *
+ * The Jack C. Taylor Conference Center is the one entry with no child page on
+ * the live site: it was an About page there, and is a Giving page here, so its
+ * copy is written rather than transcribed.
  *
  * `image` is the 1200x400 banner the index page shows on each card, resolved
  * through the glob below.
@@ -38,6 +42,21 @@ export interface Opportunity {
   image: string
   imageAlt: string
   body: OpportunityBlock[]
+  /**
+   * An extra call to action, for an opportunity with somewhere more specific to
+   * send a donor than the donation form. Rendered ahead of the shared Donate
+   * Today button rather than replacing it — every panel's closing paragraph
+   * ends on "make a direct contribution today", which needs that button to
+   * still be there.
+   */
+  cta?: { label: string; href: string }
+  /**
+   * Replaces the shared Donate Today button, for an opportunity whose second
+   * slot is better spent elsewhere — the Taylor Center has a site of its own.
+   * Only set this where `cta` already carries a donor toward a gift, so the
+   * panel does not end up with no path to one.
+   */
+  secondaryCta?: { label: string; href: string; external?: boolean }
 }
 
 export const givingOpportunities: Opportunity[] = [
@@ -108,6 +127,28 @@ export const givingOpportunities: Opportunity[] = [
     ],
   },
   {
+    id: 'taylor-conference-center',
+    title: 'Jack C. Taylor Conference Center',
+    teaser: 'The Institute’s physical flagship — and the one gift that carries a name on the building.',
+    image: 'taylor-conference-center.jpg',
+    imageAlt: 'Exterior signage on the Jack C. Taylor Conference Center in Annapolis',
+    body: [
+      { type: 'p', text: 'Funded entirely with private donations, the Jack C. Taylor Conference Center is the Naval Institute’s physical flagship: a 406-seat auditorium, five meeting rooms, two indoor/outdoor terraces, and a broadcast studio, adjoining the Institute’s headquarters on the Yard of the U.S. Naval Academy. It is where naval professionals, historians, government officials, midshipmen, students, and interested civilians convene for conferences, lectures, workshops, and wargames, and it is optimized for classified discussion on a per-use, waiver basis.' },
+      { type: 'p', text: 'Private support is what keeps it current. Gifts to the Jack C. Taylor Conference Center Maintenance & Technology Fund underwrite the upkeep of the building and the audiovisual equipment behind every session held in it — the projection and acoustics in the auditorium, the stage LED wall, and the broadcast studio that carries a discussion well beyond the people in the room.' },
+      { type: 'p', text: 'Donors can also put a name on the building itself. A gift of $2,500 is recognized with an engraved silver plate permanently affixed to a seat in the auditorium; a gift of $1,000 is recognized on the donor wall on the rooftop terrace. Either can honor or memorialize someone of your choosing.' },
+      { type: 'p', text: 'For more information on how you can support the Jack C. Taylor Conference Center, please contact the Naval Institute Foundation at (410) 295-1054 or foundation@usni.org . Or make a direct contribution today as part of your gift to the Institute’s comprehensive campaign.' },
+    ],
+    cta: {
+      label: 'Purchase a brick or chair',
+      href: '/giving/taylor-conference-center#commemorative-gifts',
+    },
+    secondaryCta: {
+      label: 'Learn more about the Center',
+      href: 'https://www.jackctaylorconferencecenter.org/',
+      external: true,
+    },
+  },
+  {
     id: 'naval-institute-press',
     title: 'The Naval Institute Press',
     teaser: 'The university press of the Navy and a leader in naval publishing since 1898.',
@@ -163,4 +204,23 @@ export const givingOpportunities: Opportunity[] = [
       { type: 'p', text: 'For more information on how you can support Historic Preservation, please contact the Naval Institute Foundation at (410) 295-1054 or foundation@usni.org . Or make a direct contribution today as part of your gift to the Institute’s comprehensive campaign.' },
     ],
   },
+]
+
+/**
+ * The investment priorities a donor can designate a gift to, in the cart.
+ *
+ * Derived from the accordion above rather than listed again. The cart kept its
+ * own hand-written set of seven, and the two had drifted badly: it split
+ * Historic Preservation into "Oral History Program" and "Photo Archives", and
+ * offered nothing at all for the essay contests, the conferences, the Press, or
+ * either named chair. Somebody choosing where their money goes should be shown
+ * the same programmes /giving/opportunities asked them to support.
+ *
+ * Sponsor Student Memberships is appended by hand. It is on that page as the
+ * featured opportunity above the accordion, so it belongs in this list, but it
+ * has a page of its own rather than an accordion record to derive from.
+ */
+export const DONATION_PRIORITIES: { id: string; label: string }[] = [
+  ...givingOpportunities.map(({ id, title }) => ({ id, label: title })),
+  { id: 'sponsored-student', label: 'Sponsor Student Memberships' },
 ]

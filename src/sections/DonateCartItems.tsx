@@ -1,16 +1,14 @@
 import { useState, useEffect } from 'react'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import { useCart } from '@/context/CartContext'
-
-const PRIORITY_OPTIONS = [
-  { id: 'usni-news',         label: 'USNI News' },
-  { id: 'proceedings',       label: 'Proceedings Magazine' },
-  { id: 'sponsored-student', label: 'Sponsored Student Program' },
-  { id: 'naval-history',     label: 'Naval History' },
-  { id: 'oral-history',      label: 'Oral History Program' },
-  { id: 'photo-archives',    label: 'Photo Archives' },
-  { id: 'taylor-center',     label: 'Jack C. Taylor Conference Center Maintenance & Technology Fund' },
-]
+import { DONATION_PRIORITIES } from '@/data/givingOpportunities'
+import {
+  COMMEMORATIVE_EDIT_PATH,
+  COMMEMORATIVE_PRIORITY_ID,
+  appendCommemorativeParams,
+  commemorativeLineLabel,
+  readCommemorativeLines,
+} from '@/data/commemorativeGifts'
 
 function Toggle({ on, onToggle }: { on: boolean; onToggle: () => void }) {
   return (
@@ -56,11 +54,43 @@ export default function DonateCartItems() {
   const frequencyLabel = frequency === 'monthly' ? 'Monthly' : 'One-Time'
 
   const [removed, setRemoved]               = useState(false)
-  const [useWhereNeeded, setUseWhereNeeded] = useState(true)
-  const [priorities, setPriorities]         = useState<Set<string>>(new Set())
+
+  /**
+   * A commemorative gift is a purchase, not a category choice: the donor has
+   * already picked bricks and chairs at fixed prices. So the priority picker is
+   * replaced by the itemised gift, and "Edit" leads back to the picker on the
+   * Taylor Center page rather than to the donation form.
+   */
+  const commemorativeLines = readCommemorativeLines(searchParams)
+  const isCommemorative = commemorativeLines.length > 0
+  const editPath = isCommemorative ? COMMEMORATIVE_EDIT_PATH : '/giving/donate'
+
+  /**
+   * A gift that arrived already designated — the commemorative bricks and
+   * chairs on the Taylor Center page hand over
+   * `priority=taylor-conference-center` — opens with that priority selected and
+   * "where needed most" off, so the donor is not asked to designate a gift they
+   * have already designated. Unrecognised ids are ignored rather than trusted
+   * into the set; a commemorative gift falls back to the Center regardless,
+   * since bricks and chairs can only be designated the one way.
+   */
+  const requestedPriority = searchParams.get('priority')
+  const presetPriority = DONATION_PRIORITIES.some(o => o.id === requestedPriority)
+    ? requestedPriority!
+    : isCommemorative
+      ? COMMEMORATIVE_PRIORITY_ID
+      : null
+
+  const [useWhereNeeded, setUseWhereNeeded] = useState(!presetPriority)
+  const [priorities, setPriorities]         = useState<Set<string>>(
+    presetPriority ? new Set([presetPriority]) : new Set(),
+  )
   const [isAnonymous, setIsAnonymous]       = useState(false)
   const [sendMessage, setSendMessage]       = useState(false)
   const [message, setMessage]               = useState('')
+  const [isTribute, setIsTribute]           = useState(false)
+  const [tributeType, setTributeType]       = useState<'honor' | 'memory'>('honor')
+  const [tributeName, setTributeName]       = useState('')
 
   useEffect(() => {
     setCartCount(removed ? 0 : 1)
@@ -85,6 +115,13 @@ export default function DonateCartItems() {
       params.set('priorities', Array.from(priorities).join(','))
     }
     if (isAnonymous) params.set('anonymous', 'true')
+    // A tribute only travels if it names someone — the checkbox alone says
+    // nothing the order summary could print.
+    if (isTribute && tributeName.trim()) {
+      params.set('tribute', tributeType)
+      params.set('tributeName', tributeName.trim())
+    }
+    appendCommemorativeParams(params, commemorativeLines)
     navigate(`/giving/donate/checkout?${params.toString()}`)
   }
 
@@ -137,7 +174,32 @@ export default function DonateCartItems() {
         {/* Gift item */}
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="flex flex-col gap-1">
-            <h3 className="font-headline text-[26px] text-[#023e7d] leading-[1.2]">Gift to the U.S. Naval Institute</h3>
+            <h3 className="font-headline text-[26px] text-[#023e7d] leading-[1.2]">
+              {isCommemorative
+                ? 'Commemorative gift — Jack C. Taylor Conference Center'
+                : 'Gift to the U.S. Naval Institute'}
+            </h3>
+
+            {/* What was bought, priced per unit, so the total below is checkable */}
+            {isCommemorative && (
+              <ul className="flex flex-col gap-1 mt-2 mb-1">
+                {commemorativeLines.map(line => (
+                  <li
+                    key={line.gift.id}
+                    className="font-body text-[17px] text-[#1d2535] flex flex-wrap items-baseline gap-x-2"
+                  >
+                    <span className="font-bold capitalize">{commemorativeLineLabel(line)}</span>
+                    <span className="text-[15px] text-[#4e576a]">
+                      ${line.gift.unitPrice.toLocaleString()} each
+                    </span>
+                    <span className="text-[15px] text-[#4e576a]">
+                      — ${line.subtotal.toLocaleString()}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
+
             <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
               <p className="font-body text-[17px] text-[#1d2535]">
                 <span className="font-bold">Frequency:</span> {frequencyLabel}
@@ -151,7 +213,7 @@ export default function DonateCartItems() {
           <div className="flex items-center gap-2 flex-shrink-0 pt-1">
             <button
               type="button"
-              onClick={() => navigate('/giving/donate')}
+              onClick={() => navigate(editPath)}
               className="flex items-center gap-1.5 border border-[#002b5c] text-[#002b5c] font-body font-bold text-[13px] px-4 py-2 hover:bg-navy-bright hover:text-white hover:border-navy-bright transition-colors"
             >
               <svg className="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -173,7 +235,45 @@ export default function DonateCartItems() {
           </div>
         </div>
 
-        {/* Investment priorities */}
+        {/* A commemorative gift is already designated, so it reports its
+            recognition rather than asking the donor to choose a priority. */}
+        {isCommemorative ? (
+          <div className="bg-[#f4f5f7] border border-[#e0e2e7] p-6 flex flex-col gap-5">
+            <div className="flex flex-col gap-1">
+              <h3 className="font-body font-bold text-[18px] text-[#1d2535]">
+                Your commemorative gift
+              </h3>
+              <p className="font-body text-[14px] text-[#4e576a] leading-[1.5]">
+                This gift supports the Jack C. Taylor Conference Center Maintenance &amp; Technology
+                Fund and is recognized at the Center itself.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-4">
+              {commemorativeLines.map(line => (
+                <div key={line.gift.id} className="flex flex-col gap-1.5">
+                  <p className="font-body font-bold text-[15px] text-[#1d2535] capitalize">
+                    {commemorativeLineLabel(line)}
+                  </p>
+                  <p className="font-body text-[14px] text-[#1d2535] leading-[1.6]">
+                    {line.gift.recognition}
+                  </p>
+                  <p className="font-body italic text-[13px] text-[#4e576a] leading-[1.5]">
+                    {line.gift.footnote}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <p className="font-body text-[14px] text-[#4e576a] leading-[1.5]">
+              Need to change what you selected?{' '}
+              <a href={COMMEMORATIVE_EDIT_PATH} className="text-link">
+                Return to bricks and chairs
+              </a>
+              .
+            </p>
+          </div>
+        ) : (
         <div className="bg-[#f4f5f7] border border-[#e0e2e7] p-6 flex flex-col gap-5">
           <div className="flex flex-col gap-1">
             <h3 className="font-body font-bold text-[18px] text-[#1d2535]">Select investment priorities</h3>
@@ -200,7 +300,7 @@ export default function DonateCartItems() {
 
           {/* Other priorities — 3-column grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4">
-            {PRIORITY_OPTIONS.map(opt => (
+            {DONATION_PRIORITIES.map(opt => (
               <div key={opt.id} className="flex items-center gap-3">
                 <Toggle on={priorities.has(opt.id)} onToggle={() => togglePriority(opt.id)} />
                 <span className="font-body text-[14px] text-[#1d2535] leading-snug">{opt.label}</span>
@@ -208,6 +308,7 @@ export default function DonateCartItems() {
             ))}
           </div>
         </div>
+        )}
 
         {/* Send a message */}
         <div className="flex flex-col gap-3">
@@ -242,17 +343,89 @@ export default function DonateCartItems() {
           <span className="font-body text-[16px] text-[#1d2535]">I wish my gift to remain anonymous</span>
         </label>
 
+        {/* Tribute gift. The honour/memory choice sits with the name rather
+            than being inferred from it: the Foundation writes to the family for
+            a memorial gift and to the honoree for the other, so the wrong guess
+            is the kind of mistake that reaches a bereaved household. */}
+        <div className="flex flex-col gap-3">
+          <label className="flex items-center gap-2 cursor-pointer select-none">
+            <input
+              type="checkbox"
+              checked={isTribute}
+              onChange={e => setIsTribute(e.target.checked)}
+              className="w-5 h-5 accent-[#023e7d] cursor-pointer flex-shrink-0"
+            />
+            <span className="font-body text-[16px] text-[#1d2535]">
+              Make this gift in honor or memory of someone
+            </span>
+          </label>
+
+          {isTribute && (
+            <div className="flex flex-col gap-4 border-l-2 border-[#c4c9d4] pl-5">
+              <fieldset className="flex flex-col gap-2">
+                <legend className="font-body font-bold text-[14px] text-[#1d2535] mb-1">
+                  This gift is
+                </legend>
+                <div className="flex flex-wrap gap-x-6 gap-y-2">
+                  {([
+                    { value: 'honor', label: 'In honor of' },
+                    { value: 'memory', label: 'In memory of' },
+                  ] as const).map(option => (
+                    <label
+                      key={option.value}
+                      className="flex items-center gap-2 cursor-pointer select-none"
+                    >
+                      <input
+                        type="radio"
+                        name="tribute-type"
+                        value={option.value}
+                        checked={tributeType === option.value}
+                        onChange={() => setTributeType(option.value)}
+                        className="w-4 h-4 accent-[#023e7d] cursor-pointer flex-shrink-0"
+                      />
+                      <span className="font-body text-[15px] text-[#1d2535]">{option.label}</span>
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+
+              <div className="flex flex-col gap-1.5 max-w-[460px]">
+                <label
+                  htmlFor="tribute-name"
+                  className="font-body font-bold text-[14px] text-[#1d2535]"
+                >
+                  Name of the person being {tributeType === 'memory' ? 'remembered' : 'honored'}
+                </label>
+                <input
+                  id="tribute-name"
+                  type="text"
+                  value={tributeName}
+                  onChange={e => setTributeName(e.target.value)}
+                  placeholder="Full name"
+                  className="w-full border border-[#4e576a] bg-white px-4 py-3 font-body text-[16px] text-[#1d2535]
+                             placeholder:text-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#023e7d]/30
+                             focus:border-[#023e7d] rounded-none"
+                />
+                <p className="font-body text-[13px] text-[#4e576a] leading-[1.5]">
+                  The Naval Institute Foundation will be in touch about how you would like the
+                  dedication acknowledged.
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
+
         {/* Navigation */}
         <div className="border-t border-[#999fad] pt-8 flex flex-wrap items-center justify-between gap-4 sm:gap-8">
           <button
             type="button"
-            onClick={() => navigate('/giving/donate')}
+            onClick={() => navigate(editPath)}
             className="flex items-center gap-2 border border-[#002b5c] text-[#001845] font-body font-extrabold text-[20px] py-4 px-8 hover:bg-navy-bright hover:text-white hover:border-navy-bright transition-colors"
           >
             <svg className="w-3 h-3 flex-shrink-0" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
               <path d="M10 6H2M6 2L2 6l4 4" />
             </svg>
-            Back to Donate
+            {isCommemorative ? 'Back to bricks and chairs' : 'Back to Donate'}
           </button>
           <button
             type="button"

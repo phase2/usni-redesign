@@ -41,7 +41,10 @@ const links = [
     headline: 'Jack C. Taylor Conference Center',
     body: 'The Institute’s conference and event venue on the grounds of the U.S. Naval Academy.',
     cta: 'Visit the center',
-    href: '/about/taylor-conference-center',
+    // The Center's page lives in Giving — it was built with private donations
+    // and is still maintained by them — but it belongs in this grid too, since
+    // it is one of the four things people come to About looking for.
+    href: '/giving/taylor-conference-center',
     image: imgTaylorCenter,
     alt: 'Exterior signage on the Jack C. Taylor Conference Center in Annapolis',
   },

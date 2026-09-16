@@ -167,7 +167,7 @@ export const orders: OrderRecord[] = [
     total: 500,
     state: 'Completed',
     kind: 'donation',
-    receiptHref: '/giving/donate/confirmation?amount=500&frequency=one-time&priorities=oral-history&order=NIF-2025-317604&email=member%40example.com&name=Matt&card=4242',
+    receiptHref: '/giving/donate/confirmation?amount=500&frequency=one-time&priorities=historic-preservation&order=NIF-2025-317604&email=member%40example.com&name=Matt&card=4242',
   },
   {
     number: 'USNI-2025-288117',
@@ -216,7 +216,7 @@ export const giving: GiftRecord[] = [
     amount: 500,
     frequency: 'One-time',
     anonymous: false,
-    receiptHref: '/giving/donate/confirmation?amount=500&frequency=one-time&priorities=oral-history&order=NIF-2025-317604&email=member%40example.com&name=Matt&card=4242',
+    receiptHref: '/giving/donate/confirmation?amount=500&frequency=one-time&priorities=historic-preservation&order=NIF-2025-317604&email=member%40example.com&name=Matt&card=4242',
   },
   {
     receipt: 'NIF-2025-284910',

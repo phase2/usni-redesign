@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { ButtonLink } from '@/components/ui/Button'
+import ExternalLinkIcon from '@/components/ui/ExternalLinkIcon'
 import {
   givingOpportunities,
   opportunityBanner,
@@ -7,17 +8,18 @@ import {
 } from '@/data/givingOpportunities'
 
 /**
- * The nine giving opportunities, as the site's standard accordion.
+ * The ten giving opportunities, as the site's standard accordion.
  *
  * Rows carry the title alone — the same treatment "Ways to Give" uses on the
- * Giving landing, so nine closed rows fit on one screen and a reader can scan
+ * Giving landing, so ten closed rows fit on one screen and a reader can scan
  * the whole list before opening anything. The teaser line and the thumbnail
  * that used to sit in the row moved into the panel, where the banner has room
  * to run at its own 3:1 proportion.
  *
  * Each panel ends with a Donate Today button, as every one of the source pages
  * does. It is rendered here rather than stored in the copy so the label and
- * destination stay the same across all nine.
+ * destination stay the same across all ten. An opportunity may add a second,
+ * more specific button of its own — see `cta` in `givingOpportunities`.
  */
 function AccordionItem({
   opp,
@@ -89,10 +91,42 @@ function AccordionItem({
               ),
             )}
 
-            <div className="pt-2">
-              <ButtonLink href="/giving/donate" variant="navy" size="sm">
-                Donate Today
-              </ButtonLink>
+            {/* An opportunity with a destination of its own leads with it, and
+                keeps Donate Today beside it as the outline secondary — the
+                closing paragraph points at the donation form either way. Where
+                `secondaryCta` is set, it takes that second slot instead. */}
+            <div className="pt-2 flex flex-wrap gap-3">
+              {opp.cta && (
+                <ButtonLink href={opp.cta.href} variant="navy" size="sm">
+                  {opp.cta.label}
+                </ButtonLink>
+              )}
+              {opp.secondaryCta ? (
+                <ButtonLink
+                  href={opp.secondaryCta.href}
+                  variant={opp.cta ? 'outline-dark' : 'navy'}
+                  size="sm"
+                  {...(opp.secondaryCta.external
+                    ? { target: '_blank', rel: 'noopener noreferrer' }
+                    : {})}
+                >
+                  {opp.secondaryCta.label}
+                  {opp.secondaryCta.external && (
+                    <>
+                      <ExternalLinkIcon size="1.1em" />
+                      <span className="sr-only">(opens in a new tab)</span>
+                    </>
+                  )}
+                </ButtonLink>
+              ) : (
+                <ButtonLink
+                  href="/giving/donate"
+                  variant={opp.cta ? 'outline-dark' : 'navy'}
+                  size="sm"
+                >
+                  Donate Today
+                </ButtonLink>
+              )}
             </div>
           </div>
         </div>
