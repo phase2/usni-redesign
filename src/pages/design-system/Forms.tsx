@@ -74,7 +74,7 @@ const [open, setOpen] = useState(false)
               rows={[
                 { name: 'open', type: 'boolean', description: 'Controls visibility. Both modals render null when false.' },
                 { name: 'onClose', type: '() => void', description: 'Called on Escape, backdrop click, or the close button.' },
-                { name: 'onSuccess', type: '(last4: string, details: CardDetails) => void', description: 'CreditCardModal only — called once valid. `details` carries brand, last4, expires, and whether "Set as default payment method" was ticked.' },
+                { name: 'onSuccess', type: '(last4: string, details: CardDetails) => void', description: 'CreditCardModal only — called once valid. `details` carries brand, last4, and expires.' },
               ]}
             />
           </div>

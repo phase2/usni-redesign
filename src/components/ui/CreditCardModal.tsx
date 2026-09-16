@@ -31,8 +31,6 @@ export interface CardDetails {
   last4: string
   /** Formatted to match the saved-card records, e.g. "04 / 2029". */
   expires: string
-  /** Whether the member asked for this card to become their default. */
-  setAsDefault: boolean
 }
 
 /** First digit is enough to name the brand, and Discover is not accepted. */
@@ -77,7 +75,6 @@ export default function CreditCardModal({
   const [expiryMonth, setExpiryMonth] = useState('')
   const [expiryYear, setExpiryYear] = useState('')
   const [cardCode, setCardCode] = useState('')
-  const [setAsDefault, setSetAsDefault] = useState(false)
 
   const handleCardGroup = (idx: number) => (raw: string) => {
     const digits = raw.replace(/\D/g, '').slice(0, 4)
@@ -106,7 +103,6 @@ export default function CreditCardModal({
       setExpiryMonth('')
       setExpiryYear('')
       setCardCode('')
-      setSetAsDefault(false)
     }
   }, [open])
 
@@ -121,7 +117,6 @@ export default function CreditCardModal({
       brand: brandFor(cardGroups[0].charAt(0)),
       last4: cardGroups[3],
       expires: `${expiryMonth} / ${expiryYear}`,
-      setAsDefault,
     })
   }
 
@@ -205,25 +200,6 @@ export default function CreditCardModal({
                 className="w-full border border-[#4e576a] bg-white px-4 py-3 font-body text-[16px] text-[#1d2535] placeholder:text-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#023e7d]/30 focus:border-[#023e7d] rounded-none min-h-[44px]"
               />
             </div>
-          </div>
-
-          {/* Hand-rolled rather than the shared CheckboxField: this modal has its
-              own type scale and #4e576a borders, and the account version's
-              16px label would outweigh the 14px field labels above it. */}
-          <div className="flex items-start gap-3">
-            <input
-              id={`${fieldId}-default`}
-              type="checkbox"
-              checked={setAsDefault}
-              onChange={e => setSetAsDefault(e.target.checked)}
-              className="mt-0.5 w-5 h-5 flex-shrink-0 cursor-pointer accent-[#0466c8]"
-            />
-            <label
-              htmlFor={`${fieldId}-default`}
-              className="font-body text-[15px] text-[#1d2535] leading-relaxed cursor-pointer"
-            >
-              Set as default payment method
-            </label>
           </div>
 
           <Button type="submit" variant={submitVariant} size="lg" fullWidth disabled={!isValid}>
