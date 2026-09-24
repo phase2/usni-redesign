@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import AccountLayout from '@/components/layout/AccountLayout'
+import AccountLayout, { ACCOUNT_NAV_NEXT_GEN } from '@/components/layout/AccountLayout'
 import { AccountCard, Badge, DataTable, Td } from '@/components/ui/AccountCard'
 import { giving, givingTotals } from '@/data/account'
 import { FOUNDATION_EMAIL, FOUNDATION_PHONE, FOUNDATION_TAX_ID } from '@/data/transactions'
@@ -18,6 +18,10 @@ export default function AccountGiving() {
     <AccountLayout
       title="Giving history"
       lede="Your gifts to the Naval Institute Foundation, with receipts for your records."
+      /* A parked page, so it carries the full menu rather than the shipped one
+         that omits it — otherwise arriving here from the next-gen dashboard
+         drops the link you just followed. */
+      nav={ACCOUNT_NAV_NEXT_GEN}
       actions={
         <Link
           to="/giving/donate"
