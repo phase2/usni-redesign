@@ -186,8 +186,14 @@ export const givingOpportunities: Opportunity[] = [
       { type: 'p', text: 'Individuals who care deeply about the work of Naval History Magazine have an opportunity to help secure Naval History ’s present and future and, in this way, preserve and disseminate Sea Service history more widely and effectively.' },
       { type: 'p', text: 'Supporters of Naval History Magazine provide direct philanthropic support to the ongoing needs of the magazine and to the strategic actions that are planned for its continued success. These actions include greater use of Navy and Marine photographic, film, and textual records at the National Archives, more graphics and maps, more use of graphic novel excerpts, more commissioned artwork to illustrate articles more richly, and more special gatefold packages.' },
       { type: 'p', text: 'For more information on how you can support Naval History Magazine, please contact the Naval Institute Foundation at (410) 295-1054 or foundation@usni.org . Or make a direct contribution today as part of your gift to the Institute’s comprehensive campaign.' },
-      { type: 'p', text: 'Subscribe to Naval History Magazine' },
     ],
+    /* On the source page this was a link the transcription flattened into a
+       closing paragraph, where it read as a stray sentence. It is an action,
+       so it belongs in the button row. */
+    cta: {
+      label: 'Subscribe to Naval History Magazine',
+      href: '/naval-history/subscribe',
+    },
   },
   {
     id: 'historic-preservation',
