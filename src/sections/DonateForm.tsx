@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import Alert from '@/components/ui/Alert'
 import { DONATION_PRIORITIES } from '@/data/givingOpportunities'
 
 const presetAmounts = [50, 100, 500, 1000]
@@ -15,55 +14,28 @@ export default function DonateForm() {
   /**
    * A donor who arrives from a specific giving opportunity — the Donate Today
    * buttons under More Ways to Give hand over `?priority=<id>` — has already
-   * said where the gift should go. That designation rides through this page and
-   * into the cart, which opens with the priority toggled on and "where needed
-   * most" off, so nobody is asked to choose twice.
+   * said where the gift should go. This page passes that designation straight
+   * through to the cart, which opens with the priority toggled on and "where
+   * needed most" off, so nobody is asked to choose twice.
    *
-   * Unrecognised ids resolve to null rather than being trusted onward: the cart
-   * would drop them anyway, and a banner naming a priority that does not exist
-   * is worse than no banner.
+   * It travels silently: the cart is where the donor sees and changes their
+   * designation, so restating it here only to offer an undo duplicated a
+   * control that already exists one step later.
+   *
+   * Unrecognised ids resolve to null rather than being trusted onward.
    */
   const designation =
     DONATION_PRIORITIES.find(p => p.id === searchParams.get('priority')) ?? null
 
-  // The donor can drop the designation here rather than having to reach the
-  // cart to undo it — arriving from a link should not be a commitment.
-  const [keepDesignation, setKeepDesignation] = useState(true)
-  const activeDesignation = keepDesignation ? designation : null
-
   const goToCart = (amount: number) => {
     const params = new URLSearchParams({ amount: String(amount), frequency: 'one-time' })
-    if (activeDesignation) params.set('priority', activeDesignation.id)
+    if (designation) params.set('priority', designation.id)
     navigate(`/giving/donate/cart?${params.toString()}`)
   }
 
   return (
     <section className="pb-16 lg:pb-20 bg-white">
       <div className="container-site">
-
-        {/* Designation carried in from a giving opportunity. Shown rather than
-            applied silently — the donor should be able to see that the choice
-            they made one page ago survived, and undo it here if it was a
-            mis-click. */}
-        {activeDesignation && (
-          <Alert
-            variant="info"
-            title={`Your gift will support ${activeDesignation.label}`}
-            className="mb-10"
-            action={
-              <button
-                type="button"
-                onClick={() => setKeepDesignation(false)}
-                className="font-body font-semibold text-[14px] text-[#023E7D] underline hover:no-underline"
-              >
-                Give where needed most instead
-              </button>
-            }
-          >
-            Carried over from Giving Opportunities. You can change this in your cart before
-            checking out.
-          </Alert>
-        )}
 
         {/* Heading */}
         <h2 className="font-headline text-2xl lg:text-3xl text-navy-bolder leading-[1.1] text-center mb-10">
