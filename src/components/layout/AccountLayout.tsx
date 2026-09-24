@@ -26,7 +26,14 @@ interface NavGroup {
   items: NavItem[]
 }
 
-export const ACCOUNT_NAV: NavGroup[] = [
+/**
+ * Every account page, in menu order. This is the full menu, and the one the
+ * next-gen dashboard shows — pass it as `nav` to get it.
+ *
+ * Note it does *not* list the next-gen dashboard itself: that page stays
+ * reachable only by typing /account/next-gen (see the route in App.tsx).
+ */
+export const ACCOUNT_NAV_NEXT_GEN: NavGroup[] = [
   {
     title: 'My account',
     items: [
@@ -47,6 +54,26 @@ export const ACCOUNT_NAV: NavGroup[] = [
     ],
   },
 ]
+
+/**
+ * Pages parked as future items. They are built and their routes work; the
+ * shipped menu just doesn't list them, so they are reachable by typing the URL
+ * or by following the next-gen dashboard's menu.
+ */
+const PARKED_HREFS = ['/account/giving', '/account/saved']
+
+/**
+ * The shipped menu — the full list minus the parked pages. Derived rather than
+ * written out twice, so adding a page means editing one list and deciding
+ * whether its href belongs in `PARKED_HREFS`.
+ *
+ * A group that loses every item drops out entirely rather than rendering a
+ * heading over nothing. That cannot happen with today's two parked hrefs, but
+ * it is one line to get right now and a stray heading to debug later.
+ */
+export const ACCOUNT_NAV: NavGroup[] = ACCOUNT_NAV_NEXT_GEN
+  .map(group => ({ ...group, items: group.items.filter(i => !PARKED_HREFS.includes(i.href)) }))
+  .filter(group => group.items.length > 0)
 
 function Avatar() {
   return (
@@ -81,11 +108,11 @@ function Avatar() {
   )
 }
 
-function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
+function SidebarNav({ nav, onNavigate }: { nav: NavGroup[]; onNavigate?: () => void }) {
   const { pathname } = useLocation()
   return (
     <nav aria-label="Account" className="flex flex-col gap-6">
-      {ACCOUNT_NAV.map(group => (
+      {nav.map(group => (
         <div key={group.title} className="flex flex-col">
           <p className="font-body font-bold text-[11px] uppercase tracking-[0.1em] text-neutral-subtle mb-2">
             {group.title}
@@ -133,18 +160,26 @@ function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
   )
 }
 
-function SidebarBody({ onNavigate }: { onNavigate?: () => void }) {
+function SidebarBody({ nav, onNavigate }: { nav: NavGroup[]; onNavigate?: () => void }) {
   return (
     <>
       <Avatar />
       <div className="h-px bg-[#c4c9d4]" />
-      <SidebarNav onNavigate={onNavigate} />
+      <SidebarNav nav={nav} onNavigate={onNavigate} />
     </>
   )
 }
 
 /** Off-canvas account nav for narrow screens. */
-function AccountDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
+function AccountDrawer({
+  nav,
+  open,
+  onClose,
+}: {
+  nav: NavGroup[]
+  open: boolean
+  onClose: () => void
+}) {
   useEffect(() => {
     if (!open) return
     const onKey = (e: KeyboardEvent) => {
@@ -190,7 +225,7 @@ function AccountDrawer({ open, onClose }: { open: boolean; onClose: () => void }
           </button>
         </div>
 
-        <SidebarBody onNavigate={onClose} />
+        <SidebarBody nav={nav} onNavigate={onClose} />
       </div>
     </div>
   )
@@ -200,12 +235,18 @@ export default function AccountLayout({
   title,
   lede,
   actions,
+  nav = ACCOUNT_NAV,
   children,
 }: {
   title: string
   lede?: ReactNode
   /** Page-level controls, rendered to the right of the heading. */
   actions?: ReactNode
+  /**
+   * Menu to show in the sidebar and the mobile drawer. Defaults to the shipped
+   * menu; pass `ACCOUNT_NAV_NEXT_GEN` to include the parked pages.
+   */
+  nav?: NavGroup[]
   children: ReactNode
 }) {
   const { pathname } = useLocation()
@@ -258,11 +299,11 @@ export default function AccountLayout({
                 Account menu
               </button>
 
-              <AccountDrawer open={menuOpen} onClose={() => setMenuOpen(false)} />
+              <AccountDrawer nav={nav} open={menuOpen} onClose={() => setMenuOpen(false)} />
 
               {/* Sidebar — the persistent rail from lg up */}
               <aside className="hidden lg:flex w-full lg:w-[280px] lg:flex-shrink-0 bg-[#f4f6fb] border border-[#e2e8f0] p-6 flex-col gap-7 lg:sticky lg:top-8">
-                <SidebarBody />
+                <SidebarBody nav={nav} />
               </aside>
 
               {/* Content */}

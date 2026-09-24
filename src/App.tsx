@@ -93,6 +93,7 @@ import DesignSystemIconography from '@/pages/design-system/Iconography'
 import HeaderPreview from '@/pages/design-system/preview/HeaderPreview'
 import FooterPreview from '@/pages/design-system/preview/FooterPreview'
 import AccountDashboard from '@/pages/account/AccountDashboard'
+import AccountDashboardNextGen from '@/pages/account/AccountDashboardNextGen'
 import AccountProfile from '@/pages/account/AccountProfile'
 import AccountAddresses from '@/pages/account/AccountAddresses'
 import AccountPayment from '@/pages/account/AccountPayment'
@@ -182,6 +183,10 @@ export default function App() {
 
         {/* Account section — no auth gate; the prototype has no sessions */}
         <Route path="/account" element={<AccountDashboard />} />
+        {/* Deliberately unlinked — reachable only by typing the URL. It is an
+            exploration alongside the dashboard being built for USNI, not part
+            of it, so it stays out of the account nav. */}
+        <Route path="/account/next-gen" element={<AccountDashboardNextGen />} />
         <Route path="/account/profile" element={<AccountProfile />} />
         <Route path="/account/addresses" element={<AccountAddresses />} />
         <Route path="/account/payment" element={<AccountPayment />} />

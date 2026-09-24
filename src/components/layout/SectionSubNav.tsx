@@ -4,6 +4,16 @@ import ExternalLinkIcon from '@/components/ui/ExternalLinkIcon'
 
 export interface SectionNavItem {
   label: string
+  /**
+   * Abbreviation for the desktop row only, where every tab sits on one line and
+   * a long name crowds its neighbours. The mobile dropdown is a vertical list
+   * with room to spare, so it always shows the full `label`.
+   *
+   * An abbreviation that is clear in context can still be opaque out of it, so
+   * the desktop link keeps the full name as its accessible name and its tooltip
+   * — only the visible text shortens.
+   */
+  shortLabel?: string
   href: string
   /** Leaves the site — opens in a new tab and gets the external-link marker. */
   external?: boolean
@@ -55,6 +65,20 @@ export default function SectionSubNav({
 
   const externalProps = (item: SectionNavItem) =>
     item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {}
+
+  /*
+   * An abbreviated tab spells itself out for assistive tech and on hover. The
+   * aria-label has to absorb the new-tab hint too: it replaces the link's
+   * contents as the accessible name, so the sr-only span inside would otherwise
+   * go unread.
+   */
+  const shortenedProps = (item: SectionNavItem) =>
+    item.shortLabel
+      ? {
+          'aria-label': item.external ? `${item.label} (opens in a new tab)` : item.label,
+          title: item.label,
+        }
+      : {}
 
   return (
     <div className="border-b border-[#B8B49A]" style={{ backgroundColor: '#E0E0CC' }}>
@@ -118,13 +142,14 @@ export default function SectionSubNav({
             key={item.label}
             href={item.href}
             {...externalProps(item)}
+            {...shortenedProps(item)}
             className={`font-body font-semibold text-sm whitespace-nowrap transition-colors
               ${isActive(item)
                 ? 'text-navy-boldest link-underline-always'
                 : 'text-navy-bolder hover:text-navy-subtle link-underline-hover'
               }`}
           >
-            {item.label}
+            {item.shortLabel ?? item.label}
             {item.external && (
               <>
                 {' '}

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import AccountLayout from '@/components/layout/AccountLayout'
+import AccountLayout, { ACCOUNT_NAV_NEXT_GEN } from '@/components/layout/AccountLayout'
 import { AccountCard, EmptyState } from '@/components/ui/AccountCard'
 import { savedArticles } from '@/data/account'
 
@@ -15,6 +15,10 @@ export default function AccountSaved() {
     <AccountLayout
       title="Saved articles"
       lede="Articles you've bookmarked. Saved reading doesn't count against the free-article meter."
+      /* A parked page, so it carries the full menu rather than the shipped one
+         that omits it — otherwise arriving here from the next-gen dashboard
+         drops the link you just followed. */
+      nav={ACCOUNT_NAV_NEXT_GEN}
     >
       <AccountCard>
         {items.length === 0 ? (

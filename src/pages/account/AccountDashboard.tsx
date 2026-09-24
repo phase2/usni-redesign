@@ -4,15 +4,7 @@ import AccountLayout from '@/components/layout/AccountLayout'
 import { AccountCard, Badge, DataRow, SectionLink, Toggle } from '@/components/ui/AccountCard'
 import Modal from '@/components/ui/Modal'
 import Alert from '@/components/ui/Alert'
-import {
-  giving,
-  givingTotals,
-  membership,
-  orders,
-  savedArticles,
-  subscriptions,
-  wishlist,
-} from '@/data/account'
+import { membership, orders, subscriptions, wishlist } from '@/data/account'
 
 /**
  * Account landing page.
@@ -27,10 +19,6 @@ export default function AccountDashboard() {
   const [autoRenew, setAutoRenew] = useState(membership.autoRenew)
   const [confirmOff, setConfirmOff] = useState(false)
   const recentOrders = orders.slice(0, 3)
-  const towardCircle = Math.min(
-    100,
-    Math.round((givingTotals.yearToDate / givingTotals.leadershipCircleThreshold) * 100),
-  )
 
   /*
    * Switching auto-renew off lapses the membership, so it asks first; switching
@@ -162,24 +150,9 @@ export default function AccountDashboard() {
           </dl>
         </AccountCard>
 
-        {/* ── Saved articles ──────────────────────────────────────────── */}
-        <AccountCard title="Saved articles" action={<SectionLink to="/account/saved">All saved</SectionLink>}>
-          <ul className="flex flex-col">
-            {savedArticles.map(a => (
-              <li key={a.href} className="py-3 border-b border-[#e8eaed] last:border-b-0 last:pb-0 first:pt-0">
-                <Link
-                  to={a.href}
-                  className="link-underline-hover font-body font-bold text-[15px] text-navy-bolder hover:text-navy-bright transition-colors"
-                >
-                  {a.title}
-                </Link>
-                <p className="font-body text-[13px] text-neutral-subtle mt-0.5">
-                  {a.publication} · {a.issue}
-                </p>
-              </li>
-            ))}
-          </ul>
-        </AccountCard>
+        {/* Saved articles is parked with giving — out of the account menu and
+            off this dashboard for phase one. /account/saved still works, and
+            the card lives on the next-gen dashboard. */}
 
         {/* ── Wishlist ────────────────────────────────────────────────── */}
         <AccountCard title="Wishlist" action={<SectionLink to="/account/wishlist">All saved books</SectionLink>}>
@@ -209,23 +182,11 @@ export default function AccountDashboard() {
           </ul>
         </AccountCard>
 
-        {/* ── Giving ──────────────────────────────────────────────────── */}
-        <AccountCard title="Your giving" action={<SectionLink to="/account/giving">Giving history</SectionLink>}>
-          <dl className="flex flex-col mb-4">
-            <DataRow label={`${givingTotals.calendarYear} to date`} value={`$${givingTotals.yearToDate.toLocaleString()}`} />
-            <DataRow label="Lifetime" value={`$${givingTotals.lifetime.toLocaleString()}`} />
-            <DataRow label="Last gift" value={`$${giving[0].amount.toLocaleString()} · ${giving[0].givenOn}`} />
-          </dl>
-          <div className="flex flex-col gap-2">
-            <div className="h-2 bg-[#e2e8f0]">
-              <div className="h-2 bg-[#023e7d]" style={{ width: `${towardCircle}%` }} />
-            </div>
-            <p className="font-body text-[13px] text-neutral-subtle leading-relaxed">
-              ${(givingTotals.leadershipCircleThreshold - givingTotals.yearToDate).toLocaleString()} more in{' '}
-              {givingTotals.calendarYear} qualifies for the Leadership Circle.
-            </p>
-          </div>
-        </AccountCard>
+        {/* Giving is out of scope for phase one, so there is no "Your giving"
+            card here and no Giving history entry in the account menu. The page
+            itself still works at /account/giving, and the card — totals, last
+            gift, and progress toward the Leadership Circle — is built out on
+            the next-gen dashboard. */}
       </div>
 
       {/* ── Confirm turning auto-renew off ────────────────────────────── */}
