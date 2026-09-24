@@ -14,9 +14,12 @@ const items = [
   { label: 'Donor Recognition', href: '/giving/donor-recognition' },
   { label: 'Corporate Partners', href: '/giving/corporate' },
   {
-    label: 'Taylor Conference Center',
-    // Seven tabs on one row, and this was the longest by half. The dropdown
-    // still spells it out.
+    // The centre is named for Jack C. Taylor, so it is either the full name or
+    // the initialism — never "Taylor Conference Center", which reads as though
+    // Taylor were the place rather than the man.
+    label: 'Jack C. Taylor Conference Center',
+    // Seven tabs on one row, and this is the longest by some margin. The mobile
+    // dropdown is a vertical list and still spells it out.
     shortLabel: 'JCTCC',
     href: '/giving/taylor-conference-center',
   },
