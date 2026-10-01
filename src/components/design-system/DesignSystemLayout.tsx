@@ -2,31 +2,32 @@ import { Link } from 'react-router-dom'
 
 interface DesignSystemLayoutProps {
   children: React.ReactNode
-  breadcrumb?: string
 }
 
-export default function DesignSystemLayout({ children, breadcrumb }: DesignSystemLayoutProps) {
+/**
+ * Shared chrome for every design-system page: a sticky white bar with the full
+ * USNI logo on the left (linking to the table of contents) and the "USNI
+ * Redesign Prototypes & Design System" title on the right.
+ *
+ * Wayfinding lives elsewhere: each component sheet carries its own breadcrumb
+ * in the page area above its H1 (DesignSystemBreadcrumb), and the floating
+ * PrototypeNav covers the way back into the prototype, which is why the bar no
+ * longer needs a "Back to prototype" link.
+ */
+export default function DesignSystemLayout({ children }: DesignSystemLayoutProps) {
   return (
     <div className="min-h-screen bg-neutral-subtlest">
       <header className="sticky top-0 z-10 bg-white border-b border-border-light">
-        <div className="max-w-container mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
-          <Link to="/design-system" className="flex items-center gap-3">
-            <img src="/usni-logo-seal.svg" alt="" className="h-8 w-auto" />
-            <span className="font-headline text-lg text-navy-bolder leading-none">Design System</span>
+        <div className="max-w-container mx-auto px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+          <Link to="/toc" aria-label="Redesign table of contents" className="flex-shrink-0">
+            <img src="/usni-logo-full.svg" alt="U.S. Naval Institute" className="h-9 lg:h-12 w-auto" />
           </Link>
-          <Link to="/" className="font-body text-sm text-navy-subtle hover:text-navy-bolder transition-colors">
-            ← Back to USNI redesign prototype
-          </Link>
+          {/* Long enough to wrap to two lines on a phone, so it is set tight and
+              capped rather than forced onto one. */}
+          <p className="font-headline text-base sm:text-xl lg:text-2xl text-navy-bolder leading-[1.15] text-right max-w-[220px] sm:max-w-none">
+            USNI Redesign Prototypes &amp; Design System
+          </p>
         </div>
-        {breadcrumb && (
-          <div className="max-w-container mx-auto px-6 lg:px-8 pb-3 -mt-1">
-            <p className="font-body text-xs uppercase tracking-[0.08em] text-neutral-subtle">
-              <Link to="/design-system" className="hover:text-navy-subtle">Design System</Link>
-              <span className="mx-2">/</span>
-              {breadcrumb}
-            </p>
-          </div>
-        )}
       </header>
       <main>{children}</main>
     </div>

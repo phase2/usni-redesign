@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import DesignSystemLayout from '@/components/design-system/DesignSystemLayout'
+import DesignSystemBreadcrumb from '@/components/design-system/DesignSystemBreadcrumb'
 import DocSection from '@/components/design-system/DocSection'
 import { Button, ButtonLink, NavyButtonLink } from '@/components/ui/Button'
 import CardCta from '@/components/ui/CardCta'
@@ -101,11 +102,9 @@ const demoPlainCard = {
 
 export default function StyleGuide() {
   return (
-    <DesignSystemLayout breadcrumb="Style Guide">
+    <DesignSystemLayout>
       <div className="max-w-container mx-auto px-6 lg:px-8 pt-12 pb-8">
-        <p className="font-body font-medium text-sm uppercase tracking-[0.08em] text-navy-subtle mb-3">
-          Foundations
-        </p>
+        <DesignSystemBreadcrumb />
         <h1 className="font-headline text-5xl text-navy-bolder leading-[1.1] mb-4">Style Guide</h1>
         <p className="font-body text-base text-neutral-subtle leading-relaxed max-w-2xl">
           Base colors, typography, and core component treatments used across USNI.org.

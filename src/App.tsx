@@ -22,6 +22,7 @@ function ScrollToTop() {
   return null
 }
 import { CartProvider } from '@/context/CartContext'
+import PrototypeNav from '@/components/prototype/PrototypeNav'
 import Home from '@/pages/Home'
 import Membership from '@/pages/Membership'
 import Events from '@/pages/Events'
@@ -86,7 +87,18 @@ import AboutHistory from '@/pages/AboutHistory'
 import AboutStrategicPlan from '@/pages/AboutStrategicPlan'
 import AboutLeadership from '@/pages/AboutLeadership'
 import AboutStateOfTheInstitute from '@/pages/AboutStateOfTheInstitute'
-import DesignSystemHome from '@/pages/design-system/DesignSystemHome'
+import TableOfContents from '@/pages/design-system/TableOfContents'
+import DsTokens from '@/pages/design-system/Tokens'
+import DsUtilities from '@/pages/design-system/Utilities'
+import DsOverlays from '@/pages/design-system/Overlays'
+import DsListsTables from '@/pages/design-system/ListsTables'
+import DsMedia from '@/pages/design-system/Media'
+import DsCommerce from '@/pages/design-system/Commerce'
+import DsAccountComponents from '@/pages/design-system/AccountComponents'
+import DsHeroes from '@/pages/design-system/Heroes'
+import DsAccordions from '@/pages/design-system/Accordions'
+import DsSectionPatterns from '@/pages/design-system/SectionPatterns'
+import DsBillboards from '@/pages/design-system/Billboards'
 import StyleGuide from '@/pages/design-system/StyleGuide'
 import DesignSystemButtons from '@/pages/design-system/Buttons'
 import DesignSystemCards from '@/pages/design-system/Cards'
@@ -114,6 +126,9 @@ export default function App() {
     <CartProvider>
     <BrowserRouter>
       <ScrollToTop />
+      {/* Every route below is also listed in src/data/prototypeMap.ts, which
+          feeds the PrototypeNav launcher and the /toc table of
+          contents — add new pages there too. */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/events" element={<Events />} />
@@ -228,7 +243,9 @@ export default function App() {
         <Route path="/about/strategic-plan" element={<AboutStrategicPlan />} />
         <Route path="/about/leadership" element={<AboutLeadership />} />
         <Route path="/about/state-of-the-institute" element={<AboutStateOfTheInstitute />} />
-        <Route path="/design-system" element={<DesignSystemHome />} />
+        <Route path="/toc" element={<TableOfContents />} />
+        {/* The table of contents' old address, kept so earlier links still land */}
+        <Route path="/design-system" element={<Navigate to="/toc" replace />} />
         <Route path="/design-system/style-guide" element={<StyleGuide />} />
         <Route path="/design-system/buttons" element={<DesignSystemButtons />} />
         <Route path="/design-system/cards" element={<DesignSystemCards />} />
@@ -236,10 +253,22 @@ export default function App() {
         <Route path="/design-system/forms" element={<DesignSystemForms />} />
         <Route path="/design-system/navigation" element={<DesignSystemNavigation />} />
         <Route path="/design-system/iconography" element={<DesignSystemIconography />} />
+        <Route path="/design-system/tokens" element={<DsTokens />} />
+        <Route path="/design-system/utilities" element={<DsUtilities />} />
+        <Route path="/design-system/overlays" element={<DsOverlays />} />
+        <Route path="/design-system/lists" element={<DsListsTables />} />
+        <Route path="/design-system/media" element={<DsMedia />} />
+        <Route path="/design-system/commerce" element={<DsCommerce />} />
+        <Route path="/design-system/account" element={<DsAccountComponents />} />
+        <Route path="/design-system/heroes" element={<DsHeroes />} />
+        <Route path="/design-system/accordions" element={<DsAccordions />} />
+        <Route path="/design-system/sections" element={<DsSectionPatterns />} />
+        <Route path="/design-system/billboards" element={<DsBillboards />} />
         <Route path="/design-system/preview/header" element={<HeaderPreview />} />
         <Route path="/design-system/preview/footer" element={<FooterPreview />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <PrototypeNav />
     </BrowserRouter>
     </CartProvider>
   )
