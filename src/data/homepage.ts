@@ -136,7 +136,7 @@ export const navItems: NavItem[] = [
       { label: 'Overview', href: '/about' },
       { label: 'History', href: '/about/history' },
       { label: 'Strategic Plan', href: '/about/strategic-plan' },
-      { label: 'State of the Institution', href: '/about/state-of-institution' },
+      { label: 'State of the Institute', href: '/about/state-of-the-institute' },
       { label: 'Leadership', href: '/about/leadership' },
       { label: 'Media Inquiries', href: '/about/media' },
       { label: 'Contact USNI', href: '/contact#general' },

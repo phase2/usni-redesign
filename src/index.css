@@ -205,6 +205,54 @@
     animation: link-underline-sweep 0.32s ease-out;
   }
 
+  /* ── Rich text ──────────────────────────────────────────────────────────
+     House styles for markup transcribed from the live site and rendered as
+     HTML rather than JSX — content too long to hand-convert, such as the
+     State of the Institute archive. Elements here cannot take utility
+     classes, so the reading-column treatment the JSX pages use (body copy,
+     headline subheads, `.text-link` links) is applied by descendant
+     selector instead. Headings arrive already shifted under the page's h1. */
+  .rich-text {
+    @apply flex flex-col gap-4 font-body text-base lg:text-[17px] text-neutral-bold leading-[1.7];
+  }
+
+  .rich-text h3 {
+    @apply font-headline text-[22px] lg:text-[26px] text-navy-bolder leading-[1.2] mt-4;
+  }
+
+  .rich-text h4 {
+    @apply font-body font-bold text-base text-navy-bolder leading-[1.4] mt-2;
+  }
+
+  .rich-text h3 + h4 {
+    @apply mt-0;
+  }
+
+  .rich-text ol {
+    @apply list-decimal pl-6 flex flex-col gap-1.5;
+  }
+
+  .rich-text ul {
+    @apply list-disc pl-6 flex flex-col gap-1.5;
+  }
+
+  .rich-text a {
+    @apply text-link;
+  }
+
+  .rich-text strong {
+    @apply font-semibold text-navy-bolder;
+  }
+
+  .rich-text img {
+    @apply block h-auto max-w-full;
+  }
+
+  /* Clears the sticky header when an in-page link (e.g. #ballot) lands. */
+  .rich-text [id] {
+    @apply scroll-mt-32;
+  }
+
   /* ── Accordion rows ──────────────────────────────────────────────────────
      One hover treatment for every accordion header: a solid #0466C8 band with
      white type. Written in CSS rather than per-component Tailwind because the
