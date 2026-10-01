@@ -1,3 +1,5 @@
+import { Fragment } from 'react'
+
 function CheckIcon() {
   return (
     <svg className="w-6 h-6 text-[#0466c8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -113,9 +115,9 @@ export default function MembershipComparisonTable() {
 
             <tbody className="bg-white">
               {tableData.map((group) => (
-                <>
+                <Fragment key={group.heading}>
                   {/* Group heading row */}
-                  <tr key={group.heading} className="border-b border-[#c4c9d4]">
+                  <tr className="border-b border-[#c4c9d4]">
                     <td colSpan={5} className="bg-[#f4f4f6] px-4 py-4">
                       <span className="font-headline text-xl text-navy-bolder">{group.heading}</span>
                     </td>
@@ -133,7 +135,7 @@ export default function MembershipComparisonTable() {
                       <Cell value={row.life} />
                     </tr>
                   ))}
-                </>
+                </Fragment>
               ))}
             </tbody>
           </table>
