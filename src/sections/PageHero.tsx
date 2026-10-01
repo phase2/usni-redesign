@@ -29,6 +29,7 @@ export default function PageHero({
   imageAlt = '',
   panelSide = 'right',
   panelTone = 'dark',
+  mobileImage = 'standard',
   children,
 }: {
   title: string
@@ -56,6 +57,13 @@ export default function PageHero({
    * whose artwork carries enough contrast on its own.
    */
   panelTone?: 'dark' | 'light'
+  /**
+   * Crop for the photo where it stacks above the panel, below `lg`. `standard`
+   * is the 4:3 every photo hero uses; `short` is 2:1, for artwork that is
+   * texture rather than subject (a cover wall, say) and does not earn a
+   * screen-height block before the title.
+   */
+  mobileImage?: 'standard' | 'short'
   /** Anything that belongs under the description, e.g. a CTA row. */
   children?: ReactNode
 }) {
@@ -77,7 +85,7 @@ export default function PageHero({
           src={image}
           alt={imageAlt}
           aria-hidden={imageAlt ? undefined : 'true'}
-          className="lg:hidden w-full aspect-[4/3] object-cover object-center"
+          className={`lg:hidden w-full ${mobileImage === 'short' ? 'aspect-[2/1]' : 'aspect-[4/3]'} object-cover object-center`}
         />
 
         <div className={`relative z-10 flex ${onLeft ? 'lg:justify-start' : 'lg:justify-end'}`}>
