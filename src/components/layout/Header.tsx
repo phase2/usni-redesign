@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useLayoutEffect } from 'react'
 import ExternalLinkIcon from '@/components/ui/ExternalLinkIcon'
 import { useLocation } from 'react-router-dom'
 import { useCart } from '@/context/CartContext'
@@ -249,15 +249,69 @@ function Chevron({ open }: { open: boolean }) {
 }
 
 /* ─── Mega Menu panel ───────────────────────────────────────────────────────── */
+/** Clearance kept between a mega-menu panel and the viewport edge. */
+const PANEL_GUTTER = 16
+
+/**
+ * Horizontal nudge that keeps an open panel inside the viewport.
+ *
+ * Each panel is 820px and hangs off one edge of its nav item. On a wide screen
+ * that always fits, but between `lg` and ~1330px the right-anchored panels
+ * (Books & Press, About, Giving) ran off the left edge, and a left-anchored one
+ * near the end of the row could run off the right. The panel is measured
+ * untransformed, then slid just far enough to clear the gutter — recomputed on
+ * resize, and on scroll since the compact header re-spaces the nav.
+ */
+function useViewportClamp(ref: React.RefObject<HTMLDivElement>) {
+  const [shift, setShift] = useState(0)
+
+  useLayoutEffect(() => {
+    const el = ref.current
+    if (!el) return
+
+    const measure = () => {
+      const prev = el.style.transform
+      el.style.transform = 'none'
+      const { left, right } = el.getBoundingClientRect()
+      el.style.transform = prev
+      const vw = document.documentElement.clientWidth
+      let next = 0
+      if (left < PANEL_GUTTER) next = PANEL_GUTTER - left
+      else if (right > vw - PANEL_GUTTER) next = vw - PANEL_GUTTER - right
+      setShift(next)
+    }
+
+    measure()
+    window.addEventListener('resize', measure)
+    window.addEventListener('scroll', measure, { passive: true })
+    return () => {
+      window.removeEventListener('resize', measure)
+      window.removeEventListener('scroll', measure)
+    }
+  }, [ref])
+
+  return shift
+}
+
 function MegaMenuPanel({ links, megaCta, alignRight }: {
   links: NavItem[]
   megaCta?: MegaMenuCTA
   alignRight?: boolean
 }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const shift = useViewportClamp(ref)
+
   return (
     <div
+      ref={ref}
       className={`absolute top-full z-50 bg-white shadow-xl border border-border-light ${alignRight ? 'right-0' : 'left-0'}`}
-      style={{ minWidth: '820px' }}
+      style={{
+        // 820px, unless the viewport (less both gutters) is narrower than that.
+        // Folded into min-width rather than a separate max-width, which would
+        // lose to min-width in a conflict.
+        minWidth: `min(820px, calc(100vw - ${PANEL_GUTTER * 2}px))`,
+        transform: shift ? `translateX(${shift}px)` : undefined,
+      }}
     >
       <div className="flex">
         <div className="flex-1 py-2">
