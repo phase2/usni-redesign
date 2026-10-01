@@ -113,6 +113,7 @@ export const navItems: NavItem[] = [
       { label: 'Professional Military Education', href: '/books/professional-military-education' },
       { label: 'Military Reading Lists', href: '/books/military-reading-lists' },
       { label: 'Oral Histories', href: '/archive/oral-histories' },
+      { label: 'Digital Editions', href: '/books/digital-editions' },
       { label: 'About the Press', href: '/books/about' },
       { label: 'Contact the Press', href: '/contact#press' },
     ],
