@@ -80,7 +80,7 @@ export default function ReadingListSection({
                 className="inline-flex items-center gap-2.5 bg-navy-bolder text-white font-body font-bold text-sm tracking-[-0.2px] px-6 py-4 border border-navy-bolder hover:bg-navy-bright hover:border-navy-bright transition-colors"
               >
                 {list.cta.label}
-                <ExternalLinkIcon size="1.05em" />
+                <ExternalLinkIcon size="1.1em" />
                 <span className="sr-only">(opens in a new tab)</span>
               </a>
             </div>
