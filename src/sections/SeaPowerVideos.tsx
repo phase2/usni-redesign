@@ -8,6 +8,12 @@ interface SeaPowerVideosProps {
   description?: string
   videos: SeaPowerVideo[]
   background?: 'white' | 'subtle'
+  /**
+   * Show each video's title as an H3 headline above it. On for the authors'
+   * remarks, where the title is what tells three players apart; off for the
+   * single event recording, where it only repeated the heading above.
+   */
+  headlines?: boolean
 }
 
 /**
@@ -28,6 +34,7 @@ export default function SeaPowerVideos({
   description,
   videos,
   background = 'subtle',
+  headlines = true,
 }: SeaPowerVideosProps) {
   const single = videos.length === 1
 
@@ -59,15 +66,22 @@ export default function SeaPowerVideos({
           }
         >
           {videos.map((video) => (
-            <ArticleVideo
-              key={video.youtubeId}
-              youtubeId={video.youtubeId}
-              poster={seaPowerImage(video.poster) ?? ''}
-              posterAlt={video.posterAlt}
-              title={video.title}
-              caption={video.title}
-              className=""
-            />
+            <div key={video.youtubeId} className="flex flex-col gap-4">
+              {/* flex-1: a headline that wraps to two lines takes up the
+                  slack, so the players stay level across the row */}
+              {headlines && (
+                <h3 className="flex-1 font-headline text-[22px] lg:text-[24px] text-navy-bolder leading-[1.2]">
+                  {video.title}
+                </h3>
+              )}
+              <ArticleVideo
+                youtubeId={video.youtubeId}
+                poster={seaPowerImage(video.poster) ?? ''}
+                posterAlt={video.posterAlt}
+                title={video.title}
+                className=""
+              />
+            </div>
           ))}
         </div>
       </div>
