@@ -120,6 +120,7 @@ export default function SeaPowerProject() {
           heading={eventsIntro.title}
           description={eventsIntro.description}
           videos={eventVideos}
+          headlines={false}
         />
 
         <SeaPowerVideos

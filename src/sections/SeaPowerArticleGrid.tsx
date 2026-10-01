@@ -53,16 +53,10 @@ export default function SeaPowerArticleGrid({
       }`}
     >
       <div className="container-site">
-        <div className="pb-4 border-b-2 border-[#0466C8]">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-6">
-            <h2 className="font-headline text-[26px] lg:text-[32px] text-navy-bolder leading-[1.15]">
-              {heading}
-            </h2>
-            <p className="font-body text-sm text-neutral-subtle whitespace-nowrap flex-shrink-0 pb-1">
-              {articles.length} articles
-            </p>
-          </div>
-        </div>
+        {/* No article count beside the heading — removed at the client's request */}
+        <h2 className="font-headline text-[26px] lg:text-[32px] text-navy-bolder leading-[1.15] pb-4 border-b-2 border-[#0466C8]">
+          {heading}
+        </h2>
 
         {description && (
           <p className="font-body text-base text-neutral-bold leading-[1.7] max-w-[780px] mt-6">
