@@ -7,7 +7,6 @@ import PageHero from '@/sections/PageHero'
 import GivingSubNav from '@/sections/GivingSubNav'
 import TaylorCenterAbout, { JCTCC_URL } from '@/sections/TaylorCenterAbout'
 import TaylorCenterSpaces from '@/sections/TaylorCenterSpaces'
-import TaylorCenterCommemorative from '@/sections/TaylorCenterCommemorative'
 import TaylorCenterNamesake from '@/sections/TaylorCenterNamesake'
 import TaylorCenterHistory from '@/sections/TaylorCenterHistory'
 import TaylorCenterVisit from '@/sections/TaylorCenterVisit'
@@ -23,11 +22,15 @@ import heroImage from '@/assets/images/taylor-center/jctcc-rooftop.jpg'
  * thing a reader met was the oldest thing on the page.
  *
  * Reordered around what someone arriving from the Giving menu is there for:
- * what the Center is and what is in it, then the two ways to put a name on it,
- * then the namesake and the history as background, then the hand-off to
- * jackctaylorconferencecenter.org for anyone who came to book a room. The
- * commemorative bricks and chairs move here from the donate page, where they
- * interrupted the ask for unrestricted support.
+ * what the Center is and what is in it, then the namesake and the history as
+ * background, then the hand-off to jackctaylorconferencecenter.org for anyone
+ * who came to book a room.
+ *
+ * The commemorative bricks and chairs had a purchase picker here, between the
+ * rooms and the namesake. Few remain, so since October 2026 they are a card on
+ * /giving/opportunities that sends a donor to the Foundation instead.
+ * `TaylorCenterCommemorative` and the cart's commemorative line items are left
+ * in place, unrendered, in case the picker comes back.
  */
 export default function GivingTaylorCenter() {
   return (
@@ -54,8 +57,12 @@ export default function GivingTaylorCenter() {
           }
         >
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 sm:items-center">
-            <ButtonLink href="#commemorative-gifts" variant="primary" size="md">
-              Purchase a brick or chair
+            <ButtonLink
+              href="/giving/donate?priority=taylor-conference-center"
+              variant="primary"
+              size="md"
+            >
+              Support the Center
             </ButtonLink>
             <ButtonLink
               href={JCTCC_URL}
@@ -73,7 +80,6 @@ export default function GivingTaylorCenter() {
 
         <TaylorCenterAbout />
         <TaylorCenterSpaces />
-        <TaylorCenterCommemorative />
         <TaylorCenterNamesake />
         <TaylorCenterHistory />
         <TaylorCenterVisit />

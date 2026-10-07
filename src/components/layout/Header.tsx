@@ -109,6 +109,10 @@ function SearchFlydown({ onClose }: { onClose: () => void }) {
               type="search"
               value={query}
               onChange={e => setQuery(e.target.value)}
+              onKeyDown={e => {
+                // Enter goes to the full results page, as the Search button does
+                if (e.key === 'Enter') window.location.href = query.trim() ? `/search?q=${encodeURIComponent(query.trim())}` : '/search'
+              }}
               placeholder="What can we help you find?"
               className="flex-1 font-body text-[17px] text-navy-bolder placeholder:text-neutral-subtle outline-none bg-transparent py-3"
               aria-label="Site search"

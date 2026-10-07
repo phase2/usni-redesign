@@ -66,7 +66,8 @@ function NavLinks({
   return (
     <ul className={depth > 0 ? 'ml-3 pl-3 border-l border-white/15' : ''}>
       {links.map((link) => {
-        const current = link.href === pathname
+        // A demo link may carry a query (Search Results); the page is the path
+        const current = link.href?.split('?')[0] === pathname
         const label = (
           <>
             <span className="min-w-0">{link.label}</span>

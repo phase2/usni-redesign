@@ -1,4 +1,5 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, type FormEvent } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const AUTOCOMPLETE_TITLES = [
   { title: 'Warfare Beneath the Waves', author: 'Axel Niestle', href: '/books/warfare-beneath-the-waves' },
@@ -41,10 +42,24 @@ function highlight(text: string, query: string) {
 
 interface BookSearchBarProps {
   className?: string
+  /**
+   * `large` is the full-width box from site search (/search): a navy rule,
+   * larger type, and a navy submit button in place of the leading icon. Used
+   * where the bar is the page's main control, as on All Books, rather than one
+   * element of a hero.
+   */
+  size?: 'default' | 'large'
+  /** Seeds the field, e.g. with the keyword the collection is filtered by. */
+  initialQuery?: string
 }
 
-export default function BookSearchBar({ className = '' }: BookSearchBarProps) {
-  const [query, setQuery] = useState('')
+/** Where a submitted search lands: the full collection, filtered. */
+const resultsHref = (q: string) =>
+  q.trim() ? `/books/collection?q=${encodeURIComponent(q.trim())}` : '/books/collection'
+
+export default function BookSearchBar({ className = '', size = 'default', initialQuery = '' }: BookSearchBarProps) {
+  const navigate = useNavigate()
+  const [query, setQuery] = useState(initialQuery)
   const [open, setOpen] = useState(false)
   const wrapperRef = useRef<HTMLDivElement>(null)
 
@@ -66,25 +81,42 @@ export default function BookSearchBar({ className = '' }: BookSearchBarProps) {
   }, [])
 
   const dropdownOpen = open && suggestions.length > 0
+  const large = size === 'large'
+
+  // Enter (and, on the large bar, the button) runs the search against the
+  // whole collection rather than picking a suggestion.
+  const onSubmit = (e: FormEvent) => {
+    e.preventDefault()
+    setOpen(false)
+    navigate(resultsHref(query))
+  }
 
   return (
     <div ref={wrapperRef} className={`relative ${className}`}>
-      <div
-        className={`flex items-center border-2 bg-white px-4 py-3.5 transition-colors
+      <form
+        role="search"
+        onSubmit={onSubmit}
+        className={large
+          ? 'flex items-stretch border-2 border-navy-bolder bg-white'
+          : `flex items-center border-2 bg-white px-4 py-3.5 transition-colors
           ${dropdownOpen
             ? 'border-[#023E7D]'
             : 'border-[#94A3B8] focus-within:border-[#023E7D]'
           }`}
       >
-        <i
-          className="fa-solid fa-magnifying-glass text-[#0466C8] mr-3 text-lg flex-shrink-0"
-          aria-hidden="true"
-        />
+        {!large && (
+          <i
+            className="fa-solid fa-magnifying-glass text-[#0466C8] mr-3 text-lg flex-shrink-0"
+            aria-hidden="true"
+          />
+        )}
         <input
           type="text"
           value={query}
-          placeholder="Search full collection by keyword"
-          className="flex-1 font-body text-base text-navy-bolder placeholder:text-neutral-subtle outline-none bg-transparent"
+          placeholder={large ? 'Search books by keyword, title, or author…' : 'Search full collection by keyword'}
+          className={large
+            ? 'flex-1 min-w-0 font-body text-lg lg:text-xl text-navy-bolder placeholder:text-neutral-subtle outline-none bg-transparent px-4 lg:px-5 py-3.5 lg:py-4'
+            : 'flex-1 font-body text-base text-navy-bolder placeholder:text-neutral-subtle outline-none bg-transparent'}
           onChange={e => { setQuery(e.target.value); setOpen(true) }}
           onFocus={() => setOpen(true)}
           onKeyDown={e => e.key === 'Escape' && setOpen(false)}
@@ -94,18 +126,28 @@ export default function BookSearchBar({ className = '' }: BookSearchBarProps) {
         />
         {query && (
           <button
+            type="button"
             onClick={() => { setQuery(''); setOpen(false) }}
-            className="ml-2 text-neutral-subtle hover:text-navy-bolder transition-colors flex-shrink-0"
+            className={`${large ? 'px-3' : 'ml-2'} text-neutral-subtle hover:text-navy-bolder transition-colors flex-shrink-0`}
             aria-label="Clear search"
           >
             <i className="fa-solid fa-xmark text-sm" aria-hidden="true" />
           </button>
         )}
-      </div>
+        {large && (
+          <button
+            type="submit"
+            className="flex-shrink-0 flex items-center justify-center w-14 lg:w-16 bg-navy-bolder text-white hover:bg-navy-bright transition-colors"
+          >
+            <i className="fa-solid fa-magnifying-glass text-lg" aria-hidden="true" />
+            <span className="sr-only">Search books</span>
+          </button>
+        )}
+      </form>
 
       {dropdownOpen && (
         <ul
-          className="absolute left-0 right-0 bg-white border-2 border-t-0 border-[#023E7D] shadow-lg z-50"
+          className={`absolute left-0 right-0 bg-white border-2 border-t-0 ${large ? 'border-navy-bolder' : 'border-[#023E7D]'} shadow-lg z-50`}
           role="listbox"
         >
           {suggestions.map((item) => (
@@ -126,7 +168,7 @@ export default function BookSearchBar({ className = '' }: BookSearchBarProps) {
           ))}
           <li className="border-t border-border-light">
             <a
-              href={`/books/collection?q=${encodeURIComponent(query)}`}
+              href={resultsHref(query)}
               className="flex items-center gap-2 px-4 py-3 font-body font-semibold text-base text-[#0466C8] hover:bg-surface-subtle transition-colors"
               onClick={() => setOpen(false)}
             >

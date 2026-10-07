@@ -927,7 +927,7 @@ export default function Heroes() {
                 { path: 'src/sections/ProceedingsContactHero.tsx', note: 'title only; pt-12 pb-20 — the deepest bottom padding of any band, for no stated reason. → PageHero.' },
                 { path: 'src/sections/ProceedingsAllIssuesHero.tsx', note: 'title only; pt-12 pb-16. → PageHero.' },
                 { path: 'src/sections/NavalHistoryAllIssuesHero.tsx', note: 'identical to ProceedingsAllIssuesHero but for the trail. → PageHero.' },
-                { path: 'src/sections/BooksCollectionHero.tsx', note: 'pt-12 pb-14, gap-6; the title shares a row with BookSearchBar (lg:flex-row lg:items-end justify-between, search at lg:max-w-[520px]). → PageHero band with an end-aligned trailing slot — the one genuinely new option this list asks for.' },
+                { path: 'src/sections/BooksCollectionHero.tsx', note: 'pt-12 pb-14, gap-6; the title, then BookSearchBar size="large" full width beneath it, as on /search. → PageHero band with the search bar as children.' },
                 { path: 'src/sections/BooksNewReleasesHero.tsx', note: 'the same title row as BooksCollectionHero with a hand-rolled navy “Browse all books” button instead of search. → same trailing slot, with ButtonLink navy.' },
               ]}
             />
