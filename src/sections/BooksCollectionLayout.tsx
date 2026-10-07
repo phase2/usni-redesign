@@ -1,4 +1,5 @@
 import { useState, useMemo, useCallback, useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { allBooks, SERIES_FACETS, SUBJECT_FACETS } from '@/data/books'
 import type { Book } from '@/data/books'
 import BookPrice from '@/components/ui/BookPrice'
@@ -309,6 +310,16 @@ export default function BooksCollectionLayout({
   const [sort, setSort] = useState('featured')
   const [page, setPage] = useState(1)
 
+  // The keyword comes from the URL (?q=), where the hero's search bar and its
+  // "See all results" link put it, so a filtered collection can be linked to.
+  const [params, setParams] = useSearchParams()
+  const keyword = (params.get('q') ?? '').trim()
+  const clearKeyword = () => {
+    const next = new URLSearchParams(params)
+    next.delete('q')
+    setParams(next)
+  }
+
   const toggleStr = useCallback((
     arr: string[],
     val: string,
@@ -334,9 +345,11 @@ export default function BooksCollectionLayout({
     setSelectedSeries([])
     setSelectedSubjects([])
     setSelectedPrices([])
+    if (keyword) clearKeyword()
   }
 
   const hasFilters =
+    keyword.length > 0 ||
     selectedBindings.length > 0 ||
     selectedSeries.length > 0 ||
     selectedSubjects.length > 0 ||
@@ -344,6 +357,14 @@ export default function BooksCollectionLayout({
 
   const filtered = useMemo(() => {
     let books = sourceBooks
+    if (keyword) {
+      // Every word has to appear somewhere in the title, byline, series, or subjects.
+      const terms = keyword.toLowerCase().split(/\s+/)
+      books = books.filter(b => {
+        const text = [b.title, b.author, b.series ?? '', ...(b.subjects ?? [])].join(' ').toLowerCase()
+        return terms.every(t => text.includes(t))
+      })
+    }
     if (selectedBindings.length)
       books = books.filter(b => selectedBindings.includes(b.format))
     if (selectedSeries.length)
@@ -359,10 +380,10 @@ export default function BooksCollectionLayout({
     if (sort === 'price-desc') return [...books].sort((a, b) => b.price - a.price)
     if (sort === 'az') return [...books].sort((a, b) => a.title.localeCompare(b.title))
     return books
-  }, [sourceBooks, selectedBindings, selectedSeries, selectedSubjects, selectedPrices, sort])
+  }, [sourceBooks, keyword, selectedBindings, selectedSeries, selectedSubjects, selectedPrices, sort])
 
   // Reset to page 1 whenever filters or sort change
-  useEffect(() => { setPage(1) }, [selectedBindings, selectedSeries, selectedSubjects, selectedPrices, sort])
+  useEffect(() => { setPage(1) }, [keyword, selectedBindings, selectedSeries, selectedSubjects, selectedPrices, sort])
 
   const pagedBooks = pageSize
     ? filtered.slice((page - 1) * pageSize, page * pageSize)
@@ -491,6 +512,9 @@ export default function BooksCollectionLayout({
           {/* Active filter chips */}
           {hasFilters && (
             <div className="flex flex-wrap gap-2 mb-6">
+              {keyword && (
+                <FilterChip group="Keyword" label={`“${keyword}”`} onRemove={clearKeyword} />
+              )}
               {selectedBindings.map(v => (
                 <FilterChip key={`b-${v}`} label={v} onRemove={() => toggleBinding(v)} />
               ))}
