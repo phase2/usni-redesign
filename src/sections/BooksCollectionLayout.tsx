@@ -2,6 +2,7 @@ import { useState, useMemo, useCallback, useEffect } from 'react'
 import { allBooks, SERIES_FACETS, SUBJECT_FACETS } from '@/data/books'
 import type { Book } from '@/data/books'
 import BookPrice from '@/components/ui/BookPrice'
+import FilterChip from '@/components/ui/FilterChip'
 
 /* ── Constants ─────────────────────────────────────────────────────────────── */
 
@@ -224,23 +225,6 @@ function BookGridCard({ book }: { book: Book }) {
         </div>
       </div>
     </a>
-  )
-}
-
-/* ── FilterChip ─────────────────────────────────────────────────────────────── */
-
-function FilterChip({ label, onRemove }: { label: string; onRemove: () => void }) {
-  return (
-    <span className="inline-flex items-center gap-1.5 bg-surface-subtle border border-border-light px-2.5 py-1 font-body text-xs text-navy-bolder">
-      {label}
-      <button
-        onClick={onRemove}
-        className="text-neutral-subtle hover:text-navy-bolder transition-colors flex-shrink-0"
-        aria-label={`Remove ${label} filter`}
-      >
-        <i className="fa-solid fa-xmark text-[10px]" aria-hidden="true" />
-      </button>
-    </span>
   )
 }
 

@@ -99,6 +99,7 @@ export const prototypeSection: PrototypeSection = {
       title: 'Site-wide',
       links: [
         { label: 'Homepage', href: '/' },
+        { label: 'Search Results', href: '/search?q=navy' },
         { label: 'Events', href: '/events', children: [{ label: 'Past Events', href: '/events/past' }] },
         { label: 'Archives', href: '/archives' },
         { label: 'Contact USNI', href: '/contact' },
