@@ -234,16 +234,8 @@ function ResultRow({
   return (
     <article className="flex gap-5 sm:gap-8 py-7">
       <div className="flex-1 min-w-0 flex flex-col gap-2">
-        <p className="flex flex-wrap items-center gap-x-2 font-body font-bold text-xs uppercase tracking-[0.1em]">
-          <span className="text-[#0466c8]">{TYPE_EYEBROW[item.type]}</span>
-          {item.label && (
-            <>
-              <span className="text-neutral-subtle" aria-hidden="true">·</span>
-              <span className={item.label === 'Upcoming' ? 'text-[#C1272D]' : 'text-neutral-subtle'}>
-                {item.label}
-              </span>
-            </>
-          )}
+        <p className="font-body font-bold text-xs uppercase tracking-[0.1em] text-[#0466c8]">
+          {TYPE_EYEBROW[item.type]}
         </p>
 
         <h3 className="font-headline text-xl lg:text-[22px] text-navy-bolder leading-[1.25]">

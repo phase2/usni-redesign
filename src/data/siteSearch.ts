@@ -60,8 +60,6 @@ export const SEARCH_TYPES: { id: SearchType; label: string; eyebrow: string }[] 
 export interface SearchItem {
   id: string
   type: SearchType
-  /** Second eyebrow beside the type — a department, "Upcoming", a series. */
-  label?: string
   title: string
   summary?: string
   href: string
@@ -138,11 +136,10 @@ const NOT_TOPICS = new Set(['Article Tag', 'USNI News', 'Event'])
 const topicsOf = (...values: (string | undefined)[]) =>
   values.filter((v): v is string => !!v && !NOT_TOPICS.has(v))
 
-function fromArticle(type: SearchType, a: Article, label?: string): SearchItem {
+function fromArticle(type: SearchType, a: Article): SearchItem {
   return {
     id: `${type}-${a.id}`,
     type,
-    label: label ?? (NOT_TOPICS.has(a.category) ? undefined : a.category),
     title: a.headline,
     summary: a.excerpt,
     href: a.href,
@@ -171,7 +168,7 @@ const seaPower = withImages([
   ...phaseThreeArticles,
   ...additionalReading,
 ]).map((a) => ({
-  ...fromArticle('proceedings', a, 'American Sea Power Project'),
+  ...fromArticle('proceedings', a),
   topics: ['American Sea Power Project'],
 }))
 
@@ -196,7 +193,6 @@ const books: SearchItem[] = (() => {
     .map((b) => ({
       id: `book-${b.id}`,
       type: 'books' as const,
-      label: b.series,
       title: b.title,
       summary: `${b.format} · $${b.price.toFixed(2)} for members ($${b.originalPrice.toFixed(2)} list)`,
       href: b.href,
@@ -209,12 +205,11 @@ const books: SearchItem[] = (() => {
 })()
 
 const events: SearchItem[] = [
-  ...upcomingEvents.map((e) => ({ ...e, upcoming: true })),
-  ...pastEvents.map((e, i) => ({ ...e, id: `past-${i}`, upcoming: false })),
+  ...upcomingEvents,
+  ...pastEvents.map((e, i) => ({ ...e, id: `past-${i}` })),
 ].map((e) => ({
   id: `event-${e.id}`,
   type: 'events' as const,
-  label: e.upcoming ? 'Upcoming' : undefined,
   title: e.title,
   summary: e.summary,
   href: e.href,
@@ -229,7 +224,6 @@ const events: SearchItem[] = [
 const podcasts: SearchItem[] = episodes.map((ep, i) => ({
   id: `podcast-${i}`,
   type: 'podcasts' as const,
-  label: ep.navalHistory ? 'Naval History Podcast' : 'Proceedings Podcast',
   title: ep.title,
   summary: ep.description,
   href: '/proceedings/podcast',
@@ -243,7 +237,6 @@ const podcasts: SearchItem[] = episodes.map((ep, i) => ({
 const contests: SearchItem[] = essayContests.map((c) => ({
   id: `contest-${c.slug}`,
   type: 'essay-contests' as const,
-  label: c.status === 'closed' ? 'Closed' : c.status === 'closing-soon' ? 'Closing Soon' : 'Open',
   title: `${c.year} ${c.title}${c.division ? ` — ${c.division}` : ''}`,
   summary: c.summary,
   href: c.href,
@@ -285,7 +278,7 @@ export function searchTerms(query: string): string[] {
 export function scoreItem(item: SearchItem, terms: string[]): number {
   if (terms.length === 0) return 1
   const title = item.title.toLowerCase()
-  const people = [...item.authors, ...item.topics, item.label ?? '', item.place ?? ''].join(' ').toLowerCase()
+  const people = [...item.authors, ...item.topics, item.place ?? ''].join(' ').toLowerCase()
   const body = (item.summary ?? '').toLowerCase()
   let score = 0
   for (const term of terms) {
