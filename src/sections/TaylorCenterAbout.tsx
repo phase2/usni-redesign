@@ -71,9 +71,9 @@ export default function TaylorCenterAbout() {
               </p>
 
               {/* The Center's own site is the one thing this section sends a
-                  reader away for — the page's own giving paths live further
-                  down, under the commemorative gifts, so it gets the slot to
-                  itself as a button rather than a link. */}
+                  reader away for — the page's giving path is the hero's Support
+                  the Center, so it gets the slot to itself as a button rather
+                  than a link. */}
               <div className="pt-1">
                 <ButtonLink
                   href={JCTCC_URL}

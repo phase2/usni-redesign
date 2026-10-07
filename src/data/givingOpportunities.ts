@@ -1,6 +1,11 @@
 /**
- * Giving Opportunities — the ten programmes the Foundation raises for, beside
- * Sponsor Student Memberships, which has a page of its own.
+ * Giving Opportunities — the twelve programmes the Foundation raises for.
+ *
+ * Twelve since the October 2026 review: Sponsor Student Memberships came down
+ * from its featured billboard above the grid to sit in it as an equal, and the
+ * commemorative bricks and chairs lost their purchase picker on the Taylor
+ * Center page and became a card here that points a donor at the Foundation —
+ * what remains is limited, so it is a conversation rather than a checkout.
  *
  * Transcribed from /donate/giving-opportunities and its nine child pages on the
  * live Drupal site (test-usni3.pantheonsite.io, captured 11 September 2026).
@@ -16,6 +21,12 @@
  * `image` is the 1200x400 banner the index page shows on each card, resolved
  * through the glob below.
  */
+
+import {
+  studentMembershipIntro,
+  studentMembershipBenefitsIntro,
+  studentMembershipBenefits,
+} from './studentMemberships'
 
 const banners = import.meta.glob('../assets/images/giving-opportunities/*', {
   eager: true,
@@ -57,10 +68,34 @@ export interface Opportunity {
    * panel does not end up with no path to one.
    */
   secondaryCta?: { label: string; href: string; external?: boolean }
+  /**
+   * False for an opportunity that cannot take a gift online — the bricks and
+   * chairs, which go through the Foundation. Drops the Donate Today button and
+   * keeps the opportunity out of the cart's priority list, so `cta` should
+   * carry the donor somewhere instead.
+   */
+  donate?: boolean
 }
 
 export const givingOpportunities: Opportunity[] = [
-
+  {
+    /* `sponsored-student` rather than a slug of the title: it is the priority
+       id the cart already used when this was appended by hand. */
+    id: 'sponsored-student',
+    title: 'Sponsor Student Memberships',
+    teaser: 'Give a midshipman or cadet a year of Naval Institute membership.',
+    image: 'student-memberships.jpg',
+    imageAlt: 'Newly commissioned ensigns throwing their hats into the air at commencement',
+    body: [
+      ...studentMembershipIntro.map(text => ({ type: 'p' as const, text })),
+      { type: 'p', text: studentMembershipBenefitsIntro },
+      ...studentMembershipBenefits.map(text => ({ type: 'li' as const, text })),
+    ],
+    cta: {
+      label: 'Sponsor a Student Membership',
+      href: '/giving/student-memberships',
+    },
+  },
   {
     id: 'proceedings',
     title: 'Proceedings Magazine',
@@ -135,18 +170,28 @@ export const givingOpportunities: Opportunity[] = [
     body: [
       { type: 'p', text: 'Funded entirely with private donations, the Jack C. Taylor Conference Center is the Naval Institute’s physical flagship: a 406-seat auditorium, five meeting rooms, two indoor/outdoor terraces, and a broadcast studio, adjoining the Institute’s headquarters on the Yard of the U.S. Naval Academy. It is where naval professionals, historians, government officials, midshipmen, students, and interested civilians convene for conferences, lectures, workshops, and wargames, and it is optimized for classified discussion on a per-use, waiver basis.' },
       { type: 'p', text: 'Private support is what keeps it current. Gifts to the Jack C. Taylor Conference Center Maintenance & Technology Fund underwrite the upkeep of the building and the audiovisual equipment behind every session held in it — the projection and acoustics in the auditorium, the stage LED wall, and the broadcast studio that carries a discussion well beyond the people in the room.' },
-      { type: 'p', text: 'Donors can also put a name on the building itself. A gift of $2,500 is recognized with an engraved silver plate permanently affixed to a seat in the auditorium; a gift of $1,000 is recognized on the donor wall on the rooftop terrace. Either can honor or memorialize someone of your choosing.' },
       { type: 'p', text: 'For more information on how you can support the Jack C. Taylor Conference Center, please contact the Naval Institute Foundation at (410) 295-1054 or foundation@usni.org . Or make a direct contribution today as part of your gift to the Institute’s comprehensive campaign.' },
     ],
     cta: {
-      label: 'Purchase a brick or chair',
-      href: '/giving/taylor-conference-center#commemorative-gifts',
+      label: 'About the Center',
+      href: '/giving/taylor-conference-center',
     },
-    secondaryCta: {
-      label: 'Learn more about the Center',
-      href: 'https://www.jackctaylorconferencecenter.org/',
-      external: true,
+  },
+  {
+    id: 'commemorative-bricks-chairs',
+    title: 'Commemorative Bricks and Chairs',
+    teaser: 'Put a name on the Jack C. Taylor Conference Center.',
+    image: 'commemorative-bricks-chairs.webp',
+    imageAlt: 'The Jack C. Taylor Conference Center commemorative brick wall, its engraved donor names arranged in columns',
+    body: [
+      { type: 'p', text: 'Two gifts carry a name on the Jack C. Taylor Conference Center permanently: an engraved silver nameplate affixed to a seat in the auditorium, and an engraved brick on the donor wall. Either can honor or memorialize someone of your choosing.' },
+      { type: 'p', text: 'A limited number of bricks and chairs remain. Contact the Naval Institute Foundation at (410) 295-1054 or foundation@usni.org to learn more about remaining brick and chair opportunities.' },
+    ],
+    cta: {
+      label: 'Contact the Foundation',
+      href: '/contact#foundation',
     },
+    donate: false,
   },
   {
     id: 'naval-institute-press',
@@ -215,18 +260,14 @@ export const givingOpportunities: Opportunity[] = [
 /**
  * The investment priorities a donor can designate a gift to, in the cart.
  *
- * Derived from the accordion above rather than listed again. The cart kept its
+ * Derived from the grid above rather than listed again. The cart kept its
  * own hand-written set of seven, and the two had drifted badly: it split
  * Historic Preservation into "Oral History Program" and "Photo Archives", and
  * offered nothing at all for the essay contests, the conferences, the Press, or
  * either named chair. Somebody choosing where their money goes should be shown
- * the same programmes /giving/opportunities asked them to support.
- *
- * Sponsor Student Memberships is appended by hand. It is on that page as the
- * featured opportunity above the accordion, so it belongs in this list, but it
- * has a page of its own rather than an accordion record to derive from.
+ * the same programmes /giving/opportunities asked them to support — less any
+ * that only take a gift through the Foundation.
  */
-export const DONATION_PRIORITIES: { id: string; label: string }[] = [
-  ...givingOpportunities.map(({ id, title }) => ({ id, label: title })),
-  { id: 'sponsored-student', label: 'Sponsor Student Memberships' },
-]
+export const DONATION_PRIORITIES: { id: string; label: string }[] = givingOpportunities
+  .filter(({ donate }) => donate !== false)
+  .map(({ id, title }) => ({ id, label: title }))

@@ -8,15 +8,17 @@ import {
 } from '@/data/givingOpportunities'
 
 /**
- * The ten giving opportunities, as a two-column grid of cards.
+ * The twelve giving opportunities, as a three-by-four grid of cards.
  *
  * This was the site's standard accordion until the client asked for the copy to
  * be visible rather than behind a click: a donor deciding between ten programmes
  * had to open each one in turn, and could not compare two of them at once. Every
  * card now shows its banner, its copy in full, and its buttons.
  *
- * Bodies run 150-450 words, so a card opens on the first two paragraphs behind
- * a Read more toggle and the rest is a click away. That keeps ten cards
+ * Bodies run 150-450 words, so a card opens on its first paragraph behind a
+ * Read more toggle and the rest is a click away. It was two paragraphs when the
+ * grid was two columns wide; at three, two paragraphs ran a card past a screen
+ * of text. That keeps twelve cards
  * scannable without going back to hiding a whole opportunity, which is what the
  * client objected to about the accordion: the title, banner, gist, and buttons
  * are always visible, and only the detail is folded.
@@ -27,17 +29,18 @@ import {
  * `mt-auto`, so the CTAs line up instead of floating at ten different heights.
  * The clamp is what makes that work: collapsed cards differ by a paragraph's
  * length, not by the 300 words that separated the longest body from the
- * shortest. Expanding one card still stretches its row-mate, which is the cost
- * of equal heights — the slack lands above that card's buttons.
+ * shortest. Expanding one card still stretches its row-mates, which is the cost
+ * of equal heights — the slack lands above their buttons.
  *
  * Each card ends with a Donate Today button, as every one of the source pages
  * does. It is rendered here rather than stored in the copy so the label and
- * destination stay the same across all ten. An opportunity may add a second,
- * more specific button of its own — see `cta` in `givingOpportunities`.
+ * destination stay the same across the grid. An opportunity may add a second,
+ * more specific button of its own — see `cta` in `givingOpportunities` — or,
+ * like the bricks and chairs, drop Donate Today for a contact link.
  */
 
 /** Paragraphs shown before the fold. Tune here; the toggle follows. */
-const PREVIEW_BLOCKS = 2
+const PREVIEW_BLOCKS = 1
 
 function OpportunityCard({ opp }: { opp: Opportunity }) {
   const [expanded, setExpanded] = useState(false)
@@ -53,8 +56,8 @@ function OpportunityCard({ opp }: { opp: Opportunity }) {
         className="w-full aspect-[3/1] object-cover"
       />
 
-      <div className="flex flex-col flex-1 gap-4 p-6 lg:p-7">
-        <h3 className="font-headline text-[24px] lg:text-[26px] text-navy-bolder leading-[1.2]">
+      <div className="flex flex-col flex-1 gap-4 p-6">
+        <h3 className="font-headline text-[22px] lg:text-[24px] text-navy-bolder leading-[1.2]">
           {opp.title}
         </h3>
 
@@ -82,7 +85,7 @@ function OpportunityCard({ opp }: { opp: Opportunity }) {
           )}
         </div>
 
-        {/* Ten cards mean up to ten identical "Read more" buttons in the tab
+        {/* Twelve cards mean up to twelve identical "Read more" buttons in the tab
             order, so the accessible name carries the opportunity it belongs to
             while the visible label stays short. */}
         {hasMore && (
@@ -136,7 +139,7 @@ function OpportunityCard({ opp }: { opp: Opportunity }) {
                 </>
               )}
             </ButtonLink>
-          ) : (
+          ) : opp.donate === false ? null : (
             /* Picking an opportunity is the donor's signal that they want a
                restricted gift, so the designation rides along to the donation
                form and on into the cart, where it arrives already toggled.
@@ -168,10 +171,11 @@ export default function GivingOpportunities({
           {heading}
         </h2>
 
-        {/* items-stretch (the grid default) so both cards in a row share a
-            height and their buttons line up. Single column below lg — two
-            columns of this much copy do not survive a tablet width. */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+        {/* items-stretch (the grid default) so the cards in a row share a
+            height and their buttons line up. Twelve divides by both two and
+            three, so neither the tablet nor the desktop grid ends on a
+            half-empty row. */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {givingOpportunities.map((opp) => (
             <OpportunityCard key={opp.id} opp={opp} />
           ))}
