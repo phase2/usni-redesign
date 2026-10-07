@@ -164,7 +164,7 @@ function FacetGroup({
       </button>
 
       {open && (
-        <div id={id} className="pb-4 flex flex-col">
+        <div id={id} className="pt-3 pb-4 flex flex-col">
           {findPlaceholder && listed.length > FACET_PREVIEW && (
             <input
               type="search"
