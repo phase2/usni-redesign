@@ -46,7 +46,9 @@ export default function GivingOpportunitiesPage() {
           }
         >
           <div>
-            <ButtonLink href="/giving/donate" variant="primary" size="md">
+            {/* Navy, not gold: the panel is the light tone, where gold reads as
+                secondary — see the variant notes in Button. */}
+            <ButtonLink href="/giving/donate" variant="navy" size="md">
               Donate Today
             </ButtonLink>
           </div>
