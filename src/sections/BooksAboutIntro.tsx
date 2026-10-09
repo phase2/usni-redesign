@@ -65,7 +65,7 @@ export default function BooksAboutIntro() {
                   </em>
                 </a>
                 . In 2013, the{' '}
-                <a href="/books/oral-histories" className="text-link">
+                <a href="/archives/oral-histories" className="text-link">
                   U.S. Naval Institute Oral History Program
                 </a>{' '}
                 was reestablished as a part of the Press.

@@ -101,7 +101,7 @@ export const prototypeSection: PrototypeSection = {
         { label: 'Homepage', href: '/' },
         { label: 'Search Results', href: '/search?q=navy' },
         { label: 'Events', href: '/events', children: [{ label: 'Past Events', href: '/events/past' }] },
-        { label: 'Archives', href: '/archives' },
+        { label: 'Archives', href: '/archives', children: [{ label: 'Oral Histories', href: '/archives/oral-histories' }] },
         { label: 'Contact USNI', href: '/contact' },
         { label: 'Login / Register', href: '/login' },
         { label: 'Newsletter Sign-up', href: '/newsletter', note: 'Unlinked on the site' },
