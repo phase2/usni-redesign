@@ -1,5 +1,6 @@
 import { useId, useState } from 'react'
 import Breadcrumb from '@/components/ui/Breadcrumb'
+import AdUnit from '@/components/ui/AdUnit'
 import { ButtonLink } from '@/components/ui/Button'
 import ExternalLinkIcon from '@/components/ui/ExternalLinkIcon'
 import SharePopover from '@/components/ui/SharePopover'
@@ -182,8 +183,11 @@ export default function OralHistoryDetail({ entry, detail }: { entry: OralHistor
               { label: 'Oral Histories', href: '/archives/oral-histories' },
             ]}
             current={detail.displayName}
-            className="pb-4 mb-8 lg:mb-10 border-b border-border-light"
+            className="pb-4 border-b border-border-light"
           />
+
+          {/* The live page carries a top-of-page ad slot (usni-site-top). */}
+          <AdUnit size="leaderboard" className="mb-2" />
 
           <div className="grid grid-cols-1 md:grid-cols-[260px_1fr] lg:grid-cols-[320px_1fr] xl:grid-cols-[380px_1fr] gap-8 lg:gap-12 xl:gap-16 items-start">
             <div className="max-w-[380px] bg-surface-subtle">

@@ -109,6 +109,8 @@ export const prototypeSection: PrototypeSection = {
               label: 'Oral Histories',
               href: '/archives/oral-histories',
               children: [
+                { label: 'About the Program', href: '/archives/oral-histories/about' },
+                { label: 'Order Oral Histories', href: '/archives/oral-histories/place-order' },
                 { label: 'Charles Adair', href: '/archives/oral-histories/adair-charles' },
                 { label: 'George W. Anderson Jr.', href: '/archives/oral-histories/anderson-george', note: 'Two volumes, audio excerpt' },
                 { label: 'Walter C. W. Ansel', href: '/archives/oral-histories/ansel-walter', note: 'Audio excerpt' },
