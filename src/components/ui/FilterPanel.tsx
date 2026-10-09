@@ -10,7 +10,7 @@ interface FilterPanelProps {
 /**
  * Filters sidebar for the listing pages.
  *
- * Desktop keeps the facets open in a sticky left column. On mobile the stack
+ * Desktop keeps the facets open in a left column that scrolls with the page. On mobile the stack
  * would push the results a screen or two down, so it collapses behind a toggle
  * that reports how many filters are on.
  */
@@ -21,7 +21,7 @@ export default function FilterPanel({ activeCount, onClearAll, children }: Filte
   const heading = 'font-headline text-[28px] lg:text-[32px] text-navy-bolder leading-[1.15]'
 
   return (
-    <aside className="w-full lg:w-[300px] xl:w-[320px] lg:flex-shrink-0 lg:sticky lg:top-8 flex flex-col gap-5">
+    <aside className="w-full lg:w-[300px] xl:w-[320px] lg:flex-shrink-0 flex flex-col gap-5">
 
       {/* Mobile: the heading is a full-width toggle, with the plus/minus pinned
           to the far right. Desktop: it's just a heading. */}

@@ -20,7 +20,7 @@ const contentLinks = [
   { label: 'Naval History', href: '/naval-history' },
   { label: 'Books & Press', href: '/books' },
   { label: 'Naval Institute Archives', href: '/archives' },
-  { label: 'Oral Histories', href: '/archive/oral-histories' },
+  { label: 'Oral Histories', href: '/archives/oral-histories' },
   { label: 'Photos & Historical Prints', href: 'https://photos.usni.org', external: true },
 ]
 

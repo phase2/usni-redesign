@@ -19,7 +19,7 @@ export default function BooksOralHistory() {
               recollections and explanations rarely entered into contemporary records.
             </p>
             <a
-              href="/books/oral-histories"
+              href="/archives/oral-histories"
               className="inline-flex items-center gap-2 bg-gold text-navy-boldest font-body font-bold text-sm tracking-[-0.2px] px-6 py-3.5 hover:bg-gold-dark transition-colors"
             >
               View the Oral Histories archive

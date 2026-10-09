@@ -589,7 +589,7 @@ export default function Navigation() {
               title="Drift — hand-written copies of the same bar"
               tone="drift"
               items={[
-                { path: 'src/sections/BooksSubNav.tsx', note: <>mobile toggle is left-aligned (<C>gap-3 w-full h-[53px] px-6 text-left</C>, no <C>justify-center</C>); toggle reads &ldquo;Books &amp; Press&rdquo; but both landmarks say &ldquo;Books&rdquo;; <C>alsoActiveUnder</C> takes several prefixes; mobile links are <C>block</C>. Its Oral Histories link is <C>/books/oral-histories</C> where the main nav uses <C>/archive/oral-histories</C>.</> },
+                { path: 'src/sections/BooksSubNav.tsx', note: <>mobile toggle is left-aligned (<C>gap-3 w-full h-[53px] px-6 text-left</C>, no <C>justify-center</C>); toggle reads &ldquo;Books &amp; Press&rdquo; but both landmarks say &ldquo;Books&rdquo;; <C>alsoActiveUnder</C> takes several prefixes; mobile links are <C>block</C>. Its Oral Histories link leaves the section for <C>/archives/oral-histories</C>, where the main nav and footer point too.</> },
                 { path: 'src/sections/AboutSubNav.tsx', note: <>identical markup; landing-tab exact match hard-coded for <C>/about</C>; mobile links <C>block</C> rather than <C>flex items-center gap-1.5</C>.</> },
                 { path: 'src/sections/ProceedingsSubNav.tsx', note: <>identical markup, plain prefix matching, no landing tab; mobile links <C>block</C>.</> },
                 { path: 'src/sections/NavalHistorySubNav.tsx', note: 'same as Proceedings.' },
