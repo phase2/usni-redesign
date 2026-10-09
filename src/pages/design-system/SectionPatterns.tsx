@@ -934,7 +934,7 @@ export default function SectionPatterns() {
                 {
                   part: 'Filter sidebar + results',
                   classes: 'container-site flex flex-col lg:flex-row lg:items-start gap-8 xl:gap-12',
-                  note: 'Flex, not grid. The aside (FilterPanel) is w-full lg:w-[300px] xl:w-[320px] lg:flex-shrink-0 lg:sticky lg:top-8; collapses behind a toggle (aria-expanded/aria-controls) below lg. PastEventsArchive, EssayContestsArchive.',
+                  note: 'Flex, not grid. The aside (FilterPanel) is w-full lg:w-[300px] xl:w-[320px] lg:flex-shrink-0, not sticky; collapses behind a toggle (aria-expanded/aria-controls) below lg. PastEventsArchive, EssayContestsArchive.',
                 },
               ]}
             />

@@ -87,7 +87,7 @@ export default function ListsTables() {
         <DocSection title="Listing page layout">
           <div className="flex flex-col gap-8">
             <Lead>
-              The archive layout has a filter panel in a sticky left column, and a results column with a
+              The archive layout has a filter panel in a left column, and a results column with a
               count, a sort control, the result cards, and the pager. Below <C>lg</C> the panel stacks
               above the results and collapses behind a toggle. The filters come first in the DOM as well
               as on screen, so reading order and focus order agree at every width. The live example is
