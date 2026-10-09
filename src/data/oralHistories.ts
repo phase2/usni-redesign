@@ -36,8 +36,9 @@
  * was missing the period after his initial; William T. Smoot was spelled
  * "WIlliam"; and Miller, Owens, and Reason were "ADM." in capitals.
  *
- * Detail pages (/archives/oral-histories/<slug>) are not built in the
- * prototype; cards link to where they would live.
+ * Detail pages (/archives/oral-histories/<slug>) are built for the first four
+ * entries only — see `oralHistoryDetails.ts`. The other cards link to where
+ * theirs would live, which 404s.
  */
 
 const images = import.meta.glob('../assets/images/oral-histories/*', {

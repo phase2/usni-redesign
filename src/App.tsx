@@ -75,6 +75,7 @@ import NavalHistorySubscribeConfirmation from '@/pages/NavalHistorySubscribeConf
 import Login from '@/pages/Login'
 import Archives from '@/pages/Archives'
 import ArchivesOralHistories from '@/pages/ArchivesOralHistories'
+import ArchivesOralHistory from '@/pages/ArchivesOralHistory'
 import NavalHistoryArticle from '@/pages/NavalHistoryArticle'
 import ProceedingsArticleFortifying from '@/pages/ProceedingsArticleFortifying'
 import ProceedingsArticleGrubb from '@/pages/ProceedingsArticleGrubb'
@@ -228,6 +229,7 @@ export default function App() {
         <Route path="/books/ai-warfighting" element={<BookProduct />} />
         <Route path="/archives" element={<Archives />} />
         <Route path="/archives/oral-histories" element={<ArchivesOralHistories />} />
+        <Route path="/archives/oral-histories/:slug" element={<ArchivesOralHistory />} />
         <Route path="/naval-history/mitscher-at-midway" element={<NavalHistoryArticle />} />
         {/* Reachable by direct URL only. The footer CTA deliberately points at
             the Mailchimp hosted form instead, so nothing on the site links here. */}

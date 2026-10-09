@@ -101,7 +101,22 @@ export const prototypeSection: PrototypeSection = {
         { label: 'Homepage', href: '/' },
         { label: 'Search Results', href: '/search?q=navy' },
         { label: 'Events', href: '/events', children: [{ label: 'Past Events', href: '/events/past' }] },
-        { label: 'Archives', href: '/archives', children: [{ label: 'Oral Histories', href: '/archives/oral-histories' }] },
+        {
+          label: 'Archives',
+          href: '/archives',
+          children: [
+            {
+              label: 'Oral Histories',
+              href: '/archives/oral-histories',
+              children: [
+                { label: 'Charles Adair', href: '/archives/oral-histories/adair-charles' },
+                { label: 'George W. Anderson Jr.', href: '/archives/oral-histories/anderson-george', note: 'Two volumes, audio excerpt' },
+                { label: 'Walter C. W. Ansel', href: '/archives/oral-histories/ansel-walter', note: 'Audio excerpt' },
+                { label: 'Jesse Arbor', href: '/archives/oral-histories/arbor-jesse' },
+              ],
+            },
+          ],
+        },
         { label: 'Contact USNI', href: '/contact' },
         { label: 'Login / Register', href: '/login' },
         { label: 'Newsletter Sign-up', href: '/newsletter', note: 'Unlinked on the site' },
