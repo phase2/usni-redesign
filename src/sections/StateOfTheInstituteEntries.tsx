@@ -13,7 +13,7 @@ export default function StateOfTheInstituteEntries() {
   return (
     <section className="bg-white py-12 lg:py-16">
       <div className="container-site">
-        <div className="max-w-[760px] flex flex-col">
+        <div className="max-w-[860px] mx-auto flex flex-col">
           {stateOfTheInstituteEntries.map((entry, i) => (
             <article
               key={`${entry.date}-${i}`}

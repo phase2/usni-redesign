@@ -49,7 +49,7 @@ function A({ href, children }: { href: string; children: ReactNode }) {
 function About() {
   return (
     <>
-      <figure className="lg:float-right lg:w-[400px] lg:ml-10 lg:mb-4 flex flex-col gap-2">
+      <figure className="lg:float-right lg:w-[340px] lg:ml-10 lg:mb-4 flex flex-col gap-2">
         <img
           src={imgZumwalt}
           alt="Admiral Elmo R. Zumwalt, in uniform, handing a bound oral history to Rear Admiral George W. Bauernschmidt"
@@ -267,10 +267,10 @@ export default function OralHistoriesSubPageContent({ slug }: { slug: OralHistor
     <>
       <section className="bg-white py-12 lg:py-16">
         <div className="container-site">
-          {/* Wider than the 760px reading column when the About photo floats beside the copy. */}
+          {/* The centered 860px column interior basic pages share; the About photo floats inside it. */}
           <div
-            className={`flex flex-col gap-5 font-body text-base lg:text-[17px] text-neutral-bold leading-[1.7] ${
-              slug === 'about' ? 'max-w-[1100px] lg:block lg:[&>*+*]:mt-5' : 'max-w-[760px]'
+            className={`max-w-[860px] mx-auto flex flex-col gap-5 font-body text-base lg:text-[17px] text-neutral-bold leading-[1.7] ${
+              slug === 'about' ? 'lg:block lg:[&>*+*]:mt-5' : ''
             }`}
           >
             <Body />

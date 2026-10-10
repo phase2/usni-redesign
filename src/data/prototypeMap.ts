@@ -117,6 +117,13 @@ export const prototypeSection: PrototypeSection = {
                 { label: 'Jesse Arbor', href: '/archives/oral-histories/arbor-jesse' },
               ],
             },
+            {
+              label: 'Memoirs',
+              href: '/archives/memoirs',
+              children: [
+                { label: 'Capt. Robert Duncan', href: '/archives/memoirs/us-navypost-military-career-capt-robert-duncan' },
+              ],
+            },
           ],
         },
         { label: 'Contact USNI', href: '/contact' },

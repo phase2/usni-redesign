@@ -284,7 +284,7 @@ export default function BooksAboutSubPageContent({ slug }: { slug: BooksAboutSub
   return (
     <section className="bg-white py-12 lg:py-16">
       <div className="container-site">
-        <div className="max-w-[760px] flex flex-col gap-5 font-body text-base lg:text-[17px] text-neutral-bold leading-[1.7]">
+        <div className="max-w-[860px] mx-auto flex flex-col gap-5 font-body text-base lg:text-[17px] text-neutral-bold leading-[1.7]">
           <Body />
         </div>
       </div>

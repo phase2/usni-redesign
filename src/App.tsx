@@ -77,6 +77,8 @@ import Archives from '@/pages/Archives'
 import ArchivesOralHistories from '@/pages/ArchivesOralHistories'
 import ArchivesOralHistory from '@/pages/ArchivesOralHistory'
 import ArchivesOralHistoriesSubPage from '@/pages/ArchivesOralHistoriesSubPage'
+import ArchivesMemoirs from '@/pages/ArchivesMemoirs'
+import ArchivesMemoir from '@/pages/ArchivesMemoir'
 import NavalHistoryArticle from '@/pages/NavalHistoryArticle'
 import ProceedingsArticleFortifying from '@/pages/ProceedingsArticleFortifying'
 import ProceedingsArticleGrubb from '@/pages/ProceedingsArticleGrubb'
@@ -236,6 +238,8 @@ export default function App() {
           element={<ArchivesOralHistoriesSubPage slug="place-order" />}
         />
         <Route path="/archives/oral-histories/:slug" element={<ArchivesOralHistory />} />
+        <Route path="/archives/memoirs" element={<ArchivesMemoirs />} />
+        <Route path="/archives/memoirs/:slug" element={<ArchivesMemoir />} />
         <Route path="/naval-history/mitscher-at-midway" element={<NavalHistoryArticle />} />
         {/* Reachable by direct URL only. The footer CTA deliberately points at
             the Mailchimp hosted form instead, so nothing on the site links here. */}

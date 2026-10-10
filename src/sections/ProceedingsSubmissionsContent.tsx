@@ -98,10 +98,10 @@ const categories: Category[] = [
 export default function ProceedingsSubmissionsContent() {
   return (
     <section className="bg-white py-12 lg:py-16">
-      {/* One column at roughly the width the live page reads at, centred inside
-          the site container rather than run to its full 1312px. */}
+      {/* The centred 860px reading column interior basic pages share, rather
+          than the site container's full 1312px. */}
       <div className="container-site">
-        <div className="max-w-[1100px] mx-auto flex flex-col gap-12 lg:gap-14">
+        <div className="max-w-[860px] mx-auto flex flex-col gap-12 lg:gap-14">
 
           {/* ── Intro ─────────────────────────────────────────────────── */}
           <div className="flex flex-col gap-5">
