@@ -107,7 +107,7 @@ export default function PageHero({
               )}
               <div className="flex flex-col gap-3 lg:gap-4">
                 <h1
-                  className={`font-headline text-[32px] lg:text-5xl xl:text-[54px] leading-[1.1] ${
+                  className={`font-headline text-[32px] lg:text-5xl xl:text-[54px] leading-[1.1] text-pretty ${
                     lightPanel ? 'text-navy-bolder' : 'text-white'
                   }`}
                 >
@@ -115,7 +115,7 @@ export default function PageHero({
                 </h1>
                 {description && (
                   <p
-                    className={`font-body text-[18px] lg:text-xl leading-relaxed ${
+                    className={`font-body text-[18px] lg:text-xl leading-relaxed text-pretty ${
                       lightPanel ? 'text-neutral-subtle' : 'text-neutral-subtlest'
                     }`}
                   >
@@ -146,7 +146,7 @@ export default function PageHero({
         )}
 
         <h1
-          className={`font-headline text-[32px] lg:text-[64px] text-navy-bolder leading-[1.1] ${
+          className={`font-headline text-[32px] lg:text-[64px] text-navy-bolder leading-[1.1] text-pretty ${
             centered ? 'max-w-[900px]' : ''
           }`}
         >
@@ -159,11 +159,13 @@ export default function PageHero({
            * left variant's 760px a two-sentence intro wrapped to three lines with
            * a two-word orphan on the last; centered text has no column to align
            * with, so it can run wider. `text-balance` then evens the lines out
-           * rather than leaving a short tail.
+           * rather than leaving a short tail. Left-aligned copy (and every title)
+           * takes `text-pretty` instead, which only re-breaks the last lines so
+           * no word is left alone on the final one.
            */
           <p
             className={`font-body text-base lg:text-lg text-neutral-subtle leading-[1.6] ${
-              centered ? 'max-w-[900px] mx-auto text-balance' : 'max-w-[760px]'
+              centered ? 'max-w-[900px] mx-auto text-balance' : 'max-w-[760px] text-pretty'
             }`}
           >
             {description}

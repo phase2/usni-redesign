@@ -193,13 +193,13 @@ export default function Heroes() {
                 },
                 {
                   part: 'Title (h1)',
-                  classes: 'font-headline text-[32px] lg:text-[64px] text-navy-bolder leading-[1.1]',
-                  note: <>32px → 64px at lg; no xl step. Centered adds <Code>max-w-[900px]</Code>.</>,
+                  classes: 'font-headline text-[32px] lg:text-[64px] text-navy-bolder leading-[1.1] text-pretty',
+                  note: <>32px → 64px at lg; no xl step. Centered adds <Code>max-w-[900px]</Code>. <Code>text-pretty</Code> keeps a single word off the last line.</>,
                 },
                 {
                   part: 'Description',
-                  classes: 'font-body text-base lg:text-lg text-neutral-subtle leading-[1.6] max-w-[760px]',
-                  note: <>16 → 18px at lg. Centered swaps the measure for <Code>max-w-[900px] mx-auto text-balance</Code>: centered copy has no column to align with, so it runs wider, and <Code>text-balance</Code> evens the lines rather than leaving a short tail.</>,
+                  classes: 'font-body text-base lg:text-lg text-neutral-subtle leading-[1.6] max-w-[760px] text-pretty',
+                  note: <>16 → 18px at lg. <Code>text-pretty</Code> keeps a single word off the last line. Centered swaps the measure for <Code>max-w-[900px] mx-auto text-balance</Code>: centered copy has no column to align with, so it runs wider, and <Code>text-balance</Code> evens the lines rather than leaving a short tail.</>,
                 },
                 {
                   part: 'Children',
@@ -395,12 +395,12 @@ export default function Heroes() {
                 },
                 {
                   part: 'Title (h1)',
-                  classes: 'font-headline text-[32px] lg:text-5xl xl:text-[54px] leading-[1.1] text-white',
+                  classes: 'font-headline text-[32px] lg:text-5xl xl:text-[54px] leading-[1.1] text-pretty text-white',
                   note: <><Code>text-navy-bolder</Code> on the white panel. 32 → 48 → 54px. Smaller than the band&rsquo;s 64px because the panel is half the width.</>,
                 },
                 {
                   part: 'Description',
-                  classes: 'font-body text-[18px] lg:text-xl leading-relaxed text-neutral-subtlest',
+                  classes: 'font-body text-[18px] lg:text-xl leading-relaxed text-pretty text-neutral-subtlest',
                   note: <><Code>text-neutral-subtle</Code> on the white panel. 18 → 20px at lg.</>,
                 },
                 {
