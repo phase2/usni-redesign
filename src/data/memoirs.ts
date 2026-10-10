@@ -27,8 +27,9 @@
  * and Edward K. Poole's "poole"; and Sailor's Letters to Mom has no
  * timeframe.
  *
- * Memoir pages (/archives/memoirs/<slug>) are not built in the prototype;
- * cards link to where they would live.
+ * Memoir pages (/archives/memoirs/<slug>) are built for the first entry only
+ * — see `memoirDetails.ts`. The other cards link to where theirs would live,
+ * which 404s.
  */
 
 const images = import.meta.glob('../assets/images/memoirs/*', {
