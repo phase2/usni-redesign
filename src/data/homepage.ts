@@ -30,7 +30,7 @@ import imgNHClashFleets from '@/assets/images/nh-clash-fleets-south-china-sea.pn
 export const archivesDropdown: NavItem[] = [
   { label: 'About the Archives', href: '/archives' },
   { label: 'Oral Histories', href: '/archives/oral-histories' },
-  { label: 'Memoirs', href: '/archive/memoirs' },
+  { label: 'Memoirs', href: '/archives/memoirs' },
   { label: 'Photos', href: 'https://photos.usni.org', external: true },
   { label: 'Contact the Archives', href: '/contact#archives' },
 ]

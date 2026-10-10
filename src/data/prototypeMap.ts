@@ -117,6 +117,7 @@ export const prototypeSection: PrototypeSection = {
                 { label: 'Jesse Arbor', href: '/archives/oral-histories/arbor-jesse' },
               ],
             },
+            { label: 'Memoirs', href: '/archives/memoirs' },
           ],
         },
         { label: 'Contact USNI', href: '/contact' },
