@@ -90,12 +90,12 @@ const SKELETONS: { title: string; example: string; rows: DiagramRow[] }[] = [
   },
   {
     title: 'Basic page',
-    example: 'BooksAboutSubPage.tsx · ProceedingsSubmissions.tsx',
+    example: 'BooksAboutSubPage.tsx · ProceedingsSubmissions.tsx · ArchivesOralHistoriesSubPage.tsx',
     rows: [
       { label: 'Header', note: 'sticky', region: 'chrome', h: 2.25 },
       { label: 'Section sub-nav', region: 'subnav', h: 1.75 },
       { label: 'PageHero (light)', note: 'breadcrumb + title', region: 'hero-light', h: 4.5 },
-      { label: 'Reading column', note: 'max-w-[760px] · py-12 lg:py-16', region: 'white', h: 14 },
+      { label: 'Reading column', note: 'max-w-[860px] mx-auto · py-12 lg:py-16', region: 'white', h: 14 },
       { label: 'Footer', region: 'chrome', h: 3 },
     ],
   },
@@ -592,8 +592,12 @@ export default function SectionPatterns() {
         <DocSection title="Reading column & prose">
           <div className="flex flex-col gap-8">
             <p className="font-body text-base text-neutral-subtle leading-relaxed max-w-[760px]">
-              Long-form copy is set in one left-aligned column, 760px at most (about 85 characters
-              at 17px), inside the site container — not centred. The same treatment comes in two
+              On a basic content page — one whose body is nothing but prose — the copy is set in one
+              column 860px at most, centred in the site container, with the text itself left-aligned
+              (Memoirs, Books &amp; Press sub-pages, Oral History About and Order, Proceedings
+              Submissions, State of the Institute). Prose that shares a page with grids, cards, or a
+              rail keeps a 760px column pinned to the container's left edge, so it lines up with what
+              sits beside and below it. The same treatment comes in two
               forms: utility classes on a wrapper when the copy is authored as markup in a template,
               and <code className="font-mono text-sm">.rich-text</code> when it arrives as HTML from
               a WYSIWYG field.
@@ -615,7 +619,7 @@ export default function SectionPatterns() {
                 {
                   part: 'Column',
                   classes: 'max-w-[760px] flex flex-col gap-5 font-body text-base lg:text-[17px] text-neutral-bold leading-[1.7]',
-                  note: 'Type is set once on the column, not on each <p>. gap-5 (20px) is the paragraph spacing — no margins on children. 16px → 17px at lg. neutral-bold #33415C is the body-copy colour.',
+                  note: 'Type is set once on the column, not on each <p>. gap-5 (20px) is the paragraph spacing — no margins on children. 16px → 17px at lg. neutral-bold #33415C is the body-copy colour. On a basic content page the width is max-w-[860px] mx-auto instead; the rest is the same.',
                 },
                 {
                   part: 'Inline link',
