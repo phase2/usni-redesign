@@ -84,11 +84,6 @@ function MemoirCard({ memoir }: { memoir: Memoir }) {
       </div>
 
       <p className="font-body text-sm text-neutral-subtle leading-relaxed line-clamp-4">{memoir.summary}</p>
-
-      <p className="mt-auto pt-1 font-body font-semibold text-sm text-link inline-flex items-center gap-2" aria-hidden="true">
-        Read This Memoir
-        <i className="fa-solid fa-arrow-right text-xs" />
-      </p>
     </article>
   )
 }
