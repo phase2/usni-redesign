@@ -68,7 +68,7 @@ export const navItems: NavItem[] = [
       { label: 'American Sea Power Project', href: '/proceedings/sea-power-project' },
       { label: 'Submission Guidelines', href: '/proceedings/submissions' },
       { label: 'Contact Proceedings', href: '/proceedings/contact' },
-      { label: 'Subscribe', href: '/membership/join' },
+      { label: 'Get Proceedings', href: '/membership/join' },
     ],
     megaCta: {
       eyebrow: 'Featured Article',
