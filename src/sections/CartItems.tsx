@@ -149,7 +149,12 @@ export default function CartItems() {
   const planLabel  = PLAN_LABELS[plan]  ?? 'Full Membership'
   const termLabel  = TERM_LABELS[term]  ?? '1 year'
   const isLifetime = term === 'lifetime' || term === 'life' || plan.endsWith('-life') || plan === 'life'
-  const priceLabel = isLifetime
+  // Sponsored student memberships are already a gift from a donor: free, one
+  // year, and nothing to renew or re-gift.
+  const isSponsored = plan.startsWith('sponsored-')
+  const priceLabel = isSponsored
+    ? 'Free (sponsored)'
+    : isLifetime
     ? `$${Number(price).toLocaleString()} one-time`
     : term === '1'
     ? `$${price}/yr`
@@ -323,7 +328,7 @@ export default function CartItems() {
         </div>
 
         {/* Membership auto-renew */}
-        {!isLifetime && <label className="flex items-center gap-2 cursor-pointer select-none">
+        {!isLifetime && !isSponsored && <label className="flex items-center gap-2 cursor-pointer select-none">
           <input
             type="checkbox"
             checked={isAutoRenew}
@@ -334,7 +339,7 @@ export default function CartItems() {
         </label>}
 
         {/* Gift checkbox */}
-        <label className="flex items-center gap-2 cursor-pointer select-none">
+        {!isSponsored && <label className="flex items-center gap-2 cursor-pointer select-none">
           <input
             type="checkbox"
             checked={isGift}
@@ -344,7 +349,7 @@ export default function CartItems() {
           <span className="font-body font-bold text-[16px] text-[#1d2535]">
             I would like to purchase this membership as a gift
           </span>
-        </label>
+        </label>}
 
         {/* Gift form or summary */}
         {isGift && (

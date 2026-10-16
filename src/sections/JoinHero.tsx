@@ -1,6 +1,14 @@
 import heroImage from '@/assets/images/membership-join-hero.jpg'
 
-export default function JoinHero() {
+export default function JoinHero({
+  eyebrow = 'Membership',
+  title = 'Join the Naval Institute Today',
+  description = 'Join the U.S. Naval Institute and add your voice to strengthen the naval profession. Dare to make a difference.',
+}: {
+  eyebrow?: string
+  title?: string
+  description?: string
+} = {}) {
   return (
     <section className="relative w-full overflow-hidden">
       {/* Background image */}
@@ -20,14 +28,13 @@ export default function JoinHero() {
       >
         <div className="bg-white text-center px-6 sm:px-12 lg:px-20 py-10 lg:py-16 w-full max-w-[860px] mx-4 lg:mx-8">
           <div className="eyebrow-headline items-center">
-            <p className="eyebrow">Membership</p>
+            <p className="eyebrow">{eyebrow}</p>
             <h1 className="font-headline text-[32px] lg:text-4xl xl:text-[56px] text-navy-bolder leading-[1.1]">
-              Join the Naval Institute Today
+              {title}
             </h1>
           </div>
           <p className="font-body text-[18px] lg:text-lg text-neutral-subtle leading-relaxed max-w-[620px] mx-auto mt-5 lg:mt-6">
-            Join the U.S. Naval Institute and add your voice to strengthen the naval profession.
-            Dare to make a difference.
+            {description}
           </p>
         </div>
       </div>

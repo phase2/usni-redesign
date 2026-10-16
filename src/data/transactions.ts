@@ -20,6 +20,8 @@ export const PLAN_LABELS: Record<string, string> = {
   'online-life': 'Online Life Membership',
   'senior-life': 'Senior Life Membership',
   'senior-online-life': 'Senior Online Life Membership',
+  'sponsored-student-full': 'Sponsored Student Membership (Print + Digital)',
+  'sponsored-student-digital': 'Sponsored Student Membership (Digital)',
 }
 
 export const TERM_LABELS: Record<string, string> = {

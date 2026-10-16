@@ -147,6 +147,8 @@ export default function MembershipCheckout() {
   const { setCartCount } = useCart()
 
   const plan      = searchParams.get('plan')     ?? 'full'
+  // Sponsored student memberships are a donor's gift: one year, no renewal.
+  const isSponsored = plan.startsWith('sponsored-')
   const term      = searchParams.get('term')     ?? '1'
   const price     = searchParams.get('price')    ?? '75'
   const magTerm   = searchParams.get('magTerm')
@@ -739,21 +741,25 @@ export default function MembershipCheckout() {
 
                     {/* Auto-renew toggles */}
                     <div className="flex flex-col gap-0 -mx-6">
-                      <div className="h-[2px] bg-[#FFD000]" />
-                      <button
-                        type="button"
-                        onClick={() => setAutoRenew(!autoRenew)}
-                        className="flex items-start gap-4 text-left px-6 py-4 group"
-                        aria-pressed={autoRenew}
-                      >
-                        <div className="relative flex-shrink-0 mt-0.5">
-                          <div className={`w-11 h-6 rounded-full transition-colors ${autoRenew ? 'bg-[#1d2535]' : 'bg-[#c4c9d4]'}`} />
-                          <div className={`absolute top-1 w-4 h-4 bg-white rounded-full shadow transition-transform ${autoRenew ? 'translate-x-6' : 'translate-x-1'}`} />
-                        </div>
-                        <span className="font-body text-[14px] text-[#4e576a] leading-[1.5]">
-                          This membership is set to auto-renew on January 1, 2027. Cancel anytime in the account settings.
-                        </span>
-                      </button>
+                      {!isSponsored && (
+                        <>
+                          <div className="h-[2px] bg-[#FFD000]" />
+                          <button
+                            type="button"
+                            onClick={() => setAutoRenew(!autoRenew)}
+                            className="flex items-start gap-4 text-left px-6 py-4 group"
+                            aria-pressed={autoRenew}
+                          >
+                            <div className="relative flex-shrink-0 mt-0.5">
+                              <div className={`w-11 h-6 rounded-full transition-colors ${autoRenew ? 'bg-[#1d2535]' : 'bg-[#c4c9d4]'}`} />
+                              <div className={`absolute top-1 w-4 h-4 bg-white rounded-full shadow transition-transform ${autoRenew ? 'translate-x-6' : 'translate-x-1'}`} />
+                            </div>
+                            <span className="font-body text-[14px] text-[#4e576a] leading-[1.5]">
+                              This membership is set to auto-renew on January 1, 2027. Cancel anytime in the account settings.
+                            </span>
+                          </button>
+                        </>
+                      )}
                       {magPrice && (
                         <>
                           <div className="h-[2px] bg-[#FFD000]" />

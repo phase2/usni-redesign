@@ -28,6 +28,7 @@ import Membership from '@/pages/Membership'
 import Events from '@/pages/Events'
 import EventsPast from '@/pages/EventsPast'
 import MembershipJoin from '@/pages/MembershipJoin'
+import SponsoredStudentMembership from '@/pages/SponsoredStudentMembership'
 import Proceedings from '@/pages/Proceedings'
 import Giving from '@/pages/Giving'
 import GivingSocieties from '@/pages/GivingSocieties'
@@ -141,6 +142,7 @@ export default function App() {
         <Route path="/events/past" element={<EventsPast />} />
         <Route path="/membership" element={<Membership />} />
         <Route path="/membership/join" element={<MembershipJoin />} />
+        <Route path="/sponsored-student-membership" element={<SponsoredStudentMembership />} />
         <Route path="/membership/cart" element={<MembershipCart />} />
         <Route path="/membership/checkout" element={<MembershipCheckout />} />
         <Route path="/membership/confirmation" element={<MembershipConfirmation />} />
