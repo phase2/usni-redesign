@@ -154,9 +154,10 @@ function CheckIcon() {
   )
 }
 
-function TierCard({
+export function TierCard({
   name,
   price,
+  priceText,
   originalPrice,
   priceUnit,
   description,
@@ -168,6 +169,8 @@ function TierCard({
 }: {
   name: string
   price: number | null
+  /** Replaces the dollar figure, e.g. "Free" for a sponsored membership. */
+  priceText?: string
   originalPrice?: number
   priceUnit?: string
   description: string
@@ -216,12 +219,16 @@ function TierCard({
                     ${originalPrice.toLocaleString()}
                   </span>
                 )}
-                <div className="flex items-start">
-                  <span className="font-body font-bold text-sm text-navy-bolder mt-[3px]">$</span>
-                  <span className="font-headline text-[36px] text-navy-bolder leading-[1.0]">
-                    {formattedPrice}
-                  </span>
-                </div>
+                {priceText ? (
+                  <span className="font-headline text-[36px] text-navy-bolder leading-[1.0]">{priceText}</span>
+                ) : (
+                  <div className="flex items-start">
+                    <span className="font-body font-bold text-sm text-navy-bolder mt-[3px]">$</span>
+                    <span className="font-headline text-[36px] text-navy-bolder leading-[1.0]">
+                      {formattedPrice}
+                    </span>
+                  </div>
+                )}
               </div>
               {priceUnit && (
                 <span className="font-body text-xs text-neutral-subtle text-right">{priceUnit}</span>

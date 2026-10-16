@@ -157,7 +157,7 @@ export default function MembershipConfirmation() {
                   <ReceiptTotal value={`$${total.toLocaleString()}`} />
                 </div>
 
-                {!isLifetime && (
+                {!isLifetime && !plan.startsWith('sponsored-') && (
                   <p className="font-body text-[14px] text-neutral-subtle leading-relaxed border-t border-[#e8eaed] pt-4">
                     {autoRenew ? (
                       <>

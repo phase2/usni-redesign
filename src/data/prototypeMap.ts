@@ -147,6 +147,7 @@ export const prototypeSection: PrototypeSection = {
             { label: 'Confirmation', href: '/membership/confirmation', note: 'Step 5' },
           ],
         },
+        { label: 'Sponsored Student Membership', href: '/sponsored-student-membership' },
       ],
     },
     {
