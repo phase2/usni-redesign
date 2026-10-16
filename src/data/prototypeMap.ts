@@ -122,6 +122,7 @@ export const prototypeSection: PrototypeSection = {
               href: '/archives/memoirs',
               children: [
                 { label: 'Capt. Robert Duncan', href: '/archives/memoirs/us-navypost-military-career-capt-robert-duncan' },
+                { label: 'Submit a Memoir', href: '/archives/memoirs/submit', note: '4 steps' },
               ],
             },
           ],
