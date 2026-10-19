@@ -265,7 +265,19 @@ export const prototypeSection: PrototypeSection = {
         { label: 'History', href: '/about/history' },
         { label: 'Strategic Plan', href: '/about/strategic-plan' },
         { label: 'State of the Institute', href: '/about/state-of-the-institute' },
-        { label: 'Leadership & Staff', href: '/about/leadership' },
+        {
+          label: 'Leadership & Staff',
+          href: '/about/leadership',
+          children: [
+            { label: 'RADM Raymond A. Spicer, USN (Ret.)', href: '/about/leadership/radm-ray-spicer-usn-ret' },
+            { label: 'Rob Colenso', href: '/about/leadership/rob-colenso' },
+            { label: 'CAPT Bill Hamblet, USN (Ret.)', href: '/about/leadership/capt-bill-hamblet-usn-ret' },
+            { label: 'April Parreco', href: '/about/leadership/april-parreco' },
+            { label: 'Laura McCullough', href: '/about/leadership/laura-mccullough' },
+            { label: 'Adam Kane', href: '/about/leadership/adam-kane' },
+            { label: 'Chip Wallen', href: '/about/leadership/chip-wallen' },
+          ],
+        },
       ],
     },
     {

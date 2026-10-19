@@ -1,11 +1,15 @@
-import Breadcrumb from '@/components/ui/Breadcrumb'
+import type { ReactNode } from 'react'
+import Breadcrumb, { type Crumb } from '@/components/ui/Breadcrumb'
+
 interface AboutPageHeroProps {
   title: string
   /** Secondary line under the title, where the source page carries one. */
-  subtitle?: string
+  subtitle?: ReactNode
   deck?: string
   /** Trailing breadcrumb label. Omit on the About landing page itself. */
   breadcrumbLabel: string
+  /** A crumb between About USNI and this page, e.g. Leadership & Staff above a bio. */
+  parent?: Crumb
 }
 
 /**
@@ -20,6 +24,7 @@ export default function AboutPageHero({
   subtitle,
   deck,
   breadcrumbLabel,
+  parent,
 }: AboutPageHeroProps) {
   return (
     <section className="bg-[#ebf4ff] pt-12 pb-16">
@@ -30,6 +35,7 @@ export default function AboutPageHero({
           trail={[
             { label: 'Home', href: '/' },
             { label: 'About USNI', href: '/about' },
+            ...(parent ? [parent] : []),
           ]}
           current={breadcrumbLabel}
           className="border-b border-[#C2DDFF] pb-4"
