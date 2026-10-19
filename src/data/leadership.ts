@@ -56,7 +56,7 @@ export interface Person {
   /** Role and committee lines, in the order they appear on the current site. */
   titles: string[]
   image: string
-  /** Prototype bio route — inert in this demo. */
+  /** Bio route. Executive Staff have pages (see leadershipBios.ts); the rest 404 for now. */
   href: string
 }
 

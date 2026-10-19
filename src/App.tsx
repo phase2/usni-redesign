@@ -93,6 +93,7 @@ import About from '@/pages/About'
 import AboutHistory from '@/pages/AboutHistory'
 import AboutStrategicPlan from '@/pages/AboutStrategicPlan'
 import AboutLeadership from '@/pages/AboutLeadership'
+import AboutLeadershipBio from '@/pages/AboutLeadershipBio'
 import AboutStateOfTheInstitute from '@/pages/AboutStateOfTheInstitute'
 import TableOfContents from '@/pages/design-system/TableOfContents'
 import DsTokens from '@/pages/design-system/Tokens'
@@ -262,6 +263,7 @@ export default function App() {
         <Route path="/about/history" element={<AboutHistory />} />
         <Route path="/about/strategic-plan" element={<AboutStrategicPlan />} />
         <Route path="/about/leadership" element={<AboutLeadership />} />
+        <Route path="/about/leadership/:slug" element={<AboutLeadershipBio />} />
         <Route path="/about/state-of-the-institute" element={<AboutStateOfTheInstitute />} />
         <Route path="/toc" element={<TableOfContents />} />
         {/* The table of contents' old address, kept so earlier links still land */}
