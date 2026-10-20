@@ -9,10 +9,12 @@ import { pastEvents, type PastEvent } from '@/data/pastEvents'
  * Past events listing, built on the essay contest archive's layout: a filters
  * sidebar on the left, a results header with sort, and a card grid.
  *
- * Cards link to the event pages the current site publishes; those routes don't
- * exist in this prototype yet.
+ * Cards link to the event pages the current site publishes; only a few of
+ * those have a page in this prototype so far (see eventDetails.ts).
  *
- * Accepts `?q=` so other pages can link here pre-filtered.
+ * Accepts `?q=` and `?type=` so other pages can link here pre-filtered —
+ * `type` is an event type in slug form, e.g. `?type=author-event`, which is
+ * how the Books & Press nav's Author Events link lands here.
  */
 
 const PER_PAGE = 12
@@ -31,6 +33,8 @@ const kindCounts = pastEvents.reduce<Record<string, number>>((acc, e) => {
   return acc
 }, {})
 const kinds = Object.keys(kindCounts).sort((a, b) => a.localeCompare(b))
+
+const kindSlug = (kind: string) => kind.toLowerCase().replace(/[^a-z0-9]+/g, '-')
 
 /** Boxed chevron, matching the accordion treatment used site-wide. */
 function AccordionChevron({ open }: { open: boolean }) {
@@ -104,7 +108,10 @@ export default function PastEventsArchive() {
   const [params] = useSearchParams()
   // Seeded from the URL once; the field is user-owned from then on
   const [query, setQuery] = useState(params.get('q') ?? '')
-  const [selectedKinds, setSelectedKinds] = useState<string[]>([])
+  const [selectedKinds, setSelectedKinds] = useState<string[]>(() => {
+    const type = params.get('type')
+    return type ? kinds.filter((k) => kindSlug(k) === type) : []
+  })
   const [kindsOpen, setKindsOpen] = useState(true)
   const [sort, setSort] = useState<SortKey>('recent')
   const [page, setPage] = useState(1)

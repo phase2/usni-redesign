@@ -244,6 +244,10 @@
     @apply font-semibold text-navy-bolder;
   }
 
+  .rich-text hr {
+    @apply border-0 border-t border-neutral-subtler my-4;
+  }
+
   .rich-text img {
     @apply block h-auto max-w-full;
   }

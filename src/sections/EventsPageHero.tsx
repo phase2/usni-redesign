@@ -1,9 +1,14 @@
-import Breadcrumb from '@/components/ui/Breadcrumb'
+import Breadcrumb, { type Crumb } from '@/components/ui/Breadcrumb'
+
 interface EventsPageHeroProps {
   title: string
+  /** Secondary line under the title, where the source page carries one. */
+  subtitle?: string
   description?: string
   /** Trailing breadcrumb label. */
   breadcrumbLabel: string
+  /** A crumb between Events and this page, e.g. Past Events above an event. */
+  parent?: Crumb
 }
 
 /**
@@ -12,8 +17,10 @@ interface EventsPageHeroProps {
  */
 export default function EventsPageHero({
   title,
+  subtitle,
   description,
   breadcrumbLabel,
+  parent,
 }: EventsPageHeroProps) {
   return (
     <section className="bg-[#ebf4ff] pt-10 lg:pt-12 pb-12 lg:pb-16">
@@ -22,6 +29,7 @@ export default function EventsPageHero({
           trail={[
             { label: 'Home', href: '/' },
             { label: 'Events', href: '/events' },
+            ...(parent ? [parent] : []),
           ]}
           current={breadcrumbLabel}
           className="pb-4 border-b border-[#C2DDFF]"
@@ -31,11 +39,18 @@ export default function EventsPageHero({
           {title}
         </h1>
 
+        {subtitle && (
+          <p className="font-headline text-[22px] lg:text-[32px] text-navy-subtle leading-[1.15]">
+            {subtitle}
+          </p>
+        )}
+
         {description && (
           <p className="font-body text-base lg:text-lg text-neutral-subtle leading-[1.6] max-w-[760px]">
             {description}
           </p>
         )}
+
       </div>
     </section>
   )

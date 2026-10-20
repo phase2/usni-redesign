@@ -109,7 +109,7 @@ export const navItems: NavItem[] = [
     children: [
       { label: 'Books', href: '/books/collection' },
       { label: 'New Releases', href: '/books/new-releases' },
-      { label: 'Author Events', href: '/books/author-events' },
+      { label: 'Author Events', href: '/events/past?type=author-event' },
       { label: 'Professional Military Education', href: '/books/professional-military-education' },
       { label: 'Military Reading Lists', href: '/books/military-reading-lists' },
       { label: 'Oral Histories', href: '/archives/oral-histories' },

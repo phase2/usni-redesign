@@ -1,4 +1,5 @@
 import imgHistoryConference from '@/assets/images/events/history-conference-2026.jpg'
+import imgLifeOfCourage from '@/assets/images/events/life-of-courage-2026.jpg'
 import imgWest2027 from '@/assets/images/events/west-2027.jpg'
 import imgDefaultEvent from '@/assets/images/USNI_3D_4C-best.jpg'
 
@@ -45,6 +46,21 @@ export const upcomingEvents: UsniEvent[] = [
     href: '/events/why-wars-come-faster-we-expect-and-what-readiness-really-requires',
     image: imgHistoryConference,
     imageAlt: 'A guided-missile destroyer launching a missile at sea',
+  },
+  {
+    id: 'life-of-courage-2026',
+    kind: 'Event',
+    title: 'Life of Courage',
+    location: 'Annapolis, MD',
+    date: 'Tuesday, 10 November 2026',
+    startsOn: '2026-11-10',
+    time: '10:30 AM – 12:00 PM ET',
+    venue: ['Jack C. Taylor Conference Center', 'Annapolis, MD'],
+    summary:
+      'Bruce McCandless III discusses Iron and Fire, the Pacific War story of his grandfather, destroyer captain and Medal of Honor recipient Admiral Bruce McCandless.',
+    href: '/events/life-courage',
+    image: imgLifeOfCourage,
+    imageAlt: 'A painting of a burning warship under fire at night in the Pacific',
   },
   {
     id: 'defense-forum-washington-2026',
