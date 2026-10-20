@@ -27,6 +27,7 @@ import Home from '@/pages/Home'
 import Membership from '@/pages/Membership'
 import Events from '@/pages/Events'
 import EventsPast from '@/pages/EventsPast'
+import EventDetail from '@/pages/EventDetail'
 import MembershipJoin from '@/pages/MembershipJoin'
 import SponsoredStudentMembership from '@/pages/SponsoredStudentMembership'
 import Proceedings from '@/pages/Proceedings'
@@ -142,6 +143,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/events" element={<Events />} />
         <Route path="/events/past" element={<EventsPast />} />
+        <Route path="/events/:slug" element={<EventDetail />} />
         <Route path="/membership" element={<Membership />} />
         <Route path="/membership/join" element={<MembershipJoin />} />
         <Route path="/sponsored-student-membership" element={<SponsoredStudentMembership />} />

@@ -111,7 +111,7 @@ export default function FacetGroup({
         <span className="flex items-center gap-2">
           {title}
           {selected.length > 0 && (
-            <span className="font-body font-bold text-xs text-white bg-navy-subtle rounded-full px-2 py-0.5">
+            <span className="accordion-count font-body font-bold text-xs text-white bg-navy-subtle rounded-full px-2 py-0.5">
               {selected.length}
             </span>
           )}
@@ -120,7 +120,7 @@ export default function FacetGroup({
       </button>
 
       {open && (
-        <div id={id} className="pt-3 pb-4 flex flex-col">
+        <div id={id} className="px-3 pt-3 pb-4 flex flex-col">
           {findPlaceholder && listed.length > FACET_PREVIEW && (
             <input
               type="search"

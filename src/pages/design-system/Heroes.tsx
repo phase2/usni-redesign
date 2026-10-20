@@ -26,7 +26,7 @@ import DonateHero from '@/sections/DonateHero'
 import { blueAndGold, warOnFilm } from '@/data/bookCollections'
 import { aiWarfightingBook } from '@/data/bookProductData'
 import { givingImage } from '@/data/givingSocieties'
-import imgWater from '@/assets/images/books/digital-editions/water.jpg'
+import imgDigitalEditions from '@/assets/images/books/digital-editions/hero-marine.jpg'
 import imgBookstore from '@/assets/images/books/custom-bookstore-hero.png'
 import imgAiHero from '@/assets/images/AdobeStock_191892422_extended.png'
 
@@ -222,7 +222,7 @@ export default function Heroes() {
               otherwise sit behind the panel. A breadcrumb on a navy panel needs the dark tone.
             </Prose>
 
-            <LiveMarkup label="Navy panel right — breadcrumb, eyebrow, description, mobileImage=&quot;short&quot; (Digital Editions)" previewClassName={FULL_BLEED_PREVIEW}>
+            <LiveMarkup label="Navy panel right — breadcrumb, eyebrow, description, mobileImage=&quot;short&quot;, imageFocus=&quot;left&quot; (Digital Editions)" previewClassName={FULL_BLEED_PREVIEW}>
               <PageHero
                 eyebrow="Naval Institute Press"
                 title="Digital Editions"
@@ -235,9 +235,10 @@ export default function Heroes() {
                     appeal to scholars, enthusiasts, and general readers alike.
                   </>
                 }
-                image={imgWater}
+                image={imgDigitalEditions}
                 mobileImage="short"
                 panelSide="right"
+                imageFocus="left"
                 breadcrumb={
                   <Breadcrumb trail={booksTrail} current="Digital Editions" tone="dark" className={darkRule} />
                 }
@@ -344,13 +345,13 @@ export default function Heroes() {
               rows={[
                 {
                   part: 'Section',
-                  classes: 'relative w-full bg-cover bg-center lg:py-20',
-                  note: <>Plus inline <Code>style=&quot;background-image: url(…)&quot;</Code>. <Code>lg:py-20</Code> leaves 80px of photo visible above and below the panel on desktop; below lg there is no padding, so the background is fully covered.</>,
+                  classes: 'relative w-full bg-cover lg:py-20',
+                  note: <>Plus inline <Code>style=&quot;background-image: url(…); background-position: center&quot;</Code>; <Code>imageFocus</Code> sets that position to left or right instead. <Code>lg:py-20</Code> leaves 80px of photo visible above and below the panel on desktop; below lg there is no padding, so the background is fully covered.</>,
                 },
                 {
                   part: 'Mobile image',
-                  classes: 'lg:hidden w-full aspect-[4/3] object-cover object-center',
-                  note: <><Code>mobileImage=&quot;short&quot;</Code> swaps <Code>aspect-[4/3]</Code> for <Code>aspect-[2/1]</Code>. <Code>alt=&quot;&quot;</Code> and <Code>aria-hidden=&quot;true&quot;</Code> unless <Code>imageAlt</Code> is given.</>,
+                  classes: 'lg:hidden w-full aspect-[4/3] object-cover',
+                  note: <>Plus inline <Code>object-position</Code> from <Code>imageFocus</Code> (center by default). <Code>mobileImage=&quot;short&quot;</Code> swaps <Code>aspect-[4/3]</Code> for <Code>aspect-[2/1]</Code>. <Code>alt=&quot;&quot;</Code> and <Code>aria-hidden=&quot;true&quot;</Code> unless <Code>imageAlt</Code> is given.</>,
                 },
                 {
                   part: 'Panel row',
@@ -507,6 +508,7 @@ export default function Heroes() {
                 { name: 'panelSide', type: "'left' | 'right'", default: "'right'", description: 'Photo treatment only.' },
                 { name: 'panelTone', type: "'dark' | 'light'", default: "'dark'", description: 'Navy-boldest or white panel.' },
                 { name: 'mobileImage', type: "'standard' | 'short'", default: "'standard'", description: '4:3 or 2:1 crop for the stacked photo below lg.' },
+                { name: 'imageFocus', type: "'left' | 'center' | 'right'", default: "'center'", description: 'Which side of the photo to keep when the hero crops it, on desktop and in the stacked mobile photo. Set it to the side the subject sits on — the panel goes opposite.' },
                 { name: 'children', type: 'ReactNode', description: 'Below the description — a CTA row.' },
               ]}
             />
@@ -972,6 +974,7 @@ import Breadcrumb from '@/components/ui/Breadcrumb'
   description="…"
   image={heroImage}
   mobileImage="short"
+  imageFocus="left"
   breadcrumb={
     <Breadcrumb trail={trail} current="Digital Editions" tone="dark"
       className="pb-4 border-b border-white/25" />

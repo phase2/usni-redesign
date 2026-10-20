@@ -42,13 +42,13 @@ function Accordion({
   return (
     <div className="border-b border-border-light last:border-0">
       <button
-        className="flex items-center justify-between w-full py-3 font-body font-bold text-sm text-navy-bolder text-left gap-3"
+        className="accordion-row flex items-center justify-between w-full px-3 py-3 font-body font-bold text-sm text-navy-bolder text-left gap-3"
         onClick={() => setOpen(!open)}
         aria-expanded={open}
       >
         {title}
         <span
-          className="flex-shrink-0 flex items-center justify-center bg-navy-subtle p-1.5"
+          className="accordion-chevron flex-shrink-0 flex items-center justify-center bg-navy-subtle p-1.5"
           aria-hidden="true"
         >
           <svg
@@ -62,7 +62,7 @@ function Accordion({
           </svg>
         </span>
       </button>
-      {open && <div className="pb-4">{children}</div>}
+      {open && <div className="px-3 pt-3 pb-4">{children}</div>}
     </div>
   )
 }

@@ -6,7 +6,7 @@ import Breadcrumb from '@/components/ui/Breadcrumb'
 import AdUnit from '@/components/ui/AdUnit'
 import DigitalEditionsIntro from '@/sections/DigitalEditionsIntro'
 import DigitalEditionsList from '@/sections/DigitalEditionsList'
-import heroImage from '@/assets/images/books/digital-editions/water.jpg'
+import heroImage from '@/assets/images/books/digital-editions/hero-marine.jpg'
 
 /**
  * Naval Institute Press Digital Editions — the live /press/digitaleditions page.
@@ -42,6 +42,7 @@ export default function BooksDigitalEditions() {
           image={heroImage}
           mobileImage="short"
           panelSide="right"
+          imageFocus="left"
           breadcrumb={
             <Breadcrumb
               trail={[

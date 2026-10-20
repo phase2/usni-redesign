@@ -244,6 +244,10 @@
     @apply font-semibold text-navy-bolder;
   }
 
+  .rich-text hr {
+    @apply border-0 border-t border-neutral-subtler my-4;
+  }
+
   .rich-text img {
     @apply block h-auto max-w-full;
   }
@@ -263,6 +267,33 @@
     transition: background-color 0.2s ease, color 0.2s ease;
   }
 
+  /* Open state: a dark navy (#002b5c, navy-bold) band, so an expanded
+     header reads as active at rest. Keyed off aria-expanded, which every
+     accordion header already sets, so no component tracks a class for it.
+     Declared before the hover rules, which match at the same specificity, so
+     hovering an open row still shows the blue hover band. */
+  .accordion-row[aria-expanded="true"] {
+    background-color: #002b5c;
+  }
+
+  .accordion-row[aria-expanded="true"],
+  .accordion-row[aria-expanded="true"] span,
+  .accordion-row[aria-expanded="true"] h2,
+  .accordion-row[aria-expanded="true"] h3,
+  .accordion-row[aria-expanded="true"] p {
+    color: #ffffff;
+  }
+
+  .accordion-row[aria-expanded="true"] .accordion-chevron,
+  .accordion-row[aria-expanded="true"] .accordion-count {
+    background-color: #ffffff;
+    color: #002b5c;
+  }
+
+  .accordion-row[aria-expanded="true"] .accordion-chevron svg {
+    color: #002b5c;
+  }
+
   .accordion-row:hover {
     background-color: #0466c8;
   }
@@ -275,8 +306,10 @@
     color: #ffffff;
   }
 
-  /* The filled chevron badge inverts, so it stays legible on the blue band. */
-  .accordion-row:hover .accordion-chevron {
+  /* The filled chevron badge inverts, so it stays legible on the blue band,
+     and so does a filter's selected-count pill. */
+  .accordion-row:hover .accordion-chevron,
+  .accordion-row:hover .accordion-count {
     background-color: #ffffff;
     color: #0466c8;
   }

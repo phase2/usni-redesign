@@ -30,6 +30,7 @@ export default function PageHero({
   panelSide = 'right',
   panelTone = 'dark',
   mobileImage = 'standard',
+  imageFocus = 'center',
   children,
 }: {
   title: string
@@ -64,6 +65,12 @@ export default function PageHero({
    * screen-height block before the title.
    */
   mobileImage?: 'standard' | 'short'
+  /**
+   * Which part of the photo to keep when the hero crops it. Defaults to the
+   * centre; pass the side the subject sits on for a wide banner whose subject
+   * would otherwise be cropped away.
+   */
+  imageFocus?: 'left' | 'center' | 'right'
   /** Anything that belongs under the description, e.g. a CTA row. */
   children?: ReactNode
 }) {
@@ -77,15 +84,16 @@ export default function PageHero({
 
     return (
       <section
-        className="relative w-full bg-cover bg-center lg:py-20"
-        style={{ backgroundImage: `url(${image})` }}
+        className="relative w-full bg-cover lg:py-20"
+        style={{ backgroundImage: `url(${image})`, backgroundPosition: imageFocus }}
       >
         {/* Mobile-only: the photo stacks above the panel rather than sitting behind it */}
         <img
           src={image}
           alt={imageAlt}
           aria-hidden={imageAlt ? undefined : 'true'}
-          className={`lg:hidden w-full ${mobileImage === 'short' ? 'aspect-[2/1]' : 'aspect-[4/3]'} object-cover object-center`}
+          className={`lg:hidden w-full ${mobileImage === 'short' ? 'aspect-[2/1]' : 'aspect-[4/3]'} object-cover`}
+          style={{ objectPosition: imageFocus }}
         />
 
         <div className={`relative z-10 flex ${onLeft ? 'lg:justify-start' : 'lg:justify-end'}`}>

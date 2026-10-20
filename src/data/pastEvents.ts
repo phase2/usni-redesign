@@ -32,6 +32,7 @@ import imgWest2025 from '@/assets/images/events/past/west-2025.png'
 import imgWest2026 from '@/assets/images/events/past/west-2026.png'
 
 import { PLACEHOLDER_EVENT_IMAGE } from '@/data/events'
+import { pastAuthorEvents } from '@/data/pastAuthorEvents'
 
 export interface PastEvent {
   /** Prototype route for the event page. */
@@ -50,7 +51,7 @@ export interface PastEvent {
 }
 
 /** Past events, scraped from the current site's /events/past listing. */
-export const pastEvents: PastEvent[] = [
+const generalEvents: PastEvent[] = [
   {
     href: '/events/americas-navy-new-strategic-era-featured-us-naval-institute-annual-meeting',
     title: 'America\'s Navy in a New Strategic Era - Featured at the U.S. Naval Institute Annual Meeting',
@@ -547,3 +548,9 @@ export const pastEvents: PastEvent[] = [
     imageAlt: 'Lessons of Herosim',
   },
 ]
+
+/**
+ * The one Past Events archive: the general listing plus the author events the
+ * current site keeps in a separate archive (see pastAuthorEvents.ts).
+ */
+export const pastEvents: PastEvent[] = [...generalEvents, ...pastAuthorEvents]

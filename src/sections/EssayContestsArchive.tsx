@@ -220,7 +220,7 @@ export default function EssayContestsArchive() {
               <span className="flex items-center gap-2">
                 Categories
                 {categories.length > 0 && (
-                  <span className="font-body font-bold text-xs text-white bg-navy-subtle rounded-full px-2 py-0.5">
+                  <span className="accordion-count font-body font-bold text-xs text-white bg-navy-subtle rounded-full px-2 py-0.5">
                     {categories.length}
                   </span>
                 )}
@@ -229,7 +229,7 @@ export default function EssayContestsArchive() {
             </button>
 
             {categoriesOpen && (
-              <div id="archive-categories" className="pb-4">
+              <div id="archive-categories" className="px-3 pt-3 pb-4">
                 {/* 38 series is too many to sit open beside the results, so the
                     list reveals past the threshold rather than scrolling */}
                 {visibleCategories.map((s) => (
