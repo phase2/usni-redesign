@@ -121,8 +121,10 @@ export default function Accordions() {
               wherever a page answers a set of common questions. Each row opens on its own, and opening
               one does not close the others. On hover the whole row turns into a solid{' '}
               {code('#0466c8')} band with white type, and the chevron badge inverts to white with a blue
-              glyph. An open row sits on white against the {code('bg-surface-subtle')} section, and its
-              badge turns 180°.
+              glyph. An open row&rsquo;s header turns a solid {code('navy-bold')} #002B5C band with white
+              type and an inverted badge, turned 180°, so the expanded question reads as active at rest;
+              hovering it still shows the blue band. Its answer sits on white against the{' '}
+              {code('bg-surface-subtle')} section.
             </p>
 
             <LiveMarkup
@@ -198,7 +200,7 @@ export default function Accordions() {
                   {
                     part: 'Row button',
                     classes: 'accordion-row flex items-center justify-between w-full py-4 px-4 text-left gap-4',
-                    note: <>{code('.accordion-row')} (index.css) gives the hover: background {code('#0466c8')}, and white on the button&rsquo;s spans, headings and paragraphs. It is plain CSS, not utilities, because its descendant selectors have to outrank the label&rsquo;s own {code('text-navy-bolder')}. {code('gap-4')} keeps a long question off the badge.</>,
+                    note: <>{code('.accordion-row')} (index.css) gives the open state and the hover, both keyed off the button itself: open ({code('aria-expanded="true"')}) is a {code('#002b5c')} band, hover a {code('#0466c8')} band, each with white on the button&rsquo;s spans, headings and paragraphs. Hover is declared last, so it wins on an open row. It is plain CSS, not utilities, because its descendant selectors have to outrank the label&rsquo;s own {code('text-navy-bolder')}. {code('gap-4')} keeps a long question off the badge.</>,
                   },
                   {
                     part: 'Question',
@@ -208,7 +210,7 @@ export default function Accordions() {
                   {
                     part: 'Chevron badge',
                     classes: 'accordion-chevron flex-shrink-0 w-8 h-8 bg-navy-bolder text-white flex items-center justify-center transition-transform duration-200',
-                    note: <>32px square, navy, white glyph. Open: add {code('rotate-180')}; the whole badge turns, not just the glyph. On row hover {code('.accordion-chevron')} turns the badge white with a {code('#0466c8')} glyph. {code('flex-shrink-0')} keeps it square next to a long question.</>,
+                    note: <>32px square, navy, white glyph. Open: add {code('rotate-180')}; the whole badge turns, not just the glyph. On an open row {code('.accordion-chevron')} turns the badge white with a {code('#002b5c')} glyph, on hover white with a {code('#0466c8')} glyph. {code('flex-shrink-0')} keeps it square next to a long question.</>,
                   },
                   {
                     part: 'Chevron glyph',
@@ -232,7 +234,8 @@ export default function Accordions() {
             <div>
               <DocLabel>Tokens</DocLabel>
               <ul className="font-body text-sm text-neutral-subtle leading-relaxed list-disc pl-5 flex flex-col gap-1 max-w-[760px]">
-                <li>Badge and question text: {code('navy-bolder')} #001845. The badge glyph and the hover type are white.</li>
+                <li>Badge and question text: {code('navy-bolder')} #001845. The badge glyph and the open and hover type are white.</li>
+                <li>Open band and its inverted glyph: {code('#002b5c')}, the {code('navy-bold')} value, hard-coded in index.css.</li>
                 <li>Hover band and inverted glyph: {code('#0466c8')}, hard-coded in index.css. It is the same blue as the {code('navy-bright')} token.</li>
                 <li>Rules: {code('border-light')} #E2E8F0. Section band: {code('surface-subtle')} #EEF2FF. Answer copy: {code('neutral-subtle')} #4E576A.</li>
               </ul>
@@ -372,7 +375,7 @@ export default function Accordions() {
           <div className="flex flex-col gap-8">
             <p className="font-body text-base text-neutral-subtle leading-relaxed max-w-[760px]">
               A smaller size of the same treatment for the facet groups in a listing&rsquo;s filter sidebar
-              (Event Type, Categories). It uses the same {code('.accordion-row')} hover band and{' '}
+              (Event Type, Categories). It uses the same {code('.accordion-row')} open and hover bands and{' '}
               {code('.accordion-chevron')} badge, at sidebar scale: 14px bold label, a smaller badge, and
               an optional count pill when filters in the group are on. It is not rendered here because it
               lives inside the full archive pages. See it at /events/past and /essay-contests/archive.
@@ -394,8 +397,8 @@ export default function Accordions() {
                   },
                   {
                     part: 'Count pill',
-                    classes: 'font-body font-bold text-xs text-white bg-navy-subtle rounded-full px-2 py-0.5',
-                    note: 'Shows how many options in the group are checked. One of the few deliberate rounded shapes.',
+                    classes: 'accordion-count font-body font-bold text-xs text-white bg-navy-subtle rounded-full px-2 py-0.5',
+                    note: <>Shows how many options in the group are checked. One of the few deliberate rounded shapes. {code('.accordion-count')} inverts it to white on the open and hover bands, the way the chevron badge does.</>,
                   },
                   {
                     part: 'Chevron badge',
@@ -409,8 +412,8 @@ export default function Accordions() {
                   },
                   {
                     part: 'Panel',
-                    classes: 'pb-4',
-                    note: <>Has the id that {code('aria-controls')} names. It is unmounted when closed; in production, render it with {code('hidden')} instead.</>,
+                    classes: 'px-3 pt-3 pb-4',
+                    note: <>Has the id that {code('aria-controls')} names. {code('px-3')} matches the row&rsquo;s padding, so the options line up under the label rather than the band&rsquo;s edge, and {code('pt-3')} keeps the first option off the open band. It is unmounted when closed; in production, render it with {code('hidden')} instead.</>,
                   },
                 ]}
               />
@@ -432,9 +435,9 @@ export default function Accordions() {
                   path: 'src/sections/BooksCollectionLayout.tsx',
                   note: (
                     <>
-                      Its local {code('Accordion')} (Binding, Series, Subjects, Price) has no{' '}
-                      {code('.accordion-row')} or {code('.accordion-chevron')}, so it has no hover band and no
-                      badge inversion. Its button is {code('py-3')} with no horizontal padding. It has no{' '}
+                      Its local {code('Accordion')} (Binding, Series, Subjects, Price) carries{' '}
+                      {code('.accordion-row')} and {code('.accordion-chevron')}, so it shares the open and hover
+                      bands, but keeps its own markup: a {code('bg-navy-subtle p-1.5')} badge. It has no{' '}
                       {code('aria-controls')}, it starts open ({code('defaultOpen = true')}), and its wrapper
                       uses {code('last:border-0')}.
                     </>

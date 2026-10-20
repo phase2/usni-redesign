@@ -193,7 +193,7 @@ export default function PastEventsArchive() {
               <span className="flex items-center gap-2">
                 Event Type
                 {selectedKinds.length > 0 && (
-                  <span className="font-body font-bold text-xs text-white bg-navy-subtle rounded-full px-2 py-0.5">
+                  <span className="accordion-count font-body font-bold text-xs text-white bg-navy-subtle rounded-full px-2 py-0.5">
                     {selectedKinds.length}
                   </span>
                 )}
@@ -202,7 +202,7 @@ export default function PastEventsArchive() {
             </button>
 
             {kindsOpen && (
-              <div id="past-events-kinds" className="pb-4">
+              <div id="past-events-kinds" className="px-3 pt-3 pb-4">
                 {kinds.map((kind) => (
                   <label
                     key={kind}
