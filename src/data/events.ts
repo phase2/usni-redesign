@@ -1,15 +1,20 @@
 import imgHistoryConference from '@/assets/images/events/history-conference-2026.jpg'
 import imgLifeOfCourage from '@/assets/images/events/life-of-courage-2026.jpg'
 import imgWest2027 from '@/assets/images/events/west-2027.jpg'
-import imgDefaultEvent from '@/assets/images/USNI_3D_4C-best.jpg'
+import imgWatermark from '@/assets/images/new-usni-default-watermark.png'
 
-/** Stand-in for events with no artwork of their own. */
-export const PLACEHOLDER_EVENT_IMAGE = imgDefaultEvent
+/**
+ * Stand-in for events with no artwork of their own: the tan crossed-swords
+ * watermark the leadership roster uses for people without a headshot. The
+ * artwork carries its own margin on a #F7F7F2 field, so it fills a 16:10 or
+ * 16:9 card frame with the mark centred.
+ */
+export const PLACEHOLDER_EVENT_IMAGE = imgWatermark
 
 export interface UsniEvent {
   id: string
-  /** Badge label — "Conference" or "Event", as on the current site. */
-  kind: 'Conference' | 'Event'
+  /** Badge label, as on the current site. */
+  kind: 'Conference' | 'Event' | 'Panel Discussion'
   title: string
   /** City and state, shown beside the pin. */
   location: string
@@ -49,7 +54,7 @@ export const upcomingEvents: UsniEvent[] = [
   },
   {
     id: 'life-of-courage-2026',
-    kind: 'Event',
+    kind: 'Panel Discussion',
     title: 'Life of Courage',
     location: 'Annapolis, MD',
     date: 'Tuesday, 10 November 2026',
@@ -73,7 +78,7 @@ export const upcomingEvents: UsniEvent[] = [
     venue: ['International Spy Museum', '700 L’Enfant Plaza SW', 'Washington, DC 20024'],
     summary: 'Check back for details and registration information.',
     href: '/events/defense-forum-washington-2026',
-    image: imgDefaultEvent,
+    image: PLACEHOLDER_EVENT_IMAGE,
     imageAlt: '',
   },
   {
@@ -101,7 +106,7 @@ export const upcomingEvents: UsniEvent[] = [
     summary:
       'The Member Event will be held at The Ultimate Skybox, a rooftop venue located in downtown San Diego with breathtaking views of the city and Petco Park.',
     href: '/events/us-naval-institute-member-event',
-    image: imgDefaultEvent,
+    image: PLACEHOLDER_EVENT_IMAGE,
     imageAlt: '',
   },
 ]

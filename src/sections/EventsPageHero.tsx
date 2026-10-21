@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import Breadcrumb, { type Crumb } from '@/components/ui/Breadcrumb'
 
 interface EventsPageHeroProps {
@@ -9,6 +10,8 @@ interface EventsPageHeroProps {
   breadcrumbLabel: string
   /** A crumb between Events and this page, e.g. Past Events above an event. */
   parent?: Crumb
+  /** Anything under the title block, e.g. an event's registration button. */
+  children?: ReactNode
 }
 
 /**
@@ -21,6 +24,7 @@ export default function EventsPageHero({
   description,
   breadcrumbLabel,
   parent,
+  children,
 }: EventsPageHeroProps) {
   return (
     <section className="bg-[#ebf4ff] pt-10 lg:pt-12 pb-12 lg:pb-16">
@@ -51,6 +55,7 @@ export default function EventsPageHero({
           </p>
         )}
 
+        {children}
       </div>
     </section>
   )

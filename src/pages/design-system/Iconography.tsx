@@ -713,7 +713,7 @@ export default function Iconography() {
               title="Drift: other hover zooms"
               tone="drift"
               items={[
-                { path: 'src/sections/UpcomingEvents.tsx', note: 'group-hover:scale-[1.04] on the event image (also PastEventsArchive)' },
+                { path: 'src/components/cards/EventCard.tsx', note: 'group-hover:scale-[1.04] on the event image (Upcoming and Past Events)' },
                 { path: 'src/sections/LeadershipRoster.tsx', note: 'group-hover:scale-[1.06], and a pre-scaled scale-[1.08] variant that zooms further' },
                 { path: 'src/sections/ArchivesCollections.tsx', note: 'group-hover:scale-[1.02]' },
                 { path: 'src/sections/AboutStrategicPlanForeword.tsx', note: 'a pre-scaled scale-[1.08] image' },
