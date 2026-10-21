@@ -2,6 +2,8 @@ import imgHistory from '@/assets/images/our-histroy-feature-image.png'
 import imgStrategicPlan from '@/assets/images/giving-feature-2.jpg'
 import imgLeadership from '@/assets/images/giving-opps-modal-hero-Conferences GO.jpg'
 import imgTaylorCenter from '@/assets/images/Daylight-Outside-Zoomed-In-e1639073841206.jpeg'
+import ExternalLinkIcon from '@/components/ui/ExternalLinkIcon'
+import { JCTCC_URL } from '@/sections/TaylorCenterAbout'
 
 /**
  * Wayfinding into the rest of the About section — the PlainCard treatment used
@@ -12,7 +14,15 @@ import imgTaylorCenter from '@/assets/images/Daylight-Outside-Zoomed-In-e1639073
  * Only the history image is final; the other three are stand-ins pending final
  * art from USNI.
  */
-const links = [
+const links: {
+  headline: string
+  body: string
+  cta: string
+  href: string
+  external?: boolean
+  image: string
+  alt: string
+}[] = [
   {
     headline: 'Our History',
     body: 'Fifteen naval officers, a post–Civil War Navy, and the forum they founded on the grounds of the Naval Academy.',
@@ -41,10 +51,10 @@ const links = [
     headline: 'Jack C. Taylor Conference Center',
     body: 'The Institute’s conference and event venue on the grounds of the U.S. Naval Academy.',
     cta: 'Visit the center',
-    // The Center's page lives in Giving — it was built with private donations
-    // and is still maintained by them — but it belongs in this grid too, since
-    // it is one of the four things people come to About looking for.
-    href: '/giving/taylor-conference-center',
+    // One of the four things people come to About looking for. The Center's
+    // page in Giving is archived, so this goes to the Center's own site.
+    href: JCTCC_URL,
+    external: true,
     image: imgTaylorCenter,
     alt: 'Exterior signage on the Jack C. Taylor Conference Center in Annapolis',
   },
@@ -69,9 +79,18 @@ export default function AboutQuickLinks() {
                 </p>
                 <a
                   href={item.href}
+                  {...(item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                   className="inline-flex items-center justify-center gap-2 bg-navy-bolder text-white font-body font-bold text-sm tracking-[-0.3px] px-5 py-3.5 border border-navy-bolder hover:bg-navy-bright hover:border-navy-bright transition-colors duration-150 w-full"
                 >
-                  {item.cta} →
+                  {item.external ? (
+                    <>
+                      {item.cta}
+                      <ExternalLinkIcon size="1.1em" />
+                      <span className="sr-only">(opens in a new tab)</span>
+                    </>
+                  ) : (
+                    <>{item.cta} →</>
+                  )}
                 </a>
               </div>
             </div>

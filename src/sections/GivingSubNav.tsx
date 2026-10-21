@@ -1,4 +1,5 @@
 import SectionSubNav from '@/components/layout/SectionSubNav'
+import { JCTCC_URL } from '@/sections/TaylorCenterAbout'
 
 /**
  * Giving section navigation.
@@ -21,7 +22,9 @@ const items = [
     // Seven tabs on one row, and this is the longest by some margin. The mobile
     // dropdown is a vertical list and still spells it out.
     shortLabel: 'JCTCC',
-    href: '/giving/taylor-conference-center',
+    // The Center's page here is archived; the tab goes to its own site.
+    href: JCTCC_URL,
+    external: true,
   },
   { label: 'Donate', href: '/giving/donate' },
   { label: 'Contact the Foundation', href: '/contact#foundation' },

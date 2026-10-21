@@ -15,6 +15,10 @@ import heroImage from '@/assets/images/taylor-center/jctcc-rooftop.jpg'
 /**
  * The Jack C. Taylor Conference Center — moved out of About and into Giving.
  *
+ * Archived since October 2026: every link that led here now goes to
+ * jackctaylorconferencecenter.org instead, and the page is reachable only from
+ * the Archive section of the table of contents (src/data/prototypeMap.ts).
+ *
  * The live page (/about-us/taylor-conference-center) is a grand-opening recap:
  * it leads with a 30 September 2021 headline and dateline, then works through
  * the dedication, the building, the namesake, and the construction timeline

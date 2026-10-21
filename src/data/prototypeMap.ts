@@ -9,7 +9,8 @@
  * The design system's component sheets come first; prototype pages follow,
  * grouped by information-architecture bucket in the order the main navigation
  * presents them (see `navItems` in homepage.ts), with the site-wide pages that
- * sit outside it first and the account section last.
+ * sit outside it first and the account section last. Pages the site no longer
+ * links to, but that are kept for reference, close the list under Archive.
  *
  * Deliberately left out:
  * - /design-system/preview/* — bare Header/Footer renders that exist only to be
@@ -338,7 +339,6 @@ export const prototypeSection: PrototypeSection = {
           ],
         },
         { label: 'Corporate Partners', href: '/giving/corporate' },
-        { label: 'Jack C. Taylor Conference Center', href: '/giving/taylor-conference-center' },
         {
           label: 'Donate',
           href: '/giving/donate',
@@ -368,7 +368,30 @@ export const prototypeSection: PrototypeSection = {
   ],
 }
 
-export const prototypeMap: PrototypeSection[] = [designSystemSection, prototypeSection]
+/**
+ * Built pages the site has stopped linking to. Each still has its route, so it
+ * can be opened from here, but every link that led to it now goes elsewhere.
+ */
+export const archiveSection: PrototypeSection = {
+  id: 'archive',
+  title: 'Archive',
+  groups: [
+    {
+      id: 'archived-pages',
+      title: 'Archived Pages',
+      links: [
+        {
+          label: 'Jack C. Taylor Conference Center',
+          href: '/giving/taylor-conference-center',
+          // Links to it now go to jackctaylorconferencecenter.org
+          note: 'Replaced by the Center’s own site',
+        },
+      ],
+    },
+  ],
+}
+
+export const prototypeMap: PrototypeSection[] = [designSystemSection, prototypeSection, archiveSection]
 
 /** Every href in a link tree, parents first — used to find the current page's group. */
 export function flattenLinks(links: PrototypeLink[]): PrototypeLink[] {

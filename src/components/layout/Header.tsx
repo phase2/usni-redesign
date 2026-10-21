@@ -323,11 +323,18 @@ function MegaMenuPanel({ links, megaCta, alignRight }: {
             <a
               key={link.href + i}
               href={link.href}
-              className="flex items-center px-8 py-4 font-body font-bold text-lg text-navy-bolder
+              {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+              className="flex items-center gap-1.5 px-8 py-4 font-body font-bold text-lg text-navy-bolder
                          border-b border-border-light last:border-0
                          hover:bg-surface-subtle hover:text-navy-subtle transition-colors"
             >
               {link.label}
+              {link.external && (
+                <>
+                  <ExternalLinkIcon />
+                  <span className="sr-only">(opens in a new tab)</span>
+                </>
+              )}
             </a>
           ))}
         </div>
@@ -595,9 +602,16 @@ function MobileMenu({ open, onClose, onSearchOpen, cartCount }: {
                           key={child.href + i}
                           href={child.href}
                           onClick={onClose}
-                          className="block px-4 py-3 font-body text-[1rem] text-navy-bolder hover:text-navy-subtle transition-colors"
+                          {...(child.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                          className="flex items-center gap-1.5 px-4 py-3 font-body text-[1rem] text-navy-bolder hover:text-navy-subtle transition-colors"
                         >
                           {child.label}
+                          {child.external && (
+                            <>
+                              <ExternalLinkIcon />
+                              <span className="sr-only">(opens in a new tab)</span>
+                            </>
+                          )}
                         </a>
                       ))}
                     </div>
