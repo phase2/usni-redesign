@@ -60,7 +60,7 @@ export interface Opportunity {
    * ends on "make a direct contribution today", which needs that button to
    * still be there.
    */
-  cta?: { label: string; href: string }
+  cta?: { label: string; href: string; external?: boolean }
   /**
    * Replaces the shared Donate Today button, for an opportunity whose second
    * slot is better spent elsewhere — the Taylor Center has a site of its own.
@@ -174,7 +174,8 @@ export const givingOpportunities: Opportunity[] = [
     ],
     cta: {
       label: 'About the Center',
-      href: '/giving/taylor-conference-center',
+      href: 'https://www.jackctaylorconferencecenter.org/',
+      external: true,
     },
   },
   {

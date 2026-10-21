@@ -155,6 +155,8 @@ export default function App() {
         <Route path="/giving" element={<Giving />} />
         <Route path="/giving/opportunities" element={<GivingOpportunitiesPage />} />
         <Route path="/giving/student-memberships" element={<GivingStudentMemberships />} />
+        {/* Archived: nothing links here any more (links go to the Center's own
+            site), but the page is kept and listed under Archive in the TOC. */}
         <Route path="/giving/taylor-conference-center" element={<GivingTaylorCenter />} />
         <Route path="/giving/donor-recognition" element={<GivingSocieties />} />
         {/* One template, four detail pages — see src/data/givingSocieties.ts */}

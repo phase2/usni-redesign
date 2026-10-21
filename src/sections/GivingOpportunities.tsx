@@ -118,8 +118,19 @@ function OpportunityCard({ opp }: { opp: Opportunity }) {
             the copy it expands. */}
         <div className="mt-auto pt-3 flex flex-wrap gap-3">
           {opp.cta && (
-            <ButtonLink href={opp.cta.href} variant="navy" size="sm">
+            <ButtonLink
+              href={opp.cta.href}
+              variant="navy"
+              size="sm"
+              {...(opp.cta.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+            >
               {opp.cta.label}
+              {opp.cta.external && (
+                <>
+                  <ExternalLinkIcon size="1.1em" />
+                  <span className="sr-only">(opens in a new tab)</span>
+                </>
+              )}
             </ButtonLink>
           )}
           {opp.secondaryCta ? (

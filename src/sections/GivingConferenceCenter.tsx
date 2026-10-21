@@ -5,9 +5,9 @@ import { JCTCC_URL } from '@/sections/TaylorCenterAbout'
 /**
  * The Taylor Center, closing the Giving landing.
  *
- * The secondary button used to point at `/conference-center`, a route that was
- * never built. It now leads to the Center's page in this section, and the
- * outbound link to the Center's own site is the one marked external.
+ * One button, to the Center's own site. It used to lead to the Center's page in
+ * this section, with a second "Host an event" button going off-site; that page
+ * is archived, so both would now go to the same place.
  */
 export default function GivingConferenceCenter() {
   return (
@@ -34,18 +34,12 @@ export default function GivingConferenceCenter() {
           </p>
           <div className="flex flex-wrap gap-3">
             <a
-              href="/giving/taylor-conference-center"
-              className="inline-flex items-center justify-center bg-navy-bolder text-white font-body font-bold text-sm tracking-[-0.3px] px-5 py-3.5 border border-navy-bolder hover:bg-navy-bright hover:border-navy-bright transition-colors"
-            >
-              About the Center
-            </a>
-            <a
               href={JCTCC_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 bg-transparent text-navy-bolder border border-navy-bolder font-body font-bold text-sm tracking-[-0.3px] px-5 py-3.5 hover:bg-navy-bright hover:text-white hover:border-navy-bright transition-colors"
+              className="inline-flex items-center justify-center gap-2 bg-navy-bolder text-white font-body font-bold text-sm tracking-[-0.3px] px-5 py-3.5 border border-navy-bolder hover:bg-navy-bright hover:border-navy-bright transition-colors"
             >
-              Host an event
+              About the Center
               <ExternalLinkIcon size="1.1em" />
               <span className="sr-only">(opens in a new tab)</span>
             </a>

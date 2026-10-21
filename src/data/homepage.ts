@@ -163,9 +163,12 @@ export const navItems: NavItem[] = [
       { label: 'Leadership & Staff', href: '/about/leadership#foundation-trustees' },
       { label: 'Donor Recognition', href: '/giving/donor-recognition' },
       { label: 'Corporate Partners', href: '/giving/corporate' },
-      // Moved out of the About menu: the Center's page is a giving page now,
-      // not an institutional-background one.
-      { label: 'Jack C. Taylor Conference Center', href: '/giving/taylor-conference-center' },
+      // The Center's page in Giving is archived; this goes to its own site.
+      {
+        label: 'Jack C. Taylor Conference Center',
+        href: 'https://www.jackctaylorconferencecenter.org/',
+        external: true,
+      },
       { label: 'Contact the Foundation', href: '/contact#foundation' },
       { label: 'Donate Today', href: '/giving/donate' },
     ],
