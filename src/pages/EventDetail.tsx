@@ -27,11 +27,13 @@ function FieldLabel({ children }: { children: string }) {
  * Both kinds share one layout, so date, time and location are always in the
  * same spot. The standard light-blue Events hero carries the title and the
  * live hero's second line; an event flagged `photoHero` takes the full-width
- * photo hero with a white panel instead, on its listing image. Below the leaderboard ad, the centered reading
- * column opens with the Date & Time and Location fields, then a rule and the
- * live body copy. A past event adds a warning above the fields that it has
- * passed, standing in for the live page's registration button; an upcoming
- * one keeps that button, below the fields.
+ * photo hero with a white panel instead, on its listing image. Below the
+ * leaderboard ad, the centered reading column opens with the Date & Time and
+ * Location fields, then a rule and the live body copy.
+ *
+ * An upcoming event's registration button sits in the hero and repeats after
+ * the body copy, where the live event template places it. A past event drops
+ * the button and shows a warning above the fields that it has passed.
  */
 export default function EventDetail() {
   const { slug = '' } = useParams()
@@ -44,6 +46,14 @@ export default function EventDetail() {
 
   const time = detail.time ?? upcoming?.time
   const venue = detail.venue ?? upcoming?.venue ?? []
+  // Hero buttons are always solid or outline navy; the repeat after the body
+  // copy keeps the gold primary.
+  const cta = (variant: 'navy' | 'primary') =>
+    upcoming && detail.cta && (
+      <ButtonLink href={detail.cta.href} variant={variant} className="self-start">
+        {detail.cta.label}
+      </ButtonLink>
+    )
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -69,14 +79,18 @@ export default function EventDetail() {
                 className="border-b border-[#C2DDFF] pb-4"
               />
             }
-          />
+          >
+            {cta('navy')}
+          </PageHero>
         ) : (
           <EventsPageHero
             title={event.title}
             subtitle={detail.subtitle}
             breadcrumbLabel={event.title}
             parent={past ? { label: 'Past Events', href: '/events/past' } : undefined}
-          />
+          >
+            {upcoming && detail.cta && <div className="pt-2 flex">{cta('navy')}</div>}
+          </EventsPageHero>
         )}
 
         <AdUnit />
@@ -116,15 +130,11 @@ export default function EventDetail() {
                 </div>
               </dl>
 
-              {upcoming && detail.cta && (
-                <ButtonLink href={detail.cta.href} className="self-start">
-                  {detail.cta.label}
-                </ButtonLink>
-              )}
-
               <hr className="border-0 border-t border-neutral-subtler" />
 
               <div className="rich-text" dangerouslySetInnerHTML={{ __html: detail.html }} />
+
+              {cta('primary')}
             </div>
           </div>
         </section>

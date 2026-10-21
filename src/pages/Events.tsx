@@ -2,6 +2,7 @@ import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import EventsHero from '@/sections/EventsHero'
 import UpcomingEvents from '@/sections/UpcomingEvents'
+import EventsAuthorEvents from '@/sections/EventsAuthorEvents'
 import EventsArchiveCta from '@/sections/EventsArchiveCta'
 import EventsConferenceCenter from '@/sections/EventsConferenceCenter'
 
@@ -12,6 +13,7 @@ export default function Events() {
       <main className="flex-1">
         <EventsHero />
         <UpcomingEvents />
+        <EventsAuthorEvents />
         <EventsArchiveCta />
         <EventsConferenceCenter />
       </main>

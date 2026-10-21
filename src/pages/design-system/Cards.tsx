@@ -270,8 +270,7 @@ export default function Cards() {
               title="Break the convention"
               tone="drift"
               items={[
-                { path: 'src/sections/UpcomingEvents.tsx', note: 'EventCard is an <article> whose headline link is stretched over the card (after:absolute after:inset-0) instead of a wrapping <a>. It hand-builds the CardCta row, and its image zooms on hover (group-hover:scale-[1.04]), so two things move.' },
-                { path: 'src/sections/PastEventsArchive.tsx', note: 'EventCard uses the same stretched link, but the headline sweeps its own underline (link-underline-hover), the image zooms, and there is no CTA.' },
+                { path: 'src/components/cards/EventCard.tsx', note: 'Shared by UpcomingEvents and PastEventsArchive. An <article> whose headline link is stretched over the card (after:absolute after:inset-0) instead of a wrapping <a>. There is no CardCta row: the headline sweeps its own underline (link-underline-hover) and is the call to action, and the image zooms on hover (group-hover:scale-[1.04]).' },
                 { path: 'src/sections/EssayContestsCurrentGrid.tsx', note: 'ContestCard wraps correctly but sweeps the headline (article-link--card) and zooms the image (group-hover:scale-105) instead of carrying a CardCta. Its p-5 padding is tighter than the canonical card.' },
                 { path: 'src/sections/EssayContestsArchive.tsx', note: 'TeaserCard has hover:shadow-md but is not a link. Only the headline <a> inside it is, so the shadow promises a click the card does not deliver.' },
                 { path: 'src/sections/ReadingListsPressLibraries.tsx', note: 'a navy button-styled <span> where the CardCta should be' },
