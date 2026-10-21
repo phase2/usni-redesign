@@ -16,18 +16,25 @@ import {
 } from '@/data/siteSearch'
 
 /**
- * Site search results — /search?q=&type=
+ * Site search results — /search?q=&type=&topic=&year=&author=&sort=&page=
  *
  * Laid out after the faceted listing the client pointed to: a large keyword
  * box under the page title, a row of content-type pills, a facet column on the
  * left, and a list of results that each carry a type eyebrow, a title, a
  * summary, a date-and-byline line, and a thumbnail on the right.
  *
- * The keyword and the type live in the URL, so the header's search flydown can
- * link straight in and a results page can be shared. Facets, sort, and the page
- * number are local to one search: the results column is keyed on the keyword
- * and type, so a new search starts from a clean slate rather than carrying
- * filters that may no longer match anything.
+ * Everything lives in the URL, so the header's search flydown can link straight
+ * in and any filtered view can be shared or linked to from another page — e.g.
+ * /search?type=events&topic=author-event. Topics and authors go in as slugs, a
+ * year as itself, and a facet with several values ticked repeats its parameter
+ * (`topic=author-event&topic=series`). `sort` is written only when it differs
+ * from the default, and `page` only past the first. A slug that matches nothing
+ * in the current results is ignored.
+ *
+ * Filter, sort and page changes replace the history entry rather than push
+ * one, so Back leaves the search instead of unticking boxes one at a time. A
+ * new keyword or type writes a fresh URL with neither, so a new search starts
+ * from a clean slate rather than carrying filters that may no longer match.
  *
  * Facet counts are disjunctive — each group counts as though its own
  * selections were cleared and every other group's were applied — so ticking a
@@ -154,6 +161,16 @@ function countBy(items: SearchItem[], values: (item: SearchItem) => (string | un
 const byCountThenName = (a: FacetOption, b: FacetOption) =>
   b.count - a.count || a.value.localeCompare(b.value)
 
+/** URL form of a topic or author, e.g. "Author Event" → "author-event". */
+const slugify = (value: string) =>
+  value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+
+/** The labels a list of slugs stands for, in URL order, dropping any unknown. */
+function fromSlugs(slugs: string[], labels: Iterable<string>) {
+  const bySlug = new Map([...labels].map((label) => [slugify(label), label]))
+  return slugs.flatMap((s) => bySlug.get(s) ?? [])
+}
+
 function SearchResults({
   matches,
   query,
@@ -164,27 +181,61 @@ function SearchResults({
   query: string
   terms: string[]
 }) {
-  const [topics, setTopics] = useState<string[]>([])
-  const [years, setYears] = useState<string[]>([])
-  const [authors, setAuthors] = useState<string[]>([])
-  const [sort, setSort] = useState<SortKey>(terms.length ? 'relevance' : 'newest')
-  const [page, setPage] = useState(1)
+  const [params, setParams] = useSearchParams()
   const topRef = useRef<HTMLDivElement>(null)
 
-  const toggle = (set: typeof setTopics) => (value: string) => {
-    set((prev) => (prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]))
-    setPage(1)
-  }
-  const toggleTopic = toggle(setTopics)
-  const toggleYear = toggle(setYears)
-  const toggleAuthor = toggle(setAuthors)
+  const items = matches.map((m) => m.item)
+  const topics = useMemo(
+    () => fromSlugs(params.getAll('topic'), new Set(items.flatMap((i) => i.topics))),
+    // `items` is rebuilt every render; `matches` is what it follows.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [params, matches],
+  )
+  const authors = useMemo(
+    () => fromSlugs(params.getAll('author'), new Set(items.flatMap((i) => i.authors))),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [params, matches],
+  )
+  const years = useMemo(() => params.getAll('year'), [params])
 
-  const clearAll = () => {
-    setTopics([])
-    setYears([])
-    setAuthors([])
-    setPage(1)
+  const defaultSort: SortKey = terms.length ? 'relevance' : 'newest'
+  const sortParam = params.get('sort')
+  const sort: SortKey =
+    SORTS.some((s) => s.key === sortParam) && (sortParam !== 'relevance' || terms.length > 0)
+      ? (sortParam as SortKey)
+      : defaultSort
+  const page = Math.max(1, Number.parseInt(params.get('page') ?? '', 10) || 1)
+
+  /** Rewrites the filter, sort and page params; any filter change resets the page. */
+  const write = (next: {
+    topics?: string[]
+    years?: string[]
+    authors?: string[]
+    sort?: SortKey
+    page?: number
+  }) => {
+    const out = new URLSearchParams()
+    const q = params.get('q')
+    const type = params.get('type')
+    if (q) out.set('q', q)
+    if (type) out.set('type', type)
+    for (const t of next.topics ?? topics) out.append('topic', slugify(t))
+    for (const y of next.years ?? years) out.append('year', y)
+    for (const a of next.authors ?? authors) out.append('author', slugify(a))
+    const s = next.sort ?? sort
+    if (s !== defaultSort) out.set('sort', s)
+    const p = next.page ?? 1
+    if (p > 1) out.set('page', String(p))
+    setParams(out, { replace: true })
   }
+
+  const toggled = (list: string[], value: string) =>
+    list.includes(value) ? list.filter((v) => v !== value) : [...list, value]
+  const toggleTopic = (v: string) => write({ topics: toggled(topics, v) })
+  const toggleYear = (v: string) => write({ years: toggled(years, v) })
+  const toggleAuthor = (v: string) => write({ authors: toggled(authors, v) })
+
+  const clearAll = () => write({ topics: [], years: [], authors: [] })
 
   const activeCount = topics.length + years.length + authors.length
 
@@ -193,7 +244,6 @@ function SearchResults({
     (except === 'year' || years.length === 0 || years.includes(yearOf(item) ?? '')) &&
     (except === 'author' || authors.length === 0 || item.authors.some((a) => authors.includes(a)))
 
-  const items = matches.map((m) => m.item)
   const topicOptions = countBy(items.filter((i) => passes(i, 'topic')), (i) => i.topics).sort(byCountThenName)
   const yearOptions = countBy(items.filter((i) => passes(i, 'year')), (i) => [yearOf(i)]).sort((a, b) =>
     b.value.localeCompare(a.value),
@@ -230,7 +280,7 @@ function SearchResults({
   const last = Math.min(current * PER_PAGE, results.length)
 
   const goToPage = (p: number) => {
-    setPage(p)
+    write({ page: p })
     topRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
@@ -286,10 +336,7 @@ function SearchResults({
             <select
               id={sortId}
               value={sort}
-              onChange={(e) => {
-                setSort(e.target.value as SortKey)
-                setPage(1)
-              }}
+              onChange={(e) => write({ sort: e.target.value as SortKey })}
               className="select-field font-body text-base text-navy-bolder border border-[#94A3B8] pl-3.5 py-2
                 bg-white cursor-pointer outline-none focus:border-navy-bright
                 focus:shadow-[0_0_0_3px_rgba(4,102,200,0.15)] transition min-w-[160px]"
