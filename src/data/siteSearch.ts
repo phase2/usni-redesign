@@ -175,8 +175,8 @@ export interface SearchItem {
   type: SearchType
   title: string
   summary?: string
-  /** Absent for an archive article, which has no page in the prototype. */
-  href?: string
+  /** An archive article's leads to the 404 page; it has no page in the prototype yet. */
+  href: string
   /** Display date, already formatted. */
   date?: string
   /** `YYYY-MM-DD`, for sorting and the Time Period and Year facets. */

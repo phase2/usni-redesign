@@ -1,5 +1,6 @@
 import { useId, useMemo, useRef, type ReactNode } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
+import CardCta from '@/components/ui/CardCta'
 import FacetGroup, { type FacetOption } from '@/components/ui/FacetGroup'
 import IssueRangePicker, { rangeLabel, type IssueRange } from '@/components/search/IssueRangePicker'
 import FilterChip from '@/components/ui/FilterChip'
@@ -101,27 +102,14 @@ const eyebrowOf = (item: SearchItem) => {
   return dept ? `${TYPE_EYEBROW[item.type]} · ${dept}` : TYPE_EYEBROW[item.type]
 }
 
-function Title({ item, className }: { item: SearchItem; className: string }) {
-  return (
-    <h3 className={`font-headline text-navy-bolder ${className}`}>
-      {/* Archive articles have no page in the prototype, so no link. */}
-      {item.href ? (
-        <a href={item.href} className="link-underline-hover">
-          {item.title}
-        </a>
-      ) : (
-        item.title
-      )}
-    </h3>
-  )
-}
-
 /**
- * Date, place and contributors. Bylines filter by contributor rather than
- * leave the page — the prototype has no contributor pages, and narrowing to
- * someone's other work is what a reader clicking a name usually wants.
+ * Date, place and contributors. In a list row, bylines filter by contributor
+ * rather than leave the page — the prototype has no contributor pages, and
+ * narrowing to someone's other work is what a reader clicking a name usually
+ * wants. In a grid card, which is itself one link, they are plain text: a
+ * button cannot sit inside the card's anchor.
  */
-function Byline({ item, selection, onToggle }: ResultProps) {
+function Byline({ item, selection, onToggle, plain = false }: ResultProps & { plain?: boolean }) {
   if (!item.date && item.authors.length === 0 && !item.place) return null
   const lead = [item.date, item.place].filter(Boolean)
   return (
@@ -135,15 +123,19 @@ function Byline({ item, selection, onToggle }: ResultProps) {
       {item.authors.map((a) => (
         <span key={a} className="flex items-center gap-2">
           {lead.length > 0 && <span aria-hidden="true">|</span>}
-          <button
-            type="button"
-            onClick={() => onToggle('contributor', a)}
-            aria-pressed={selection.contributor?.includes(a) ?? false}
-            className="text-left text-navy-bolder underline underline-offset-2 decoration-[#94A3B8] hover:decoration-navy-bolder"
-          >
-            {a}
-            <span className="sr-only"> — filter by this contributor</span>
-          </button>
+          {plain ? (
+            <span className="text-navy-bolder">{a}</span>
+          ) : (
+            <button
+              type="button"
+              onClick={() => onToggle('contributor', a)}
+              aria-pressed={selection.contributor?.includes(a) ?? false}
+              className="text-left text-navy-bolder underline underline-offset-2 decoration-[#94A3B8] hover:decoration-navy-bolder"
+            >
+              {a}
+              <span className="sr-only"> — filter by this contributor</span>
+            </button>
+          )}
         </span>
       ))}
     </p>
@@ -156,14 +148,18 @@ function ResultRow(props: ResultProps) {
     <article className="flex gap-5 sm:gap-8 py-7">
       <div className="flex-1 min-w-0 flex flex-col gap-2">
         <p className="font-body font-bold text-xs uppercase tracking-[0.1em] text-[#0466c8]">{eyebrowOf(item)}</p>
-        <Title item={item} className="text-xl lg:text-[22px] leading-[1.25]" />
+        <h3 className="font-headline text-xl lg:text-[22px] text-navy-bolder leading-[1.25]">
+          <a href={item.href} className="link-underline-hover">
+            {item.title}
+          </a>
+        </h3>
         {item.summary && (
           <p className="font-body text-[15px] text-neutral-bold leading-[1.6] line-clamp-3">{item.summary}</p>
         )}
         <Byline {...props} />
       </div>
 
-      {item.image && item.href && (
+      {item.image && (
         <a
           href={item.href}
           tabIndex={-1}
@@ -179,38 +175,51 @@ function ResultRow(props: ResultProps) {
   )
 }
 
+/** The grid card's foot link, by what the card leads to. */
+const CTA_LABEL: Record<SearchType, string> = {
+  proceedings: 'Read article',
+  'naval-history': 'Read article',
+  news: 'Read article',
+  books: 'View book',
+  events: 'View event',
+  podcasts: 'Listen',
+  'essay-contests': 'View contest',
+}
+
 /**
- * The grid card. A record with no picture — every archive article — takes the
- * crossed-swords watermark, as events without artwork do, so the grid keeps
- * its rhythm. A book jacket sits whole on the tint rather than being cropped.
+ * The grid card, on the site's linked-card convention (see CardCta): one
+ * anchor wraps the whole card, the shadow lifts on hover, and the stylized
+ * link at the foot is the only thing that moves — the headline stays static
+ * and the image does not zoom.
+ *
+ * A record with no picture — every archive article — takes the crossed-swords
+ * watermark, as events without artwork do, so the grid keeps its rhythm. A
+ * book jacket sits whole on the tint rather than being cropped.
  */
 function ResultCard(props: ResultProps) {
   const { item } = props
-  const media = (
-    <div className="relative aspect-[16/10] overflow-hidden bg-surface-subtle">
-      <img
-        src={item.image ?? imgPlaceholder}
-        alt=""
-        loading="lazy"
-        className={`w-full h-full ${item.image && item.cover ? 'object-contain p-4' : 'object-cover'}`}
-      />
-    </div>
-  )
   return (
-    <article className="flex flex-col bg-white border border-navy-subtle h-full">
-      {item.href ? (
-        <a href={item.href} tabIndex={-1} aria-hidden="true">
-          {media}
-        </a>
-      ) : (
-        media
-      )}
+    <a
+      href={item.href}
+      className="group flex flex-col bg-white border border-navy-subtle h-full hover:shadow-md transition-shadow"
+    >
+      <div className="relative aspect-[16/10] overflow-hidden bg-surface-subtle">
+        <img
+          src={item.image ?? imgPlaceholder}
+          alt=""
+          loading="lazy"
+          className={`w-full h-full ${item.image && item.cover ? 'object-contain p-4' : 'object-cover'}`}
+        />
+      </div>
       <div className="flex flex-col gap-2 p-5 flex-1">
         <p className="font-body font-bold text-xs uppercase tracking-[0.1em] text-[#0466c8]">{eyebrowOf(item)}</p>
-        <Title item={item} className="text-lg lg:text-xl leading-[1.25]" />
-        <Byline {...props} />
+        <h3 className="font-headline text-lg lg:text-xl text-navy-bolder leading-[1.25]">{item.title}</h3>
+        <Byline {...props} plain />
+        <div className="mt-auto pt-2">
+          <CardCta>{CTA_LABEL[item.type]}</CardCta>
+        </div>
       </div>
-    </article>
+    </a>
   )
 }
 

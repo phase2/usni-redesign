@@ -12,7 +12,9 @@ import { mergeTags, searchIndex, slugify, type SearchItem, type TagFacet } from 
  * Browse opens. The promise is kept, so every later visit reuses it.
  *
  * The records carry a title, issue month, contributors and tags — no summary,
- * image or page. Where one is also a current record (an article from the April
+ * image or page. Each still links, as a teaser should, to an address shaped
+ * like the article's (/proceedings/archive/1912/12/<title>), which lands on
+ * the 404 page until article pages exist. Where one is also a current record (an article from the April
  * 2026 issue, say), its tags go onto that record and the archive copy is
  * dropped, so the article appears once, with its page and picture.
  */
@@ -87,11 +89,14 @@ function toItems(d: ArchivePayload): SearchItem[] {
       const ids = d.tags[from][i]
       if (ids.length) tags[to] = ids.map((id) => d.vocab[from][id])
     }
+    const type = pub === 'Naval History' ? 'naval-history' : 'proceedings'
+    const mm = String(month + 1).padStart(2, '0')
     return {
       id: `archive-${i}`,
-      type: pub === 'Naval History' ? 'naval-history' : 'proceedings',
+      type,
       title,
-      sortDate: `${year}-${String(month + 1).padStart(2, '0')}-01`,
+      href: `/${type}/archive/${year}/${mm}/${slugify(title)}`,
+      sortDate: `${year}-${mm}-01`,
       date: `${MONTHS[month]} ${year}`,
       authors: [...new Set(d.auth[i].map((a) => authors[a]))],
       tags,
