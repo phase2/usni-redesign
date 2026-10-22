@@ -16,20 +16,27 @@ import type { ReactNode } from 'react'
  */
 const OVERLAY_OPACITY = 0.72
 
+/**
+ * `search` sits centered under the introduction — the magazine's own search
+ * box, scoped to it. The section does not clip its overflow, so the box's
+ * suggestion list can hang over the band below.
+ */
 export default function MagazineHero({
   image,
   logo,
   logoAlt,
   children,
+  search,
 }: {
   image: string
   logo: string
   logoAlt: string
   children: ReactNode
+  search?: ReactNode
 }) {
   return (
     <section
-      className="relative flex flex-col items-center justify-center py-12 lg:py-28 lg:min-h-[480px] bg-cover bg-center overflow-hidden"
+      className="relative z-20 flex flex-col items-center justify-center py-12 lg:py-28 lg:min-h-[480px] bg-cover bg-center"
       style={{ backgroundImage: `url(${image})` }}
     >
       <div
@@ -38,11 +45,12 @@ export default function MagazineHero({
         style={{ backgroundColor: `rgba(14, 18, 26, ${OVERLAY_OPACITY})` }}
       />
 
-      <div className="relative z-10 flex flex-col items-center">
+      <div className="relative z-10 flex flex-col items-center w-full">
         <img src={logo} alt={logoAlt} className="h-[58px] w-auto object-contain mb-8" />
         <p className="font-body text-white text-center text-lg leading-[1.4] max-w-[764px] px-6">
           {children}
         </p>
+        {search && <div className="w-full max-w-[640px] px-6 mt-8">{search}</div>}
       </div>
     </section>
   )
