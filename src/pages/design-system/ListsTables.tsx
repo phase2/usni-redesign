@@ -317,7 +317,7 @@ export default function ListsTables() {
               items={[
                 { path: 'src/sections/PastEventsArchive.tsx', note: 'AccordionChevron is defined locally here …' },
                 { path: 'src/sections/EssayContestsArchive.tsx', note: '… and again here, identically. One shared chevron partial is enough.' },
-                { path: 'src/sections/BooksCollectionLayout.tsx', note: 'FacetCheckbox matches the checkbox row exactly. The panel around it does not (see the listing drift above). Its FilterChip (inline-flex items-center gap-1.5 bg-surface-subtle border border-border-light px-2.5 py-1 font-body text-xs text-navy-bolder, with an fa-xmark remove button) is the only active-filter chip on the site.' },
+                { path: 'src/sections/BooksCollectionLayout.tsx', note: 'FacetCheckbox matches the checkbox row exactly. The panel around it does not (see the listing drift above). Its FilterChip (inline-flex items-center gap-1.5 bg-surface-subtle border border-border-light hover:border-navy-bolder transition-colors px-2.5 py-1 font-body text-xs text-navy-bolder, with an fa-xmark remove button) is the only active-filter chip on the site.' },
               ]}
             />
             <PropsTable

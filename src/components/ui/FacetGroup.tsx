@@ -15,8 +15,14 @@ import { useId, useState } from 'react'
 /** Options a facet shows before "Show all". */
 const FACET_PREVIEW = 6
 
+/**
+ * The most "Show all" lists. Site search's Contributor facet runs to thousands
+ * of names; past this the Find box is the way in.
+ */
+const FACET_MAX = 100
+
 /** Boxed chevron, matching the accordion treatment used site-wide. */
-function AccordionChevron({ open }: { open: boolean }) {
+export function AccordionChevron({ open }: { open: boolean }) {
   return (
     <span
       className="accordion-chevron flex-shrink-0 flex items-center justify-center bg-navy-subtle p-1.5"
@@ -96,8 +102,9 @@ export default function FacetGroup({
   ]
   const needle = find.trim().toLowerCase()
   const matching = needle ? listed.filter((o) => o.value.toLowerCase().includes(needle)) : listed
-  const visible = showAll || needle ? matching : matching.slice(0, FACET_PREVIEW)
+  const visible = matching.slice(0, showAll || needle ? FACET_MAX : FACET_PREVIEW)
   const hidden = matching.length - visible.length
+  const capped = (showAll || needle) && hidden > 0
 
   return (
     <div className="border-b border-border-light">
@@ -148,12 +155,20 @@ export default function FacetGroup({
               <span className="font-body text-sm text-navy-bolder group-hover:text-navy-subtle transition-colors flex-1 leading-snug">
                 {o.value}
               </span>
-              <span className="font-body text-xs text-neutral-subtle tabular-nums pt-0.5">{o.count}</span>
+              <span className="font-body text-xs text-neutral-subtle tabular-nums pt-0.5">
+                {o.count.toLocaleString()}
+              </span>
             </label>
           ))}
 
           {needle && matching.length === 0 && (
             <p className="font-body text-sm text-neutral-subtle py-1.5">No matches.</p>
+          )}
+
+          {capped && (
+            <p className="font-body text-sm text-neutral-subtle py-1.5">
+              {hidden.toLocaleString()} more{findPlaceholder ? ' — type above to find one.' : '.'}
+            </p>
           )}
 
           {!needle && (hidden > 0 || showAll) && matching.length > FACET_PREVIEW && (
@@ -166,7 +181,11 @@ export default function FacetGroup({
                 className={`fa-solid ${showAll ? 'fa-circle-minus' : 'fa-circle-plus'} text-sm`}
                 aria-hidden="true"
               />
-              {showAll ? 'Show fewer' : `Show all ${matching.length}`}
+              {showAll
+                ? 'Show fewer'
+                : matching.length > FACET_MAX
+                  ? `Show top ${FACET_MAX}`
+                  : `Show all ${matching.length}`}
               <span className="sr-only"> {title.toLowerCase()} options</span>
             </button>
           )}

@@ -102,6 +102,21 @@ export const prototypeSection: PrototypeSection = {
         { label: 'Homepage', href: '/' },
         { label: 'Search Results', href: '/search?q=navy' },
         {
+          label: 'Browse All Articles',
+          href: '/browse',
+          // The content architecture plan's subject pages are filtered views
+          // of Browse All Articles.
+          children: [
+            { label: 'Topic: Mine Warfare', href: '/browse?topic=mine-warfare', note: 'Subject view' },
+            { label: 'Ship: USS Constitution', href: '/browse?ship=uss-constitution&view=grid', note: 'Grid view' },
+            {
+              label: 'Naval History: World War II',
+              href: '/browse?publication=naval-history&conflict=world-war-ii',
+              note: 'Scoped to a magazine',
+            },
+          ],
+        },
+        {
           label: 'Events',
           href: '/events',
           children: [

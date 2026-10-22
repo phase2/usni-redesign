@@ -129,6 +129,7 @@ import AccountSaved from '@/pages/account/AccountSaved'
 import AccountWishlist from '@/pages/account/AccountWishlist'
 import Contact from '@/pages/Contact'
 import Search from '@/pages/Search'
+import Browse from '@/pages/Browse'
 import NotFound from '@/pages/NotFound'
 
 export default function App() {
@@ -219,6 +220,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/browse" element={<Browse />} />
 
         {/* Account section — no auth gate; the prototype has no sessions */}
         <Route path="/account" element={<AccountDashboard />} />

@@ -16,7 +16,7 @@ export default function FilterChip({
   onRemove: () => void
 }) {
   return (
-    <span className="inline-flex items-center gap-1.5 bg-surface-subtle border border-border-light px-2.5 py-1 font-body text-xs text-navy-bolder">
+    <span className="inline-flex items-center gap-1.5 bg-surface-subtle border border-border-light hover:border-navy-bolder transition-colors px-2.5 py-1 font-body text-xs text-navy-bolder">
       {group && <span className="text-neutral-subtle">{group}:</span>}
       {label}
       <button

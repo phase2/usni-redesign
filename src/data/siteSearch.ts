@@ -14,8 +14,16 @@
  * out: the main navigation already reaches them, and the client asked for
  * search to return content only.
  *
+ * Every record is tagged with the managed vocabulary proposed in the content
+ * architecture plan (src/data/searchTaxonomy.ts): its old category goes to the
+ * facet it really belongs to — a department, an event type, a book subject's
+ * nearest topic — and its title and summary are matched against the plan's
+ * ships, regions, conflicts, commands, organizations and topics. The 34,686
+ * archive articles the plan was tagged against are searched separately, on
+ * Browse All Articles (src/data/archiveSearch.ts, src/sections/BrowseArticles.tsx).
+ *
  * The production site would put this behind a search service; the prototype
- * filters in the browser, which is plenty for a few hundred records.
+ * filters in the browser.
  */
 
 import type { Article } from '@/types'
@@ -36,6 +44,16 @@ import { episodes } from './podcastEpisodes'
 import { essayContests } from './essayContests'
 import imgProceedingsPodcast from '@/assets/images/proceedings-podcast-thumb.png'
 import imgNavalHistoryPodcast from '@/assets/images/nh-podcast-thumb.png'
+import {
+  BRANCHES,
+  COMMANDS,
+  CONFLICTS,
+  DEPARTMENTS,
+  ORGANIZATIONS,
+  REGIONS,
+  SHIPS,
+  TOPICS,
+} from './searchTaxonomy'
 
 export type SearchType =
   | 'proceedings'
@@ -57,25 +75,165 @@ export const SEARCH_TYPES: { id: SearchType; label: string; eyebrow: string }[] 
   { id: 'essay-contests', label: 'Essay Contests', eyebrow: 'Essay Contest' },
 ]
 
+/** Facets a record carries tags for. Type, contributor and dates are fields. */
+export type TagFacet =
+  | 'topic'
+  | 'subtopic'
+  | 'ship'
+  | 'region'
+  | 'conflict'
+  | 'command'
+  | 'org'
+  | 'person'
+  | 'branch'
+  | 'dept'
+  | 'eventType'
+
+export type FacetKey = 'type' | 'issue' | 'period' | 'year' | 'contributor' | TagFacet
+
+export interface FacetDef {
+  key: FacetKey
+  label: string
+  /** URL parameter, e.g. `organization` for `org`. */
+  param: string
+  /** Placeholder for the "Find …" box on a long list. */
+  find?: string
+  /** Options in date order, newest first, rather than by count. */
+  chrono?: boolean
+}
+
+/**
+ * Every facet, by key. Parameter names follow the Browse prototype, so its
+ * addresses carry over. Each listing picks its own column from these.
+ */
+const FACET: Record<FacetKey, FacetDef> = {
+  type: { key: 'type', label: 'Content Type', param: 'type' },
+  issue: { key: 'issue', label: 'Issue', param: 'issue', chrono: true },
+  topic: { key: 'topic', label: 'Topic', param: 'topic', find: 'Find a topic…' },
+  period: { key: 'period', label: 'Time Period', param: 'period', chrono: true },
+  ship: { key: 'ship', label: 'Ship or Class', param: 'ship', find: 'Find a ship…' },
+  region: { key: 'region', label: 'Region', param: 'region', find: 'Find a region…' },
+  conflict: { key: 'conflict', label: 'Conflict or Era', param: 'conflict', find: 'Find a conflict…' },
+  command: { key: 'command', label: 'Command or Unit', param: 'command', find: 'Find a command…' },
+  org: { key: 'org', label: 'Organization', param: 'organization', find: 'Find an organization…' },
+  contributor: { key: 'contributor', label: 'Contributor', param: 'contributor', find: 'Find a contributor…' },
+  subtopic: { key: 'subtopic', label: 'Subtopic', param: 'subtopic', find: 'Find a subtopic…' },
+  person: { key: 'person', label: 'Person Covered', param: 'person', find: 'Find a person…' },
+  branch: { key: 'branch', label: 'Service Branch', param: 'branch' },
+  dept: { key: 'dept', label: 'Department', param: 'department', find: 'Find a department…' },
+  eventType: { key: 'eventType', label: 'Event Type', param: 'event-type' },
+  year: { key: 'year', label: 'Year', param: 'year', chrono: true, find: 'Find a year…' },
+}
+
+/**
+ * Site search's column (/search): content type first — it replaced the row of
+ * type pills — then the subjects current content is tagged with.
+ */
+export const SEARCH_FACETS: FacetDef[] = [
+  FACET.type,
+  FACET.topic,
+  FACET.year,
+  FACET.contributor,
+  FACET.ship,
+  FACET.region,
+  FACET.conflict,
+  FACET.command,
+  FACET.org,
+  FACET.branch,
+  FACET.dept,
+  FACET.eventType,
+]
+
+/**
+ * Browse All Articles' column (/browse): the two magazines, then the plan's
+ * subject dimensions, then the finer cuts. Content type is Publication here,
+ * under the plan's `publication` parameter.
+ */
+export const BROWSE_FACETS: FacetDef[] = [
+  { ...FACET.type, label: 'Publication', param: 'publication' },
+  FACET.topic,
+  FACET.period,
+  FACET.issue,
+  FACET.ship,
+  FACET.region,
+  FACET.conflict,
+  FACET.command,
+  FACET.org,
+  FACET.contributor,
+  FACET.subtopic,
+  FACET.person,
+  FACET.branch,
+  FACET.dept,
+  FACET.year,
+]
+
+/** Display labels and URL parameters, for links into a listing from elsewhere. */
+export const FACETS = Object.values(FACET)
+
 export interface SearchItem {
   id: string
   type: SearchType
   title: string
   summary?: string
-  href: string
+  /** Absent for an archive article, which has no page in the prototype. */
+  href?: string
   /** Display date, already formatted. */
   date?: string
-  /** `YYYY-MM-DD`, for sorting and the Year facet. */
+  /** `YYYY-MM-DD`, for sorting and the Time Period and Year facets. */
   sortDate?: string
-  /** Facet values. Authors are also the byline. */
+  /** The byline, and the Contributor facet. */
   authors: string[]
-  topics: string[]
+  tags: Partial<Record<TagFacet, string[]>>
   /** Extra byline text that is not a facet, e.g. an event's city. */
   place?: string
   image?: string
   imageAlt?: string
   /** A book jacket: rendered portrait rather than cropped to landscape. */
   cover?: boolean
+  /** One of the 34,686 tagged archive articles (src/data/archiveSearch.ts). */
+  archive?: boolean
+}
+
+/** URL form of a facet value, e.g. "Leadership & Command" → "leadership-command". */
+export const slugify = (value: string) =>
+  value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+
+const TYPE_LABEL = Object.fromEntries(SEARCH_TYPES.map((t) => [t.id, t.label])) as Record<SearchType, string>
+
+const MONTH_NAMES = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December',
+]
+
+/** `1912-12-01`, or the issue key `1912-12`, → "December 1912". */
+export const issueLabel = (sortDate: string) =>
+  `${MONTH_NAMES[Number(sortDate.slice(5, 7)) - 1]} ${sortDate.slice(0, 4)}`
+
+/** "December 1912" → `1912-12`, so issues sort by date rather than by name. */
+export const issueSortKey = (label: string) => {
+  const [month, year] = label.split(' ')
+  return `${year}-${String(MONTH_NAMES.indexOf(month) + 1).padStart(2, '0')}`
+}
+
+/** A record's values for one facet, as the filter column lists them. */
+export function facetValues(item: SearchItem, key: FacetKey): string[] {
+  switch (key) {
+    case 'type':
+      return [TYPE_LABEL[item.type]]
+    case 'contributor':
+      return item.authors
+    case 'year':
+      return item.sortDate ? [item.sortDate.slice(0, 4)] : []
+    case 'issue':
+      // Magazine articles only: the issue they ran in, as "December 1912".
+      return (item.type === 'proceedings' || item.type === 'naval-history') && item.sortDate
+        ? [issueLabel(item.sortDate)]
+        : []
+    case 'period':
+      return item.sortDate ? [`${item.sortDate.slice(0, 3)}0s`] : []
+    default:
+      return item.tags[key] ?? []
+  }
 }
 
 /* ── Dates ────────────────────────────────────────────────────────────────── */
@@ -131,10 +289,80 @@ function authorsOf(raw?: string): string[] {
   return name && name !== 'Multiple Authors' ? [name] : []
 }
 
-/** Categories that only restate the type, or are placeholders, are not topics. */
-const NOT_TOPICS = new Set(['Article Tag', 'USNI News', 'Event'])
-const topicsOf = (...values: (string | undefined)[]) =>
-  values.filter((v): v is string => !!v && !NOT_TOPICS.has(v))
+/* ── Tagging ──────────────────────────────────────────────────────────────── */
+
+type Tags = SearchItem['tags']
+
+/**
+ * Where the sources' own categories land in the managed vocabulary. Magazine
+ * categories are mostly departments, which the plan keeps as they are; book
+ * subjects and news categories go to their nearest topic, conflict, region or
+ * branch. A category not listed here and not a department ("Featured Article",
+ * "Naval History" on a book) carries no facet.
+ */
+const CATEGORY_TAGS: Record<string, Tags> = {
+  'American Sea Power Project': { dept: ['The American Sea Power Project'] },
+  'Aviation & Air Power': { topic: ['Naval Aviation'] },
+  Aviation: { topic: ['Naval Aviation'] },
+  China: { region: ['China'] },
+  'Cold War': { conflict: ['Cold War'] },
+  'Cybersecurity & Technology': { topic: ['Cyber Operations', 'Emerging Technology & Innovation'] },
+  'Foreign Forces': { topic: ['Foreign Navies'] },
+  Industry: { topic: ['Shipbuilding & Industrial Base'] },
+  'Leadership & Professional Development': { topic: ['Leadership & Command'] },
+  'Marine Corps': { branch: ['Marine Corps'] },
+  'Political Science & Policy': { topic: ['National Security Policy'] },
+  'Strategy & Geopolitics': { topic: ['Strategy & Doctrine', 'Great Power Competition'] },
+  Submarines: { topic: ['Undersea & Submarine Warfare'] },
+  'World War II': { conflict: ['World War II'] },
+}
+
+const DEPARTMENT_SET = new Set<string>(DEPARTMENTS)
+
+/**
+ * Vocabulary terms looked for, whole-word, in a record's title and summary.
+ * "Navy" is left out of the branches: nearly every record would match it.
+ */
+const MATCHED: [TagFacet, readonly string[]][] = [
+  ['topic', TOPICS],
+  ['ship', SHIPS],
+  ['region', REGIONS],
+  ['conflict', CONFLICTS],
+  ['command', COMMANDS],
+  ['org', ORGANIZATIONS],
+  ['branch', BRANCHES.filter((b) => b !== 'Navy')],
+]
+
+const escapeRegExp = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+
+const MATCHERS = MATCHED.map(
+  ([facet, terms]) =>
+    [facet, terms.map((term) => [term, new RegExp(`\\b${escapeRegExp(term)}\\b`, 'i')] as const)] as const,
+)
+
+/** Adds each value to its facet, once. */
+export function mergeTags(into: Tags, from: Tags): Tags {
+  for (const [facet, values] of Object.entries(from) as [TagFacet, string[]][]) {
+    const list = (into[facet] ??= [])
+    for (const v of values) if (!list.includes(v)) list.push(v)
+  }
+  return into
+}
+
+/** Tags for a record from its own categories and its words. */
+function tagsOf(categories: (string | undefined)[], text: string): Tags {
+  const tags: Tags = {}
+  for (const c of categories) {
+    if (!c) continue
+    if (DEPARTMENT_SET.has(c)) mergeTags(tags, { dept: [c] })
+    else if (CATEGORY_TAGS[c]) mergeTags(tags, structuredClone(CATEGORY_TAGS[c]))
+  }
+  for (const [facet, matchers] of MATCHERS) {
+    const hits = matchers.filter(([, re]) => re.test(text)).map(([term]) => term)
+    if (hits.length) mergeTags(tags, { [facet]: hits })
+  }
+  return tags
+}
 
 function fromArticle(type: SearchType, a: Article): SearchItem {
   return {
@@ -145,7 +373,7 @@ function fromArticle(type: SearchType, a: Article): SearchItem {
     href: a.href,
     ...readDate(a.date),
     authors: authorsOf(a.author),
-    topics: topicsOf(a.category),
+    tags: tagsOf([a.category], `${a.headline} ${a.excerpt ?? ''}`),
     image: a.image,
     imageAlt: a.imageAlt,
   }
@@ -169,7 +397,7 @@ const seaPower = withImages([
   ...additionalReading,
 ]).map((a) => ({
   ...fromArticle('proceedings', a),
-  topics: ['American Sea Power Project'],
+  tags: tagsOf(['American Sea Power Project'], `${a.headline} ${a.excerpt ?? ''}`),
 }))
 
 const proceedings = dedupe([
@@ -197,7 +425,7 @@ const books: SearchItem[] = (() => {
       summary: `${b.format} · $${b.price.toFixed(2)} for members ($${b.originalPrice.toFixed(2)} list)`,
       href: b.href,
       authors: authorsOf(b.author),
-      topics: topicsOf(...(b.subjects ?? [])),
+      tags: tagsOf(b.subjects ?? [], b.title),
       image: b.image,
       imageAlt: `Cover of ${b.title}`,
       cover: true,
@@ -215,7 +443,10 @@ const events: SearchItem[] = [
   href: e.href,
   ...readDate(e.startsOn),
   authors: [],
-  topics: topicsOf(e.kind),
+  tags: mergeTags(
+    e.kind === 'Event' ? {} : { eventType: [e.kind] },
+    tagsOf([], `${e.title} ${e.summary ?? ''}`),
+  ),
   place: e.location,
   image: e.image,
   imageAlt: e.imageAlt,
@@ -229,7 +460,7 @@ const podcasts: SearchItem[] = episodes.map((ep, i) => ({
   href: '/proceedings/podcast',
   ...readDate(ep.date),
   authors: [],
-  topics: [],
+  tags: tagsOf([], `${ep.title} ${ep.description ?? ''}`),
   image: ep.navalHistory ? imgNavalHistoryPodcast : imgProceedingsPodcast,
   imageAlt: ep.navalHistory ? 'Naval History Podcast' : 'Proceedings Podcast',
 }))
@@ -243,7 +474,7 @@ const contests: SearchItem[] = essayContests.map((c) => ({
   sortDate: c.deadlineISO,
   date: `Deadline ${c.deadline}`,
   authors: [],
-  topics: [],
+  tags: tagsOf([], `${c.title} ${c.summary ?? ''}`),
   image: c.image,
   imageAlt: c.imageAlt,
 }))
@@ -273,13 +504,24 @@ export function searchTerms(query: string): string[] {
 /**
  * A weighted match score, or 0 when any term is missing — every term has to
  * appear somewhere, as a reader typing two words expects. Title hits count
- * most, then bylines and topics, then the summary.
+ * most, then bylines and tags, then the summary. A record's lower-cased text is
+ * built once and kept: the archive puts tens of thousands through this on
+ * every keystroke.
  */
+const haystacks = new WeakMap<SearchItem, { title: string; people: string; body: string }>()
+
 export function scoreItem(item: SearchItem, terms: string[]): number {
   if (terms.length === 0) return 1
-  const title = item.title.toLowerCase()
-  const people = [...item.authors, ...item.topics, item.place ?? ''].join(' ').toLowerCase()
-  const body = (item.summary ?? '').toLowerCase()
+  let hay = haystacks.get(item)
+  if (!hay) {
+    hay = {
+      title: item.title.toLowerCase(),
+      people: [...item.authors, ...Object.values(item.tags).flat(), item.place ?? ''].join(' ').toLowerCase(),
+      body: (item.summary ?? '').toLowerCase(),
+    }
+    haystacks.set(item, hay)
+  }
+  const { title, people, body } = hay
   let score = 0
   for (const term of terms) {
     const hit = (title.includes(term) ? 6 : 0) + (people.includes(term) ? 3 : 0) + (body.includes(term) ? 1 : 0)
