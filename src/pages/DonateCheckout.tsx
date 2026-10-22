@@ -10,7 +10,8 @@ import { PRIORITY_LABELS, TRIBUTE_LABELS, makeOrderNumber } from '@/data/transac
 import {
   appendCommemorativeParams,
   commemorativeLineLabel,
-  readCommemorativeLines,
+  money,
+  readDonation,
 } from '@/data/commemorativeGifts'
 import { countries, militaryStatuses, ranksForService, services, suffixes, usStates } from '@/data/essaySubmission'
 import { GradYearHelpTooltip, ServiceHelpTooltip } from '@/components/ui/FieldHelp'
@@ -160,23 +161,21 @@ export default function DonateCheckout() {
   const navigate = useNavigate()
   const { setCartCount } = useCart()
 
-  const amount      = searchParams.get('amount')    ?? '100'
   const frequency   = searchParams.get('frequency') ?? 'one-time'
   const isAnonymous = searchParams.get('anonymous') === 'true'
   const tributeType = searchParams.get('tribute')
   const tributeName = searchParams.get('tributeName')?.trim() ?? ''
   const priorityIds = searchParams.get('priorities')?.split(',').filter(Boolean) ?? []
 
-  const amountNum      = Number(amount)
   const frequencyLabel = frequency === 'monthly' ? 'Monthly' : 'One-Time'
   const priorityLabels = priorityIds.map(id => PRIORITY_LABELS[id] ?? id)
 
-  /** A commemorative gift itemises what was bought in place of the priority list. */
-  const commemorativeLines = readCommemorativeLines(searchParams)
+  /** The cash gift and any bricks and chairs, itemised and totalled. */
+  const { cash, lines: commemorativeLines, total } = readDonation(searchParams)
 
   useEffect(() => {
-    setCartCount(1)
-  }, [setCartCount])
+    setCartCount((cash > 0 ? 1 : 0) + commemorativeLines.length)
+  }, [cash, commemorativeLines.length, setCartCount])
 
   // ── Account
   const [activeTab, setActiveTab]       = useState<'guest' | 'create' | 'signin'>('guest')
@@ -284,10 +283,10 @@ export default function DonateCheckout() {
     setShowErrors(false)
 
     const params = new URLSearchParams({
-      amount,
       frequency,
       order: makeOrderNumber('NIF'),
     })
+    if (cash > 0) params.set('amount', String(cash))
     if (priorityIds.length > 0) params.set('priorities', priorityIds.join(','))
     appendCommemorativeParams(params, commemorativeLines)
     if (isAnonymous) params.set('anonymous', 'true')
@@ -546,47 +545,46 @@ export default function DonateCheckout() {
                   <div className="p-6 flex flex-col gap-6">
                     <h2 className="font-headline text-[24px] text-[#1d2535] leading-[1.2]">Order summary</h2>
 
-                    {/* Line items */}
+                    {/* Line items: the gift with its frequency, then each
+                        brick or chair line, then what is charged today. */}
                     <div className="flex flex-col gap-0">
-                      <div className="flex justify-between items-baseline gap-4 py-3 border-b border-[#e8eaed]">
-                        <span className="font-body font-bold text-[15px] text-[#1d2535]">Frequency</span>
-                        <span className="font-body text-[15px] text-[#4e576a]">{frequencyLabel}</span>
-                      </div>
+                      {cash > 0 && (
+                        <div className="flex justify-between items-baseline gap-4 py-3 border-b border-[#e8eaed]">
+                          <span className="font-body font-bold text-[15px] text-[#1d2535]">
+                            Gift <span className="font-normal text-[#4e576a]">({frequencyLabel})</span>
+                          </span>
+                          <span className="font-body text-[15px] text-[#4e576a]">{money(cash)}</span>
+                        </div>
+                      )}
+                      {commemorativeLines.map(line => (
+                        <div
+                          key={line.gift.id}
+                          className="flex justify-between items-baseline gap-4 py-3 border-b border-[#e8eaed]"
+                        >
+                          <span className="font-body font-bold text-[15px] text-[#1d2535] capitalize">
+                            {commemorativeLineLabel(line)}
+                          </span>
+                          <span className="font-body text-[15px] text-[#4e576a]">${line.subtotal.toLocaleString()}</span>
+                        </div>
+                      ))}
                       <div className="flex justify-between items-baseline gap-4 pt-4 mt-1">
                         <span className="font-body font-bold text-[17px] text-[#1d2535]">Total</span>
-                        <span className="font-headline text-[32px] text-[#023e7d]">${amountNum.toLocaleString()}</span>
+                        <span className="font-headline text-[32px] text-[#023e7d]">{money(total)}</span>
                       </div>
-                      {frequency === 'monthly' && (
+                      {frequency === 'monthly' && cash > 0 && (
                         <p className="font-body text-[13px] text-[#4e576a] leading-[1.5] mt-2">
-                          Your card will be charged ${amountNum.toLocaleString()} each month. Cancel anytime in your account settings.
+                          Your card will be charged {money(cash)} each month. Cancel anytime in your account settings.
+                          {commemorativeLines.length > 0 && ' Bricks and chairs are charged once.'}
                         </p>
                       )}
                     </div>
 
                     <div className="h-px bg-[#c4c9d4]" />
 
-                    {/* What the gift buys: the bricks and chairs where there
-                        are any, otherwise the priorities or the default fund. */}
+                    {/* Where it goes: the gift's priorities or the default
+                        fund, and the bricks and chairs' fixed fund. */}
                     <div className="flex flex-col gap-2">
-                      {commemorativeLines.length > 0 ? (
-                        <>
-                          <span className="font-body font-bold text-[15px] text-[#1d2535]">Commemorative gift</span>
-                          <div className="flex flex-col gap-1.5 mt-1">
-                            {commemorativeLines.map(line => (
-                              <span
-                                key={line.gift.id}
-                                className="font-body text-[14px] text-[#4e576a] flex justify-between gap-3"
-                              >
-                                <span className="capitalize">{commemorativeLineLabel(line)}</span>
-                                <span>${line.subtotal.toLocaleString()}</span>
-                              </span>
-                            ))}
-                          </div>
-                          <span className="font-body text-[13px] text-[#4e576a] mt-1 italic">
-                            Jack C. Taylor Conference Center Maintenance &amp; Technology Fund
-                          </span>
-                        </>
-                      ) : priorityLabels.length > 0 ? (
+                      {cash > 0 && (priorityLabels.length > 0 ? (
                         <>
                           <span className="font-body font-bold text-[15px] text-[#1d2535]">Investment Priorities</span>
                           <div className="flex flex-col gap-1.5 mt-1">
@@ -600,6 +598,11 @@ export default function DonateCheckout() {
                           <span className="font-body font-bold text-[15px] text-[#1d2535]">Fund</span>
                           <span className="font-body text-[15px] text-[#4e576a]">Most Needed</span>
                         </div>
+                      ))}
+                      {commemorativeLines.length > 0 && (
+                        <span className="font-body text-[13px] text-[#4e576a] mt-1 italic">
+                          Bricks and chairs: Jack C. Taylor Conference Center Maintenance &amp; Technology Fund
+                        </span>
                       )}
                       {/* The two choices made back in the cart, reported here
                           rather than asked again. */}

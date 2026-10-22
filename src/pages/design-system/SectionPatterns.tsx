@@ -755,7 +755,7 @@ export default function SectionPatterns() {
               items={[
                 { path: 'src/sections/ProceedingsSubmissionsContent.tsx', note: 'centred max-w-[1100px] mx-auto column; body is text-navy-bolder leading-[1.75] with no lg step; subheads font-headline text-[30px] lg:text-[40px]; groups spaced with gap-12 lg:gap-14. Build it on the canonical basic-page column instead.' },
                 { path: 'src/sections/PmeIntro.tsx', note: 'max-w-[680px] — narrower because covers sit beside it (deliberate in a two-column row).' },
-                { path: 'src/sections/TaylorCenterCommemorative.tsx', note: 'section intro at max-w-[820px]; other intros are 780px, the column 760px.' },
+                { path: 'src/sections/DonateCommemorative.tsx', note: 'section intro at max-w-[820px]; other intros are 780px, the column 760px.' },
                 { path: 'src/index.css (.rich-text)', note: 'gap-4 between blocks, where the JSX column uses gap-5; strong is semibold navy where JSX pages leave it bold, inherited colour.' },
               ]}
             />

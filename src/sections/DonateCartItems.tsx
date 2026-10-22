@@ -1,13 +1,14 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, type ReactNode } from 'react'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import { useCart } from '@/context/CartContext'
 import { DONATION_PRIORITIES } from '@/data/givingOpportunities'
 import {
-  COMMEMORATIVE_EDIT_PATH,
-  COMMEMORATIVE_PRIORITY_ID,
   appendCommemorativeParams,
   commemorativeLineLabel,
-  readCommemorativeLines,
+  donateFormHref,
+  money,
+  readDonation,
+  type CommemorativeGift,
 } from '@/data/commemorativeGifts'
 
 function Toggle({ on, onToggle }: { on: boolean; onToggle: () => void }) {
@@ -42,44 +43,103 @@ function Toggle({ on, onToggle }: { on: boolean; onToggle: () => void }) {
 }
 
 
+/** One line of the cart: what it is, its details, and Edit and Remove. */
+function CartItem({
+  title,
+  children,
+  onEdit,
+  onRemove,
+}: {
+  title: string
+  children: ReactNode
+  onEdit: () => void
+  onRemove: () => void
+}) {
+  return (
+    <div className="flex flex-wrap items-start justify-between gap-4 pb-6 border-b border-[#e0e2e7] last:border-0 last:pb-0">
+      <div className="flex flex-col gap-1">
+        <h3 className="font-headline text-[26px] text-[#023e7d] leading-[1.2]">{title}</h3>
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-1">{children}</div>
+      </div>
+      <div className="flex items-center gap-2 flex-shrink-0 pt-1">
+        <button
+          type="button"
+          onClick={onEdit}
+          className="flex items-center gap-1.5 border border-[#002b5c] text-[#002b5c] font-body font-bold text-[13px] px-4 py-2 hover:bg-navy-bright hover:text-white hover:border-navy-bright transition-colors"
+        >
+          <svg className="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+          </svg>
+          Edit
+        </button>
+        <button
+          type="button"
+          onClick={onRemove}
+          className="flex items-center gap-1.5 border border-[#c1121f] text-[#c1121f] font-body font-bold text-[13px] px-4 py-2 hover:bg-[#fff5f5] transition-colors"
+        >
+          <svg className="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M1 1l12 12M13 1L1 13" />
+          </svg>
+          Remove
+        </button>
+      </div>
+    </div>
+  )
+}
+
+/** "Label: value", as the cart's item details print. */
+function Detail({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <p className="font-body text-[17px] text-[#1d2535]">
+      <span className="font-bold">{label}:</span> {children}
+    </p>
+  )
+}
+
+const Divider = () => <div className="w-px h-5 bg-[#c4c9d4]" aria-hidden />
+
+/**
+ * The donation cart. As on the live /foundation flow, a gift and any bricks or
+ * chairs from the donation form arrive together and list as separate items —
+ * the gift with its frequency and amount, each commemorative gift with its
+ * quantity — each with its own Edit and Remove, and a total under them.
+ *
+ * Investment priorities apply to the cash gift, so the picker shows only while
+ * there is one. Bricks and chairs are always designated to the Center's
+ * Maintenance & Technology Fund, so they report their recognition instead.
+ * Edit and Back return to the donation form with every choice still made.
+ */
 export default function DonateCartItems() {
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
   const { setCartCount } = useCart()
 
-  const amount    = searchParams.get('amount')    ?? '100'
-  const frequency = searchParams.get('frequency') ?? 'one-time'
-
-  const amountNum      = Number(amount)
+  const frequency      = searchParams.get('frequency') ?? 'one-time'
   const frequencyLabel = frequency === 'monthly' ? 'Monthly' : 'One-Time'
 
-  const [removed, setRemoved]               = useState(false)
+  const donation = readDonation(searchParams)
+  const [cashRemoved, setCashRemoved] = useState(false)
+  const [removedLines, setRemovedLines] = useState<Set<CommemorativeGift['id']>>(new Set())
+
+  const cash = cashRemoved ? 0 : donation.cash
+  const commemorativeLines = donation.lines.filter(l => !removedLines.has(l.gift.id))
+  const total = cash + commemorativeLines.reduce((sum, l) => sum + l.subtotal, 0)
+  const itemCount = (cash > 0 ? 1 : 0) + commemorativeLines.length
+  const removed = itemCount === 0
 
   /**
-   * A commemorative gift is a purchase, not a category choice: the donor has
-   * already picked bricks and chairs at fixed prices. So the priority picker is
-   * replaced by the itemised gift, and "Edit" leads back to the picker on the
-   * Taylor Center page rather than to the donation form.
-   */
-  const commemorativeLines = readCommemorativeLines(searchParams)
-  const isCommemorative = commemorativeLines.length > 0
-  const editPath = isCommemorative ? COMMEMORATIVE_EDIT_PATH : '/giving/donate'
-
-  /**
-   * A gift that arrived already designated — the commemorative bricks and
-   * chairs on the Taylor Center page hand over
-   * `priority=taylor-conference-center` — opens with that priority selected and
-   * "where needed most" off, so the donor is not asked to designate a gift they
-   * have already designated. Unrecognised ids are ignored rather than trusted
-   * into the set; a commemorative gift falls back to the Center regardless,
-   * since bricks and chairs can only be designated the one way.
+   * A gift that arrived already designated — the Donate Today buttons under
+   * More Ways to Give hand over `priority=<id>` through the donation form —
+   * opens with that priority selected and "where needed most" off, so the
+   * donor is not asked to designate a gift they have already designated.
+   * Unrecognised ids are ignored rather than trusted into the set.
    */
   const requestedPriority = searchParams.get('priority')
   const presetPriority = DONATION_PRIORITIES.some(o => o.id === requestedPriority)
     ? requestedPriority!
-    : isCommemorative
-      ? COMMEMORATIVE_PRIORITY_ID
-      : null
+    : null
+  const editPath = donateFormHref({ cash, lines: commemorativeLines }, presetPriority)
 
   const [useWhereNeeded, setUseWhereNeeded] = useState(!presetPriority)
   const [priorities, setPriorities]         = useState<Set<string>>(
@@ -93,8 +153,8 @@ export default function DonateCartItems() {
   const [tributeName, setTributeName]       = useState('')
 
   useEffect(() => {
-    setCartCount(removed ? 0 : 1)
-  }, [removed, setCartCount])
+    setCartCount(itemCount)
+  }, [itemCount, setCartCount])
 
   const togglePriority = (id: string) => {
     setPriorities(prev => {
@@ -110,8 +170,10 @@ export default function DonateCartItems() {
   }
 
   const handleCheckout = () => {
-    const params = new URLSearchParams({ amount, frequency })
-    if (!useWhereNeeded && priorities.size > 0) {
+    const params = new URLSearchParams({ frequency })
+    if (cash > 0) params.set('amount', String(cash))
+    // Priorities designate the cash gift; bricks and chairs are already designated.
+    if (cash > 0 && !useWhereNeeded && priorities.size > 0) {
       params.set('priorities', Array.from(priorities).join(','))
     }
     if (isAnonymous) params.set('anonymous', 'true')
@@ -171,81 +233,59 @@ export default function DonateCartItems() {
           <h2 className="font-headline text-[40px] text-[#1d2535] leading-[1.1]">Cart items</h2>
         </div>
 
-        {/* Gift item */}
-        <div className="flex flex-wrap items-start justify-between gap-4">
-          <div className="flex flex-col gap-1">
-            <h3 className="font-headline text-[26px] text-[#023e7d] leading-[1.2]">
-              {isCommemorative
-                ? 'Commemorative gift — Jack C. Taylor Conference Center'
-                : 'Gift to the U.S. Naval Institute'}
-            </h3>
-
-            {/* What was bought, priced per unit, so the total below is checkable */}
-            {isCommemorative && (
-              <ul className="flex flex-col gap-1 mt-2 mb-1">
-                {commemorativeLines.map(line => (
-                  <li
-                    key={line.gift.id}
-                    className="font-body text-[17px] text-[#1d2535] flex flex-wrap items-baseline gap-x-2"
-                  >
-                    <span className="font-bold capitalize">{commemorativeLineLabel(line)}</span>
-                    <span className="text-[15px] text-[#4e576a]">
-                      ${line.gift.unitPrice.toLocaleString()} each
-                    </span>
-                    <span className="text-[15px] text-[#4e576a]">
-                      — ${line.subtotal.toLocaleString()}
-                    </span>
-                  </li>
-                ))}
-              </ul>
+        {/* Items: the gift, then each commemorative gift, then the total. The
+            items have their own column so the last one drops its rule (`last:`)
+            and only the darker one above the total shows. */}
+        <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-6">
+            {cash > 0 && (
+              <CartItem
+                title="Gift to the U.S. Naval Institute"
+                onEdit={() => navigate(editPath)}
+                onRemove={() => setCashRemoved(true)}
+              >
+                <Detail label="Frequency">{frequencyLabel}</Detail>
+                <Divider />
+                <Detail label="Amount">{money(cash)}</Detail>
+              </CartItem>
             )}
 
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-              <p className="font-body text-[17px] text-[#1d2535]">
-                <span className="font-bold">Frequency:</span> {frequencyLabel}
-              </p>
-              <div className="w-px h-5 bg-[#c4c9d4]" aria-hidden />
-              <p className="font-body text-[17px] text-[#1d2535]">
-                <span className="font-bold">Amount:</span> ${amountNum.toLocaleString()}
-              </p>
+            {commemorativeLines.map(line => (
+              <CartItem
+                key={line.gift.id}
+                title={`${line.gift.plural} — Jack C. Taylor Conference Center`}
+                onEdit={() => navigate(editPath)}
+                onRemove={() => setRemovedLines(prev => new Set(prev).add(line.gift.id))}
+              >
+                <Detail label="Quantity">{line.count}</Detail>
+                <Divider />
+                <Detail label="Amount">${line.subtotal.toLocaleString()}</Detail>
+                <span className="font-body text-[15px] text-[#4e576a]">
+                  (${line.gift.unitPrice.toLocaleString()} each)
+                </span>
+              </CartItem>
+            ))}
+          </div>
+
+          {itemCount > 1 && (
+            <div className="flex items-baseline justify-end gap-4 border-t border-[#c4c9d4] pt-5">
+              <span className="font-body font-bold text-[17px] text-[#1d2535]">Total</span>
+              <span className="font-headline text-[32px] text-[#023e7d] leading-none">{money(total)}</span>
             </div>
-          </div>
-          <div className="flex items-center gap-2 flex-shrink-0 pt-1">
-            <button
-              type="button"
-              onClick={() => navigate(editPath)}
-              className="flex items-center gap-1.5 border border-[#002b5c] text-[#002b5c] font-body font-bold text-[13px] px-4 py-2 hover:bg-navy-bright hover:text-white hover:border-navy-bright transition-colors"
-            >
-              <svg className="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-              </svg>
-              Edit
-            </button>
-            <button
-              type="button"
-              onClick={() => setRemoved(true)}
-              className="flex items-center gap-1.5 border border-[#c1121f] text-[#c1121f] font-body font-bold text-[13px] px-4 py-2 hover:bg-[#fff5f5] transition-colors"
-            >
-              <svg className="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M1 1l12 12M13 1L1 13" />
-              </svg>
-              Remove
-            </button>
-          </div>
+          )}
         </div>
 
-        {/* A commemorative gift is already designated, so it reports its
+        {/* Bricks and chairs are already designated, so they report their
             recognition rather than asking the donor to choose a priority. */}
-        {isCommemorative ? (
+        {commemorativeLines.length > 0 && (
           <div className="bg-[#f4f5f7] border border-[#e0e2e7] p-6 flex flex-col gap-5">
             <div className="flex flex-col gap-1">
               <h3 className="font-body font-bold text-[18px] text-[#1d2535]">
                 Your commemorative gift
               </h3>
               <p className="font-body text-[14px] text-[#4e576a] leading-[1.5]">
-                This gift supports the Jack C. Taylor Conference Center Maintenance &amp; Technology
-                Fund and is recognized at the Center itself.
+                Bricks and chairs support the Jack C. Taylor Conference Center Maintenance &amp;
+                Technology Fund and are recognized at the Center itself.
               </p>
             </div>
 
@@ -264,21 +304,17 @@ export default function DonateCartItems() {
                 </div>
               ))}
             </div>
-
-            <p className="font-body text-[14px] text-[#4e576a] leading-[1.5]">
-              Need to change what you selected?{' '}
-              <a href={COMMEMORATIVE_EDIT_PATH} className="text-link">
-                Return to bricks and chairs
-              </a>
-              .
-            </p>
           </div>
-        ) : (
+        )}
+
+        {/* Investment priorities, for the cash gift */}
+        {cash > 0 && (
         <div className="bg-[#f4f5f7] border border-[#e0e2e7] p-6 flex flex-col gap-5">
           <div className="flex flex-col gap-1">
             <h3 className="font-body font-bold text-[18px] text-[#1d2535]">Select investment priorities</h3>
             <p className="font-body text-[14px] text-[#4e576a] leading-[1.5]">
-              Select where your donation will be used. If more than one priority is selected, your donation will be split evenly between the selections.
+              Select where your {commemorativeLines.length > 0 ? `${money(cash)} gift` : 'donation'} will
+              be used. If more than one priority is selected, your donation will be split evenly between the selections.
             </p>
             <p className="font-body text-[14px] text-[#4e576a] leading-[1.5]">
               If you do not see your desired priority in the list,{' '}
@@ -425,7 +461,7 @@ export default function DonateCartItems() {
             <svg className="w-3 h-3 flex-shrink-0" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
               <path d="M10 6H2M6 2L2 6l4 4" />
             </svg>
-            {isCommemorative ? 'Back to bricks and chairs' : 'Back to Donate'}
+            Back to Donate
           </button>
           <button
             type="button"

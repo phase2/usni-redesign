@@ -269,7 +269,7 @@ const HEADINGS: TypeRow[] = [
     role: 'H2 — interior heading with blue rule',
     classes: 'font-headline text-[26px] lg:text-[32px] text-navy-bolder leading-[1.15] pb-4 border-b-2 border-[#0466C8]',
     sample: 'Purchase a Brick or Chair at the new Jack C. Taylor Conference Center',
-    where: '17 uses — TaylorCenterCommemorative, StudentSchoolDirectory…',
+    where: '17 uses — DonateCommemorative, StudentSchoolDirectory…',
     note: 'The rule colour is navy-bright, hard-coded.',
   },
   {

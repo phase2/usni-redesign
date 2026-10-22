@@ -359,6 +359,11 @@ export const prototypeSection: PrototypeSection = {
           href: '/giving/donate',
           children: [
             { label: 'Cart', href: '/giving/donate/cart', note: 'Step 2' },
+            {
+              label: 'Cart with a brick and chair',
+              href: '/giving/donate/cart?amount=100&frequency=one-time&chairs=1&bricks=2',
+              note: 'Step 2',
+            },
             { label: 'Checkout', href: '/giving/donate/checkout', note: 'Step 3' },
             { label: 'Confirmation', href: '/giving/donate/confirmation', note: 'Step 4' },
           ],
