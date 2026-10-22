@@ -247,7 +247,7 @@ export function TierCard({
             className={`flex items-center justify-center w-full font-body font-bold text-base px-6 py-4 transition-colors
               ${isMostPopular
                 ? 'bg-gold text-navy-bolder hover:bg-gold-dark'
-                : 'bg-navy-bolder text-white hover:bg-navy-bold'
+                : 'bg-navy-bolder text-white hover:bg-navy-bright'
               }`}
           >
             {buttonLabel}
