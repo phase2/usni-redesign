@@ -181,11 +181,7 @@ export default function FacetGroup({
                 className={`fa-solid ${showAll ? 'fa-circle-minus' : 'fa-circle-plus'} text-sm`}
                 aria-hidden="true"
               />
-              {showAll
-                ? 'Show fewer'
-                : matching.length > FACET_MAX
-                  ? `Show top ${FACET_MAX}`
-                  : `Show all ${matching.length}`}
+              {showAll ? 'Show less' : 'Show more'}
               <span className="sr-only"> {title.toLowerCase()} options</span>
             </button>
           )}
