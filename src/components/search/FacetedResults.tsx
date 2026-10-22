@@ -1,6 +1,5 @@
 import { useId, useMemo, useRef, type ReactNode } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import CardCta from '@/components/ui/CardCta'
 import FacetGroup, { type FacetOption } from '@/components/ui/FacetGroup'
 import IssueRangePicker, { rangeLabel, type IssueRange } from '@/components/search/IssueRangePicker'
 import FilterChip from '@/components/ui/FilterChip'
@@ -175,22 +174,12 @@ function ResultRow(props: ResultProps) {
   )
 }
 
-/** The grid card's foot link, by what the card leads to. */
-const CTA_LABEL: Record<SearchType, string> = {
-  proceedings: 'Read article',
-  'naval-history': 'Read article',
-  news: 'Read article',
-  books: 'View book',
-  events: 'View event',
-  podcasts: 'Listen',
-  'essay-contests': 'View contest',
-}
-
 /**
- * The grid card, on the site's linked-card convention (see CardCta): one
- * anchor wraps the whole card, the shadow lifts on hover, and the stylized
- * link at the foot is the only thing that moves — the headline stays static
- * and the image does not zoom.
+ * The grid card. One anchor wraps the whole card; on hover the shadow lifts
+ * and the headline sweeps its underline (`article-link--card`, as on the
+ * collection title cards). There is no "Read article" row at the foot: across a
+ * grid it repeated on every card, so the headline carries the hover instead.
+ * The image does not zoom.
  *
  * A record with no picture — every archive article — takes the crossed-swords
  * watermark, as events without artwork do, so the grid keeps its rhythm. A
@@ -213,11 +202,10 @@ function ResultCard(props: ResultProps) {
       </div>
       <div className="flex flex-col gap-2 p-5 flex-1">
         <p className="font-body font-bold text-xs uppercase tracking-[0.1em] text-[#0466c8]">{eyebrowOf(item)}</p>
-        <h3 className="font-headline text-lg lg:text-xl text-navy-bolder leading-[1.25]">{item.title}</h3>
+        <h3 className="font-headline text-lg lg:text-xl text-navy-bolder leading-[1.25]">
+          <span className="article-link article-link--card">{item.title}</span>
+        </h3>
         <Byline {...props} plain />
-        <div className="mt-auto pt-2">
-          <CardCta>{CTA_LABEL[item.type]}</CardCta>
-        </div>
       </div>
     </a>
   )
