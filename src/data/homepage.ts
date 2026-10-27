@@ -159,7 +159,6 @@ export const navItems: NavItem[] = [
       // Ways to Give is a section of the Giving landing page in the redesign.
       { label: 'Ways to Give', href: '/giving#ways-to-give' },
       { label: 'Giving Opportunities', href: '/giving/opportunities' },
-      { label: 'Sponsor Student Memberships', href: '/giving/student-memberships' },
       { label: 'Leadership & Staff', href: '/about/leadership#foundation-trustees' },
       { label: 'Donor Recognition', href: '/giving/donor-recognition' },
       { label: 'Corporate Partners', href: '/giving/corporate' },

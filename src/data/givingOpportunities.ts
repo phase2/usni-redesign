@@ -91,10 +91,6 @@ export const givingOpportunities: Opportunity[] = [
       { type: 'p', text: studentMembershipBenefitsIntro },
       ...studentMembershipBenefits.map(text => ({ type: 'li' as const, text })),
     ],
-    cta: {
-      label: 'Sponsor a Student Membership',
-      href: '/giving/student-memberships',
-    },
   },
   {
     id: 'proceedings',

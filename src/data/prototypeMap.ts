@@ -331,7 +331,6 @@ export const prototypeSection: PrototypeSection = {
       links: [
         { label: 'Giving', href: '/giving' },
         { label: 'Giving Opportunities', href: '/giving/opportunities' },
-        { label: 'Sponsor Student Memberships', href: '/giving/student-memberships' },
         {
           label: 'Donor Recognition',
           href: '/giving/donor-recognition',
@@ -413,6 +412,13 @@ export const archiveSection: PrototypeSection = {
           href: '/giving/taylor-conference-center',
           // Links to it now go to jackctaylorconferencecenter.org
           note: 'Replaced by the Center’s own site',
+        },
+        {
+          label: 'Sponsor Student Memberships',
+          href: '/giving/student-memberships',
+          // Sponsorship is not being built; its giving opportunity takes a gift
+          // through the donation form instead.
+          note: 'Not being built',
         },
       ],
     },
