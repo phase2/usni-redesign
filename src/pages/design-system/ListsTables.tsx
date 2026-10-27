@@ -175,7 +175,7 @@ export default function ListsTables() {
             <SourceList
               title="Canonical"
               items={[
-                { path: 'src/sections/PastEventsArchive.tsx', note: 'layout, keyword, one checkbox facet, sort, pager' },
+                { path: 'src/sections/PastEventsArchive.tsx', note: 'layout, keyword, checkbox facets (FacetGroup), sort, pager. scope="all" is the All Events listing and adds a When facet.' },
                 { path: 'src/sections/EssayContestsArchive.tsx', note: 'the same layout, plus the “See N more” threshold' },
               ]}
             />

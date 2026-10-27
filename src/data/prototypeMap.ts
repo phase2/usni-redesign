@@ -126,6 +126,7 @@ export const prototypeSection: PrototypeSection = {
               note: 'Upcoming',
             },
             { label: 'Life of Courage', href: '/events/life-courage', note: 'Upcoming' },
+            { label: 'All Events', href: '/events/all', note: 'Upcoming and past' },
             {
               label: 'Past Events',
               href: '/events/past',

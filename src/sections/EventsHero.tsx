@@ -37,7 +37,7 @@ export default function EventsHero() {
         </div>
 
         <div className="flex flex-col lg:flex-row gap-3 lg:gap-4 lg:items-center">
-          <NavyButtonLink href="#upcoming-events">See upcoming events</NavyButtonLink>
+          <NavyButtonLink href="/events/all">See all events</NavyButtonLink>
           <ButtonLink
             href="https://www.jackctaylorconferencecenter.org/"
             variant="outline-dark"
