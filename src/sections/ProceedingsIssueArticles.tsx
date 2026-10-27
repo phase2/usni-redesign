@@ -134,10 +134,10 @@ export default function ProceedingsIssueArticles({
           <div className="flex items-center gap-2">
             <button
               onClick={() => setView('grid')}
-              className={`flex items-center gap-2 px-3 py-2 font-body font-semibold text-sm transition-colors
+              className={`flex items-center gap-2 px-3 py-2 border font-body font-semibold text-sm transition-colors
                 ${view === 'grid'
-                  ? 'bg-surface-subtle text-navy-bolder'
-                  : 'text-neutral-subtle hover:text-navy-bolder hover:bg-surface-subtle'}`}
+                  ? 'border-transparent bg-surface-subtle text-navy-bolder'
+                  : 'border-transparent text-neutral-subtle hover:text-navy-bolder hover:bg-surface-subtle hover:border-navy-bright'}`}
               aria-label="Grid view"
               aria-pressed={view === 'grid'}
             >
@@ -146,10 +146,10 @@ export default function ProceedingsIssueArticles({
             </button>
             <button
               onClick={() => setView('list')}
-              className={`flex items-center gap-2 px-3 py-2 font-body font-semibold text-sm transition-colors
+              className={`flex items-center gap-2 px-3 py-2 border font-body font-semibold text-sm transition-colors
                 ${view === 'list'
-                  ? 'bg-surface-subtle text-navy-bolder'
-                  : 'text-neutral-subtle hover:text-navy-bolder hover:bg-surface-subtle'}`}
+                  ? 'border-transparent bg-surface-subtle text-navy-bolder'
+                  : 'border-transparent text-neutral-subtle hover:text-navy-bolder hover:bg-surface-subtle hover:border-navy-bright'}`}
               aria-label="List view"
               aria-pressed={view === 'list'}
             >
