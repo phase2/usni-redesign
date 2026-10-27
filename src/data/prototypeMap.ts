@@ -205,6 +205,11 @@ export const prototypeSection: PrototypeSection = {
               label: 'Get Real about How Naval Aviation Got Better',
               href: '/proceedings/naval-aviation-got-better',
             },
+            {
+              label: 'Updating UV Fleets at Scale Quickly and Securely',
+              href: '/proceedings/sponsored/updating-uv-fleets',
+              note: 'Sponsored',
+            },
           ],
         },
         { label: 'Proceedings Podcast', href: '/proceedings/podcast' },
