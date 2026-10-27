@@ -128,6 +128,7 @@ import AccountGiving from '@/pages/account/AccountGiving'
 import AccountSaved from '@/pages/account/AccountSaved'
 import AccountWishlist from '@/pages/account/AccountWishlist'
 import Contact from '@/pages/Contact'
+import Faq from '@/pages/Faq'
 import Search from '@/pages/Search'
 import Browse from '@/pages/Browse'
 import NotFound from '@/pages/NotFound'
@@ -219,6 +220,7 @@ export default function App() {
         <Route path="/naval-history/subscribe/confirmation" element={<NavalHistorySubscribeConfirmation />} />
         <Route path="/login" element={<Login />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/faq" element={<Faq />} />
         <Route path="/search" element={<Search />} />
         <Route path="/browse" element={<Browse />} />
 

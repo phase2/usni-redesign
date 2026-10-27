@@ -68,7 +68,7 @@ export default function DonateFAQ() {
               Foundation Frequently Asked Questions
             </h2>
             <a
-              href="/giving/faq"
+              href="/faq#foundation"
               className="inline-flex items-center justify-center bg-navy-bolder text-white font-body font-bold text-sm tracking-[-0.3px] px-5 py-3.5 hover:bg-navy-bright transition-colors"
             >
               View All Frequently Asked Questions

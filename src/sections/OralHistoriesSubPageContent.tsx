@@ -197,7 +197,7 @@ function AboutFAQ() {
               Frequently Asked Questions
             </h2>
             <a
-              href="/faq"
+              href="/faq#oral-history"
               className="inline-flex items-center justify-center bg-navy-bolder text-white font-body font-bold text-sm tracking-[-0.3px] px-5 py-3.5 hover:bg-navy-bright transition-colors"
             >
               View All Frequently Asked Questions

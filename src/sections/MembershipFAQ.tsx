@@ -86,7 +86,7 @@ export default function MembershipFAQ() {
             <h2 className="font-headline text-4xl text-navy-bolder leading-[1.2]">
               Membership Frequently Asked Questions
             </h2>
-            <NavyButtonLink href="/membership/faq">
+            <NavyButtonLink href="/faq#membership">
               View All Frequently Asked Questions
             </NavyButtonLink>
           </div>

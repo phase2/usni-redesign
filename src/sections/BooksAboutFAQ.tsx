@@ -334,7 +334,7 @@ export default function BooksAboutFAQ() {
               Frequently Asked Questions
             </h2>
             <a
-              href="/faq"
+              href="/faq#naval-institute-press"
               className="inline-flex items-center justify-center bg-navy-bolder text-white font-body font-bold text-sm tracking-[-0.3px] px-5 py-3.5 hover:bg-navy-bright transition-colors"
             >
               View All Frequently Asked Questions
