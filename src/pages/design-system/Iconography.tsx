@@ -72,7 +72,7 @@ const GLOSSARY: { group: string; entries: GlossaryEntry[] }[] = [
       { classes: 'fa-solid fa-chevron-left', meaning: 'Back / previous', where: 'Breadcrumb parent link, carousels, pagination' },
       { classes: 'fa-solid fa-chevron-right', meaning: 'Next / drill in', where: 'Carousels, pagination, collection cross-links' },
       { classes: 'fa-solid fa-chevron-down', meaning: 'Expand (rotates 180° when open)', where: 'Disclosure toggles, Member updates, filters' },
-      { classes: 'fa-solid fa-chevron-up', meaning: 'Collapse', where: 'Read-more toggles (GivingOpportunities, EssayContestsAbout)' },
+      { classes: 'fa-solid fa-chevron-up', meaning: 'Collapse', where: 'Read-more toggles (EssayContestsAbout)' },
       { classes: 'fa-solid fa-caret-down', meaning: 'Menu / sort dropdown', where: 'ArticleComments sort' },
       { classes: 'fa-solid fa-house', meaning: 'Home (breadcrumb root)', where: 'Breadcrumb' },
       { classes: 'fa-solid fa-xmark', meaning: 'Close / clear', where: 'Popovers, search clear, filter chips, header search' },

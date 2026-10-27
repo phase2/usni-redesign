@@ -195,8 +195,10 @@ export default function Overlays() {
             <Lede>
               A centred white panel over a blurred navy scrim, with a square navy close button in the top-right
               corner and a serif heading that names the dialog. Use it for a short task or a decision that has to be
-              made before continuing — confirming a destructive change, adding an address, entering a card. Do not
-              use it for content people will want to read at length or link to.
+              made before continuing — confirming a destructive change, adding an address, entering a card. Prefer a
+              page for content people will want to read at length or link to. Where a grid of summary cards opens
+              its detail on demand, as the giving opportunities do, pass the actions as a <Code>footer</Code> so
+              they stay pinned while the copy scrolls.
             </Lede>
 
             <LiveMarkup
@@ -232,8 +234,12 @@ export default function Overlays() {
               rows={[
                 { part: 'Root', classes: 'fixed inset-0 z-[60] flex items-center justify-center p-4', note: 'role="dialog" aria-modal="true" aria-labelledby → the heading. z-[60] clears the sticky header (z-40) and every dropdown (z-50). `p-4` keeps a 16px margin round the panel on phones.' },
                 { part: 'Scrim', classes: 'absolute inset-0 bg-navy-boldest/70 backdrop-blur-sm', note: 'aria-hidden. Click closes. navy-boldest at 70% with a small blur — the same scrim on every overlay on the site.' },
-                { part: 'Panel', classes: 'relative z-10 bg-white w-full max-h-[88vh] overflow-y-auto shadow-2xl outline-none', note: 'Width capped by an inline `max-width` (the `maxWidth` prop, default 560px). Tall content scrolls inside the panel, never the page. tabindex="-1" so it can take focus; `outline-none` because it is a programmatic focus target, not a control.' },
-                { part: 'Close button', classes: 'absolute top-4 right-4 flex items-center justify-center w-10 h-10 bg-navy-subtle text-white hover:bg-navy-bright transition-colors', note: 'aria-label="Close". 40px square, 16px ✕ drawn as an inline SVG (`w-4 h-4`, stroke 2). Inside the panel, so it scrolls away with long content.' },
+                { part: 'Panel', classes: 'relative z-10 bg-white w-full max-h-[88vh] flex flex-col shadow-2xl', note: 'Width capped by an inline `max-width` (the `maxWidth` prop, default 560px). A column: the scrolling region, then the footer if there is one. Tall content scrolls inside the panel, never the page.' },
+                { part: 'Scrolling region', classes: 'min-h-0 overflow-y-auto outline-none', note: 'Holds the media, heading and body. tabindex="-1" and the focus target on open, so the arrow keys scroll it; `outline-none` because it is a programmatic focus target, not a control.' },
+                { part: 'Bottom fade', classes: 'pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white to-transparent', note: 'aria-hidden. Over the scrolling region’s bottom edge, at opacity 100 only while there is more to scroll to (measured on scroll and on resize), so a short body never looks cut off.' },
+                { part: 'Media (optional)', classes: 'caller’s — e.g. w-full aspect-[3/1] object-cover block', note: 'Full-bleed above the heading, inside the scrolling region, so a banner scrolls away and leaves the copy the room.' },
+                { part: 'Footer (optional)', classes: 'flex-shrink-0 px-7 lg:px-8 py-5 border-t border-border-light', note: 'Pinned below the scrolling region — the actions stay on screen however long the body runs.' },
+                { part: 'Close button', classes: 'absolute top-4 right-4 z-10 flex items-center justify-center w-10 h-10 bg-navy-subtle text-white hover:bg-navy-bright transition-colors', note: 'aria-label="Close". 40px square, 16px ✕ drawn as an inline SVG (`w-4 h-4`, stroke 2). Positioned on the panel, so it stays put while the body scrolls; first in the tab order.' },
                 { part: 'Body', classes: 'px-7 lg:px-8 pt-8 pb-8 flex flex-col gap-6', note: '28px side padding, 32px from lg. 24px between heading and each child.' },
                 { part: 'Heading', classes: 'font-headline text-[28px] text-[#1d2535] leading-[1.2] pr-12', note: 'An <h2>. `pr-12` keeps a long title clear of the close button. #1d2535 = text-primary.' },
                 { part: 'Button row (confirm)', classes: 'flex flex-col-reverse sm:flex-row sm:justify-end gap-3', note: 'Safe choice is the solid button and comes first visually on desktop (right) and on top on mobile, so a stray tap never lands on the destructive action. Destructive button: `text-[#c1121f] border-[#c1121f]`, filling red on hover.' },
@@ -247,14 +253,15 @@ export default function Overlays() {
                 { part: '560px (default)', classes: 'maxWidth="560px"', note: 'Card entry; the default for a short form.' },
                 { part: '600px', classes: 'maxWidth="600px"', note: 'AddressModal — room for City / State / ZIP on one row.' },
                 { part: '640px', classes: 'max-w-[640px]', note: 'Member-update reader (drift copy) — long-form text.' },
-                { part: '864px', classes: 'max-w-[864px]', note: 'Membership benefit modal (drift copy) — full-bleed image header.' },
+                { part: '864px', classes: 'maxWidth="864px"', note: 'Giving opportunity modal — banner media, long copy, pinned footer. The membership benefit modal (drift copy) is the same width.' },
               ]}
             />
 
             <DevNote>
               <p>
                 Template variables: <Code>{'{{ title }}'}</Code> (heading and accessible name),{' '}
-                <Code>{'{{ content }}'}</Code> (body — a form, an Alert and copy, a button row), and a size modifier.
+                <Code>{'{{ content }}'}</Code> (body — a form, an Alert and copy, a button row), optional{' '}
+                <Code>{'{{ media }}'}</Code> and <Code>{'{{ footer }}'}</Code> regions, and a size modifier.
                 Render the dialog markup hidden in the page (or fetch it) and open it with a Drupal behavior; Drupal
                 core’s <Code>Drupal.dialog</Code> can be used if it is restyled to this markup, but the default jQuery
                 UI chrome must not show.
@@ -274,6 +281,8 @@ export default function Overlays() {
                 { name: 'title', type: 'string', description: 'Heading text and the dialog’s accessible name.' },
                 { name: 'maxWidth', type: 'string', default: "'560px'", description: 'Panel width cap.' },
                 { name: 'children', type: 'ReactNode', description: 'Body, stacked with a 24px gap under the heading.' },
+                { name: 'media', type: 'ReactNode', description: 'Full-bleed content above the heading, such as a banner image. Scrolls with the body.' },
+                { name: 'footer', type: 'ReactNode', description: 'Pinned below the scrolling body, with a hairline above it — for actions that must stay in reach of long copy.' },
               ]}
             />
 

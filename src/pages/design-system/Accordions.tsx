@@ -532,10 +532,10 @@ export default function Accordions() {
                 element with an id, set {code('hidden')} on it, and give the button{' '}
                 {code('type="button"')}, {code('aria-expanded')} and {code('aria-controls')}. BooksAboutIntro
                 and EssayContestsAbout have {code('aria-expanded')} but no {code('aria-controls')}, and they
-                unmount the hidden copy. GivingOpportunities is wired correctly: it keeps its container
-                in the DOM, points {code('aria-controls')} at it, and adds an {code('sr-only')} suffix
-                (&ldquo;about {'{{ title }}'}&rdquo;) so that several toggles on one page have distinct
-                accessible names. Follow that model. Do not move focus on toggle.
+                unmount the hidden copy. Instead, keep the container in the DOM, point{' '}
+                {code('aria-controls')} at it, and where several toggles share a page add an{' '}
+                {code('sr-only')} suffix (&ldquo;about {'{{ title }}'}&rdquo;) so their accessible names
+                differ. Do not move focus on toggle.
               </p>
             </DevNote>
 
@@ -551,18 +551,6 @@ export default function Accordions() {
               title="Drift"
               tone="drift"
               items={[
-                {
-                  path: 'src/sections/GivingOpportunities.tsx',
-                  note: (
-                    <>
-                      &ldquo;Read more&rdquo; / &ldquo;Read less&rdquo; on each of ten cards, with the same
-                      classes plus {code('type="button"')}, {code('aria-controls')} and an {code('sr-only')}{' '}
-                      &ldquo;about {'{title}'}&rdquo;. It differs only in its wording, and its accessibility
-                      wiring is the model for the canonical toggle. Pick one wording (&ldquo;See more&rdquo;
-                      or &ldquo;Read more&rdquo;) for the site.
-                    </>
-                  ),
-                },
                 {
                   path: 'src/sections/BooksCollectionLayout.tsx',
                   note: (
