@@ -61,7 +61,7 @@ function ModalCloseCopy() {
     <button
       type="button"
       aria-label="Close"
-      className="flex items-center justify-center w-10 h-10 bg-navy-subtle text-white hover:bg-navy-bright transition-colors"
+      className="flex items-center justify-center w-10 h-10 bg-white text-navy-bolder border border-navy-bolder hover:bg-navy-bright hover:text-white hover:border-navy-bright transition-colors"
     >
       <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
         <path d="M3 3l10 10M13 3L3 13" />
@@ -725,8 +725,8 @@ export default function Buttons() {
               rows={[
                 {
                   part: 'Square close (spec)',
-                  classes: 'flex items-center justify-center w-10 h-10 bg-navy-subtle text-white hover:bg-navy-bright transition-colors',
-                  note: 'A 40px navy-subtle square, hovering to navy-bright. Positioned absolute top-4 right-4 in the dialog. The glyph is the inline 16px close SVG (stroke 2), which in the prototype is missing aria-hidden="true"; add it. Shared by Modal, CreditCardModal and the Member Updates modal; the account drawer uses w-9 h-9.',
+                  classes: 'flex items-center justify-center w-10 h-10 bg-white text-navy-bolder border border-navy-bolder hover:bg-navy-bright hover:text-white hover:border-navy-bright transition-colors',
+                  note: 'A 40px white square with a 1px navy-bolder border and navy ✕, filling navy-bright with a white ✕ on hover — the outline-dark button’s colors. White so it reads the same on a banner image as on a white panel. Positioned absolute top-4 right-4 in the dialog. The glyph is the inline 16px close SVG (stroke 2), which in the prototype is missing aria-hidden="true"; add it. Shared by every modal: Modal, CreditCardModal, the Member Updates modal, the membership benefit modals and the image lightbox.',
                 },
                 {
                   part: 'Round arrow (spec)',
@@ -770,8 +770,7 @@ export default function Buttons() {
               tone="drift"
               items={[
                 { path: 'src/sections/BooksProductSection.tsx', note: 'carousel arrows are w-10 h-10 and hover to #EBF4FF instead of light-blue; they are removed (not disabled) at the ends, and lack type="button"' },
-                { path: 'src/components/layout/AccountLayout.tsx', note: 'drawer close is w-9 h-9 instead of w-10 h-10' },
-                { path: 'src/components/ui/ArticleImageGallery.tsx', note: 'its lightbox close is white (bg-white text-neutral-subtle hover:bg-neutral-subtlest) rather than navy-subtle' },
+                { path: 'src/components/layout/AccountLayout.tsx', note: 'drawer close is w-9 h-9 instead of w-10 h-10, and keeps the earlier solid navy-subtle fill — the drawer is not a modal, so it was left out when the modal closes went white and outlined' },
               ]}
             />
           </div>

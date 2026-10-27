@@ -139,7 +139,7 @@ function BenefitModal({ benefit, onClose }: { benefit: Benefit; onClose: () => v
           />
           {/* Close button */}
           <button
-            className="absolute top-4 right-4 flex items-center justify-center w-10 h-10 bg-white text-neutral-subtle hover:bg-neutral-subtlest transition-colors"
+            className="absolute top-4 right-4 flex items-center justify-center w-10 h-10 bg-white text-navy-bolder border border-navy-bolder hover:bg-navy-bright hover:text-white hover:border-navy-bright transition-colors"
             onClick={onClose}
             aria-label="Close"
           >

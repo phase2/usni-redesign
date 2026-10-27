@@ -51,7 +51,7 @@ function UpdateModal({ update, onClose }: { update: MemberUpdate; onClose: () =>
           type="button"
           onClick={onClose}
           aria-label="Close"
-          className="absolute top-4 right-4 flex items-center justify-center w-10 h-10 bg-navy-subtle text-white hover:bg-navy-bright transition-colors"
+          className="absolute top-4 right-4 flex items-center justify-center w-10 h-10 bg-white text-navy-bolder border border-navy-bolder hover:bg-navy-bright hover:text-white hover:border-navy-bright transition-colors"
         >
           <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
             <path d="M3 3l10 10M13 3L3 13" />

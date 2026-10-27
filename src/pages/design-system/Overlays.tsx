@@ -239,7 +239,7 @@ export default function Overlays() {
                 { part: 'Bottom fade', classes: 'pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white to-transparent', note: 'aria-hidden. Over the scrolling region’s bottom edge, at opacity 100 only while there is more to scroll to (measured on scroll and on resize), so a short body never looks cut off.' },
                 { part: 'Media (optional)', classes: 'caller’s — e.g. w-full aspect-[3/1] object-cover block', note: 'Full-bleed above the heading, inside the scrolling region, so a banner scrolls away and leaves the copy the room.' },
                 { part: 'Footer (optional)', classes: 'flex-shrink-0 px-7 lg:px-8 py-5 border-t border-border-light', note: 'Pinned below the scrolling region — the actions stay on screen however long the body runs.' },
-                { part: 'Close button', classes: 'absolute top-4 right-4 z-10 flex items-center justify-center w-10 h-10 bg-navy-subtle text-white hover:bg-navy-bright transition-colors', note: 'aria-label="Close". 40px square, 16px ✕ drawn as an inline SVG (`w-4 h-4`, stroke 2). Positioned on the panel, so it stays put while the body scrolls; first in the tab order.' },
+                { part: 'Close button', classes: 'absolute top-4 right-4 z-10 flex items-center justify-center w-10 h-10 bg-white text-navy-bolder border border-navy-bolder hover:bg-navy-bright hover:text-white hover:border-navy-bright transition-colors', note: 'aria-label="Close". 40px square, white with a 1px navy-bolder border and navy ✕, filling navy-bright on hover like the outline-dark button. 16px ✕ drawn as an inline SVG (`w-4 h-4`, stroke 2). White so it reads the same over `media` as on the panel. Positioned on the panel, so it stays put while the body scrolls; first in the tab order.' },
                 { part: 'Body', classes: 'px-7 lg:px-8 pt-8 pb-8 flex flex-col gap-6', note: '28px side padding, 32px from lg. 24px between heading and each child.' },
                 { part: 'Heading', classes: 'font-headline text-[28px] text-[#1d2535] leading-[1.2] pr-12', note: 'An <h2>. `pr-12` keeps a long title clear of the close button. #1d2535 = text-primary.' },
                 { part: 'Button row (confirm)', classes: 'flex flex-col-reverse sm:flex-row sm:justify-end gap-3', note: 'Safe choice is the solid button and comes first visually on desktop (right) and on top on mobile, so a stray tap never lands on the destructive action. Destructive button: `text-[#c1121f] border-[#c1121f]`, filling red on hover.' },
@@ -292,7 +292,7 @@ export default function Overlays() {
               title="Hand-built copies of the shell"
               items={[
                 { path: 'src/components/ui/CreditCardModal.tsx', note: '`z-50` (not z-[60]); no `max-h`/scroll on the panel; focus is not moved in; heading id is a fixed string, so two instances would collide. See below.' },
-                { path: 'src/sections/MembershipBenefits.tsx', note: 'BenefitModal: `z-50`, 864px, 490px image header, white close button (`bg-white text-neutral-subtle hover:bg-neutral-subtlest`), <h3> heading, `px-10 pt-8 pb-10` body; no focus handling.' },
+                { path: 'src/sections/MembershipBenefits.tsx', note: 'BenefitModal: `z-50`, 864px, 490px image header, <h3> heading, `px-10 pt-8 pb-10` body; no focus handling.' },
                 { path: 'src/components/ui/AccountNotifications.tsx', note: 'UpdateModal: matches Modal (z-[60], navy close) but `max-h-[86vh]`, `px-7 lg:px-9 pt-8 pb-9`, red eyebrow + 28/32px heading + date; no focus handling.' },
                 { path: 'src/components/ui/ArticleImageGallery.tsx', note: 'Lightbox: `z-50`, no panel — image and caption float on the scrim; white close button at `top-6 right-6`; aria-label is the caption; no scroll lock or Escape handler of its own.' },
               ]}
@@ -378,7 +378,7 @@ export default function Overlays() {
                 { part: 'Root', classes: 'fixed inset-0 z-50 flex items-center justify-center p-4', note: 'Drift: z-50 rather than Modal’s z-[60]. aria-labelledby="credit-card-modal-title".' },
                 { part: 'Scrim', classes: 'absolute inset-0 bg-navy-boldest/70 backdrop-blur-sm', note: 'Same as Modal.' },
                 { part: 'Panel', classes: 'relative bg-white w-full max-w-[560px] shadow-2xl z-10', note: 'Drift: no `max-h-[88vh] overflow-y-auto`, so on a short landscape phone the bottom of the form can fall off-screen.' },
-                { part: 'Close button', classes: 'absolute top-4 right-4 flex items-center justify-center w-10 h-10 bg-navy-subtle text-white hover:bg-navy-bright transition-colors', note: 'Same as Modal, but no `type="button"` — inside the panel, not the form, so it does not submit.' },
+                { part: 'Close button', classes: 'absolute top-4 right-4 flex items-center justify-center w-10 h-10 bg-white text-navy-bolder border border-navy-bolder hover:bg-navy-bright hover:text-white hover:border-navy-bright transition-colors', note: 'Same as Modal, but no `type="button"` — inside the panel, not the form, so it does not submit.' },
                 { part: 'Heading', classes: 'font-headline text-[28px] text-[#1d2535] leading-[1.2]', note: 'No `pr-12` — a long custom `title` could run under the close button.' },
               ]}
             />
