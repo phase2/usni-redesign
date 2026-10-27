@@ -166,6 +166,8 @@ export const prototypeSection: PrototypeSection = {
           ],
         },
         { label: 'Contact USNI', href: '/contact' },
+        { label: 'Frequently Asked Questions', href: '/faq' },
+        { label: 'Ship’s Store', href: '/ships-store' },
         { label: 'Login / Register', href: '/login' },
         { label: 'Newsletter Sign-up', href: '/newsletter', note: 'Unlinked on the site' },
         { label: 'Page Not Found', href: '/404', note: '404' },
