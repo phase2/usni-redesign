@@ -22,8 +22,10 @@ import EventCard, { type EventCardData } from '@/components/cards/EventCard'
  *
  * Accepts `?q=` and `?type=` so other pages can link here pre-filtered —
  * `type` is an event type in slug form, e.g. `?type=author-event`, which is
- * how the Books & Press nav's Author Events link lands here. The all-events
- * scope also takes `?when=upcoming` or `?when=past`.
+ * how the Books & Press nav's Author Events link lands here. Facets take
+ * several values, comma-separated (`?type=conference,author-event`); the
+ * all-events scope adds `?when=upcoming` or `?when=past`, and `?sort=` and
+ * `?page=` round out the state, all kept in step with the controls below.
  */
 
 const PER_PAGE = 12
@@ -67,6 +69,19 @@ function countBy(events: ListedEvent[], key: (e: ListedEvent) => string) {
 }
 
 const slug = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, '-')
+
+/** Facet values named by a comma-separated list of slugs, e.g. `?type=conference,author-event`. */
+function fromSlugs(param: string | null, options: string[]): string[] {
+  if (!param) return []
+  const wanted = param.split(',')
+  return options.filter((option) => wanted.includes(slug(option)))
+}
+
+/** The inverse, in option order so the same selection always makes the same URL. */
+function toSlugs(selected: string[], options: string[]): string | null {
+  const value = options.filter((o) => selected.includes(o)).map(slug).join(',')
+  return value || null
+}
 
 /** Boxed chevron, matching the accordion treatment used site-wide. */
 function AccordionChevron({ open }: { open: boolean }) {
@@ -165,36 +180,50 @@ export default function PastEventsArchive({ scope = 'past' }: { scope?: Scope })
   const kinds = useMemo(() => Object.keys(kindCounts).sort((a, b) => a.localeCompare(b)), [kindCounts])
   const whenCounts = useMemo(() => countBy(events, (e) => e.when), [events])
 
-  const [params] = useSearchParams()
-  // Seeded from the URL once; the field is user-owned from then on
-  const [query, setQuery] = useState(params.get('q') ?? '')
-  const [selectedKinds, setSelectedKinds] = useState<string[]>(() => {
-    const type = params.get('type')
-    return type ? kinds.filter((k) => slug(k) === type) : []
-  })
-  const [selectedWhens, setSelectedWhens] = useState<string[]>(() => {
-    const when = params.get('when')
-    return scope === 'all' && when ? whens.filter((w) => slug(w) === when) : []
-  })
-  const [sort, setSort] = useState<SortKey>(sorts[0].key)
-  const [page, setPage] = useState(1)
+  /*
+   * The URL is the state: every filter, the sort and the page are read from
+   * the query string and written back to it, so a filtered view can be
+   * shared, bookmarked, and stepped through with Back and Forward. Defaults
+   * stay out of the URL, so an unfiltered listing is just its bare path.
+   */
+  const [params, setParams] = useSearchParams()
+  const query = params.get('q') ?? ''
+  const typeParam = params.get('type')
+  const whenParam = scope === 'all' ? params.get('when') : null
+  const selectedKinds = useMemo(() => fromSlugs(typeParam, kinds), [typeParam, kinds])
+  const selectedWhens = useMemo(() => fromSlugs(whenParam, whens), [whenParam])
+  const sort = sorts.find((s) => s.key === params.get('sort'))?.key ?? sorts[0].key
+  const page = Math.max(1, Math.floor(Number(params.get('page'))) || 1)
 
-  // Any filter change invalidates the current page number
-  const reset = () => setPage(1)
-
-  const toggle = (setter: typeof setSelectedKinds) => (value: string) => {
-    setter((prev) =>
-      prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value],
+  /**
+   * Write params to the URL; null or '' removes one. Anything but a page
+   * change drops the page number, since a new filter or sort starts the
+   * results over. Keystrokes in the keyword field replace the history entry
+   * rather than adding one per letter.
+   */
+  const update = (changes: Record<string, string | null>, { replace = false } = {}) => {
+    setParams(
+      (prev) => {
+        const next = new URLSearchParams(prev)
+        for (const [key, value] of Object.entries(changes)) {
+          if (value) next.set(key, value)
+          else next.delete(key)
+        }
+        if (!('page' in changes)) next.delete('page')
+        return next
+      },
+      { replace },
     )
-    reset()
   }
 
-  const clearAll = () => {
-    setQuery('')
-    setSelectedKinds([])
-    setSelectedWhens([])
-    reset()
+  const toggle = (param: 'type' | 'when', options: string[], selected: string[]) => (value: string) => {
+    const nextSelected = selected.includes(value)
+      ? selected.filter((v) => v !== value)
+      : [...selected, value]
+    update({ [param]: toSlugs(nextSelected, options) })
   }
+
+  const clearAll = () => update({ q: null, type: null, when: null })
 
   const activeCount = selectedKinds.length + selectedWhens.length + (query.trim() ? 1 : 0)
 
@@ -255,7 +284,7 @@ export default function PastEventsArchive({ scope = 'past' }: { scope?: Scope })
                 id={`${idPrefix}-search`}
                 type="search"
                 value={query}
-                onChange={(e) => { setQuery(e.target.value); reset() }}
+                onChange={(e) => update({ q: e.target.value }, { replace: true })}
                 placeholder="Event name or city…"
                 className="w-full bg-white border border-[#94A3B8] pl-10 pr-3 py-2.5 font-body text-base
                   text-navy-bolder placeholder:text-neutral-subtle outline-none
@@ -271,7 +300,7 @@ export default function PastEventsArchive({ scope = 'past' }: { scope?: Scope })
               options={whens}
               counts={whenCounts}
               selected={selectedWhens}
-              onToggle={toggle(setSelectedWhens)}
+              onToggle={toggle('when', whens, selectedWhens)}
             />
           )}
 
@@ -281,7 +310,7 @@ export default function PastEventsArchive({ scope = 'past' }: { scope?: Scope })
             options={kinds}
             counts={kindCounts}
             selected={selectedKinds}
-            onToggle={toggle(setSelectedKinds)}
+            onToggle={toggle('type', kinds, selectedKinds)}
           />
 
         </FilterPanel>
@@ -301,7 +330,7 @@ export default function PastEventsArchive({ scope = 'past' }: { scope?: Scope })
               <select
                 id={`${idPrefix}-sort`}
                 value={sort}
-                onChange={(e) => { setSort(e.target.value as SortKey); reset() }}
+                onChange={(e) => update({ sort: e.target.value === sorts[0].key ? null : e.target.value })}
                 className="select-field font-body text-base text-navy-bolder border border-[#94A3B8] pl-3.5 py-2
                   bg-white cursor-pointer outline-none focus:border-navy-bright
                   focus:shadow-[0_0_0_3px_rgba(4,102,200,0.15)] transition min-w-[180px]"
@@ -333,7 +362,7 @@ export default function PastEventsArchive({ scope = 'past' }: { scope?: Scope })
                 label={scope === 'all' ? 'Events pagination' : 'Past events pagination'}
                 totalPages={totalPages}
                 page={current}
-                onChange={setPage}
+                onChange={(n) => update({ page: n > 1 ? String(n) : null })}
               />
             </div>
           )}
