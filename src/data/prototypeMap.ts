@@ -214,6 +214,7 @@ export const prototypeSection: PrototypeSection = {
             },
           ],
         },
+        { label: 'Sponsored Content', href: '/proceedings/sponsored' },
         { label: 'Proceedings Podcast', href: '/proceedings/podcast' },
         { label: 'American Sea Power Project', href: '/proceedings/sea-power-project' },
         { label: 'Submission Guidelines', href: '/proceedings/submissions' },

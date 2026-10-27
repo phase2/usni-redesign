@@ -1,14 +1,20 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import type { Article } from '@/types'
+import Pagination from '@/components/ui/Pagination'
 import { aprilIssueArticles } from '@/data/proceedingsApril2026'
-
-// The full April 2026 table of contents — all 34 items, transcribed from the
-// issue page on usni.org.
-const articles: Article[] = aprilIssueArticles
 
 type ViewMode = 'grid' | 'list'
 
-function GridArticleCard({ article }: { article: Article }) {
+/** How a listing differs from the issue table of contents it was built for. */
+interface CardOptions {
+  /** Show each article's date in the grid too — for a list spanning many issues. */
+  showDate?: boolean
+  /** Clamp grid excerpts to four lines, for listings whose teasers run long. */
+  clampExcerpts?: boolean
+}
+
+function GridArticleCard({ article, showDate, clampExcerpts }: { article: Article } & CardOptions) {
   return (
     <article className="flex flex-col gap-3">
       {article.image && (
@@ -29,11 +35,14 @@ function GridArticleCard({ article }: { article: Article }) {
             {article.headline}
           </a>
         </h3>
+        {showDate && <p className="font-body text-sm text-neutral-subtle">{article.date}</p>}
         {article.author && (
           <p className="font-body text-sm font-semibold text-navy-bolder leading-snug">{article.author}</p>
         )}
         {article.excerpt && (
-          <p className="font-body text-sm text-neutral-subtle leading-[1.5]">{article.excerpt}</p>
+          <p className={`font-body text-sm text-neutral-subtle leading-[1.5] ${clampExcerpts ? 'line-clamp-4' : ''}`}>
+            {article.excerpt}
+          </p>
         )}
       </div>
     </article>
@@ -75,17 +84,52 @@ function ListArticleRow({ article }: { article: Article }) {
   )
 }
 
-export default function ProceedingsIssueArticles() {
+/**
+ * An article listing with a grid / list toggle. Built for an issue's table of
+ * contents — by default the full April 2026 issue, all 34 items — and reused
+ * for Sponsored Content, which spans many issues and so pages its results.
+ */
+export default function ProceedingsIssueArticles({
+  articles = aprilIssueArticles,
+  summary = `${aprilIssueArticles.length} articles · April 2026`,
+  pageSize,
+  paginationLabel = 'Articles pagination',
+  showDate,
+  clampExcerpts,
+}: {
+  articles?: Article[]
+  /** The count line at the left of the toggle bar. */
+  summary?: string
+  /** Page the listing at this many per page, with the page kept in the URL (?page=). Omit to show all. */
+  pageSize?: number
+  paginationLabel?: string
+} & CardOptions) {
   const [view, setView] = useState<ViewMode>('grid')
+  const [params, setParams] = useSearchParams()
+  const sectionRef = useRef<HTMLElement>(null)
+
+  const totalPages = pageSize ? Math.max(1, Math.ceil(articles.length / pageSize)) : 1
+  const page = Math.min(totalPages, Math.max(1, Math.floor(Number(params.get('page'))) || 1))
+  const shown = pageSize ? articles.slice((page - 1) * pageSize, page * pageSize) : articles
+
+  const goToPage = (n: number) => {
+    setParams((prev) => {
+      const next = new URLSearchParams(prev)
+      if (n > 1) next.set('page', String(n))
+      else next.delete('page')
+      return next
+    })
+    sectionRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }
 
   return (
-    <section className="bg-white py-14 lg:py-20">
+    <section ref={sectionRef} className="bg-white py-14 lg:py-20 scroll-mt-4">
       <div className="container-site">
 
         {/* Toggle bar */}
         <div className="flex items-center justify-between mb-8 pb-4 border-b border-border-light">
           <span className="font-body text-sm text-neutral-subtle">
-            {articles.length} articles · April 2026
+            {summary}
           </span>
           <div className="flex items-center gap-2">
             <button
@@ -117,19 +161,25 @@ export default function ProceedingsIssueArticles() {
 
         {view === 'grid' && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-            {articles.map((article) => (
-              <GridArticleCard key={article.id} article={article} />
+            {shown.map((article) => (
+              <GridArticleCard key={article.id} article={article} showDate={showDate} clampExcerpts={clampExcerpts} />
             ))}
           </div>
         )}
 
         {view === 'list' && (
           <div className="flex flex-col divide-y divide-[#c4c9d4]">
-            {articles.map((article) => (
+            {shown.map((article) => (
               <div key={article.id} className="py-5">
                 <ListArticleRow article={article} />
               </div>
             ))}
+          </div>
+        )}
+
+        {totalPages > 1 && (
+          <div className="pt-10">
+            <Pagination label={paginationLabel} totalPages={totalPages} page={page} onChange={goToPage} />
           </div>
         )}
 

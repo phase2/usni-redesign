@@ -374,7 +374,7 @@ export default function Cards() {
               title="Drift: hand-built small teasers"
               tone="drift"
               items={[
-                { path: 'src/sections/ProceedingsIssueArticles.tsx', note: 'GridArticleCard. 16:10 image. Eyebrow is font-semibold text-xs tracking-widest text-navy-subtle instead of the blue 14px category. Headline is text-lg lg:text-xl navy-bolder, plus an author line and an unclamped excerpt.' },
+                { path: 'src/sections/ProceedingsIssueArticles.tsx', note: 'GridArticleCard. 16:10 image. Eyebrow is font-semibold text-xs tracking-widest text-navy-subtle instead of the blue 14px category. Headline is text-lg lg:text-xl navy-bolder, plus an author line and an unclamped excerpt. Sponsored Content reuses it with the date shown and the excerpt clamped to four lines.' },
                 { path: 'src/sections/NavalHistoryIssueArticles.tsx', note: 'an identical copy of the Proceedings file (only the data import differs)' },
                 { path: 'src/sections/ArticleRelated.tsx', note: 'RelatedArticleCard. Same differences as GridArticleCard, with a text-xs “date | by author” line.' },
               ]}

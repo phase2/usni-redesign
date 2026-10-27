@@ -86,6 +86,7 @@ import ArchivesMemoirSubmit from '@/pages/ArchivesMemoirSubmit'
 import NavalHistoryArticle from '@/pages/NavalHistoryArticle'
 import ProceedingsArticleFortifying from '@/pages/ProceedingsArticleFortifying'
 import ProceedingsArticleGrubb from '@/pages/ProceedingsArticleGrubb'
+import ProceedingsSponsoredContent from '@/pages/ProceedingsSponsoredContent'
 import ProceedingsSponsoredUvFleets from '@/pages/ProceedingsSponsoredUvFleets'
 import NewsletterJoin from '@/pages/NewsletterJoin'
 import EssayContests from '@/pages/EssayContests'
@@ -246,6 +247,7 @@ export default function App() {
         <Route path="/proceedings/three-mefs" element={<ProceedingsArticle />} />
         <Route path="/proceedings/fortifying-digital-watch" element={<ProceedingsArticleFortifying />} />
         <Route path="/proceedings/naval-aviation-got-better" element={<ProceedingsArticleGrubb />} />
+        <Route path="/proceedings/sponsored" element={<ProceedingsSponsoredContent />} />
         <Route path="/proceedings/sponsored/updating-uv-fleets" element={<ProceedingsSponsoredUvFleets />} />
         <Route path="/books/ai-warfighting" element={<BookProduct />} />
         <Route path="/archives" element={<Archives />} />
