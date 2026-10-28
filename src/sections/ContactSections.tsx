@@ -403,14 +403,13 @@ export function ContactVisiting() {
   )
 }
 
-/* ── Hub: find the right team ────────────────────────────────────────────── */
+/* ── Hub: find the right department ──────────────────────────────────────── */
 
 export function ContactRouteCards() {
   return (
     <ContactSection
       id="teams"
-      title="Find the right team"
-      lede="Most questions go fastest to the team that handles them. Each of these has its own page, with direct phone numbers and email."
+      title="Find the right department"
       tone="tan"
     >
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">

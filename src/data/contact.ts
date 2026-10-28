@@ -50,7 +50,7 @@ export const generalContact = {
 
 /* ── Contact hub ─────────────────────────────────────────────────────────── */
 
-/** A team with a page of its own, as the hub's "Find the right team" cards. */
+/** A department with a page of its own, as the hub's "Find the right department" cards. */
 export interface ContactRoute {
   title: string
   summary: string
