@@ -292,6 +292,7 @@ export const prototypeSection: PrototypeSection = {
           ],
         },
         { label: 'Digital Editions', href: '/books/digital-editions' },
+        { label: 'Glossary of Naval Skills Terms', href: '/books/online/naval-science-3/glossary', note: 'Naval Science 3' },
         {
           label: 'About the Press',
           href: '/books/about',

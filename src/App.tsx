@@ -64,6 +64,7 @@ import BooksPME from '@/pages/BooksPME'
 import BooksReadingLists from '@/pages/BooksReadingLists'
 import BooksAbout from '@/pages/BooksAbout'
 import BooksAboutSubPage from '@/pages/BooksAboutSubPage'
+import BooksNavalScienceGlossary from '@/pages/BooksNavalScienceGlossary'
 import BooksDigitalEditions from '@/pages/BooksDigitalEditions'
 import BookSeriesPage from '@/pages/BookSeriesPage'
 import NavalHistory from '@/pages/NavalHistory'
@@ -218,6 +219,7 @@ export default function App() {
         <Route path="/books/about/writing" element={<BooksAboutSubPage slug="writing" />} />
         <Route path="/books/about/ai" element={<BooksAboutSubPage slug="ai" />} />
         <Route path="/books/digital-editions" element={<BooksDigitalEditions />} />
+        <Route path="/books/online/naval-science-3/glossary" element={<BooksNavalScienceGlossary />} />
         {/* One template, nine series — see src/data/bookCollections.ts */}
         <Route path="/books/series/scarlet-and-gold" element={<BookSeriesPage slug="scarlet-and-gold" />} />
         <Route path="/books/series/blue-and-gold" element={<BookSeriesPage slug="blue-and-gold" />} />
