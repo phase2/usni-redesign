@@ -139,7 +139,7 @@ export const navItems: NavItem[] = [
       { label: 'State of the Institute', href: '/about/state-of-the-institute' },
       { label: 'Leadership', href: '/about/leadership' },
       { label: 'Editorial Staff', href: '/about/editorial-staff' },
-      { label: 'Media Inquiries', href: '/contact#media' },
+      { label: 'Advertise With Us', href: '/advertise' },
       { label: 'Contact USNI', href: '/contact' },
     ],
     megaCta: {

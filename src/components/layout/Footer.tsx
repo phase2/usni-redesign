@@ -11,7 +11,7 @@ const aboutLinks = [
   { label: "Shop Our Ship's Store", href: '/ships-store' },
   { label: 'Advertise With Us', href: '/advertise' },
   { label: 'Contact Us', href: '/contact' },
-  { label: 'Media Inquiries', href: '/media' },
+  { label: 'Media Inquiries', href: '/contact#media' },
 ]
 
 const contentLinks = [
