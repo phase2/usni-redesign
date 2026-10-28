@@ -8,7 +8,7 @@ const navItems = [
   { label: 'Essay Contests', href: '/essay-contests' },
   { label: 'American Sea Power Project', href: '/proceedings/sea-power-project' },
   { label: 'Submission Guidelines', href: '/proceedings/submit' },
-  { label: 'Contact Proceedings', href: '/about/editorial-staff?magazine=proceedings' },
+  { label: 'Proceedings Editorial Staff', href: '/about/editorial-staff?magazine=proceedings' },
   { label: 'Get Proceedings', href: '/membership/join' },
 ]
 

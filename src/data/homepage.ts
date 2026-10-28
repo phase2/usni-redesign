@@ -67,7 +67,7 @@ export const navItems: NavItem[] = [
       { label: 'Essay Contests', href: '/essay-contests' },
       { label: 'American Sea Power Project', href: '/proceedings/sea-power-project' },
       { label: 'Submission Guidelines', href: '/proceedings/submit' },
-      { label: 'Contact Proceedings', href: '/about/editorial-staff?magazine=proceedings' },
+      { label: 'Proceedings Editorial Staff', href: '/about/editorial-staff?magazine=proceedings' },
       { label: 'Get Proceedings', href: '/membership/join' },
     ],
     megaCta: {
@@ -89,7 +89,7 @@ export const navItems: NavItem[] = [
       { label: 'All Issues', href: '/naval-history/all-issues' },
       { label: 'Essay Contests', href: '/essay-contests' },
       { label: 'Submission Guidelines', href: '/naval-history/submit' },
-      { label: 'Contact Naval History', href: '/about/editorial-staff?magazine=naval-history' },
+      { label: 'Naval History Editorial Staff', href: '/about/editorial-staff?magazine=naval-history' },
       { label: 'Subscribe', href: '/naval-history/subscribe' },
     ],
     megaCta: {

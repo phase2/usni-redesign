@@ -6,7 +6,7 @@ const navItems = [
   { label: 'All Issues', href: '/naval-history/all-issues' },
   { label: 'Essay Contests', href: '/essay-contests' },
   { label: 'Submission Guidelines', href: '/naval-history/submit' },
-  { label: 'Contact Naval History', href: '/about/editorial-staff?magazine=naval-history' },
+  { label: 'Naval History Editorial Staff', href: '/about/editorial-staff?magazine=naval-history' },
   { label: 'Subscribe', href: '/naval-history/subscribe' },
 ]
 

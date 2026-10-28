@@ -6,7 +6,7 @@ const navItems = [
   { label: 'Latest Issue', href: '/proceedings/apr-2026' },
   { label: 'Issue Archive', href: '/proceedings/all-issues' },
   { label: 'Essay Contests', href: '/essay-contests' },
-  { label: 'Contact Proceedings', href: '/about/editorial-staff?magazine=proceedings' },
+  { label: 'Proceedings Editorial Staff', href: '/about/editorial-staff?magazine=proceedings' },
 ]
 
 export default function ArticleSubNav() {
