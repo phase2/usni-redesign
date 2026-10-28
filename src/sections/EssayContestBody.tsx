@@ -259,7 +259,7 @@ export default function EssayContestBody({ contest }: { contest: EssayContest })
 
             {/* Sibling divisions as plain links */}
             {siblings.length > 0 && (
-              <div className="border border-border-light p-6 flex flex-col gap-3">
+              <div className="border border-navy-subtle p-6 flex flex-col gap-3">
                 <p className="font-body font-semibold text-sm text-navy-bolder">
                   Other divisions of this contest
                 </p>
@@ -282,7 +282,7 @@ export default function EssayContestBody({ contest }: { contest: EssayContest })
             )}
 
             {contest.fundedBy && contest.fundedBy.length > 0 && (
-              <div className="border border-border-light p-6 flex flex-col gap-1.5">
+              <div className="border border-navy-subtle p-6 flex flex-col gap-1.5">
                 <p className="font-body font-semibold text-xs uppercase tracking-[0.1em] text-neutral-subtle">
                   {contest.fundedByLabel ?? 'Funded by'}
                 </p>
