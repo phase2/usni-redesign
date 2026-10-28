@@ -4,14 +4,15 @@ import Breadcrumb from '@/components/ui/Breadcrumb'
 import { ButtonLink } from '@/components/ui/Button'
 import ExternalLinkIcon from '@/components/ui/ExternalLinkIcon'
 import PageHero from '@/sections/PageHero'
-import { STORE_URL, ShipsStoreHelp, ShipsStoreShop, ShipsStoreTips } from '@/sections/ShipsStoreSections'
+import { STORE_URL, ShipsStoreContent } from '@/sections/ShipsStoreSections'
 import heroImage from '@/assets/images/ships-store/ships-store-hero.jpg'
 
 /**
  * The Ship's Store landing — where the header's Ship's Store utility link, the
  * footer, and the Books & Press billboard all lead. The store runs on its
  * operator's site, so this page explains it and hands off: what is for sale,
- * the member discount, how ordering works, and whom to ask.
+ * the member discount, how ordering works, and whom to ask — in the live
+ * page's order, as one reading column.
  *
  * The hero is the live page's banner in the shared photo/navy-panel header,
  * with the "Members Save 20%" subtitle folded into the description.
@@ -47,9 +48,7 @@ export default function ShipsStore() {
           </div>
         </PageHero>
 
-        <ShipsStoreShop />
-        <ShipsStoreTips />
-        <ShipsStoreHelp />
+        <ShipsStoreContent />
       </main>
       <Footer />
     </div>
