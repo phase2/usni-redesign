@@ -19,6 +19,7 @@ export default function Advertise() {
             <Breadcrumb
               trail={[
                 { label: 'Home', href: '/' },
+                { label: 'About USNI', href: '/about' },
               ]}
               current="Advertise With Us"
               className="border-b border-[#C2DDFF] pb-4"
