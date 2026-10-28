@@ -72,7 +72,7 @@ export default function ArchivesResearchContent() {
         </div>
       </section>
 
-      <section className="bg-surface-subtle py-12 lg:py-14" aria-labelledby="research-other-heading">
+      <section className="bg-tan-subtlest py-12 lg:py-14" aria-labelledby="research-other-heading">
         <div className="container-site">
           <div className="max-w-[860px] flex flex-col gap-4">
             <h2 id="research-other-heading" className="font-headline text-[26px] lg:text-[32px] text-navy-bolder leading-[1.15]">
