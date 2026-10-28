@@ -918,6 +918,7 @@ export default function Buttons() {
                 { path: 'src/sections/ProceedingsMagazine.tsx', note: 'full width: text-sm py-4 px-5 w-full, no border' },
                 { path: 'src/sections/NavalHistory.tsx', note: 'same as ProceedingsMagazine' },
                 { path: 'src/sections/ContactSections.tsx', note: 'text-base px-6 py-3.5, bordered, no tracking (4px shorter than md/lg)' },
+                { path: 'src/sections/MemberServicesContact.tsx', note: 'the same submit as ContactSections' },
                 { path: 'src/sections/EssaySubmitForm.tsx', note: 'text-base px-6 py-3.5 gap-2, bordered' },
                 { path: 'src/pages/NotFound.tsx', note: 'text-base px-6 py-3.5, bordered' },
                 { path: 'src/pages/account/AccountProfile.tsx', note: 'text-base px-6 py-3.5, bordered' },
@@ -933,7 +934,6 @@ export default function Buttons() {
                 { path: 'src/pages/Login.tsx', note: 'full-width submit, text-base py-4, no border, and hovers to navy-bold instead of navy-bright' },
                 { path: 'src/sections/MembershipCustomizer.tsx', note: 'plan-card CTA: w-full text-base px-6 py-4; navy hovers to navy-bold, “most popular” is gold' },
                 { path: 'src/sections/DonateForm.tsx', note: 'amount-card buttons (flex justify-between w-full text-sm px-4 py-3); documented on Forms' },
-                { path: 'src/sections/ProceedingsContactContent.tsx', note: 'bg-navy-bold (not navy-bolder) full-width button inside a warning panel' },
                 { path: 'src/components/layout/Header.tsx', note: 'search submit, px-7 text-[15px] tracking-[-0.3px], full height of the field. Intentional: it is part of the search input.' },
               ]}
             />

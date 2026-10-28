@@ -48,7 +48,6 @@ import ProceedingsAllIssues from '@/pages/ProceedingsAllIssues'
 import ProceedingsPodcast from '@/pages/ProceedingsPodcast'
 import BooksAndPress from '@/pages/BooksAndPress'
 import ProceedingsArticle from '@/pages/ProceedingsArticle'
-import ProceedingsContact from '@/pages/ProceedingsContact'
 import ProceedingsSubmissions from '@/pages/ProceedingsSubmissions'
 import SeaPowerProject from '@/pages/SeaPowerProject'
 import MembershipCart from '@/pages/MembershipCart'
@@ -132,6 +131,13 @@ import AccountGiving from '@/pages/account/AccountGiving'
 import AccountSaved from '@/pages/account/AccountSaved'
 import AccountWishlist from '@/pages/account/AccountWishlist'
 import Contact from '@/pages/Contact'
+import MembershipContact from '@/pages/MembershipContact'
+import EditorialStaff from '@/pages/EditorialStaff'
+import NavalHistorySubmissions from '@/pages/NavalHistorySubmissions'
+import PressContact from '@/pages/PressContact'
+import ArchivesResearchRequests from '@/pages/ArchivesResearchRequests'
+import GivingContact from '@/pages/GivingContact'
+import Advertise from '@/pages/Advertise'
 import Faq from '@/pages/Faq'
 import ShipsStore from '@/pages/ShipsStore'
 import Search from '@/pages/Search'
@@ -153,6 +159,7 @@ export default function App() {
         <Route path="/events/past" element={<EventsPast />} />
         <Route path="/events/:slug" element={<EventDetail />} />
         <Route path="/membership" element={<Membership />} />
+        <Route path="/membership/contact" element={<MembershipContact />} />
         <Route path="/membership/join" element={<MembershipJoin />} />
         <Route path="/sponsored-student-membership" element={<SponsoredStudentMembership />} />
         <Route path="/membership/cart" element={<MembershipCart />} />
@@ -161,6 +168,7 @@ export default function App() {
         <Route path="/membership/magazine-upsell" element={<MembershipMagazineUpsell />} />
         <Route path="/proceedings" element={<Proceedings />} />
         <Route path="/giving" element={<Giving />} />
+        <Route path="/giving/contact" element={<GivingContact />} />
         <Route path="/giving/opportunities" element={<GivingOpportunitiesPage />} />
         <Route path="/giving/student-memberships" element={<GivingStudentMemberships />} />
         {/* Archived: nothing links here any more (links go to the Center's own
@@ -190,8 +198,10 @@ export default function App() {
         <Route path="/proceedings/apr-2026" element={<ProceedingsCurrentIssue />} />
         <Route path="/proceedings/all-issues" element={<ProceedingsAllIssues />} />
         <Route path="/proceedings/podcast" element={<ProceedingsPodcast />} />
-        <Route path="/proceedings/contact" element={<ProceedingsContact />} />
-        <Route path="/proceedings/submissions" element={<ProceedingsSubmissions />} />
+        {/* The two magazine contact pages became one masthead under About */}
+        <Route path="/proceedings/contact" element={<Navigate replace to="/about/editorial-staff?magazine=proceedings" />} />
+        <Route path="/proceedings/submit" element={<ProceedingsSubmissions />} />
+        <Route path="/proceedings/submissions" element={<Navigate replace to="/proceedings/submit" />} />
         <Route path="/proceedings/sea-power-project" element={<SeaPowerProject />} />
         <Route path="/books" element={<BooksAndPress />} />
         <Route path="/books/collection" element={<BooksCollection />} />
@@ -202,6 +212,7 @@ export default function App() {
         <Route path="/books/professional-military-education" element={<BooksPME />} />
         <Route path="/books/military-reading-lists" element={<BooksReadingLists />} />
         <Route path="/books/about" element={<BooksAbout />} />
+        <Route path="/books/contact" element={<PressContact />} />
         <Route path="/books/about/examination-requests" element={<BooksAboutSubPage slug="examination-requests" />} />
         <Route path="/books/about/writing" element={<BooksAboutSubPage slug="writing" />} />
         <Route path="/books/about/ai" element={<BooksAboutSubPage slug="ai" />} />
@@ -219,6 +230,8 @@ export default function App() {
         <Route path="/naval-history" element={<NavalHistory />} />
         <Route path="/naval-history/aug-2026" element={<NavalHistoryCurrentIssue />} />
         <Route path="/naval-history/all-issues" element={<NavalHistoryAllIssues />} />
+        <Route path="/naval-history/submit" element={<NavalHistorySubmissions />} />
+        <Route path="/naval-history/submissions" element={<Navigate replace to="/naval-history/submit" />} />
         <Route path="/naval-history/subscribe" element={<NavalHistorySubscribe />} />
         <Route path="/naval-history/subscribe/membership-upsell" element={<NavalHistoryMembershipUpsell />} />
         <Route path="/naval-history/subscribe/cart" element={<NavalHistorySubscribeCart />} />
@@ -226,6 +239,7 @@ export default function App() {
         <Route path="/naval-history/subscribe/confirmation" element={<NavalHistorySubscribeConfirmation />} />
         <Route path="/login" element={<Login />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/advertise" element={<Advertise />} />
         <Route path="/faq" element={<Faq />} />
         <Route path="/ships-store" element={<ShipsStore />} />
         <Route path="/search" element={<Search />} />
@@ -252,6 +266,7 @@ export default function App() {
         <Route path="/proceedings/sponsored/updating-uv-fleets" element={<ProceedingsSponsoredUvFleets />} />
         <Route path="/books/ai-warfighting" element={<BookProduct />} />
         <Route path="/archives" element={<Archives />} />
+        <Route path="/archives/research-requests" element={<ArchivesResearchRequests />} />
         <Route path="/archives/oral-histories" element={<ArchivesOralHistories />} />
         <Route path="/archives/oral-histories/about" element={<ArchivesOralHistoriesSubPage slug="about" />} />
         <Route
@@ -284,6 +299,9 @@ export default function App() {
         <Route path="/about/history" element={<AboutHistory />} />
         <Route path="/about/strategic-plan" element={<AboutStrategicPlan />} />
         <Route path="/about/leadership" element={<AboutLeadership />} />
+        <Route path="/about/editorial-staff" element={<EditorialStaff />} />
+        {/* /media-inquiries folded into the contact hub */}
+        <Route path="/about/media" element={<Navigate replace to="/contact#media" />} />
         <Route path="/about/leadership/:slug" element={<AboutLeadershipBio />} />
         <Route path="/about/state-of-the-institute" element={<AboutStateOfTheInstitute />} />
         <Route path="/toc" element={<TableOfContents />} />

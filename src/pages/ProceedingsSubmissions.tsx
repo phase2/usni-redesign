@@ -6,11 +6,10 @@ import ProceedingsSubmissionsContent from '@/sections/ProceedingsSubmissionsCont
 import Breadcrumb from '@/components/ui/Breadcrumb'
 
 /**
- * Proceedings submission guidelines.
- *
- * The Proceedings sub-nav and the Contact page have both linked here all along
- * (ProceedingsSubNav, ProceedingsContactContent's closing banner) with nothing
- * at the other end. Structure and copy follow the live page at
+ * Proceedings submission guidelines, at /proceedings/submit (formerly
+ * /proceedings/submissions, which redirects here). The Naval History
+ * counterpart is /naval-history/submit, and the editorial masthead links to
+ * both. Structure and copy follow the live page at
  * /periodicals/proceedings-magazine/submission-guidelines section for
  * section; only the styling is the redesign's.
  */

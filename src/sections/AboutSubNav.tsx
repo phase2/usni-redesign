@@ -16,8 +16,9 @@ const navItems = [
   { label: 'Strategic Plan', href: '/about/strategic-plan' },
   { label: 'State of the Institute', href: '/about/state-of-the-institute' },
   { label: 'Leadership & Staff', href: '/about/leadership' },
-  { label: 'Media Inquiries', href: '/about/media' },
-  { label: 'Contact USNI', href: '/contact#general' },
+  { label: 'Editorial Staff', href: '/about/editorial-staff' },
+  { label: 'Media Inquiries', href: '/contact#media' },
+  { label: 'Contact USNI', href: '/contact' },
 ]
 
 function isActive(pathname: string, href: string) {

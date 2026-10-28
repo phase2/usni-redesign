@@ -1,8 +1,8 @@
-import { useState, type ReactNode } from 'react'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import PageHero from '@/sections/PageHero'
 import { faqTopics } from '@/data/faqs'
+import FaqItem from '@/sections/FaqItem'
 
 /**
  * All frequently asked questions.
@@ -13,34 +13,8 @@ import { faqTopics } from '@/data/faqs'
  * reading column — the framed treatment ArticleCallout uses.
  *
  * Every topic group sits in one full-width section, divided by rules contained
- * to the column. Each group is a heading over the accordion BooksAboutFAQ uses
- * — square navy chevron and the shared `.accordion-row` hover and open bands.
+ * to the column. Each group is a heading over the shared FaqItem accordion.
  */
-function FAQItem({ q, a }: { q: string; a: ReactNode }) {
-  const [open, setOpen] = useState(false)
-  return (
-    <div className={`border-b border-border-light transition-colors ${open ? 'bg-white' : ''}`}>
-      <button
-        className="accordion-row flex items-center justify-between w-full py-4 px-4 text-left gap-4"
-        onClick={() => setOpen(!open)}
-        aria-expanded={open}
-      >
-        <span className="font-body font-semibold text-base text-navy-bolder">{q}</span>
-        <span className={`accordion-chevron flex-shrink-0 w-8 h-8 bg-navy-bolder text-white flex items-center justify-center transition-transform duration-200 ${open ? 'rotate-180' : ''}`}>
-          <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none">
-            <path d="M3 6l5 5 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </span>
-      </button>
-      {open && (
-        <div className="pt-4 pb-5 pl-4 pr-16 flex flex-col gap-4 font-body text-base text-neutral-subtle leading-relaxed">
-          {a}
-        </div>
-      )}
-    </div>
-  )
-}
-
 export default function Faq() {
   return (
     <div className="flex flex-col min-h-screen">
@@ -94,7 +68,7 @@ export default function Faq() {
                   </h2>
                   <div className="border-t border-border-light">
                     {topic.questions.map((item) => (
-                      <FAQItem key={item.q} q={item.q} a={item.a} />
+                      <FaqItem key={item.q} q={item.q} a={item.a} />
                     ))}
                   </div>
                 </div>

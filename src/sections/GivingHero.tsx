@@ -41,7 +41,7 @@ export default function GivingHero() {
             <ButtonLink href="/giving/donate" variant="primary" size="md">
               Donate Today
             </ButtonLink>
-            <ButtonLink href="/contact#foundation" variant="outline" size="md">
+            <ButtonLink href="/giving/contact" variant="outline" size="md">
               Contact the Foundation
             </ButtonLink>
           </div>

@@ -27,7 +27,7 @@ const items = [
     external: true,
   },
   { label: 'Donate', href: '/giving/donate' },
-  { label: 'Contact the Foundation', href: '/contact#foundation' },
+  { label: 'Contact the Foundation', href: '/giving/contact' },
 ]
 
 export default function GivingSubNav() {

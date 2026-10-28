@@ -8,7 +8,7 @@ const navItems = [
   { label: 'Oral Histories', href: '/archives/oral-histories' },
   { label: 'Memoirs', href: '/archives/memoirs' },
   { label: 'Photos', href: 'https://photos.usni.org', external: true },
-  { label: 'Contact the Archives', href: '/contact#archives' },
+  { label: 'Research Requests', href: '/archives/research-requests' },
 ]
 
 export default function ArchivesSubNav() {

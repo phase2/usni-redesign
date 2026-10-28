@@ -163,9 +163,11 @@ export const prototypeSection: PrototypeSection = {
                 { label: 'Submit a Memoir', href: '/archives/memoirs/submit', note: '4 steps' },
               ],
             },
+            { label: 'Research Requests', href: '/archives/research-requests' },
           ],
         },
-        { label: 'Contact USNI', href: '/contact' },
+        { label: 'Contact Us', href: '/contact', note: 'Hub, with media inquiries folded in' },
+        { label: 'Advertise With Us', href: '/advertise' },
         { label: 'Frequently Asked Questions', href: '/faq' },
         { label: 'Ship’s Store', href: '/ships-store' },
         { label: 'Login / Register', href: '/login' },
@@ -188,6 +190,7 @@ export const prototypeSection: PrototypeSection = {
             { label: 'Confirmation', href: '/membership/confirmation', note: 'Step 5' },
           ],
         },
+        { label: 'Contact Member Services', href: '/membership/contact', note: 'Member or prospect form' },
         { label: 'Sponsored Student Membership', href: '/sponsored-student-membership' },
       ],
     },
@@ -217,8 +220,7 @@ export const prototypeSection: PrototypeSection = {
         { label: 'Sponsored Content', href: '/proceedings/sponsored' },
         { label: 'Proceedings Podcast', href: '/proceedings/podcast' },
         { label: 'American Sea Power Project', href: '/proceedings/sea-power-project' },
-        { label: 'Submission Guidelines', href: '/proceedings/submissions' },
-        { label: 'Contact Proceedings', href: '/proceedings/contact' },
+        { label: 'Submission Guidelines', href: '/proceedings/submit' },
       ],
     },
     {
@@ -245,6 +247,7 @@ export const prototypeSection: PrototypeSection = {
         { label: 'Naval History', href: '/naval-history' },
         { label: 'Current Issue', href: '/naval-history/aug-2026', note: 'August 2026' },
         { label: 'All Issues', href: '/naval-history/all-issues' },
+        { label: 'Submission Guidelines', href: '/naval-history/submit' },
         { label: 'Article: Mitscher at Midway', href: '/naval-history/mitscher-at-midway' },
         {
           label: 'Subscribe',
@@ -298,6 +301,7 @@ export const prototypeSection: PrototypeSection = {
             { label: 'Artificial Intelligence at Naval Institute Press', href: '/books/about/ai' },
           ],
         },
+        { label: 'Contact the Press', href: '/books/contact' },
         {
           label: 'Cart',
           href: '/books/cart',
@@ -329,6 +333,7 @@ export const prototypeSection: PrototypeSection = {
             { label: 'Chip Wallen', href: '/about/leadership/chip-wallen' },
           ],
         },
+        { label: 'Editorial Staff', href: '/about/editorial-staff', note: 'Proceedings and Naval History masthead' },
       ],
     },
     {
@@ -367,6 +372,7 @@ export const prototypeSection: PrototypeSection = {
           ],
         },
         { label: 'Corporate Partners', href: '/giving/corporate' },
+        { label: 'Contact the Foundation', href: '/giving/contact' },
         {
           label: 'Donate',
           href: '/giving/donate',

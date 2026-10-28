@@ -970,7 +970,7 @@ export default function SectionPatterns() {
               items={[
                 { path: 'src/sections/BooksCollectionLayout.tsx', note: 'filter sidebar hand-built: hidden lg:block w-[220px] xl:w-[240px] flex-shrink-0, not sticky, no mobile toggle (filters simply disappear below lg).' },
                 { path: 'src/components/layout/AccountLayout.tsx', note: 'sidebar at lg:w-[280px] on bg-[#f4f6fb] — its own pattern; see Account.' },
-                { path: 'src/sections/ContactSections.tsx', note: 'heading-left at lg:grid-cols-[360px_1fr] gap-10 lg:gap-16 with no xl step.' },
+                { path: 'src/sections/ContactSections.tsx', note: 'right rail at lg:grid-cols-[minmax(0,1fr)_360px] gap-10 lg:gap-16 with no xl step. MemberServicesContact.tsx uses the same columns at gap-8 lg:gap-12, AdvertiseContent.tsx at gap-10 lg:gap-14; PressContactContent.tsx uses 320px.' },
                 { path: 'src/sections/AboutStrategicPlanForeword.tsx', note: 'right rail at 340px → 380px with gap-10 xl:gap-12. BookProductOverview.tsx uses 1fr_340px → 1fr_380px (plain 1fr).' },
               ]}
             />
@@ -1080,7 +1080,7 @@ export default function SectionPatterns() {
                 {
                   part: 'Drift',
                   classes: 'scroll-mt-[100px] · scroll-mt-[150px] · scroll-mt-8',
-                  note: 'UpcomingEvents (100px), LeadershipRoster and ContactSections (150px, both under a JumpLinkNav — 3px short of clearing it), EssayContestBody (32px, an in-column anchor).',
+                  note: 'UpcomingEvents and ContactSections (100px), LeadershipRoster (150px, under a JumpLinkNav — 3px short of clearing it), EssayContestBody (32px, an in-column anchor).',
                 },
               ]}
             />

@@ -26,7 +26,7 @@ export default function MembershipServicesCTA() {
           </p>
           <div className="flex flex-wrap gap-3">
             <a
-              href="/contact#membership"
+              href="/membership/contact"
               className="inline-flex items-center justify-center bg-gold text-navy-bolder
                          font-body font-bold text-base tracking-[-0.3px]
                          px-5 py-3.5 hover:bg-gold-dark transition-colors"

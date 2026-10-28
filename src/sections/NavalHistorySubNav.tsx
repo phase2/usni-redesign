@@ -5,8 +5,8 @@ const navItems = [
   { label: 'Current Issue', href: '/naval-history/aug-2026' },
   { label: 'All Issues', href: '/naval-history/all-issues' },
   { label: 'Essay Contests', href: '/essay-contests' },
-  { label: 'Submission Guidelines', href: '/naval-history/submissions' },
-  { label: 'Contact Naval History', href: '/contact#general' },
+  { label: 'Submission Guidelines', href: '/naval-history/submit' },
+  { label: 'Contact Naval History', href: '/about/editorial-staff?magazine=naval-history' },
   { label: 'Subscribe', href: '/naval-history/subscribe' },
 ]
 

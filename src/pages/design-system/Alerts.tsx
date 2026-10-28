@@ -298,6 +298,7 @@ export default function Alerts() {
                 { path: 'src/sections/EssaySubmitForm.tsx', note: 'counted fields' },
                 { path: 'src/pages/NewsletterJoin.tsx', note: 'counted fields' },
                 { path: 'src/sections/ContactSections.tsx', note: 'named fields, no scroll-mt' },
+                { path: 'src/sections/MemberServicesContact.tsx', note: 'named fields, no scroll-mt' },
               ]}
             />
           </div>
@@ -429,7 +430,6 @@ export default function Alerts() {
                 { path: 'src/pages/account/AccountDashboard.tsx', note: 'Salesforce-unavailable fallback: border-[#f0d98a] (a softer amber than #ffaa00), px-6 py-5, title text-[16px] navy-bolder, body neutral-subtle. No icon, no role. Should be Alert warning.' },
                 { path: 'src/pages/account/AccountDashboardNextGen.tsx', note: 'the same fallback, copied' },
                 { path: 'src/pages/account/AccountPayment.tsx', note: '“Removing a card on auto-renew”: info palette but a pale border-[#bcd8f7] instead of #0466c8; 14px neutral-subtle body. No icon, no role. Should be Alert info.' },
-                { path: 'src/sections/ContactSections.tsx', note: '“Before you travel” (visiting section): exact warning palette, neutral-subtle body, no icon or role. The same file uses Alert for its form summary and response-times note.' },
                 { path: 'src/sections/ArticleAuthorBio.tsx', note: 'Disclaimer: warning palette with an fa-circle-info icon in #1D2535, an 11px uppercase “Disclaimer” label and 12px body. A standing legal note rather than a status, so Alert info, or a small-print block if design wants it quieter.' },
               ]}
             />
@@ -452,7 +452,6 @@ export default function Alerts() {
                 { path: 'src/sections/DonateCartItems.tsx', note: 'the same banner on bg-[#fefde8] (a paler yellow) with a 28px headline' },
                 { path: 'src/sections/NavalHistoryCartItems.tsx', note: 'same as DonateCartItems' },
                 { path: 'src/pages/Login.tsx', note: '“Need additional assistance?”: px-8 py-6, 22px headline, 18px body' },
-                { path: 'src/sections/ProceedingsContactContent.tsx', note: 'Submission Guidelines: a warning-palette billboard with a 36px headline and a full-width bg-navy-bold button, lg:flex-row' },
               ]}
             />
 

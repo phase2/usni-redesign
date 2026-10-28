@@ -13,7 +13,7 @@ const links = [
     headline: 'Submission Guidelines',
     body: 'Naval History publishes rigorously researched articles from historians, veterans, and enthusiasts. Review our guidelines and pitch your story.',
     cta: 'See Submission Guidelines',
-    href: '/naval-history/submissions',
+    href: '/naval-history/submit',
     icon: 'fa-solid fa-file-pen',
   },
   {
@@ -21,7 +21,7 @@ const links = [
     headline: 'Contact Naval History',
     body: 'Have a question for the editorial team? Reach out about subscriptions, submissions, advertising, or any other Naval History Magazine inquiry.',
     cta: 'Contact Naval History',
-    href: '/contact#general',
+    href: '/about/editorial-staff?magazine=naval-history',
     icon: 'fa-solid fa-envelope',
   },
 ]

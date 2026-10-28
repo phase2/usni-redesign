@@ -186,7 +186,7 @@ export const givingOpportunities: Opportunity[] = [
     ],
     cta: {
       label: 'Contact the Foundation',
-      href: '/contact#foundation',
+      href: '/giving/contact',
     },
     donate: false,
   },

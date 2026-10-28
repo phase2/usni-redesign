@@ -32,7 +32,7 @@ export const archivesDropdown: NavItem[] = [
   { label: 'Oral Histories', href: '/archives/oral-histories' },
   { label: 'Memoirs', href: '/archives/memoirs' },
   { label: 'Photos', href: 'https://photos.usni.org', external: true },
-  { label: 'Contact the Archives', href: '/contact#archives' },
+  { label: 'Research Requests', href: '/archives/research-requests' },
 ]
 
 export const navItems: NavItem[] = [
@@ -43,7 +43,7 @@ export const navItems: NavItem[] = [
       { label: 'Overview', href: '/membership' },
       { label: 'Plans & Pricing', href: '/membership/join' },
       { label: 'Renew', href: '/login' },
-      { label: 'Contact Member Services', href: '/contact#membership' },
+      { label: 'Contact Member Services', href: '/membership/contact' },
       { label: 'Join', href: '/membership/join' },
     ],
     megaCta: {
@@ -66,8 +66,8 @@ export const navItems: NavItem[] = [
       { label: 'Proceedings Podcast', href: '/proceedings/podcast' },
       { label: 'Essay Contests', href: '/essay-contests' },
       { label: 'American Sea Power Project', href: '/proceedings/sea-power-project' },
-      { label: 'Submission Guidelines', href: '/proceedings/submissions' },
-      { label: 'Contact Proceedings', href: '/proceedings/contact' },
+      { label: 'Submission Guidelines', href: '/proceedings/submit' },
+      { label: 'Contact Proceedings', href: '/about/editorial-staff?magazine=proceedings' },
       { label: 'Get Proceedings', href: '/membership/join' },
     ],
     megaCta: {
@@ -88,8 +88,8 @@ export const navItems: NavItem[] = [
       { label: 'Current Issue', href: '/naval-history/aug-2026' },
       { label: 'All Issues', href: '/naval-history/all-issues' },
       { label: 'Essay Contests', href: '/essay-contests' },
-      { label: 'Submission Guidelines', href: '/naval-history/submissions' },
-      { label: 'Contact Naval History', href: '/contact#general' },
+      { label: 'Submission Guidelines', href: '/naval-history/submit' },
+      { label: 'Contact Naval History', href: '/about/editorial-staff?magazine=naval-history' },
       { label: 'Subscribe', href: '/naval-history/subscribe' },
     ],
     megaCta: {
@@ -115,7 +115,7 @@ export const navItems: NavItem[] = [
       { label: 'Oral Histories', href: '/archives/oral-histories' },
       { label: 'Digital Editions', href: '/books/digital-editions' },
       { label: 'About the Press', href: '/books/about' },
-      { label: 'Contact the Press', href: '/contact#press' },
+      { label: 'Contact the Press', href: '/books/contact' },
     ],
     megaCta: {
       eyebrow: 'Featured New Release',
@@ -138,8 +138,9 @@ export const navItems: NavItem[] = [
       { label: 'Strategic Plan', href: '/about/strategic-plan' },
       { label: 'State of the Institute', href: '/about/state-of-the-institute' },
       { label: 'Leadership', href: '/about/leadership' },
-      { label: 'Media Inquiries', href: '/about/media' },
-      { label: 'Contact USNI', href: '/contact#general' },
+      { label: 'Editorial Staff', href: '/about/editorial-staff' },
+      { label: 'Media Inquiries', href: '/contact#media' },
+      { label: 'Contact USNI', href: '/contact' },
     ],
     megaCta: {
       headline: '150+ Years of Independent Thought',
@@ -168,7 +169,7 @@ export const navItems: NavItem[] = [
         href: 'https://www.jackctaylorconferencecenter.org/',
         external: true,
       },
-      { label: 'Contact the Foundation', href: '/contact#foundation' },
+      { label: 'Contact the Foundation', href: '/giving/contact' },
       { label: 'Donate Today', href: '/giving/donate' },
     ],
     megaCta: {

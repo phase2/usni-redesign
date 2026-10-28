@@ -926,7 +926,6 @@ export default function Heroes() {
                 { path: 'src/sections/EventsPageHero.tsx', note: 'class-for-class the PageHero band with the Events trail fixed. → PageHero, no changes.' },
                 { path: 'src/sections/EssayContestsHero.tsx (InteriorHero)', note: 'the band plus a bold deck line. → PageHero + deck.' },
                 { path: 'src/sections/AboutPageHero.tsx', note: 'pt-12 pb-16 with no mobile step, a DM Serif subtitle, deck at leading-[1.5] max-w-[820px] (see above). → PageHero + subtitle.' },
-                { path: 'src/sections/ProceedingsContactHero.tsx', note: 'title only; pt-12 pb-20 — the deepest bottom padding of any band, for no stated reason. → PageHero.' },
                 { path: 'src/sections/ProceedingsAllIssuesHero.tsx', note: 'title only; pt-12 pb-16. → PageHero.' },
                 { path: 'src/sections/NavalHistoryAllIssuesHero.tsx', note: 'identical to ProceedingsAllIssuesHero but for the trail. → PageHero.' },
                 { path: 'src/sections/BooksCollectionHero.tsx', note: 'pt-12 pb-14, gap-6; the title, then BookSearchBar size="large" full width beneath it, as on /search. → PageHero band with the search bar as children.' },

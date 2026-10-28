@@ -81,7 +81,7 @@ export function OrgMembershipBillboard() {
           </p>
           <div className="pt-3">
             <a
-              href="/contact#membership"
+              href="/membership/contact"
               className="inline-flex items-center gap-2 bg-navy-bold text-white font-body font-bold text-base tracking-[-0.5px] px-6 py-4 border border-navy-bold hover:bg-navy-bright hover:border-navy-bright transition-colors"
             >
               Contact member services

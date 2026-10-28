@@ -109,7 +109,7 @@ export default function AccountOrders() {
 
       <p className="font-body text-[14px] text-neutral-subtle leading-relaxed max-w-[640px]">
         A recently placed order can take a few minutes to appear. If something looks wrong,{' '}
-        <a href="/contact#general" className="text-link">contact us</a>{' '}
+        <a href="/contact" className="text-link">contact us</a>{' '}
         with the order number and we’ll sort it out.
       </p>
     </AccountLayout>

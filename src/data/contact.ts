@@ -1,15 +1,23 @@
 /**
- * Contact information for the consolidated Contact USNI page.
+ * Contact information for the contact hub and the department contact pages.
  *
- * Transcribed from four standalone pages on the current site:
- *   /about-us/contact-us     — visiting directions, general contact form
- *   /membership/contact-us   — the same visiting directions, nothing else
- *   /donate/contact-us       — Naval Institute Foundation staff and addresses
- *   /press/contact-us        — Naval Institute Press staff by department
- *   /archives/contact-us     — research and photo-archive inquiries
+ * Transcribed from the live site's contact pages, which the redesign splits
+ * between a short hub (/contact) and pages that live in their own sections:
+ *   /about-us/contact-us    → /contact (form, visiting directions)
+ *   /media-inquiries        → /contact#media
+ *   /donate/contact-us      → /giving/contact
+ *   /press/contact-us       → /books/contact
+ *   /archives/contact-us    → /archives/research-requests
+ *   /advertise-us           → /advertise
+ * Member Services, which the live site only reaches through deep links into
+ * the general page, gets a page and form of its own at /membership/contact.
  *
- * The About and Membership pages carried identical directions blocks, which is
- * part of why merging them is worth doing.
+ * Corrections to the live copy:
+ * - Several mailto links send to a different address than they display (Amanda
+ *   Ojeda, Jessica Sparks, Ashley Baird, Megan Kellenberger, Claire Noble);
+ *   each now mails the address it shows.
+ * - Schuyler Tose's number reads "(410) 295-410-1061"; it is given here as
+ *   (410) 295-1061.
  */
 
 export interface ContactPerson {
@@ -17,6 +25,8 @@ export interface ContactPerson {
   role: string
   email?: string
   phone?: string
+  /** Leadership profile, where the person has one. */
+  profileHref?: string
   /** Headshot, or the watermark stand-in where we have none. */
   image?: string
 }
@@ -26,6 +36,8 @@ export interface ContactGroup {
   people: ContactPerson[]
 }
 
+export const telHref = (n: string) => `tel:${n.replace(/[^0-9]/g, '')}`
+
 /** Institute-wide details, as published in the site footer. */
 export const generalContact = {
   address: ['U.S. Naval Institute', '291 Wood Road', 'Annapolis, MD 21402'],
@@ -33,17 +45,142 @@ export const generalContact = {
   local: '410-268-6110',
   fax: '410-571-1703',
   customerEmail: 'customer@usni.org',
-  memberEmail: 'member@usni.org',
+  hours: 'Monday–Friday, 8:00 a.m. – 4:30 p.m. Eastern',
 }
 
-export const memberServices = {
+/* ── Contact hub ─────────────────────────────────────────────────────────── */
+
+/** A team with a page of its own, as the hub's "Find the right team" cards. */
+export interface ContactRoute {
+  title: string
+  summary: string
+  href: string
+  cta: string
+}
+
+export const contactRoutes: ContactRoute[] = [
+  {
+    title: 'Member Services',
+    summary: 'Joining, renewing, magazine delivery, billing, and your account.',
+    href: '/membership/contact',
+    cta: 'Contact Member Services',
+  },
+  {
+    title: 'Editorial Staff',
+    summary: 'The editors of Proceedings and Naval History, and how to submit an article.',
+    href: '/about/editorial-staff',
+    cta: 'See the masthead',
+  },
+  {
+    title: 'Naval Institute Press',
+    summary: 'Review copies, author events, trade orders, and rights and permissions.',
+    href: '/books/contact',
+    cta: 'Contact the Press',
+  },
+  {
+    title: 'Archives Research Requests',
+    summary: 'Library research, copies of past articles, photos, and on-site visits.',
+    href: '/archives/research-requests',
+    cta: 'Request research',
+  },
+  {
+    title: 'Naval Institute Foundation',
+    summary: 'Donations, gifts of stock, planned giving, and corporate sponsorship.',
+    href: '/giving/contact',
+    cta: 'Contact the Foundation',
+  },
+  {
+    title: 'Advertising',
+    summary: 'The media kit, audience, and our advertising sales team.',
+    href: '/advertise',
+    cta: 'Advertise with us',
+  },
+]
+
+/**
+ * Options on the hub's Contact Type dropdown. The live form offers only Book
+ * Returns and Customer Support. Types another team handles stay selectable, so
+ * a reader who picks one is pointed to that team rather than turned away.
+ */
+export interface ContactType {
+  label: string
+  /** Set when another team has its own page for this. */
+  routeTo?: { team: string; href: string }
+}
+
+export const contactTypes: ContactType[] = [
+  { label: 'Order or shipping question' },
+  { label: 'Book return' },
+  { label: 'Website or sign-in help' },
+  { label: 'Events' },
+  { label: 'Media inquiry' },
+  { label: 'Website feedback' },
+  { label: 'Something else' },
+]
+
+export const routedContactTypes: ContactType[] = [
+  { label: 'Membership, renewal, or magazine delivery', routeTo: { team: 'Member Services', href: '/membership/contact' } },
+  { label: 'Submitting an article', routeTo: { team: 'the editorial staff', href: '/about/editorial-staff' } },
+  { label: 'Donation or gift', routeTo: { team: 'the Naval Institute Foundation', href: '/giving/contact' } },
+  { label: 'Research or archive request', routeTo: { team: 'the Archives', href: '/archives/research-requests' } },
+  { label: 'Advertising', routeTo: { team: 'Advertising', href: '/advertise' } },
+]
+
+/** /media-inquiries, folded into the hub. */
+export const mediaContact = {
   blurb:
-    'Questions about joining, renewing, gift memberships, magazine delivery, or your account. Member services can also look up your member number and fix a lapsed subscription.',
+    'The U.S. Naval Institute can quickly provide leading experts on issues relating to national security, naval affairs, global sea power, and naval history.',
+  team: 'Communications Team',
+  email: 'media@usni.org',
+  phone: '(410) 295-1026',
+}
+
+/* ── Member Services ─────────────────────────────────────────────────────── */
+
+export const memberServices = {
   email: 'member@usni.org',
   tollFree: '1-800-233-8764',
   local: '410-268-6110',
   hours: 'Monday–Friday, 8:00 a.m. – 4:30 p.m. Eastern',
 }
+
+/**
+ * The member form asks first whether the reader is a member, so a prospective
+ * member's question (a lead) and a member's support request arrive tagged and
+ * can go to different queues.
+ */
+export const memberTopics = [
+  'Renewing my membership',
+  'Magazine delivery',
+  'Updating my address or contact details',
+  'Billing or payment',
+  'Signing in or my online account',
+  'Gift membership I gave or received',
+  'Changing or canceling my membership',
+  'Something else',
+]
+
+export const prospectTopics = [
+  'Choosing a membership',
+  'Student, military, or group rates',
+  'Giving a membership as a gift',
+  'What membership includes',
+  'Something else',
+]
+
+/**
+ * The Member Services page's quick links: joining for a prospective member,
+ * then the self-service pages that answer the most common member requests
+ * without a message.
+ */
+export const memberSelfService = [
+  { label: 'Join the Naval Institute', href: '/membership/join' },
+  { label: 'Renew your membership', href: '/login' },
+  { label: 'Update your address', href: '/account/addresses' },
+  { label: 'Manage subscriptions', href: '/account/subscriptions' },
+  { label: 'Check an order', href: '/account/orders' },
+  { label: 'Membership FAQ', href: '/faq#membership' },
+]
 
 /* ── Naval Institute Foundation (giving) ─────────────────────────────────── */
 
@@ -65,17 +202,17 @@ export const foundationContact = {
     'The Naval Institute Foundation raises the funds behind the Institute’s educational and preservation work — the essay contests, the oral histories, the photo archive, and the forum itself.',
   address: ['Naval Institute Foundation', '291 Wood Road', 'Annapolis, MD 21402'],
   email: 'foundation@usni.org',
+  /** The Foundation office line its FAQ answers give. */
   phone: '410-295-1054',
-  fax: '410-295-1050',
   tollFree: '1-800-233-8764',
   local: '410-268-6110',
+  fax: '410-295-1050',
 }
 
 export const foundationStaff: ContactPerson[] = [
-  { name: 'Laura McCullough', role: 'Chief Development Officer', phone: '(814) 341-1707', email: 'lmccullough@usni.org', image: imgLauraMccullough },
-  { name: 'Rebecca Lee', role: 'Director of Annual Giving', phone: '(410) 295-1056', email: 'rlee@usni.org', image: imgWatermark },
+  { name: 'Laura McCullough', role: 'Chief Development Officer', phone: '(814) 341-1707', email: 'lmccullough@usni.org', image: imgLauraMccullough, profileHref: '/about/leadership/laura-mccullough' },
   { name: 'Amanda Ojeda', role: 'Development and Grant Manager', phone: '(410) 295-1062', email: 'aojeda@usni.org', image: imgAmandaOjeda },
-  { name: 'Schuyler Tose', role: 'Prospect and Database Coordinator', phone: '(410) 295-1035', email: 'stose@usni.org', image: imgWatermark },
+  { name: 'Schuyler Tose', role: 'Prospect and Database Coordinator', phone: '(410) 295-1061', email: 'stose@usni.org', image: imgWatermark },
 ]
 
 /* ── Naval Institute Press ───────────────────────────────────────────────── */
@@ -84,34 +221,18 @@ export const pressContact = {
   address: ['Naval Institute Press', '291 Wood Road', 'Annapolis, Maryland 21402'],
   phone: '410-295-1037',
   fax: '410-295-1084',
-  tradeEmail: 'trade@usni.org',
-  salesEmail: 'cnoble@usni.org',
+  social: [
+    { label: 'X (Twitter)', href: 'https://twitter.com/USNIBooks', icon: 'fa-brands fa-x-twitter' },
+    { label: 'Facebook', href: 'https://www.facebook.com/NavalInstitute/', icon: 'fa-brands fa-facebook-f' },
+    { label: 'Instagram', href: 'https://www.instagram.com/navalinstitute/', icon: 'fa-brands fa-instagram' },
+  ],
 }
-
-export const pressNotes = [
-  {
-    title: 'Review copies, events, and author interviews',
-    body: 'Contact Claire Noble, Sales and Marketing Director, at cnoble@usni.org.',
-  },
-  {
-    title: 'Orders — members and consumers',
-    body: 'Orders may be placed on the Naval Institute website. For additional help with an order, contact customer service.',
-  },
-  {
-    title: 'Orders — trade retail and wholesale',
-    body: 'Orders and inquiries can be sent to trade@usni.org or jrussell@usni.org.',
-  },
-  {
-    title: 'Writing for the Press',
-    body: 'For manuscript submissions, see the Press submission guidelines before getting in touch.',
-  },
-]
 
 export const pressGroups: ContactGroup[] = [
   {
     title: 'Administration',
     people: [
-      { name: 'Adam Kane', role: 'Press Director', email: 'akane@usni.org' },
+      { name: 'Adam Kane', role: 'Press Director', email: 'akane@usni.org', profileHref: '/about/leadership/adam-kane' },
       { name: 'Claire Noble', role: 'Deputy Press Director', email: 'cnoble@usni.org' },
     ],
   },
@@ -128,8 +249,8 @@ export const pressGroups: ContactGroup[] = [
     title: 'Production',
     people: [
       { name: 'Susan Corrado', role: 'Managing Editor', email: 'scorrado@usni.org' },
-      { name: 'Ashley Baird', role: 'Senior Production Editor', email: 'abaird@usni.org' },
       { name: 'Brennan Knight', role: 'Production Editor', email: 'bknight@usni.org' },
+      { name: 'Ashley Baird', role: 'Senior Production Editor', email: 'abaird@usni.org' },
     ],
   },
   {
@@ -148,17 +269,26 @@ export const pressGroups: ContactGroup[] = [
   },
 ]
 
-/* ── Archives ────────────────────────────────────────────────────────────── */
+/* ── Archives research requests ──────────────────────────────────────────── */
 
 export const archivesContact = {
-  blurb:
-    'The Archives is open to the public, and visitors are welcome to conduct research on site in Beach Hall. Library staff also handle research requests remotely for those who cannot visit.',
   researchEmail: 'research@usni.org',
   photoEmail: 'photos@usni.org',
   photoSite: 'https://photos.usni.org',
+  customerEmail: 'customer@usni.org',
+  memberEmail: 'member@usni.org',
   libraryPhone: '(410) 295-1022',
-  turnaround:
-    'Simple requests are normally answered within 24 to 48 hours. Detailed requests take longer, depending on what they involve.',
+}
+
+/* ── Advertising ─────────────────────────────────────────────────────────── */
+
+export const advertisingContact = {
+  name: 'Lewis Duncan',
+  role: 'Director of Corporate Strategic Partnerships & Advertising',
+  email: 'lduncan@usni.org',
+  phone: '410-295-1041',
+  mediaKitHref: 'https://www.scribd.com/document/940190892/2026-Media-Kit',
+  termsHref: 'https://www.usni.org/us-naval-institute-standard-terms-and-conditions-advertising-services',
 }
 
 /* ── Visiting ────────────────────────────────────────────────────────────── */
@@ -177,15 +307,13 @@ export const visiting = {
     'Arrive at USNA Gate #1 guard station.',
   ],
   passSteps: [
-    'Without a current military ID and Department of Defense decals on your vehicle, you must obtain authorization before entering the Naval Academy.',
+    'Without a current military ID and Department of Defense decals on your vehicle, you must obtain prior authorization from a Naval Institute representative at least ten days before your visit.',
     'The Pass & ID office is ahead on the right, with parking to your right.',
-    'Bring your driver’s licence, proof of insurance, and vehicle registration. You will be issued a visitor’s pass.',
+    'Bring your driver’s license, proof of insurance, and vehicle registration. You will be issued a visitor’s pass.',
     'Continue to Beach Hall on Hospital Point.',
   ],
   securityNote:
-    'Security restrictions change with threat conditions and can make entry to the Naval Academy difficult without proper identification. Call the Naval Academy visitor line at 410-293-1000 before you travel.',
+    'Security restrictions change with threat conditions and can make entry to the Naval Academy difficult without proper identification. Call the Naval Academy at 410-293-1000, option 5, before you travel.',
   academyPhone: '410-293-1000',
+  securityHref: 'https://www.usna.edu/SecuInfoPers/FAQS.htm',
 }
-
-/** Options on the general contact form, as published today. */
-export const contactTypes = ['Book Returns', 'Customer Support']

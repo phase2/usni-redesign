@@ -277,7 +277,7 @@ export default function CartItems() {
           </h2>
           <p className="font-body text-[20px] text-black leading-[1.4]">
             Let's finalize checkout – we are excited to welcome you to USNI! If you have any questions with the process, please{' '}
-            <a href="/contact#membership" className="text-link transition-colors">
+            <a href="/membership/contact" className="text-link transition-colors">
               contact membership services
             </a>.
           </p>

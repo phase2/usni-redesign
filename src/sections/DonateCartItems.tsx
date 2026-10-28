@@ -222,7 +222,7 @@ export default function DonateCartItems() {
           <p className="font-body text-[16px] text-[#1d2535] leading-[1.5]">
             Thank you for supporting the U.S. Naval Institute! You can adjust your donation amount or frequency
             below before proceeding to checkout. If you have any questions, please{' '}
-            <a href="/contact#foundation" className="transition-colors text-link">
+            <a href="/giving/contact" className="transition-colors text-link">
               contact us
             </a>.
           </p>

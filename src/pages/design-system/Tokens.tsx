@@ -226,7 +226,7 @@ const HEADINGS: TypeRow[] = [
     role: 'H1 — light-blue interior hero',
     classes: 'font-headline text-[32px] lg:text-[64px] text-navy-bolder leading-[1.1]',
     sample: 'Leadership & Staff',
-    where: '9 files: AboutPageHero, EventsPageHero, EssayContestsHero, ProceedingsAllIssuesHero, NavalHistoryAllIssuesHero, ProceedingsPodcastHero, ProceedingsContactHero…',
+    where: '8 files: AboutPageHero, EventsPageHero, EssayContestsHero, ProceedingsAllIssuesHero, NavalHistoryAllIssuesHero, ProceedingsPodcastHero…',
     note: 'The canonical page title. Two sizes only: 32px below lg, 64px from lg.',
   },
   {

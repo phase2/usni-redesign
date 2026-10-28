@@ -34,10 +34,10 @@ export default function ArchivesAbout() {
             </p>
             <div className="pt-2">
               <a
-                href="/contact#archives"
+                href="/archives/research-requests"
                 className="inline-flex items-center gap-2 font-body font-bold text-base text-link"
               >
-                Contact the Archives for access
+                Make a research request
                 <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M3 8h10M9 4l4 4-4 4" />
                 </svg>

@@ -25,7 +25,7 @@ const navItems: SubNavItem[] = [
   { label: 'Oral Histories', href: '/archives/oral-histories' },
   { label: 'Digital Editions', href: '/books/digital-editions' },
   { label: 'About the Press', href: '/books/about' },
-  { label: 'Contact the Press', href: '/contact#press' },
+  { label: 'Contact the Press', href: '/books/contact' },
 ]
 
 function isItemActive(pathname: string, item: SubNavItem): boolean {
