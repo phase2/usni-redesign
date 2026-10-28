@@ -69,7 +69,7 @@ export const contactRoutes: ContactRoute[] = [
     title: 'Editorial Staff',
     summary: 'The editors of Proceedings and Naval History, and how to submit an article.',
     href: '/about/editorial-staff',
-    cta: 'See the masthead',
+    cta: 'Contact the editors',
   },
   {
     title: 'Naval Institute Press',
