@@ -8,15 +8,9 @@ import { DetailBlock, EmailLink, PhoneLink } from '@/sections/ContactSections'
  *
  * The live /advertise-us is a sales page, not a contact page: the media kit,
  * the case for the audience, the sales contact, and the terms. The live page
- * embeds the media kit from Scribd; here it is a link out. The figures are the
- * live copy's own (2019 and 2020) and want refreshing from the 2026 kit.
+ * embeds the media kit from Scribd; here it is a link out. The copy's figures
+ * (2019 and 2020) want refreshing from the 2026 kit.
  */
-
-const stats = [
-  { figure: '“Must read”', label: 'How military readers consistently rank Proceedings among military journals' },
-  { figure: '500,000+', label: 'Times news organizations quoted or linked to the Naval Institute in 2019' },
-  { figure: '2 million+', label: 'USNI News page views a month during 2020' },
-]
 
 function External({ href, children }: { href: string; children: React.ReactNode }) {
   return (
@@ -31,23 +25,10 @@ function External({ href, children }: { href: string; children: React.ReactNode 
 export default function AdvertiseContent() {
   return (
     <>
-      <section className="bg-navy-bolder py-10 lg:py-12" aria-label="Audience">
-        <div className="container-site">
-          <dl className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
-            {stats.map((s) => (
-              <div key={s.figure} className="flex flex-col-reverse gap-2 border-l-2 border-[#C2DDFF] pl-5">
-                <dt className="font-body text-[15px] text-white/80 leading-[1.5]">{s.label}</dt>
-                <dd className="font-headline text-[36px] lg:text-[44px] text-white leading-none">{s.figure}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      </section>
-
       <section className="bg-white py-12 lg:py-16">
         <div className="container-site grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_360px] gap-10 lg:gap-14 items-start">
           <div className="max-w-[760px] flex flex-col gap-5 font-body text-base lg:text-lg text-navy-bolder leading-[1.75]">
-            <h2 className="font-headline text-[30px] lg:text-[40px] leading-[1.15] mb-1">Reach the Sea Services</h2>
+            <h2 className="font-headline text-[30px] lg:text-[40px] leading-[1.15] mb-1">Reach the right audience by advertising with the Naval Institute</h2>
             <p>
               For a century and a half, the Naval Institute has created impact and outcomes that have underpinned
               the success of the Navy, Marine Corps, and Coast Guard. It&rsquo;s a serious mission, and end users,
