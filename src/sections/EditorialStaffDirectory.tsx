@@ -119,8 +119,14 @@ export default function EditorialStaffDirectory() {
           <TabNav tabs={tabs} activeId={activeTab} onChange={pick} label="Editorial staff by magazine" size="lg" />
 
           <div role="tabpanel" id={panelId(activeTab)} aria-labelledby={tabId(activeTab)} className="flex flex-col gap-10 lg:gap-12">
-            {groups.map((g) => (
-              <div key={g.id} className="flex flex-col gap-6" role="group" aria-labelledby={`staff-${g.id}`}>
+            {/* A light rule between groups, not above the first */}
+            {groups.map((g, i) => (
+              <div
+                key={g.id}
+                className={`flex flex-col gap-6 ${i > 0 ? 'border-t border-border-light pt-10 lg:pt-12' : ''}`}
+                role="group"
+                aria-labelledby={`staff-${g.id}`}
+              >
                 <h2 id={`staff-${g.id}`} className="font-headline text-[26px] lg:text-[32px] text-navy-bolder leading-[1.15]">
                   {g.title}
                 </h2>
