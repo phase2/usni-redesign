@@ -4,6 +4,7 @@ import { allBooks, SERIES_FACETS, SUBJECT_FACETS } from '@/data/books'
 import type { Book } from '@/data/books'
 import BookPrice from '@/components/ui/BookPrice'
 import FilterChip from '@/components/ui/FilterChip'
+import { FacetShowMore } from '@/components/ui/FacetGroup'
 
 /* ── Constants ─────────────────────────────────────────────────────────────── */
 
@@ -179,13 +180,11 @@ function FilterableFacetGroup({
       </div>
 
       {!filter && hiddenCount > 0 && (
-        <button
-          className="mt-1.5 font-body font-semibold text-xs text-[#0466C8] hover:text-navy-subtle transition-colors"
-          onClick={() => setExpanded(!expanded)}
-        >
-          {expanded ? 'See less' : `See ${hiddenCount} more`}
-          <i className={`fa-solid fa-chevron-${expanded ? 'up' : 'down'} text-[10px] ml-1`} aria-hidden="true" />
-        </button>
+        <FacetShowMore
+          expanded={expanded}
+          onToggle={() => setExpanded(!expanded)}
+          label={`${fieldLabel.toLowerCase()} options`}
+        />
       )}
     </div>
   )

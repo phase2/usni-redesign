@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom'
 import { ResultsCount } from '@/components/ui/ResultsList'
 import Pagination from '@/components/ui/Pagination'
 import FilterPanel from '@/components/ui/FilterPanel'
+import { FacetShowMore } from '@/components/ui/FacetGroup'
 import { essayContestSeries } from '@/data/essayContests'
 import { archiveImage, essayArchive, type EssayArchiveEntry } from '@/data/essayArchive'
 
@@ -252,17 +253,12 @@ export default function EssayContestsArchive() {
                   </label>
                 ))}
 
-                {hiddenCategoryCount > 0 && (
-                  <button
-                    onClick={() => setShowAllCategories((v) => !v)}
-                    className="mt-1.5 font-body font-semibold text-xs text-[#0466C8] hover:text-navy-subtle transition-colors"
-                  >
-                    {showAllCategories ? 'See less' : `See ${hiddenCategoryCount} more`}
-                    <i
-                      className={`fa-solid fa-chevron-${showAllCategories ? 'up' : 'down'} text-[10px] ml-1`}
-                      aria-hidden="true"
-                    />
-                  </button>
+                {(showAllCategories || hiddenCategoryCount > 0) && (
+                  <FacetShowMore
+                    expanded={showAllCategories}
+                    onToggle={() => setShowAllCategories((v) => !v)}
+                    label="categories options"
+                  />
                 )}
               </div>
             )}

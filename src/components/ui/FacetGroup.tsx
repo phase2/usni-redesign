@@ -41,6 +41,38 @@ export function AccordionChevron({ open }: { open: boolean }) {
   )
 }
 
+/**
+ * The Show more / Show less toggle under a long facet list. Shared by every
+ * listing's filters so the control reads the same everywhere: no hidden-item
+ * count in the label, which would change as the reader ticks options.
+ * `label` names the list for screen readers ("categories options").
+ */
+export function FacetShowMore({
+  expanded,
+  onToggle,
+  label,
+}: {
+  expanded: boolean
+  onToggle: () => void
+  label: string
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onToggle}
+      aria-expanded={expanded}
+      className="self-start mt-1.5 inline-flex items-center gap-1.5 font-body font-semibold text-sm text-[#0466c8] hover:text-navy-bolder transition-colors"
+    >
+      <i
+        className={`fa-solid ${expanded ? 'fa-circle-minus' : 'fa-circle-plus'} text-sm`}
+        aria-hidden="true"
+      />
+      {expanded ? 'Show less' : 'Show more'}
+      <span className="sr-only"> {label}</span>
+    </button>
+  )
+}
+
 export interface FacetOption {
   value: string
   count: number
@@ -172,18 +204,11 @@ export default function FacetGroup({
           )}
 
           {!needle && (hidden > 0 || showAll) && matching.length > FACET_PREVIEW && (
-            <button
-              type="button"
-              onClick={() => setShowAll((s) => !s)}
-              className="self-start mt-1.5 flex items-center gap-1.5 font-body font-semibold text-sm text-[#0466c8] hover:text-navy-bolder transition-colors"
-            >
-              <i
-                className={`fa-solid ${showAll ? 'fa-circle-minus' : 'fa-circle-plus'} text-sm`}
-                aria-hidden="true"
-              />
-              {showAll ? 'Show less' : 'Show more'}
-              <span className="sr-only"> {title.toLowerCase()} options</span>
-            </button>
+            <FacetShowMore
+              expanded={showAll}
+              onToggle={() => setShowAll((s) => !s)}
+              label={`${title.toLowerCase()} options`}
+            />
           )}
         </div>
       )}

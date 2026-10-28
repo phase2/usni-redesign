@@ -141,7 +141,7 @@ export default function ListsTables() {
                 </li>
                 <li>
                   <strong>Checkbox facets with counts</strong>: the Facets module on a Search API index
-                  gives checkboxes, per-option counts, and a soft limit (&ldquo;See N more&rdquo;) out of the
+                  gives checkboxes, per-option counts, and a soft limit (&ldquo;Show more&rdquo;) out of the
                   box. Core exposed filters with Better Exposed Filters give checkboxes but no counts.
                 </li>
                 <li>
@@ -176,7 +176,7 @@ export default function ListsTables() {
               title="Canonical"
               items={[
                 { path: 'src/sections/PastEventsArchive.tsx', note: 'layout, keyword, checkbox facets (FacetGroup), sort, pager. scope="all" is the All Events listing and adds a When facet.' },
-                { path: 'src/sections/EssayContestsArchive.tsx', note: 'the same layout, plus the “See N more” threshold' },
+                { path: 'src/sections/EssayContestsArchive.tsx', note: 'the same layout, plus the Show more threshold' },
               ]}
             />
             <SourceList
@@ -205,8 +205,8 @@ export default function ListsTables() {
             </Lead>
             <Lead>
               The example is the essay contest archive. Its Categories facet has 38 options, so the list stops
-              at 12 with a &ldquo;See 26 more&rdquo; button. A checked option stays visible when the list
-              collapses, so clearing it never means hunting behind &ldquo;See more&rdquo;. Tick a box to see
+              at 12 with a &ldquo;Show more&rdquo; button. A checked option stays visible when the list
+              collapses, so clearing it never means hunting behind &ldquo;Show more&rdquo;. Tick a box to see
               the count badge and Clear all appear.
             </Lead>
 
@@ -275,9 +275,9 @@ export default function ListsTables() {
                 },
                 { part: 'Option count', classes: 'font-body text-xs text-neutral-subtle tabular-nums', note: '“(14)”. tabular-nums lines the digits up down the column.' },
                 {
-                  part: 'See N more',
-                  classes: 'mt-1.5 font-body font-semibold text-xs text-[#0466C8] hover:text-navy-subtle transition-colors  ›  i: fa-solid fa-chevron-down text-[10px] ml-1',
-                  note: 'EssayContestsArchive. Shown past 12 options. The chevron flips to fa-chevron-up and the label to “See less”. Should carry aria-expanded.',
+                  part: 'Show more',
+                  classes: 'self-start mt-1.5 inline-flex items-center gap-1.5 font-body font-semibold text-sm text-[#0466c8] hover:text-navy-bolder transition-colors  ›  i: fa-solid fa-circle-plus text-sm',
+                  note: 'FacetShowMore (FacetGroup.tsx), shared by every listing’s filters. Shown past 12 options here. The icon flips to fa-circle-minus and the label to “Show less”; aria-expanded follows. No count in the label.',
                 },
               ]}
             />
@@ -291,7 +291,7 @@ export default function ListsTables() {
               </p>
               <p>
                 <strong>Facet disclosures</strong> use the accordion behavior. The button needs{' '}
-                <C>aria-controls</C> pointing at the option list id. <strong>See N more</strong> is the Facets
+                <C>aria-controls</C> pointing at the option list id. <strong>Show more</strong> is the Facets
                 module&rsquo;s soft limit. If built by hand, it toggles a class on options past the 12th
                 and must keep checked options visible.
               </p>
