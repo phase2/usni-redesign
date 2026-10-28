@@ -1,6 +1,7 @@
 import imgGeneralPrize from '@/assets/images/essay-contest-general-prize-2026.webp'
 import imgLeadership from '@/assets/images/essay-contest-leadership-2026.webp'
 import imgPhotoContest from '@/assets/images/essay-contest-photo-2026.jpg'
+import { pastEssayContests } from './essayContestsPast'
 
 /**
  * Essay contest content, transcribed from the current usni.org essay contest
@@ -22,6 +23,8 @@ export interface EssayContestWinner {
   prize: string
   title: string
   name: string
+  /** The winning essay as published, where the live page links it. */
+  href?: string
 }
 
 /** One year's winners for a contest (or one division of it). */
@@ -115,11 +118,18 @@ export interface EssayContest {
   fundedByLabel?: string
   contacts?: EssayContestContact[]
   previousWinners?: EssayContestWinnerGroup[]
+  /** A closed edition's own winners — the live page's Selected Submissions. */
+  winners?: EssayContestWinner[]
 }
 
 /** Every contest takes entries through the shared form on this site. */
 export function isPhotoEntry(contest: EssayContest): boolean {
   return contest.entryKind === 'photo'
+}
+
+/** The open edition of a closed contest's series, if one is running now. */
+export function currentEdition(contest: EssayContest): EssayContest | undefined {
+  return essayContests.find((c) => c.title === contest.title && c.status !== 'closed')
 }
 
 // ── Contests ────────────────────────────────────────────────────────────────
@@ -304,8 +314,9 @@ export const essayContests: EssayContest[] = [
   },
 ]
 
+/** Open contests first, then the closed editions kept as past-contest samples. */
 export function getContest(slug: string): EssayContest {
-  const contest = essayContests.find((c) => c.slug === slug)
+  const contest = [...essayContests, ...pastEssayContests].find((c) => c.slug === slug)
   if (!contest) throw new Error(`Unknown essay contest slug: ${slug}`)
   return contest
 }

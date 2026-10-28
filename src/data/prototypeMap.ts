@@ -228,6 +228,11 @@ export const prototypeSection: PrototypeSection = {
         { label: 'Essay Contests', href: '/essay-contests' },
         { label: 'General Prize Essay Contest', href: '/essay-contests/general-prize' },
         { label: 'Leadership Essay Contest', href: '/essay-contests/leadership' },
+        {
+          label: '2025 Leadership Essay Contest',
+          href: '/essay-contests/2025/2025-leadership-essay-contest',
+          note: 'Past contest sample; 2017–2024 linked from it',
+        },
         { label: 'Naval and Maritime Photo Contest', href: '/essay-contests/naval-maritime-photo' },
         { label: 'Submit an Entry', href: '/essay-contests/submit' },
         { label: 'Contest Archive', href: '/essay-contests/archive' },

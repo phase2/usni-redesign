@@ -90,6 +90,7 @@ import ProceedingsSponsoredContent from '@/pages/ProceedingsSponsoredContent'
 import ProceedingsSponsoredUvFleets from '@/pages/ProceedingsSponsoredUvFleets'
 import NewsletterJoin from '@/pages/NewsletterJoin'
 import EssayContests from '@/pages/EssayContests'
+import { pastEssayContests } from '@/data/essayContestsPast'
 import EssayContestPage from '@/pages/EssayContestPage'
 import EssaySubmit from '@/pages/EssaySubmit'
 import EssayContestsArchivePage from '@/pages/EssayContestsArchivePage'
@@ -271,6 +272,10 @@ export default function App() {
         <Route path="/essay-contests/submit" element={<EssaySubmit />} />
         <Route path="/essay-contests/general-prize" element={<EssayContestPage slug="general-prize" />} />
         <Route path="/essay-contests/leadership" element={<EssayContestPage slug="leadership" />} />
+        {/* Past editions, at their live paths (/essay-contests/2025/2025-leadership-essay-contest) */}
+        {pastEssayContests.map((c) => (
+          <Route key={c.slug} path={c.href} element={<EssayContestPage slug={c.slug} />} />
+        ))}
         <Route
           path="/essay-contests/naval-maritime-photo"
           element={<EssayContestPage slug="naval-maritime-photo" />}

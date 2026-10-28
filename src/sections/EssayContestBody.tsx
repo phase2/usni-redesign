@@ -1,5 +1,6 @@
 import {
   contestEntryStat,
+  currentEdition,
   essayContests,
   essaySubmitPath,
   isPhotoEntry,
@@ -77,7 +78,7 @@ export default function EssayContestBody({ contest }: { contest: EssayContest })
   // Judging/selection/announcement describe what happens after you enter, so
   // they read better after the rules than before the prompt.
   const isAfterRules = (b: EssayContestBlock) =>
-    /judging|selection process|announcement/i.test(b.heading)
+    /judging|selection process|announcement|^winners$/i.test(b.heading)
   const beforeRules = contest.blocks.filter((b) => !isAfterRules(b))
   const afterRules = contest.blocks.filter(isAfterRules)
 
@@ -86,6 +87,8 @@ export default function EssayContestBody({ contest }: { contest: EssayContest })
   )
 
   const entryStat = contestEntryStat(contest)
+  const closed = contest.status === 'closed'
+  const current = closed ? currentEdition(contest) : undefined
 
   return (
     <section className="bg-white py-12 lg:py-16">
@@ -119,15 +122,20 @@ export default function EssayContestBody({ contest }: { contest: EssayContest })
               <Block key={block.heading} block={block} />
             ))}
 
-            <div className="flex flex-col gap-4">
-              <Heading id="eligibility">Eligibility</Heading>
-              <Bullets items={contest.eligibility} />
-            </div>
+            {/* A past edition may say who could enter in its challenge instead */}
+            {contest.eligibility.length > 0 && (
+              <div className="flex flex-col gap-4">
+                <Heading id="eligibility">Eligibility</Heading>
+                <Bullets items={contest.eligibility} />
+              </div>
+            )}
 
-            <div className="flex flex-col gap-4">
-              <Heading id="submission-guidelines">Submission Guidelines</Heading>
-              <Bullets items={contest.submissionGuidelines} />
-            </div>
+            {contest.submissionGuidelines.length > 0 && (
+              <div className="flex flex-col gap-4">
+                <Heading id="submission-guidelines">Submission Guidelines</Heading>
+                <Bullets items={contest.submissionGuidelines} />
+              </div>
+            )}
 
             <div className="flex flex-col gap-4">
               <Heading id="prizes">Prizes</Heading>
@@ -185,11 +193,15 @@ export default function EssayContestBody({ contest }: { contest: EssayContest })
           {/* ── Sidebar: the single place the entry facts appear ── */}
           <aside className="w-full lg:sticky lg:top-8 flex flex-col gap-5">
             <div className="bg-white border border-navy-subtle p-6 flex flex-col gap-5">
-              <h2 className="font-headline text-xl text-navy-bolder">Enter this contest</h2>
+              <h2 className="font-headline text-xl text-navy-bolder">
+                {closed ? 'This contest has closed' : 'Enter this contest'}
+              </h2>
 
               <dl className="flex flex-col gap-3">
                 <div className="flex justify-between gap-3 pb-3 border-b border-border-light">
-                  <dt className="font-body font-semibold text-sm text-navy-bolder">Deadline</dt>
+                  <dt className="font-body font-semibold text-sm text-navy-bolder">
+                    {closed ? 'Closed' : 'Deadline'}
+                  </dt>
                   <dd className="font-body text-sm text-neutral-subtle text-right">
                     <time dateTime={contest.deadlineISO}>{contest.deadline}</time>
                   </dd>
@@ -210,26 +222,39 @@ export default function EssayContestBody({ contest }: { contest: EssayContest })
                 </div>
               </dl>
 
-              <a
-                href={essaySubmitPath(contest)}
-                className="flex items-center justify-center gap-2 bg-gold text-navy-bolder font-body font-bold text-base px-5 py-3.5 border border-gold hover:bg-gold-dark transition-colors"
-              >
-                <i
-                  className={`fa-solid ${isPhotoEntry(contest) ? 'fa-camera' : 'fa-pen-nib'}`}
-                  aria-hidden="true"
-                />
-                {contest.submitLabel ?? 'Submit Your Essay'}
-              </a>
+              {closed ? (
+                current && (
+                  <a
+                    href={current.href}
+                    className="flex items-center justify-center gap-2 bg-navy-bolder text-white font-body font-bold text-base px-5 py-3.5 border border-navy-bolder hover:bg-navy-bright hover:border-navy-bright transition-colors"
+                  >
+                    Enter the {current.year} contest
+                  </a>
+                )
+              ) : (
+                <>
+                  <a
+                    href={essaySubmitPath(contest)}
+                    className="flex items-center justify-center gap-2 bg-gold text-navy-bolder font-body font-bold text-base px-5 py-3.5 border border-gold hover:bg-gold-dark transition-colors"
+                  >
+                    <i
+                      className={`fa-solid ${isPhotoEntry(contest) ? 'fa-camera' : 'fa-pen-nib'}`}
+                      aria-hidden="true"
+                    />
+                    {contest.submitLabel ?? 'Submit Your Essay'}
+                  </a>
 
-              <p className="font-body text-sm text-neutral-subtle leading-relaxed">
-                {isPhotoEntry(contest)
-                  ? 'High-resolution tiff or jpg, no AI or manipulation. See '
-                  : 'Word document, judged in the blind. See '}
-                <a href="#submission-guidelines" className="text-link">
-                  submission guidelines
-                </a>
-                .
-              </p>
+                  <p className="font-body text-sm text-neutral-subtle leading-relaxed">
+                    {isPhotoEntry(contest)
+                      ? 'High-resolution tiff or jpg, no AI or manipulation. See '
+                      : 'Word document, judged in the blind. See '}
+                    <a href="#submission-guidelines" className="text-link">
+                      submission guidelines
+                    </a>
+                    .
+                  </p>
+                </>
+              )}
             </div>
 
             {/* Sibling divisions as plain links */}
