@@ -22,6 +22,18 @@ export interface TabItem {
  * Home and End jump to the ends, and only the selected tab is in the tab order,
  * so a keyboard user tabs past the bar rather than through every label.
  */
+export type TabNavSize = 'md' | 'lg'
+
+/**
+ * `md` is the original bar. `lg` is for a tab set that is the page's main
+ * control rather than a switch inside a section (the editorial masthead's
+ * magazine tabs), and steps up again from `lg` screens.
+ */
+const tabSizes: Record<TabNavSize, string> = {
+  md: 'px-5 py-3 text-sm',
+  lg: 'px-6 py-3.5 text-base lg:px-8 lg:py-4 lg:text-lg',
+}
+
 export const tabId = (id: string) => `tab-${id}`
 export const panelId = (id: string) => `tabpanel-${id}`
 
@@ -30,6 +42,7 @@ export default function TabNav({
   activeId,
   onChange,
   label,
+  size = 'md',
   className = '',
 }: {
   tabs: TabItem[]
@@ -37,6 +50,7 @@ export default function TabNav({
   onChange: (id: string) => void
   /** Accessible name for the tab list, e.g. "Donor listing by year". */
   label: string
+  size?: TabNavSize
   className?: string
 }) {
   const onKeyDown = useCallback(
@@ -78,7 +92,7 @@ export default function TabNav({
             aria-controls={panelId(tab.id)}
             tabIndex={selected ? 0 : -1}
             onClick={() => onChange(tab.id)}
-            className={`px-5 py-3 font-body font-semibold text-sm text-left sm:whitespace-nowrap border-b-2 -mb-px transition-colors
+            className={`${tabSizes[size]} font-body font-semibold text-left sm:whitespace-nowrap border-b-2 -mb-px transition-colors
               ${selected
                 ? 'border-[#0466C8] text-navy-bolder bg-[#E0E0CC]'
                 : 'border-transparent text-navy-bolder/40 hover:text-navy-bolder/70'

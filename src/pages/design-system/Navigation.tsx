@@ -12,7 +12,7 @@ import SourceList from '@/components/design-system/SourceList'
 import DevNote from '@/components/design-system/DevNote'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import SectionSubNav from '@/components/layout/SectionSubNav'
-import TabNav, { panelId, tabId } from '@/components/ui/TabNav'
+import TabNav, { panelId, tabId, type TabNavSize } from '@/components/ui/TabNav'
 import BreakpointLabel from '@/components/design-system/BreakpointLabel'
 import PreviewFrame from '@/components/design-system/PreviewFrame'
 import { Button } from '@/components/ui/Button'
@@ -95,12 +95,13 @@ function C({ children }: { children: ReactNode }) {
   return <code className="font-mono text-sm [overflow-wrap:anywhere]">{children}</code>
 }
 
-function TabNavDemo() {
+function TabNavDemo({ size }: { size?: TabNavSize }) {
   const [active, setActive] = useState('2024')
   const years = ['2024', '2023', '2022', '2021', '2020']
   return (
     <>
       <TabNav
+        size={size}
         label="Donor listing by year"
         tabs={years.map((y) => ({ id: y, label: y }))}
         activeId={active}
@@ -677,10 +678,15 @@ export default function Navigation() {
               <TabNavDemo />
             </LiveMarkup>
 
+            <LiveMarkup label="Large (size=&quot;lg&quot;)" previewClassName="bg-surface-subtle p-8" defaultOpen={false}>
+              <TabNavDemo size="lg" />
+            </LiveMarkup>
+
             <ClassTable
               rows={[
                 { part: 'Tab list', classes: 'flex flex-wrap gap-1 border-b border-navy-bolder/20', note: <><C>role="tablist"</C> with an <C>aria-label</C>. Wraps on narrow screens; caller adds margins via <C>className</C>.</> },
                 { part: 'Tab', classes: 'px-5 py-3 font-body font-semibold text-sm text-left sm:whitespace-nowrap border-b-2 -mb-px transition-colors', note: <><C>-mb-px</C> lays the 2px underline over the list&rsquo;s 1px rule. Labels may wrap below <C>sm</C> (long author names).</> },
+                { part: 'Tab — large', classes: 'px-6 py-3.5 text-base lg:px-8 lg:py-4 lg:text-lg', note: <>Replaces the size classes above with <C>size="lg"</C>. For a tab set that is the page&rsquo;s main control, such as the magazine tabs on the editorial masthead.</> },
                 { part: 'Tab — selected', classes: 'border-[#0466C8] text-navy-bolder bg-[#E0E0CC]', note: <><C>aria-selected="true"</C>, <C>tabIndex=0</C>. #0466C8 = navy-bright; #E0E0CC is the sub-nav tan (no token).</> },
                 { part: 'Tab — unselected', classes: 'border-transparent text-navy-bolder/40 hover:text-navy-bolder/70', note: <><C>tabIndex=-1</C>. 40% navy on white is about 2.6:1 — below 4.5:1 for 14px text; worth raising in production.</> },
               ]}
@@ -720,6 +726,7 @@ const [active, setActive] = useState('2024')
                 { name: 'activeId', type: 'string', description: "Required. The selected tab's id — the component is controlled." },
                 { name: 'onChange', type: '(id: string) => void', description: 'Required. Called with the newly selected id, by click or arrow key.' },
                 { name: 'label', type: 'string', description: 'Required. Accessible name for the tab list, e.g. "Donor listing by year".' },
+                { name: 'size', type: "'md' | 'lg'", description: "Default 'md'. 'lg' for a tab set that leads the page (the editorial masthead)." },
                 { name: 'className', type: 'string', description: 'Extra layout classes on the bar, typically a margin.' },
               ]}
             />
