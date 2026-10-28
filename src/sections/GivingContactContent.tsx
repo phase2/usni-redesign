@@ -1,3 +1,4 @@
+import { NavyButtonLink } from '@/components/ui/Button'
 import { faqTopics } from '@/data/faqs'
 import FaqItem from '@/sections/FaqItem'
 import GivingMeetTheTeam from '@/sections/GivingMeetTheTeam'
@@ -27,9 +28,10 @@ export default function GivingContactContent() {
             <div className="border-t border-border-light">
               {foundationFaqs.map((f) => <FaqItem key={f.q} q={f.q} a={f.a} />)}
             </div>
-            <p className="font-body text-base">
-              <a href="/faq" className="text-link font-bold">View all frequently asked questions</a>
-            </p>
+            {/* The Membership FAQ's button, opening the FAQ page at its Foundation topic */}
+            <div>
+              <NavyButtonLink href="/faq#foundation">View All Frequently Asked Questions</NavyButtonLink>
+            </div>
           </div>
         </div>
       </section>
