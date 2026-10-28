@@ -432,6 +432,13 @@ export const archiveSection: PrototypeSection = {
           // through the donation form instead.
           note: 'Not being built',
         },
+        {
+          label: 'State of the Institute, Year by Year',
+          href: '/about/state-of-the-institute/by-year',
+          // The live page migrates one to one; this year picker is the
+          // proposed redesign, kept for a later phase.
+          note: 'Future enhancement',
+        },
       ],
     },
   ],

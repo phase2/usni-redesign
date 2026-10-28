@@ -99,6 +99,7 @@ import AboutStrategicPlan from '@/pages/AboutStrategicPlan'
 import AboutLeadership from '@/pages/AboutLeadership'
 import AboutLeadershipBio from '@/pages/AboutLeadershipBio'
 import AboutStateOfTheInstitute from '@/pages/AboutStateOfTheInstitute'
+import AboutStateOfTheInstituteByYear from '@/pages/AboutStateOfTheInstituteByYear'
 import TableOfContents from '@/pages/design-system/TableOfContents'
 import DsTokens from '@/pages/design-system/Tokens'
 import DsUtilities from '@/pages/design-system/Utilities'
@@ -304,6 +305,8 @@ export default function App() {
         <Route path="/about/media" element={<Navigate replace to="/contact#media" />} />
         <Route path="/about/leadership/:slug" element={<AboutLeadershipBio />} />
         <Route path="/about/state-of-the-institute" element={<AboutStateOfTheInstitute />} />
+        {/* Archived: the year-at-a-time version, kept as a future enhancement */}
+        <Route path="/about/state-of-the-institute/by-year" element={<AboutStateOfTheInstituteByYear />} />
         <Route path="/toc" element={<TableOfContents />} />
         {/* The table of contents' old address, kept so earlier links still land */}
         <Route path="/design-system" element={<Navigate to="/toc" replace />} />

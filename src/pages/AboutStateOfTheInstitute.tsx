@@ -8,10 +8,8 @@ import StateOfTheInstituteEntries from '@/sections/StateOfTheInstituteEntries'
  * State of the Institute — the live /about-us/state-of-the-institute page.
  *
  * A basic page: the light-blue About sub-page header, then the live page's
- * dated election and governance notices in the redesign's type, one year at a
- * time with a year picker in the body rather than the live page's single long
- * scroll. The live page has no lede or artwork, so the header is the title
- * alone.
+ * dated election and governance notices in the redesign's type. The live page
+ * has no lede or artwork, so the header is the title alone.
  */
 export default function AboutStateOfTheInstitute() {
   return (

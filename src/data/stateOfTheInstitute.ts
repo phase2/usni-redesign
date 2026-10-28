@@ -25,14 +25,13 @@ import dalySignature from '@/assets/images/state-of-the-institute/daly-signature
  *   its own entry like every other dated heading.
  * - The live 2013 Stavridis entry shows the same May 2007 Proceedings cover
  *   twice, and the 2012 letter the same signature twice; one of each is kept.
- * - The page shows one year at a time, so the 2016 entry's "below" link to
- *   the 2015 bylaws amendments becomes `?year=2015#ballot`.
  * - The live "8 January 2018" notice sits between July 2019 and September
  *   2018 and announces the 2019 election, so it's almost certainly January
- *   2019. Its date stays as printed (flagged to the client), but it's filed
- *   under 2019.
+ *   2019. Its date stays as printed (flagged to the client); the archived
+ *   year-by-year view files it under 2019.
  *
- * Rendered by StateOfTheInstituteEntries, which styles the markup.
+ * Rendered by StateOfTheInstituteEntries, which styles the markup, and by the
+ * archived year-by-year view, StateOfTheInstituteByYear.
  */
 export interface StateOfTheInstituteEntry {
   /** As the live heading reads it — some are a month, some a full date. */
@@ -144,7 +143,7 @@ export const stateOfTheInstituteEntries: StateOfTheInstituteEntry[] = [
   },
   {
     date: '5 January 2016',
-    html: resolve(`<p><img alt="2016 Member Ballot Reminder" src="{{ballot2016}}"></p><p>As a member in good standing, you have the right, privilege and obligation to vote in the <strong>2016 U.S. Naval Institute Election.</strong></p><p>We have an outstanding roster of candidates for the Board of Directors and Editorial Board for your consideration. Please review their biographies at the following link.</p><p><a href="https://www.usni.org/sites/default/files/Ballot%20Bios%202016.pdf">Board of Director and Editorial Board Candidate Biographies</a>(PDF)</p><p>Also included on the ballot are two important Constitution and Bylaws recommendations for your consideration. Specific details on the proposed amendments can be found <a href="?year=2015#ballot">below</a>.</p><p>Vote online at <a href="http://www.associationvoting.com/usni">www.associationvoting.com/usni</a>. Login with your member number (starts with a C and can be found on your magazine label) and the email address on file at USNI.</p><p>Online balloting closes at 23:59 ET on 9 March 2016.</p><p>If you need assistance logging in please contact the USNI Member Services team at 1-800-233-8764 or <a href="mailto:election@usni.org">election@usni.org</a>.</p><p>Thank you for your continued membership in the U.S. Naval Institute. We're strong, vital and energized for the future thanks to members like you.</p>`),
+    html: resolve(`<p><img alt="2016 Member Ballot Reminder" src="{{ballot2016}}"></p><p>As a member in good standing, you have the right, privilege and obligation to vote in the <strong>2016 U.S. Naval Institute Election.</strong></p><p>We have an outstanding roster of candidates for the Board of Directors and Editorial Board for your consideration. Please review their biographies at the following link.</p><p><a href="https://www.usni.org/sites/default/files/Ballot%20Bios%202016.pdf">Board of Director and Editorial Board Candidate Biographies</a>(PDF)</p><p>Also included on the ballot are two important Constitution and Bylaws recommendations for your consideration. Specific details on the proposed amendments can be found <a href="#ballot">below</a>.</p><p>Vote online at <a href="http://www.associationvoting.com/usni">www.associationvoting.com/usni</a>. Login with your member number (starts with a C and can be found on your magazine label) and the email address on file at USNI.</p><p>Online balloting closes at 23:59 ET on 9 March 2016.</p><p>If you need assistance logging in please contact the USNI Member Services team at 1-800-233-8764 or <a href="mailto:election@usni.org">election@usni.org</a>.</p><p>Thank you for your continued membership in the U.S. Naval Institute. We're strong, vital and energized for the future thanks to members like you.</p>`),
   },
   {
     date: '25 September 2015',

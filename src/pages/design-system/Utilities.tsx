@@ -673,7 +673,7 @@ export default function Utilities() {
 
         {/* ── Content ─────────────────────────────────────────────────── */}
         <DocSection title="Rich text">
-          <Entry name=".rich-text" layer="components" apply uses="1 use — StateOfTheInstituteEntries">
+          <Entry name=".rich-text" layer="components" apply uses="2 uses — StateOfTheInstituteEntries and its archived year-by-year view, StateOfTheInstituteByYear">
             <P>
               House styles for HTML that arrives as markup rather than as classed elements — on the prototype, the State
               of the Institute archive, transcribed from the live site. Child elements cannot take utility classes, so
