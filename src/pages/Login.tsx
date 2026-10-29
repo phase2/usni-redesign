@@ -189,7 +189,7 @@ export default function Login() {
                     </a>
                     <a
                       href="/membership"
-                      className="inline-flex items-center gap-2 bg-transparent text-white font-body font-bold text-base px-6 py-4 border border-white/40 hover:bg-white/10 transition-colors"
+                      className="inline-flex items-center gap-2 bg-transparent text-white font-body font-bold text-base px-6 py-4 border border-white/40 hover:bg-white hover:text-navy-bolder hover:border-white transition-colors"
                     >
                       Learn about membership
                     </a>

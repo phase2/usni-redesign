@@ -37,7 +37,7 @@ export default function MembershipServicesCTA() {
               href="/faq#membership"
               className="inline-flex items-center justify-center bg-transparent text-white
                          border border-white font-body font-bold text-base tracking-[-0.3px]
-                         px-5 py-3.5 hover:bg-white/10 transition-colors"
+                         px-5 py-3.5 hover:bg-white hover:text-navy-bolder transition-colors"
             >
               View FAQ
             </a>

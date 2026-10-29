@@ -361,7 +361,7 @@ export default function Billboards() {
                       The navy-card option. The photo is on its own {code('absolute inset-0 bg-cover bg-center')}{' '}
                       div with {code('aria-hidden')}, and there is no wash. The card is {code('bg-navy-boldest md:max-w-[520px]')}.
                       The buttons are {code('text-base')}: gold, and a white outline with{' '}
-                      {code('hover:bg-white/10')}, in {code('flex flex-wrap gap-3')}.
+                      {code('hover:bg-white hover:text-navy-bolder')}, in {code('flex flex-wrap gap-3')}.
                     </>
                   ),
                 },

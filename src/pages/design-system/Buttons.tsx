@@ -254,8 +254,8 @@ export default function Buttons() {
                 },
                 {
                   part: 'outline',
-                  classes: 'bg-transparent text-white border border-white hover:bg-white hover:text-navy-bright',
-                  note: 'Dark and photo grounds only. Fills white on hover, label turns navy-bright.',
+                  classes: 'bg-transparent text-white border border-white hover:bg-white hover:text-navy-bolder',
+                  note: 'Dark and photo grounds only. Fills solid white on hover, label turns navy-bolder. Never a translucent white wash.',
                 },
                 {
                   part: 'outline-dark',
@@ -318,7 +318,7 @@ export default function Buttons() {
 {% set variants = {
   primary: 'bg-gold text-navy-bolder hover:bg-gold-dark border border-gold',
   navy: 'bg-navy-bolder text-white hover:bg-navy-bright border border-navy-bolder hover:border-navy-bright',
-  outline: 'bg-transparent text-white border border-white hover:bg-white hover:text-navy-bright',
+  outline: 'bg-transparent text-white border border-white hover:bg-white hover:text-navy-bolder',
   'outline-dark': 'bg-transparent text-navy-bolder border border-navy-bolder hover:bg-navy-bright hover:text-white hover:border-navy-bright',
   link: 'bg-transparent p-0 text-link',
 } %}
