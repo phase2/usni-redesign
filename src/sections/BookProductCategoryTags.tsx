@@ -8,7 +8,7 @@ export default function BookProductCategoryTags({ categories }: Props) {
       <div className="container-site">
 
         <h2 className="font-body font-semibold text-xs uppercase tracking-widest text-neutral-subtle mb-4">
-          Categories
+          Subjects
         </h2>
 
         <div className="flex flex-wrap gap-2">

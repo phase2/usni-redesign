@@ -102,8 +102,8 @@ export default function BookProductHero({ book }: Props) {
               ))}
             </p>
 
-            {/* Star rating */}
-            <StarRating rating={4.5} count={34} />
+            {/* Star rating — only for titles that have customer reviews */}
+            {book.rating && <StarRating rating={book.rating.value} count={book.rating.count} />}
 
             {/* Format selector */}
             <div>

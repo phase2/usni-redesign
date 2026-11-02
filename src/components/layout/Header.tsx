@@ -10,7 +10,7 @@ type SearchResult = { title: string; subtitle: string; type: 'Book' | 'Article' 
 
 const SEARCH_DATA: SearchResult[] = [
   // Books
-  { title: 'AI Warfighting', subtitle: 'Morrison & Chen', type: 'Book', href: '/books/ai-warfighting' },
+  { title: 'AI Warfighting', subtitle: 'Matthew & Genna Moellering', type: 'Book', href: '/books/ai-warfighting' },
   { title: 'Warfare Beneath the Waves', subtitle: 'Axel Niestle', type: 'Book', href: '/books/warfare-beneath-the-waves' },
   { title: 'Training for Victory', subtitle: 'Frank R. Donche', type: 'Book', href: '/books/training-for-victory' },
   { title: 'Standing Up the Space Force', subtitle: 'Multiple Authors', type: 'Book', href: '/books/standing-up-space-force' },

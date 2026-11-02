@@ -17,16 +17,25 @@ import type { Book } from '@/data/books'
 
 export interface BookAuthor {
   name: string
-  role: string
+  /** Optional title line under the name; the live listing shows bios only. */
+  role?: string
   bio: string
 }
 
 export interface BookFormat {
   label: string
+  /** Member price. */
   price: number
+  /** List price. */
   originalPrice: number
   isbn: string
   inStock: boolean
+}
+
+export interface BookReview {
+  /** Inline `*italics*` mark book titles. */
+  quote: string
+  attribution: string
 }
 
 export interface BookProductData {
@@ -39,55 +48,98 @@ export interface BookProductData {
   publishDate: string
   publisher: string
   pageCount: number
+  illustrations?: string
   dimensions: string
+  weight?: string
+  /** Customer rating. Omitted for titles without reviews, so no stars render. */
+  rating?: { value: number; count: number }
   series?: { label: string; seriesName: string; href: string }
+  /** First paragraph is the lead. Inline `*italics*` mark book titles. */
   overview: string[]
+  reviews?: BookReview[]
+  /** The live site's "Subject" links. */
   categories: { label: string; href: string }[]
 }
 
+export interface BookDetailRow {
+  icon: string
+  label: string
+  value: string
+  href?: string
+}
+
+/** Shared by the inline details table and the accordion variant. */
+export function bookDetailRows(book: BookProductData): BookDetailRow[] {
+  const format = book.formats[0]
+  return [
+    { icon: 'fa-book', label: 'Format', value: book.formats.map((f) => f.label).join(', ') },
+    { icon: 'fa-barcode', label: 'ISBN-13', value: format.isbn },
+    { icon: 'fa-building', label: 'Publisher', value: book.publisher, href: '/books/about' },
+    { icon: 'fa-calendar-days', label: 'Published', value: book.publishDate },
+    ...(book.series
+      ? [{ icon: 'fa-layer-group', label: 'Series', value: book.series.seriesName, href: book.series.href }]
+      : []),
+    { icon: 'fa-file-lines', label: 'Pages', value: `${book.pageCount} pages` },
+    ...(book.illustrations ? [{ icon: 'fa-chart-simple', label: 'Illustrations', value: book.illustrations }] : []),
+    { icon: 'fa-ruler-combined', label: 'Dimensions', value: book.dimensions },
+    ...(book.weight ? [{ icon: 'fa-weight-hanging', label: 'Weight', value: book.weight }] : []),
+  ]
+}
+
+// Transcribed from the live listing (project-references/current-website-screenshots/
+// AI-Warfighting-U-S-Naval-Institute-11-02-2026_02_52_PM.png). The live site has no
+// ISBN-10 for this title, so none is shown.
 export const aiWarfightingBook: BookProductData = {
   id: 'ai-warfighting',
   title: 'AI Warfighting',
-  subtitle: 'Autonomous Weapons and the Future of Naval Conflict',
+  subtitle: 'Transforming Combat Operations for the Digital Age',
   authors: [
     {
-      name: 'Captain James T. Morrison, USN (Ret.)',
-      role: 'Former Director, Naval AI Integration, Office of the Chief of Naval Operations',
-      bio: `Captain James T. Morrison served 28 years in the United States Navy, culminating as Director of Naval AI Integration in the Office of the Chief of Naval Operations. During his career he commanded destroyer USS Gridley (DDG-101) and served as fleet robotics program manager at NAVSEA. He holds advanced degrees in computer science from MIT and strategic intelligence from the National Intelligence University. Morrison is a senior fellow at the Center for Strategic and Budgetary Assessments and a frequent contributor to Proceedings and Joint Force Quarterly.`,
+      name: 'Matthew Moellering',
+      bio: `Major Matthew Moellering currently serves as the AI Director for U.S. Army Special Operations Command where he is responsible for integrating AI products for the warfighter. His service includes deployments to the Middle East and Afghanistan as an Infantry Platoon Leader and as a Special Forces Operational Detachment Alpha Commander. Matt earned his master’s degree from Carnegie Mellon University as a member of the second cohort of Army AI Scholars.`,
     },
     {
-      name: 'Dr. Sarah K. Chen',
-      role: 'Senior Research Scientist, Institute for Defense Analyses',
-      bio: `Dr. Sarah K. Chen is a senior research scientist at the Institute for Defense Analyses, where she leads the Autonomous Systems and AI research group. A former DARPA program manager, she directed the Collaborative Operations in Denied Environments (CODE) program. Dr. Chen holds a Ph.D. in robotics from Carnegie Mellon University and has testified before the Senate Armed Services Committee on autonomous weapons policy. Her previous book, Machine Judgment, was selected for the CNO's Professional Reading Program.`,
+      name: 'Genna Moellering',
+      bio: `Genna Moellering graduated from the United States Military Academy in 2016 and served for five years as a Military Intelligence Officer. Her service includes a deployment to Afghanistan in support of Operation Freedom’s Sentinel. She holds a master’s degree in Public Policy Management—Data Analytics from Carnegie Mellon University.`,
     },
   ],
   formats: [
-    { label: 'Hardcover', price: 38.95, originalPrice: 48.95, isbn: '9781682477892', inStock: true },
-    { label: 'Paperback', price: 24.95, originalPrice: 32.95, isbn: '9781682477908', inStock: true },
+    { label: 'Hardcover', price: 26.97, originalPrice: 44.95, isbn: '9798899190377', inStock: true },
   ],
   coverImage: imgAI,
-  publishDate: 'March 15, 2025',
+  publishDate: 'April 20, 2027',
   publisher: 'Naval Institute Press',
-  pageCount: 312,
-  dimensions: '6.12(w) × 9.25(h) × 1.0(d)',
+  pageCount: 370,
+  illustrations: '24 figures',
+  dimensions: '9 × 6 × 1 in',
+  weight: '24 oz',
   series: {
     label: 'AUSA Series',
     seriesName: 'Association of the United States Army',
     href: '/books/series/ausa',
   },
   overview: [
-    `AI Warfighting argues that the United States is entering a third revolution in military affairs — one driven not by nuclear weapons or precision munitions, but by artificial intelligence and autonomous systems. Drawing on classified wargames, operational simulations, and interviews with warfighters across the services, the authors build an urgent case that the joint force's bureaucratic culture and acquisition system are structuring the Navy for defeat in a conflict that will be decided in milliseconds, not months.`,
-    `The book opens with a stark assessment of the People's Liberation Army Navy's autonomous capabilities, detailing how China has leveraged a decade of unrestricted AI investment to field systems the U.S. Navy cannot yet match. The authors are unsparing: current acquisition timelines mean the Navy will not close the gap through conventional procurement. The path forward, they argue, requires a fundamental reorientation around software-defined warfare — ships and aircraft that update their combat logic the way smartphones update their apps.`,
-    `Central to the book is a new framework the authors call Distributed Machine Combat — a concept for networking autonomous surface, subsurface, and aerial vehicles into self-organizing swarms that overwhelm adversary defenses through mass, surprise, and adaptive behavior rather than platform sophistication. The framework is grounded in documented experiments from Trident Warrior, RIMPAC, and classified Pacific exercises.`,
-    `Morrison and Chen also tackle the hardest problem in autonomous warfare: the law of armed conflict. They provide a rigorous, practically minded treatment of the human-machine teaming requirements imposed by DoD Directive 3000.09, arguing that meaningful human control and tactical speed are not inherently incompatible — but that achieving both demands deliberate system design and new training paradigms for sailors and officers.`,
-    `The final section offers a reform agenda: a legislative roadmap for Congressional action, a proposed reorganization of PEO Unmanned and Small Combatants, and a model for accelerating AI talent pipelines through expanded partnerships with commercial technology firms. AI Warfighting is essential reading for anyone who wants to understand — and shape — the future of naval power.`,
+    `*AI Warfighting* argues that the side that wins future wars won’t be the one with the most advanced weapons, but the one that can update, adapt, and fight at the speed of software—and shows how militaries must reorganize now to do exactly that. Drawing on real-world combat experience and lessons from Ukraine, it stands apart from other AI-and-war titles by offering a clear, practical framework for commanders and leaders who need to integrate AI into operations today, not theorize about it tomorrow.`,
+    `Artificial Intelligence (AI) is revolutionizing warfare and reshaping battlefields faster than military leaders can adapt. From Ukraine to the Middle East, AI-powered drones and software-driven weapon systems are outperforming traditional tools, demonstrating that the future of combat lies in technology. *AI Warfighting* is the first book to offer a practical framework for navigating this new era of AI-enabled warfare.`,
+    `Written by warfighters with deep technology expertise, *AI Warfighting* introduces DevWarOps, a groundbreaking methodology inspired by the tech industry’s DevOps revolution. Just as DevOps transformed software development through collaboration, automation, and continuous improvement, DevWarOps unites software, data, and combat operations into a single, agile system. This framework reimagines military operations for a world where software defines battlefield advantage.`,
+    `Divided into five parts, the book offers clear, actionable guidance for integrating AI into modern military operations. It shows how software development now shapes the OODA (Observe, Orient, Decide, Act) Loop, making data the lifeblood of warfare, reframing weapons as software systems, expanding the cyber battlefield across all domains, and demanding continuous adaptation so commanders can fight and evolve at the speed of technology.`,
+    `Drawing on real-world lessons from Ukraine, Gaza, and the Middle East, *AI Warfighting* bridges theory and practice to show how AI can be deployed effectively on today’s battlefields. Aimed at commanders, policymakers, and defense innovators, it challenges outdated 20th-century processes and delivers a practical framework for turning constant technological change—where weapons are increasingly software platforms—into lasting military advantage, making it both an essential guide and a call to action for the future of warfighting.`,
+  ],
+  reviews: [
+    {
+      quote: `Every reformation begins when the people closest to the work stop waiting for permission from the cathedral. *AI Warfighting* is that document for the force. The Moellerings don’t ask the Pentagon to fix itself; they tell the captain, the chief, and the sergeant how to fight the tech stack, own their data, and ship capability at the speed of war. This is how the Defense Reformation actually happens: not in a memo from above, but in a thousand formations that refuse to be obsolete.`,
+      attribution: 'Shyam Sankar, CTO of Palantir and co-author of *Mobilize: How to Reboot the American Industrial Base and Stop World War III*',
+    },
+    {
+      quote: `The decisive contest in future war will likely be fought—and won or lost—inside the technological OODA loop. In *AI Warfighting*, the Moellerings make a powerful case that software development, data architecture, cyber defense, and organizational design are no longer support functions—they are central acts of command. Thoughtful and brilliantly argued, their fascinating book provides a framework for thinking and fighting in the digital age.`,
+      attribution: 'Gen. Stan McChrystal, U.S. Army (Ret.), CEO of the leadership consulting firm McChrystal Group',
+    },
   ],
   categories: [
-    { label: 'AI & Technology', href: '/books/ai-technology' },
-    { label: 'Naval Strategy', href: '/books/naval-strategy' },
-    { label: 'Military Science', href: '/books/military-science' },
-    { label: 'Autonomous Systems', href: '/books/autonomous-systems' },
-    { label: 'Policy & National Security', href: '/books/policy-national-security' },
+    { label: 'Weapons', href: '/books/collection' },
+    { label: 'Strategy', href: '/books/collection' },
+    { label: 'Association of the U.S. Army (AUSA)', href: '/books/series/ausa' },
+    { label: 'Spring 2027 Catalog', href: '/books/collection' },
   ],
 }
 
@@ -96,7 +148,7 @@ export const aiWarfightingBook: BookProductData = {
 export const ausaSeriesBooks: Book[] = [
   { id: 'ausa-01', title: 'Chief of Staff, Vol. 1', author: 'Edited by Maj. Gen. David T. Zabecki, AUS (Ret.)', format: 'Paperback', price: 22.95, originalPrice: 29.95, image: imgAdmirals, href: '/books/chief-of-staff-vol-1' },
   { id: 'ausa-02', title: 'Adopting Mission Command', author: 'Donald E. Vandergriff', format: 'Paperback', price: 24.95, originalPrice: 32.95, image: imgMarines, href: '/books/adopting-mission-command' },
-  { id: 'ausa-03', title: 'AI Warfighting', author: 'Matthew Moellering and Genna Moellering', format: 'Paperback', price: 24.95, originalPrice: 32.95, image: imgAI, href: '/books/ai-warfighting' },
+  { id: 'ausa-03', title: 'AI Warfighting', author: 'Matthew Moellering and Genna Moellering', format: 'Hardcover', price: 26.97, originalPrice: 44.95, image: imgAI, href: '/books/ai-warfighting' },
   { id: 'ausa-04', title: 'Arming East Asia', author: 'Eric Setzekorn', format: 'Paperback', price: 22.95, originalPrice: 29.95, image: imgChina, href: '/books/arming-east-asia' },
   { id: 'ausa-05', title: 'Bipolar General', author: 'Maj. Gen. Gregg F. Martin, USA (Ret.)', format: 'Hardcover', price: 28.95, originalPrice: 36.95, image: imgCareer, href: '/books/bipolar-general' },
   { id: 'ausa-06', title: 'Black Ops Vietnam', author: 'Robert M. Gillespie', format: 'Paperback', price: 22.95, originalPrice: 29.95, image: imgWarfare, href: '/books/black-ops-vietnam' },

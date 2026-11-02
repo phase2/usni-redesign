@@ -1,13 +1,5 @@
 import { useState } from 'react'
-import type { BookProductData } from '@/data/bookProductData'
-
-interface Row {
-  icon: string
-  label: string
-  value: string
-  isLink?: boolean
-  href?: string
-}
+import { bookDetailRows, type BookProductData } from '@/data/bookProductData'
 
 interface Props {
   book: BookProductData
@@ -16,18 +8,7 @@ interface Props {
 export default function BookProductDetails({ book }: Props) {
   const [isOpen, setIsOpen] = useState(true)
 
-  const format = book.formats[0]
-
-  const rows: Row[] = [
-    { icon: 'fa-barcode', label: 'ISBN-13', value: format.isbn },
-    { icon: 'fa-building', label: 'Publisher', value: book.publisher, isLink: true, href: '/books/naval-institute-press' },
-    { icon: 'fa-calendar-days', label: 'Publication Date', value: book.publishDate },
-    ...(book.series
-      ? [{ icon: 'fa-layer-group', label: 'Series', value: book.series.seriesName, isLink: true, href: book.series.href }]
-      : []),
-    { icon: 'fa-file-lines', label: 'Page Count', value: `${book.pageCount} pages` },
-    { icon: 'fa-ruler-combined', label: 'Dimensions', value: book.dimensions },
-  ]
+  const rows = bookDetailRows(book)
 
   return (
     <section className="bg-white border-t border-[#e4e7ec] py-12 lg:py-16">
@@ -69,7 +50,7 @@ export default function BookProductDetails({ book }: Props) {
                       </div>
                     </td>
                     <td className="py-3.5 px-4">
-                      {row.isLink && row.href ? (
+                      {row.href ? (
                         <a
                           href={row.href}
                           className="font-body text-sm text-link"

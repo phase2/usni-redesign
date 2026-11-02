@@ -50,10 +50,12 @@ export default function BookProductAuthorBios({ authors }: Props) {
             <p className="font-headline text-xl lg:text-2xl text-navy-bolder leading-snug">
               {active.name}
             </p>
-            <p className="font-body text-sm font-semibold text-[#0466c8] mt-1 mb-5">
-              {active.role}
-            </p>
-            <p className="font-body text-base text-neutral-subtle leading-[1.75]">
+            {active.role && (
+              <p className="font-body text-sm font-semibold text-[#0466c8] mt-1">
+                {active.role}
+              </p>
+            )}
+            <p className="font-body text-base text-neutral-subtle leading-[1.75] mt-5">
               {active.bio}
             </p>
             <div className="flex flex-wrap items-center gap-3 mt-6">

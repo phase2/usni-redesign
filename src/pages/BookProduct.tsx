@@ -4,6 +4,7 @@ import BooksSubNav from '@/sections/BooksSubNav'
 import BookProductHero from '@/sections/BookProductHero'
 import BookProductOverview from '@/sections/BookProductOverview'
 import BookProductAuthorBios from '@/sections/BookProductAuthorBios'
+import BookProductReviews from '@/sections/BookProductReviews'
 import BookProductCategoryTags from '@/sections/BookProductCategoryTags'
 import BooksProductSection from '@/sections/BooksProductSection'
 import { aiWarfightingBook, ausaSeriesBooks } from '@/data/bookProductData'
@@ -20,6 +21,7 @@ export default function BookProduct() {
         <BookProductHero book={book} />
         <BookProductOverview overview={book.overview} book={book} />
         <BookProductAuthorBios authors={book.authors} />
+        {book.reviews && book.reviews.length > 0 && <BookProductReviews reviews={book.reviews} />}
         {book.series && (
           <BooksProductSection
             title="More in this series"

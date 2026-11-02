@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import type { BookProductData } from '@/data/bookProductData'
+import InlineItalics from '@/components/ui/InlineItalics'
+import { bookDetailRows, type BookProductData } from '@/data/bookProductData'
 
 interface Props {
   overview: string[]
@@ -12,18 +13,7 @@ export default function BookProductOverview({ overview, book }: Props) {
   const visible = expanded ? overview : overview.slice(0, 2)
   const hasMore = overview.length > 2
 
-  const format = book.formats[0]
-
-  const rows = [
-    { icon: 'fa-barcode', label: 'ISBN-13', value: format.isbn },
-    { icon: 'fa-building', label: 'Publisher', value: book.publisher, isLink: true, href: '/books/naval-institute-press' },
-    { icon: 'fa-calendar-days', label: 'Publication Date', value: book.publishDate },
-    ...(book.series
-      ? [{ icon: 'fa-layer-group', label: 'Series', value: book.series.seriesName, isLink: true, href: book.series.href }]
-      : []),
-    { icon: 'fa-file-lines', label: 'Page Count', value: `${book.pageCount} pages` },
-    { icon: 'fa-ruler-combined', label: 'Dimensions', value: book.dimensions },
-  ]
+  const rows = bookDetailRows(book)
 
   return (
     <section className="bg-white border-t border-[#e4e7ec] py-12 lg:py-16">
@@ -37,8 +27,13 @@ export default function BookProductOverview({ overview, book }: Props) {
             </h2>
             <div className="flex flex-col gap-4">
               {visible.map((para, i) => (
-                <p key={i} className="font-body text-base text-neutral-subtle leading-[1.75]">
-                  {para}
+                <p
+                  key={i}
+                  className={i === 0
+                    ? 'font-body font-semibold text-lg text-navy-bolder leading-[1.65]'
+                    : 'font-body text-base text-neutral-subtle leading-[1.75]'}
+                >
+                  <InlineItalics text={para} />
                 </p>
               ))}
             </div>
@@ -79,7 +74,7 @@ export default function BookProductOverview({ overview, book }: Props) {
                       </div>
                     </td>
                     <td className="py-3 px-3">
-                      {row.isLink && row.href ? (
+                      {row.href ? (
                         <a href={row.href} className="font-body text-sm text-link">
                           {row.value}
                         </a>
