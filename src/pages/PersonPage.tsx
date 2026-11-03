@@ -6,6 +6,7 @@ import Breadcrumb from '@/components/ui/Breadcrumb'
 import AdUnit from '@/components/ui/AdUnit'
 import SectionHeader from '@/components/ui/SectionHeader'
 import BookGridCard from '@/components/cards/BookGridCard'
+import BookRowCard from '@/components/cards/BookRowCard'
 import NotFound from '@/pages/NotFound'
 import { person } from '@/data/people'
 
@@ -27,7 +28,8 @@ function Bio({ paragraphs }: { paragraphs: string[] }) {
  * The live page is a title, the bio, and a "Books by …" grid. Here it takes the
  * standard interior layout: the light-blue `PageHero`, the leaderboard ad right
  * under it, then the bio in the left-pinned reading column with the books in a
- * ruled rail to its right (stacked under the bio below `lg`).
+ * light-blue rail to its right (stacked under the bio below `lg`), each book a
+ * cover-left row.
  */
 export default function PersonPage() {
   const { slug = '' } = useParams()
@@ -82,17 +84,21 @@ export default function PersonPage() {
         ) : (
           <section className="bg-white pt-4 pb-16 lg:pb-20">
             <div className="container-site">
-              <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_340px] gap-12 lg:gap-16 items-start">
+              <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_380px] xl:grid-cols-[minmax(0,1fr)_440px] gap-12 lg:gap-16 items-start">
                 <Bio paragraphs={p.bio} />
 
                 {p.books.length > 0 && (
-                  <aside id="books" aria-labelledby="books-heading" className="scroll-mt-8 border-t-2 border-navy-bold pt-6">
+                  <aside
+                    id="books"
+                    aria-labelledby="books-heading"
+                    className="scroll-mt-8 bg-[#ebf4ff] border-t-2 border-navy-bold p-6 lg:p-8"
+                  >
                     <h2 id="books-heading" className="font-headline text-2xl lg:text-[28px] text-navy-bolder leading-[1.2] mb-6">
                       Books by {p.name}
                     </h2>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 gap-x-5 gap-y-8">
+                    <div className="flex flex-col gap-8">
                       {p.books.map((book) => (
-                        <BookGridCard key={book.id} book={book} />
+                        <BookRowCard key={book.id} book={book} />
                       ))}
                     </div>
                   </aside>
