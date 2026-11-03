@@ -274,6 +274,8 @@ export const prototypeSection: PrototypeSection = {
           children: [
             { label: 'Author Bio', href: '/people/matthew-moellering', note: 'Matthew Moellering' },
             { label: 'Author Bio', href: '/people/genna-moellering', note: 'Genna Moellering' },
+            { label: 'Author Bio', href: '/people/norman-friedman', note: 'Norman Friedman — 16 books, 12 articles' },
+            { label: 'Author Bio', href: '/people/samuel-morison', note: 'Samuel Morison — 16 books, 2 articles' },
           ],
         },
         { label: 'New Releases', href: '/books/new-releases' },
