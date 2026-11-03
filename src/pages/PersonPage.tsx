@@ -28,7 +28,7 @@ function Bio({ paragraphs }: { paragraphs: string[] }) {
  * The live page is a title, the bio, and a "Books by …" grid. Here it takes the
  * standard interior layout: the light-blue `PageHero`, the leaderboard ad right
  * under it, then the bio in the left-pinned reading column with the books in a
- * light-blue rail to its right (stacked under the bio below `lg`), each book a
+ * tan rail to its right (stacked under the bio below `lg`), each book a
  * cover-left row.
  */
 export default function PersonPage() {
@@ -91,7 +91,7 @@ export default function PersonPage() {
                   <aside
                     id="books"
                     aria-labelledby="books-heading"
-                    className="scroll-mt-8 bg-[#ebf4ff] border-t-2 border-navy-bold p-6 lg:p-8"
+                    className="scroll-mt-8 bg-tan-subtlest p-6 lg:p-8"
                   >
                     <h2 id="books-heading" className="font-headline text-2xl lg:text-[28px] text-navy-bolder leading-[1.2] mb-6">
                       Books by {p.name}
