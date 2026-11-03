@@ -105,6 +105,9 @@ export const aiWarfightingBook: BookProductData = {
   ],
   formats: [
     { label: 'Hardcover', price: 26.97, originalPrice: 44.95, isbn: '9798899190377', inStock: true },
+    // Placeholder for testing the format selector: the live title is hardcover
+    // only, so this format, its prices, and its ISBN are invented.
+    { label: 'Paperback', price: 17.97, originalPrice: 29.95, isbn: '9798899190384', inStock: true },
   ],
   coverImage: imgAI,
   publishDate: 'April 20, 2027',
