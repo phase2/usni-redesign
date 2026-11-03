@@ -467,7 +467,7 @@ export default function MembershipCheckout() {
                         <h2 className="font-headline text-[28px] text-[#1d2535] leading-[1.2]">Delivery Address</h2>
                         <p className="font-body text-[15px] text-[#4e576a] leading-[1.5]">
                           Required for your print {printTitles.length > 1 ? 'editions' : 'edition'} of{' '}
-                          {printTitleList}. Address auto-populates shipping cost.
+                          {printTitleList}.
                         </p>
                       </div>
                       {signedIn ? (
