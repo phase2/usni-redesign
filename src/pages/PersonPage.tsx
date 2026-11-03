@@ -4,7 +4,6 @@ import Footer from '@/components/layout/Footer'
 import PageHero from '@/sections/PageHero'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import AdUnit from '@/components/ui/AdUnit'
-import SectionHeader from '@/components/ui/SectionHeader'
 import BookGridCard from '@/components/cards/BookGridCard'
 import SmallFeature from '@/components/cards/SmallFeature'
 import NotFound from '@/pages/NotFound'
@@ -18,7 +17,8 @@ import { person } from '@/data/people'
  * one, as on the leadership bios — then every book on a tan band, then the
  * article grid on white. The live page puts articles first and caps books at
  * six; here books lead and all of them are listed. Sections with nothing to
- * show are left out.
+ * show are left out. Section headlines use SectionHeader's type scale without
+ * its top rule.
  */
 export default function PersonPage() {
   const { slug = '' } = useParams()
@@ -80,7 +80,9 @@ export default function PersonPage() {
         {p.books.length > 0 && (
           <section id="books" className="bg-tan-subtlest py-14 lg:py-20 scroll-mt-8">
             <div className="container-site">
-              <SectionHeader headline={`Books by ${p.name}`} className="mb-10" />
+              <h2 className="font-headline text-4xl lg:text-5xl text-navy-bolder leading-[1.1] mb-10">
+                Books by {p.name}
+              </h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-x-5 gap-y-10">
                 {p.books.map((book) => (
                   <BookGridCard key={book.id} book={book} />
@@ -93,7 +95,9 @@ export default function PersonPage() {
         {p.articles.length > 0 && (
           <section id="articles" className="bg-white py-14 lg:py-20 scroll-mt-8">
             <div className="container-site">
-              <SectionHeader headline={`Articles by ${p.name}`} className="mb-10" />
+              <h2 className="font-headline text-4xl lg:text-5xl text-navy-bolder leading-[1.1] mb-10">
+                Articles by {p.name}
+              </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
                 {p.articles.map((article) => (
                   <SmallFeature key={article.id} article={article} aspectRatio="aspect-[5/3]" showExcerpt />
