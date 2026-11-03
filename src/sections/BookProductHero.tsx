@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import type { BookProductData } from '@/data/bookProductData'
 import { personHref } from '@/data/people'
-import ExternalLinkIcon from '@/components/ui/ExternalLinkIcon'
 
 function StarRating({ rating, count }: { rating: number; count: number }) {
   return (
@@ -179,20 +178,29 @@ export default function BookProductHero({ book }: Props) {
             {book.ebookRetailers && book.ebookRetailers.length > 0 && (
               <div className="border-t border-[#e4e7ec] pt-4">
                 <p className="font-body text-xs font-semibold uppercase tracking-widest text-neutral-subtle mb-2">
-                  eBook available from
+                  eBooks available at these retailers
                 </p>
-                <ul className="flex flex-wrap gap-x-5 gap-y-1.5">
+                {/* Each badge gets the same 3:1 framed tile and the logo is
+                    fit inside it (object-contain) with 0.5rem of padding, so mixed artwork, such as
+                    the theme PNGs and Google's wider SVG badge, never
+                    stretches. The live site crams them into a 135×45
+                    background with background-size: cover, which distorts
+                    them. On mobile the tiles stretch into an even 2×2 grid. */}
+                <ul className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center">
                   {book.ebookRetailers.map((r) => (
                     <li key={r.label}>
                       <a
                         href={r.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 font-body text-sm font-semibold text-link"
+                        className="flex h-16 w-full sm:w-[192px] items-center justify-center overflow-hidden rounded border p-2 border-[#e4e7ec] bg-white transition-[box-shadow,border-color] hover:border-navy-subtle hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0466C8]"
                       >
-                        {r.label}
-                        <ExternalLinkIcon />
-                        <span className="sr-only">(opens in a new tab)</span>
+                        <img
+                          src={r.logo}
+                          alt={`${r.label} (opens in a new tab)`}
+                          className="block h-full w-full object-contain"
+                          loading="lazy"
+                        />
                       </a>
                     </li>
                   ))}

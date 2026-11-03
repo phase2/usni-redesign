@@ -14,6 +14,10 @@ import imgTraining from '@/assets/images/books/training-for-victory.jpg'
 import imgJapanese from '@/assets/images/books/japanese-submarines-WWTwo.jpg'
 import imgGreyhounds from '@/assets/images/books/greyhounds-of-the-pacific.jpg'
 import imgSpaceForce from '@/assets/images/books/standing-up-space-force.jpg'
+import logoBarnesNoble from '@/assets/images/retailers/barnesnoble.png'
+import logoAmazon from '@/assets/images/retailers/amazon.png'
+import logoGooglePlay from '@/assets/images/retailers/Google_Play_Store_badge_EN.svg'
+import logoIBooks from '@/assets/images/retailers/ibooks.png'
 import type { Book } from '@/data/books'
 import { person } from '@/data/people'
 
@@ -78,7 +82,13 @@ export interface BookProductData {
   bylineSuffix?: string
   media?: BookMediaItem[]
   /** Outside stores that sell the eBook. The Press itself does not. */
-  ebookRetailers?: { label: string; href: string }[]
+  /** Retailer logos: the live theme's 421×140 PNGs, plus Google's official
+   *  Play Store badge SVG (180×53) in place of the theme's Google Play PNG. */
+  ebookRetailers?: {
+    label: string
+    href: string
+    logo: string
+  }[]
   reviews?: BookReview[]
   /** The live site's "Subject" links. */
   categories: { label: string; href: string }[]
@@ -317,10 +327,10 @@ export const meltingPointBook: BookProductData = {
     },
   ],
   ebookRetailers: [
-    { label: 'Barnes & Noble', href: 'https://www.barnesandnoble.com/w/the-melting-point-kenneth-f-mckenzie/1144249793?ean=9781682474495' },
-    { label: 'Amazon Kindle', href: 'https://www.amazon.com/Melting-Point-High-Command-Century-ebook/dp/B0CLNFQ656' },
-    { label: 'Google Play', href: 'https://play.google.com/store/books/details/Kenneth_F_McKenzie_The_Melting_Point?id=VfPeEAAAQBAJ' },
-    { label: 'Apple Books', href: 'https://books.apple.com/us/book/the-melting-point/id6470289648' },
+    { label: 'Barnes & Noble', href: 'https://www.barnesandnoble.com/w/the-melting-point-kenneth-f-mckenzie/1144249793?ean=9781682474495', logo: logoBarnesNoble },
+    { label: 'Amazon Kindle', href: 'https://www.amazon.com/Melting-Point-High-Command-Century-ebook/dp/B0CLNFQ656', logo: logoAmazon },
+    { label: 'Google Play', href: 'https://play.google.com/store/books/details/Kenneth_F_McKenzie_The_Melting_Point?id=VfPeEAAAQBAJ', logo: logoGooglePlay },
+    { label: 'Apple Books', href: 'https://books.apple.com/us/book/the-melting-point/id6470289648', logo: logoIBooks },
   ],
   categories: [
     { label: 'Iraq & Afghanistan', href: '/books/collection' },
