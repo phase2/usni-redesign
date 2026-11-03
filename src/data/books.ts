@@ -551,7 +551,11 @@ export const newReleases: Book[] = [
   },
 ]
 
-export const bestSellers: Book[] = allBooks.slice(10, 20)
+/** The Melting Point leads so its full product page (both formats) is easy to find. */
+export const bestSellers: Book[] = [
+  allBooks.find((b) => b.id === 'nr3')!,
+  ...allBooks.slice(10, 20),
+]
 
 export const heroGridBooks = allBooks.map(b => b.image)
 

@@ -47,7 +47,7 @@ export default function BookProduct() {
           title="You might also like"
           seeAllLabel="See all books"
           seeAllHref="/books"
-          books={bestSellers}
+          books={bestSellers.filter((b) => b.href !== `/books/${slug}`)}
         />
         <BookProductCategoryTags categories={book.categories} />
       </main>
