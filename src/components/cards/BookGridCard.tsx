@@ -5,7 +5,17 @@ import BookPrice from '@/components/ui/BookPrice'
  * A book in a grid: cover, title, author, format, and price. Shared by the
  * collection results and the "Books by …" list on a person page.
  */
-export default function BookGridCard({ book }: { book: Book }) {
+export default function BookGridCard({
+  book,
+  showAuthor = true,
+}: {
+  book: Book
+  /**
+   * Off where the author is already the page's subject (a person page), so the
+   * card drops to the carousel's title / format / price.
+   */
+  showAuthor?: boolean
+}) {
   return (
     <a href={book.href} className="group flex flex-col gap-3">
       {/* No overflow-hidden: the cover lifts out of the aspect box on hover and
@@ -24,7 +34,7 @@ export default function BookGridCard({ book }: { book: Book }) {
             group-hover:-translate-y-2 group-hover:shadow-[0_10px_26px_rgba(0,18,51,0.24)]"
         />}
       </div>
-      <div className="flex flex-col gap-0.5">
+      <div className={`flex flex-col ${showAuthor ? 'gap-0.5' : 'gap-1'}`}>
         <h3 className="font-headline text-[20px] leading-snug text-navy-bolder line-clamp-3">
           {/* Inner span, as on the essay-contest and issue cards: the underline
               is a background gradient, and `clone` only splits it per line on an
@@ -34,9 +44,11 @@ export default function BookGridCard({ book }: { book: Book }) {
         </h3>
         {/* 14px floor for both lines; the author takes medium weight and a
             small gap above the format so the two read as separate facts. */}
-        <p className="font-body text-sm font-medium text-neutral-subtle leading-snug mt-0.5">{book.author}</p>
-        <p className="font-body text-sm text-neutral-subtle mt-1">{book.format}</p>
-        <div className="mt-2">
+        {showAuthor && (
+          <p className="font-body text-sm font-medium text-neutral-subtle leading-snug mt-0.5">{book.author}</p>
+        )}
+        <p className={`font-body text-sm text-neutral-subtle ${showAuthor ? 'mt-1' : ''}`}>{book.format}</p>
+        <div className={showAuthor ? 'mt-2' : 'mt-1'}>
           <BookPrice listPrice={book.originalPrice} memberPrice={book.price} />
         </div>
       </div>

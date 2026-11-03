@@ -83,9 +83,9 @@ export default function PersonPage() {
               <h2 className="font-headline text-4xl lg:text-5xl text-navy-bolder leading-[1.1] mb-10">
                 Books by {p.name}
               </h2>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-x-5 gap-y-10">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-x-6 gap-y-12">
                 {p.books.map((book) => (
-                  <BookGridCard key={book.id} book={book} />
+                  <BookGridCard key={book.id} book={book} showAuthor={false} />
                 ))}
               </div>
             </div>
