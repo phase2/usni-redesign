@@ -145,6 +145,7 @@ import ShipsStore from '@/pages/ShipsStore'
 import Search from '@/pages/Search'
 import Browse from '@/pages/Browse'
 import NotFound from '@/pages/NotFound'
+import PersonPage from '@/pages/PersonPage'
 
 export default function App() {
   return (
@@ -268,6 +269,7 @@ export default function App() {
         <Route path="/proceedings/sponsored" element={<ProceedingsSponsoredContent />} />
         <Route path="/proceedings/sponsored/updating-uv-fleets" element={<ProceedingsSponsoredUvFleets />} />
         <Route path="/books/ai-warfighting" element={<BookProduct />} />
+        <Route path="/people/:slug" element={<PersonPage />} />
         <Route path="/archives" element={<Archives />} />
         <Route path="/archives/research-requests" element={<ArchivesResearchRequests />} />
         <Route path="/archives/oral-histories" element={<ArchivesOralHistories />} />

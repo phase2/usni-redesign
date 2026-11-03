@@ -2,6 +2,7 @@ import { useState } from 'react'
 import TabNav, { panelId, tabId } from '@/components/ui/TabNav'
 import { ButtonLink } from '@/components/ui/Button'
 import type { BookAuthor } from '@/data/bookProductData'
+import { personHref } from '@/data/people'
 
 interface Props {
   authors: BookAuthor[]
@@ -15,6 +16,7 @@ export default function BookProductAuthorBios({ authors }: Props) {
   const [activeIndex, setActiveIndex] = useState(0)
   const active = authors[activeIndex]
   const isMulti = authors.length > 1
+  const bioHref = personHref(active.slug ?? slugify(active.name))
 
   return (
     <section id="author-bios" className="bg-white pb-12 lg:pb-16">
@@ -59,11 +61,11 @@ export default function BookProductAuthorBios({ authors }: Props) {
               {active.bio}
             </p>
             <div className="flex flex-wrap items-center gap-3 mt-6">
-              <ButtonLink href={`/authors/${slugify(active.name)}`} variant="navy" size="sm">
+              <ButtonLink href={bioHref} variant="navy" size="sm">
                 View Biography
               </ButtonLink>
               <ButtonLink
-                href={`/authors/${slugify(active.name)}#stories`}
+                href={`${bioHref}#books`}
                 variant="outline-dark"
                 size="sm"
               >

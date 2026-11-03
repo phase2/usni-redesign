@@ -14,8 +14,11 @@ import imgJapanese from '@/assets/images/books/japanese-submarines-WWTwo.jpg'
 import imgGreyhounds from '@/assets/images/books/greyhounds-of-the-pacific.jpg'
 import imgSpaceForce from '@/assets/images/books/standing-up-space-force.jpg'
 import type { Book } from '@/data/books'
+import { person } from '@/data/people'
 
 export interface BookAuthor {
+  /** Person page slug; links the byline and bio buttons to /people/:slug. */
+  slug?: string
   name: string
   /** Optional title line under the name; the live listing shows bios only. */
   role?: string
@@ -86,6 +89,13 @@ export function bookDetailRows(book: BookProductData): BookDetailRow[] {
   ]
 }
 
+/** A book author whose name and bio come from their person page. */
+function authorFromPerson(slug: string): BookAuthor {
+  const p = person(slug)
+  if (!p) throw new Error(`No person page for "${slug}"`)
+  return { slug, name: p.name, bio: p.bio.join(' ') }
+}
+
 // Transcribed from the live listing (project-references/current-website-screenshots/
 // AI-Warfighting-U-S-Naval-Institute-11-02-2026_02_52_PM.png). The live site has no
 // ISBN-10 for this title, so none is shown.
@@ -93,16 +103,7 @@ export const aiWarfightingBook: BookProductData = {
   id: 'ai-warfighting',
   title: 'AI Warfighting',
   subtitle: 'Transforming Combat Operations for the Digital Age',
-  authors: [
-    {
-      name: 'Matthew Moellering',
-      bio: `Major Matthew Moellering currently serves as the AI Director for U.S. Army Special Operations Command where he is responsible for integrating AI products for the warfighter. His service includes deployments to the Middle East and Afghanistan as an Infantry Platoon Leader and as a Special Forces Operational Detachment Alpha Commander. Matt earned his master’s degree from Carnegie Mellon University as a member of the second cohort of Army AI Scholars.`,
-    },
-    {
-      name: 'Genna Moellering',
-      bio: `Genna Moellering graduated from the United States Military Academy in 2016 and served for five years as a Military Intelligence Officer. Her service includes a deployment to Afghanistan in support of Operation Freedom’s Sentinel. She holds a master’s degree in Public Policy Management—Data Analytics from Carnegie Mellon University.`,
-    },
-  ],
+  authors: [authorFromPerson('matthew-moellering'), authorFromPerson('genna-moellering')],
   formats: [
     { label: 'Hardcover', price: 26.97, originalPrice: 44.95, isbn: '9798899190377', inStock: true },
     // Placeholder for testing the format selector: the live title is hardcover

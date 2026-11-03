@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { BookProductData } from '@/data/bookProductData'
+import { personHref } from '@/data/people'
 
 function StarRating({ rating, count }: { rating: number; count: number }) {
   return (
@@ -91,7 +92,7 @@ export default function BookProductHero({ book }: Props) {
               {book.authors.map((a, i) => (
                 <span key={a.name}>
                   <a
-                    href="#author-bios"
+                    href={a.slug ? personHref(a.slug) : '#author-bios'}
                     className="font-semibold text-link"
                   >
                     {a.name}

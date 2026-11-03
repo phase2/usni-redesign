@@ -267,7 +267,15 @@ export const prototypeSection: PrototypeSection = {
       links: [
         { label: 'Books & Press', href: '/books' },
         { label: 'Books', href: '/books/collection', note: 'Full collection' },
-        { label: 'Book Product Page', href: '/books/ai-warfighting', note: 'AI Warfighting' },
+        {
+          label: 'Book Product Page',
+          href: '/books/ai-warfighting',
+          note: 'AI Warfighting',
+          children: [
+            { label: 'Author Bio', href: '/people/matthew-moellering', note: 'Matthew Moellering' },
+            { label: 'Author Bio', href: '/people/genna-moellering', note: 'Genna Moellering' },
+          ],
+        },
         { label: 'New Releases', href: '/books/new-releases' },
         {
           label: 'Professional Military Education',
