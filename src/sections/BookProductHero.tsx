@@ -2,31 +2,6 @@ import { useState } from 'react'
 import type { BookProductData } from '@/data/bookProductData'
 import { personHref } from '@/data/people'
 
-function StarRating({ rating, count }: { rating: number; count: number }) {
-  return (
-    <div className="flex items-center gap-2">
-      <div className="flex items-center gap-0.5" aria-label={`${rating} out of 5 stars`}>
-        {[1, 2, 3, 4, 5].map((star) => {
-          const filled = rating >= star
-          const half = !filled && rating >= star - 0.5
-          return (
-            <i
-              key={star}
-              className={`text-[#d4920a] text-sm ${
-                half ? 'fa-solid fa-star-half-stroke' : filled ? 'fa-solid fa-star' : 'fa-regular fa-star'
-              }`}
-              aria-hidden="true"
-            />
-          )
-        })}
-      </div>
-      <span className="font-body text-sm text-neutral-subtle">
-        {rating} <span className="text-[#c4c9d4]">|</span> {count} reviews
-      </span>
-    </div>
-  )
-}
-
 interface Props {
   book: BookProductData
 }
@@ -103,9 +78,6 @@ export default function BookProductHero({ book }: Props) {
               ))}
               {book.bylineSuffix && <span className="text-neutral-subtle">; {book.bylineSuffix}</span>}
             </p>
-
-            {/* Star rating — only for titles that have customer reviews */}
-            {book.rating && <StarRating rating={book.rating.value} count={book.rating.count} />}
 
             {/* Format selector */}
             <div>

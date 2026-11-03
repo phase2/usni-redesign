@@ -798,7 +798,7 @@ export default function Heroes() {
           <div className="flex flex-col gap-8">
             <Prose>
               The top of a book product page: a sticky cover on the left, and on the right the title,
-              authors, rating, format selector, price and add-to-cart. It is a product summary that
+              authors, format selector, price and add-to-cart. It is a product summary that
               happens to open the page, not a hero — it belongs with Commerce, and is noted here so it is
               not mistaken for a header variant.
             </Prose>
@@ -822,8 +822,8 @@ export default function Heroes() {
                 In Drupal Commerce the formats are product variations, and the format selector + price +
                 Add to Cart are the variation&rsquo;s add-to-cart form, which swaps price and stock over
                 AJAX when the variation changes. Mark the selector up as a radio group (or buttons with{' '}
-                <Code>aria-pressed</Code>) so the selected format is announced. Rating, share buttons and
-                the wishlist button need <Code>type=&quot;button&quot;</Code> and accessible names.
+                <Code>aria-pressed</Code>) so the selected format is announced. Share buttons and the
+                wishlist button need <Code>type=&quot;button&quot;</Code> and accessible names.
               </p>
             </DevNote>
             <SourceList title="Where it lives" items={[{ path: 'src/sections/BookProductHero.tsx' }, { path: 'src/data/bookProductData.ts' }]} />

@@ -117,7 +117,7 @@ const GLOSSARY: { group: string; entries: GlossaryEntry[] }[] = [
       { classes: 'fa-solid fa-calendar-days', meaning: 'Date', where: 'Book details, account tiles' },
       { classes: 'fa-regular fa-clock', meaning: 'Reading time', where: 'ArticleInBrief' },
       { classes: 'fa-solid fa-location-dot', meaning: 'Event location', where: 'Event cards' },
-      { classes: 'fa-solid fa-star / fa-solid fa-star-half-stroke / fa-regular fa-star', meaning: 'Rating', where: 'BookProductHero, comments' },
+      { classes: 'fa-solid fa-star / fa-solid fa-star-half-stroke / fa-regular fa-star', meaning: 'Rating', where: 'Article comments' },
       { classes: 'fa-solid fa-barcode', meaning: 'ISBN', where: 'Book details' },
       { classes: 'fa-solid fa-building', meaning: 'Publisher', where: 'Book details' },
       { classes: 'fa-solid fa-file-lines', meaning: 'Page count', where: 'Book details' },

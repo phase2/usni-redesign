@@ -71,8 +71,6 @@ export interface BookProductData {
   illustrations?: string
   dimensions: string
   weight?: string
-  /** Customer rating. Omitted for titles without reviews, so no stars render. */
-  rating?: { value: number; count: number }
   series?: { label: string; seriesName: string; href: string }
   /** Inline `*italics*` mark book titles. */
   overview: string[]
@@ -155,9 +153,6 @@ export const aiWarfightingBook: BookProductData = {
   illustrations: '24 figures',
   dimensions: '9 × 6 × 1 in',
   weight: '24 oz',
-  // Placeholder: the live title has no ratings. Kept to show the rating's
-  // styling and placement in the redesign.
-  rating: { value: 4.5, count: 34 },
   series: {
     label: 'AUSA Series',
     seriesName: 'Association of the United States Army',
