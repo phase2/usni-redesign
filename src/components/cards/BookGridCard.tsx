@@ -31,8 +31,10 @@ export default function BookGridCard({ book }: { book: Book }) {
               under the whole block instead. */}
           <span className="article-link article-link--card">{book.title}</span>
         </h3>
-        <p className="font-body text-xs text-neutral-subtle mt-0.5">{book.author}</p>
-        <p className="font-body text-xs text-neutral-subtle">{book.format}</p>
+        {/* 14px floor for both lines; the author takes medium weight and a
+            small gap above the format so the two read as separate facts. */}
+        <p className="font-body text-sm font-medium text-neutral-subtle leading-snug mt-0.5">{book.author}</p>
+        <p className="font-body text-sm text-neutral-subtle mt-1">{book.format}</p>
         <div className="mt-2">
           <BookPrice listPrice={book.originalPrice} memberPrice={book.price} />
         </div>

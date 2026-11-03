@@ -530,8 +530,8 @@ export default function Cards() {
                 { part: 'Text stack', classes: 'flex flex-col gap-1' },
                 { part: 'Title', classes: 'font-headline text-[19px] leading-snug text-navy-bolder  ›  span: article-link article-link--card', note: 'The span is present only when linked. --card sweeps on a hover anywhere in the group, and clones per line so a wrapped title underlines every line.' },
                 { part: 'Subtitle', classes: 'font-body text-[13px] text-neutral-subtle leading-snug' },
-                { part: 'Byline', classes: 'font-body text-[13px] text-neutral-bold leading-snug mt-0.5' },
-                { part: 'Format + price', classes: 'mt-2 flex flex-col gap-1.5  ›  format: font-body text-[13px] text-neutral-subtle leading-none', note: 'Then BookPrice (see Commerce).' },
+                { part: 'Byline', classes: 'font-body text-sm font-medium text-neutral-bold leading-snug mt-0.5', note: '14px floor; medium weight sets it apart from the format.' },
+                { part: 'Format + price', classes: 'mt-2 flex flex-col gap-1.5  ›  format: font-body text-sm text-neutral-subtle leading-none', note: 'Then BookPrice (see Commerce).' },
                 { part: 'Availability', classes: 'font-body text-[12px] italic text-neutral-subtle leading-snug mt-1.5', note: 'Unavailable state only, e.g. “Not available to order online”.' },
               ]}
             />
@@ -558,7 +558,7 @@ export default function Cards() {
               tone="drift"
               items={[
                 { path: 'src/sections/BooksProductSection.tsx', note: 'BookCard. Carousel widths (3 / 4 / 6 across). The image fills the aspect box directly rather than sitting absolute. 20px title, BookPrice size="sm".' },
-                { path: 'src/sections/BooksCollectionLayout.tsx', note: 'BookGridCard. 20px title with line-clamp-3, plus text-xs author and format lines.' },
+                { path: 'src/components/cards/BookGridCard.tsx', note: 'BookGridCard, used by the collection results and person pages. 20px title with line-clamp-3, then a 14px medium-weight author and, 4px below, a 14px regular format line.' },
                 { path: 'src/sections/FromThePress.tsx', note: 'CarouselCard. Lifts the image but has no resting shadow and no deepened shadow, and no title underline. The prices are hand-set spans instead of BookPrice: the list price is not struck through and the member price is unlabeled.' },
                 { path: 'src/sections/PmeIntro.tsx', note: 'cover only. The lift is -translate-y-1.5 instead of -translate-y-2.' },
               ]}

@@ -64,7 +64,7 @@ export default function CollectionTitleCard({ title }: { title: CollectionTitle 
         )}
 
         {title.byline && (
-          <p className="font-body text-[13px] text-neutral-bold leading-snug mt-0.5">
+          <p className="font-body text-sm font-medium text-neutral-bold leading-snug mt-0.5">
             {title.byline}
           </p>
         )}
@@ -72,7 +72,7 @@ export default function CollectionTitleCard({ title }: { title: CollectionTitle 
         {title.href ? (
           <div className="mt-2 flex flex-col gap-1.5">
             {title.format && (
-              <span className="font-body text-[13px] text-neutral-subtle leading-none">
+              <span className="font-body text-sm text-neutral-subtle leading-none">
                 {title.format}
               </span>
             )}
