@@ -352,7 +352,7 @@ export default function Cards() {
               rows={[
                 { part: 'Card', classes: 'flex flex-col gap-3' },
                 { part: 'Image link', classes: 'block overflow-hidden aspect-[4/3] bg-neutral-subtlest flex-shrink-0', note: 'aspect-[4/3] is the default. Callers pass another aspect class, such as aspect-[16/9].' },
-                { part: 'Image', classes: 'w-full h-full object-cover hover:scale-105 transition-transform duration-300' },
+                { part: 'Image', classes: 'w-full h-full object-cover hover:scale-105 transition-transform duration-300', note: 'An article with no image falls back to new-usni-default-watermark.png (empty alt), as search results and events do.' },
                 { part: 'Text stack', classes: 'flex flex-col gap-2' },
                 { part: 'Category', classes: 'font-body font-normal text-[14px] uppercase tracking-[0.5px] text-[#0466C8]', note: 'Omitted when the record has none.' },
                 { part: 'Headline', classes: 'font-headline text-[20px] text-[#1d2535] leading-[1.2]  ›  a: article-link hover:text-navy-subtle', note: '#1d2535 = text-primary (neutral-bolder), unlike Large Feature’s navy-bolder.' },
@@ -388,7 +388,7 @@ export default function Cards() {
             <PropsTable
               rows={[
                 { name: 'article', type: 'Article', description: 'Required. category, headline, date, author, image, href.' },
-                { name: 'showImage', type: 'boolean', default: 'true', description: 'Hides the thumbnail entirely when false.' },
+                { name: 'showImage', type: 'boolean', default: 'true', description: 'Hides the thumbnail entirely when false. When true and the article has no image, the USNI watermark stands in.' },
                 { name: 'aspectRatio', type: 'string', default: "'aspect-[4/3]'", description: 'Tailwind aspect-ratio class applied to the image container.' },
                 { name: 'showExcerpt', type: 'boolean', default: 'false', description: "Adds the article's dek under the date line. Opt-in, because most records already carry an excerpt for other layouts." },
               ]}

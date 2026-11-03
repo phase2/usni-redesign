@@ -1,4 +1,5 @@
 import type { Article } from '@/types'
+import imgPlaceholder from '@/assets/images/new-usni-default-watermark.png'
 
 interface SmallFeatureProps {
   article: Article
@@ -24,11 +25,13 @@ export default function SmallFeature({
 }: SmallFeatureProps) {
   return (
     <article className={`flex flex-col gap-3 ${className}`}>
-      {showImage && article.image && (
+      {/* An article with no art gets the USNI watermark, as search results and
+          events do, so a grid of teasers keeps its rhythm. */}
+      {showImage && (
         <a href={article.href} className={`block overflow-hidden ${aspectRatio ?? 'aspect-[4/3]'} bg-neutral-subtlest flex-shrink-0`}>
           <img
-            src={article.image}
-            alt={article.imageAlt ?? article.headline}
+            src={article.image ?? imgPlaceholder}
+            alt={article.image ? (article.imageAlt ?? article.headline) : ''}
             className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
           />
         </a>
