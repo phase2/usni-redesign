@@ -119,13 +119,13 @@ export const allBooks: Book[] = [
   {
     id: 'nr3',
     title: 'The Melting Point',
-    author: 'Forrest L. Marion',
+    author: 'Gen. Kenneth F. McKenzie Jr., USMC (Ret.)',
     format: 'Hardcover',
-    price: 32.95,
-    originalPrice: 42.95,
+    price: 20.97,
+    originalPrice: 34.95,
     image: imgMelting,
-    href: '/books/the-melting-point',
-    subjects: ['World War II', 'Aviation & Air Power'],
+    href: '/books/melting-point',
+    subjects: ['Iraq & Afghanistan', 'Marine Corps', 'Biography & Memoir'],
   },
   {
     id: 'nr4',

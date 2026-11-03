@@ -1,4 +1,4 @@
-import { aiWarfightingBook, type BookProductData } from '@/data/bookProductData'
+import { aiWarfightingBook, meltingPointBook, type BookProductData } from '@/data/bookProductData'
 
 /**
  * Shared lookups and money for the books purchase flow — cart, checkout, and
@@ -12,6 +12,7 @@ import { aiWarfightingBook, type BookProductData } from '@/data/bookProductData'
 
 export const BOOK_CATALOG: Record<string, BookProductData> = {
   'ai-warfighting': aiWarfightingBook,
+  'melting-point': meltingPointBook,
 }
 
 export interface ShippingMethod {

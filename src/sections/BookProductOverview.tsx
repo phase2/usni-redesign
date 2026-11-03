@@ -29,7 +29,7 @@ export default function BookProductOverview({ overview, book }: Props) {
               {visible.map((para, i) => (
                 <p
                   key={i}
-                  className={i === 0
+                  className={i === 0 && book.overviewLead
                     ? 'font-body font-semibold text-lg text-navy-bolder leading-[1.65]'
                     : 'font-body text-base text-neutral-subtle leading-[1.75]'}
                 >

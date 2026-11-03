@@ -268,7 +268,7 @@ export default function App() {
         <Route path="/proceedings/naval-aviation-got-better" element={<ProceedingsArticleGrubb />} />
         <Route path="/proceedings/sponsored" element={<ProceedingsSponsoredContent />} />
         <Route path="/proceedings/sponsored/updating-uv-fleets" element={<ProceedingsSponsoredUvFleets />} />
-        <Route path="/books/ai-warfighting" element={<BookProduct />} />
+        <Route path="/books/:slug" element={<BookProduct />} />
         <Route path="/people/:slug" element={<PersonPage />} />
         <Route path="/archives" element={<Archives />} />
         <Route path="/archives/research-requests" element={<ArchivesResearchRequests />} />

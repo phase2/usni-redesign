@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { BookProductData } from '@/data/bookProductData'
 import { personHref } from '@/data/people'
+import ExternalLinkIcon from '@/components/ui/ExternalLinkIcon'
 
 function StarRating({ rating, count }: { rating: number; count: number }) {
   return (
@@ -101,6 +102,7 @@ export default function BookProductHero({ book }: Props) {
                   {i === book.authors.length - 2 && ' and '}
                 </span>
               ))}
+              {book.bylineSuffix && <span className="text-neutral-subtle">; {book.bylineSuffix}</span>}
             </p>
 
             {/* Star rating — only for titles that have customer reviews */}
@@ -172,6 +174,31 @@ export default function BookProductHero({ book }: Props) {
                 Add to Wishlist
               </button>
             </div>
+
+            {/* eBook retailers — outbound only; the Press does not sell eBooks */}
+            {book.ebookRetailers && book.ebookRetailers.length > 0 && (
+              <div className="border-t border-[#e4e7ec] pt-4">
+                <p className="font-body text-xs font-semibold uppercase tracking-widest text-neutral-subtle mb-2">
+                  eBook available from
+                </p>
+                <ul className="flex flex-wrap gap-x-5 gap-y-1.5">
+                  {book.ebookRetailers.map((r) => (
+                    <li key={r.label}>
+                      <a
+                        href={r.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 font-body text-sm font-semibold text-link"
+                      >
+                        {r.label}
+                        <ExternalLinkIcon />
+                        <span className="sr-only">(opens in a new tab)</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             {/* Share */}
             <div className="flex items-center gap-3 pt-2">

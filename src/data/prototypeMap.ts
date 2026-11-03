@@ -278,6 +278,14 @@ export const prototypeSection: PrototypeSection = {
             { label: 'Author Bio', href: '/people/samuel-morison', note: 'Samuel Morison — 16 books, 2 articles' },
           ],
         },
+        {
+          label: 'Book Product Page',
+          href: '/books/melting-point',
+          note: 'The Melting Point — hardcover and paperback',
+          children: [
+            { label: 'Author Bio', href: '/people/kenneth-mckenzie', note: 'Kenneth McKenzie' },
+          ],
+        },
         { label: 'New Releases', href: '/books/new-releases' },
         {
           label: 'Professional Military Education',

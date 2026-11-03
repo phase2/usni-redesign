@@ -1,4 +1,4 @@
-import { newReleases, type Book } from '@/data/books'
+import { allBooks, newReleases, type Book } from '@/data/books'
 import { collectionCover } from '@/data/bookCollections'
 import type { Article } from '@/types'
 import friedmanPhoto from '@/assets/images/people/norman-friedman.jpg'
@@ -40,6 +40,7 @@ function personImage(file: string): string | undefined {
 }
 
 const aiWarfighting = newReleases.find((b) => b.id === 'new-ai-warfighting')!
+const meltingPoint = allBooks.find((b) => b.id === 'nr3')!
 
 /* ── Norman Friedman & Samuel Morison (generated from the test site) ──────── */
 
@@ -118,6 +119,15 @@ export const people: Record<string, Person> = {
       `Genna Moellering graduated from the United States Military Academy in 2016 and served for five years as a Military Intelligence Officer. Her service includes a deployment to Afghanistan in support of Operation Freedom’s Sentinel. She holds a master’s degree in Public Policy Management—Data Analytics from Carnegie Mellon University.`,
     ],
     books: [aiWarfighting],
+    articles: [],
+  },
+  'kenneth-mckenzie': {
+    slug: 'kenneth-mckenzie',
+    name: 'Kenneth McKenzie',
+    bio: [
+      `General Frank McKenzie, USMC, retired as the fourteenth commander of U.S. Central Command in 2022, completing a forty-two-year career as a Marine. Prior to Central Command, he served as the Director of the Joint Staff. He is currently the Executive Director of the Global and National Security Institute and the Florida Center for Cyber Security at the University of South Florida and resides in Tampa Bay.`,
+    ],
+    books: [meltingPoint],
     articles: [],
   },
   'norman-friedman': {

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 const AUTOCOMPLETE_TITLES = [
   { title: 'Warfare Beneath the Waves', author: 'Axel Niestle', href: '/books/warfare-beneath-the-waves' },
   { title: 'Training for Victory', author: 'Frank R. Donche', href: '/books/training-for-victory' },
-  { title: 'The Melting Point', author: 'Forrest L. Marion', href: '/books/the-melting-point' },
+  { title: 'The Melting Point', author: 'Gen. Kenneth F. McKenzie Jr.', href: '/books/melting-point' },
   { title: 'Standing Up the Space Force', author: 'Multiple Authors', href: '/books/standing-up-space-force' },
   { title: 'Rush to Disaster', author: 'James D. Hornfischer', href: '/books/rush-to-disaster' },
   { title: 'The Origins of Aegis', author: 'Thomas Wildenberg', href: '/books/origins-of-aegis' },
