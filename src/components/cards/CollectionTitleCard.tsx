@@ -1,6 +1,6 @@
 import type { CollectionTitle } from '@/data/bookCollections'
 import { collectionCover } from '@/data/bookCollections'
-import usniIcon from '@/assets/images/usni-icon-gold.svg'
+import BookCoverPlate from '@/components/ui/BookCoverPlate'
 import BookPrice from '@/components/ui/BookPrice'
 
 /**
@@ -42,7 +42,7 @@ export default function CollectionTitleCard({ title }: { title: CollectionTitle 
               group-hover:shadow-[0_10px_26px_rgba(0,18,51,0.24)]"
           />
         ) : (
-          <CoverPlate />
+          <BookCoverPlate />
         )}
       </div>
 
@@ -97,27 +97,5 @@ export default function CollectionTitleCard({ title }: { title: CollectionTitle 
     <a href={title.href} className="group flex flex-col gap-3">
       {body}
     </a>
-  )
-}
-
-/**
- * Stand-in for a title whose cover art the Press does not publish: the USNI
- * quill-and-sword mark on a tan plate in a white frame.
- *
- * Uses `usni-icon-gold.svg` rather than the raster watermark the leadership
- * roster uses for a missing headshot. That one ships its own #F7F7F2 field with
- * no alpha channel, which meant knocking the field out with `mix-blend-multiply`
- * over the tan — it left a visible square and washed the mark out. The SVG is
- * transparent and needs no blending.
- */
-function CoverPlate() {
-  return (
-    <div
-      className="absolute inset-0 bg-tan-subtle border-[6px] border-white
-                 flex items-center justify-center"
-      aria-hidden="true"
-    >
-      <img src={usniIcon} alt="" className="w-[58%] h-auto" />
-    </div>
   )
 }

@@ -526,7 +526,7 @@ export default function Cards() {
                   classes: 'absolute inset-0 w-full h-full object-cover object-center shadow-[0_2px_8px_rgba(0,18,51,0.14)] transition-shadow duration-300 group-hover:shadow-[0_10px_26px_rgba(0,18,51,0.24)]',
                   note: 'Absolute, so a cover whose own ratio is taller than 2:3 cannot stretch its row. The shadow is hand-rolled from navy-boldest (rgb 0,18,51) with no spread. shadow-md/xl pinch at the corners of a tall cover. There is no shadow token.',
                 },
-                { part: 'Book plate', classes: 'absolute inset-0 bg-tan-subtle border-[6px] border-white flex items-center justify-center  ›  img: w-[58%] h-auto', note: 'usni-icon-gold.svg on tan-subtle in a white mat. aria-hidden.' },
+                { part: 'Book plate', classes: 'absolute inset-0 bg-tan-subtle border-[6px] border-white flex items-center justify-center  ›  img: w-[58%] h-auto', note: 'BookCoverPlate (src/components/ui/BookCoverPlate.tsx): usni-icon-gold.svg on tan-subtle in a white mat. aria-hidden. Shared by every book card as the missing-cover default.' },
                 { part: 'Text stack', classes: 'flex flex-col gap-1' },
                 { part: 'Title', classes: 'font-headline text-[19px] leading-snug text-navy-bolder  ›  span: article-link article-link--card', note: 'The span is present only when linked. --card sweeps on a hover anywhere in the group, and clones per line so a wrapped title underlines every line.' },
                 { part: 'Subtitle', classes: 'font-body text-[13px] text-neutral-subtle leading-snug' },

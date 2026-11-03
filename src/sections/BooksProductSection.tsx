@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import type { Book } from '@/data/books'
 import BookPrice from '@/components/ui/BookPrice'
+import BookCoverPlate from '@/components/ui/BookCoverPlate'
 
 function BookCard({ book }: { book: Book }) {
   return (
@@ -11,8 +12,8 @@ function BookCard({ book }: { book: Book }) {
         sm:w-[calc((100%-3*1.5rem)/4)]
         lg:w-[calc((100%-5*1.5rem)/6)]"
     >
-      <div className="bg-neutral-subtlest aspect-[2/3]">
-        <img
+      <div className="relative bg-neutral-subtlest aspect-[2/3]">
+        {book.image ? <img
           src={book.image}
           alt={book.title}
           /* Shadow on the image, not the box, so it travels with the lift.
@@ -22,7 +23,11 @@ function BookCard({ book }: { book: Book }) {
           className="w-full h-full object-cover transition-[transform,box-shadow] duration-300
             shadow-[0_2px_8px_rgba(0,18,51,0.14)]
             group-hover:-translate-y-2 group-hover:shadow-[0_10px_26px_rgba(0,18,51,0.24)]"
-        />
+        /> : (
+          <div className="absolute inset-0 transition-transform duration-300 group-hover:-translate-y-2">
+            <BookCoverPlate />
+          </div>
+        )}
       </div>
       <div className="flex flex-col gap-1">
         <h3 className="font-headline text-[20px] leading-snug text-navy-bolder">

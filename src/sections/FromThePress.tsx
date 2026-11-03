@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import CardCta from '@/components/ui/CardCta'
 import { allBooks, type Book } from '@/data/books'
+import BookCoverPlate from '@/components/ui/BookCoverPlate'
 
 // Homepage concept block for the Naval Institute Press team: a featured
 // product spotlight on a white panel, a "more like this" carousel beside it,
@@ -18,12 +19,16 @@ function CarouselCard({ book }: { book: Book }) {
       className="group flex flex-col gap-3 flex-shrink-0 snap-start
         w-[calc((100%-1.5rem)/2)] sm:w-[calc((100%-2*1.5rem)/3)]"
     >
-      <div className="bg-neutral-subtlest aspect-[2/3]">
-        <img
+      <div className="relative bg-neutral-subtlest aspect-[2/3]">
+        {book.image ? <img
           src={book.image}
           alt={book.title}
           className="w-full h-full object-cover group-hover:-translate-y-2 transition-transform duration-300"
-        />
+        /> : (
+          <div className="absolute inset-0 transition-transform duration-300 group-hover:-translate-y-2">
+            <BookCoverPlate />
+          </div>
+        )}
       </div>
       <div className="flex flex-col gap-1">
         <h4 className="font-headline text-[18px] leading-snug text-navy-bolder">
