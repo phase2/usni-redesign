@@ -26,8 +26,8 @@ function EpisodeCard({ episode }: { episode: Episode }) {
   return (
     <article className="py-8 lg:py-10">
       <div className="min-w-0">
-        <h3 className="font-body font-bold text-[19px] lg:text-[21px] text-navy-bolder leading-snug">
-          <a href="#" className="hover:text-navy-subtle transition-colors">{episode.title}</a>
+        <h3 className="font-headline text-[22px] lg:text-[26px] text-navy-bolder leading-[1.2]">
+          <a href="#" className="link-underline-hover">{episode.title}</a>
         </h3>
         <p className="font-body font-semibold text-sm uppercase tracking-[0.08em] text-neutral-subtle mt-2">
           {episode.date}
