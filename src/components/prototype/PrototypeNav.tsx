@@ -230,9 +230,11 @@ export default function PrototypeNav() {
             <div className="flex items-center justify-between gap-3 px-5 pt-3.5 pb-1.5 text-xs text-white/40">
               <Link
                 to="/toc"
-                className="inline-flex items-center gap-2 text-[15px] font-semibold text-light-blue hover:underline"
+                className="group inline-flex items-center gap-2 text-[15px] font-semibold text-light-blue"
               >
-                <span aria-hidden="true">←</span> Table of contents
+                {/* Underline the words only; the arrow stays bare on hover. */}
+                <span aria-hidden="true">←</span>
+                <span className="group-hover:underline">Table of contents</span>
               </Link>
               <span className="whitespace-nowrap">
                 <kbd className="rounded bg-white/10 px-1.5 py-0.5 font-mono">⌘K</kbd> toggle ·{' '}
