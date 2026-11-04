@@ -3,8 +3,7 @@ import Pagination from '@/components/ui/Pagination'
 import SoundCloudPlayer from '@/components/ui/SoundCloudPlayer'
 import { episodes, episodeHref, type Episode } from '@/data/podcastEpisodes'
 
-/** One episode in a list. Also used for "More Episodes" on an episode's page. */
-export function EpisodeCard({ episode, showPlayer = true }: { episode: Episode; showPlayer?: boolean }) {
+function EpisodeCard({ episode }: { episode: Episode }) {
   return (
     <article className="py-8 lg:py-10">
       <div className="min-w-0">
@@ -19,7 +18,7 @@ export function EpisodeCard({ episode, showPlayer = true }: { episode: Episode; 
             {episode.description}
           </p>
         )}
-        {showPlayer && <SoundCloudPlayer trackId={episode.trackId} title={episode.title} className="mt-5" />}
+        <SoundCloudPlayer trackId={episode.trackId} title={episode.title} className="mt-5" />
       </div>
     </article>
   )

@@ -4,8 +4,7 @@ import Breadcrumb from '@/components/ui/Breadcrumb'
 import PodcastListenBadges from '@/components/ui/PodcastListenBadges'
 import SoundCloudPlayer from '@/components/ui/SoundCloudPlayer'
 import { ButtonLink } from '@/components/ui/Button'
-import { EpisodeCard } from '@/sections/ProceedingsPodcastEpisodes'
-import { episodes, type Episode } from '@/data/podcastEpisodes'
+import { type Episode } from '@/data/podcastEpisodes'
 
 const PODCAST_HREF = '/proceedings/podcast'
 
@@ -14,12 +13,11 @@ const PODCAST_HREF = '/proceedings/podcast'
  * (/magazines/proceedings/the-proceedings-podcast/<slug>) is bare: title,
  * date, write-up, SoundCloud player, and an "All Episodes" button. This keeps
  * all of that and gives it the landing page's hero, so an episode reads as
- * part of the show, plus a short run of recent episodes to keep listening.
+ * part of the show.
  */
 export default function ProceedingsPodcastEpisodeDetail({ episode }: { episode: Episode }) {
   const show = episode.navalHistory ? 'Naval History Podcast' : 'Proceedings Podcast'
   const body = episode.body ?? (episode.description ? [episode.description] : [])
-  const more = episodes.filter((ep) => ep.slug !== episode.slug).slice(0, 3)
 
   return (
     <>
@@ -94,24 +92,9 @@ export default function ProceedingsPodcastEpisodeDetail({ episode }: { episode: 
           />
 
           <div className="mt-10">
-            <ButtonLink href={PODCAST_HREF} variant="outline-dark">
-              All Episodes
+            <ButtonLink href={PODCAST_HREF} variant="navy">
+              See all episodes
             </ButtonLink>
-          </div>
-        </div>
-      </section>
-
-      {/* ── More episodes ── */}
-      <section className="bg-neutral-subtlest py-12 lg:py-16">
-        <div className="container-site max-w-[860px]">
-          <h2 className="font-headline text-[32px] lg:text-[40px] text-[#060a0a] leading-[1.1]">
-            More Episodes
-          </h2>
-          <div className="bg-[#C2DDFF] h-px w-full mt-6" />
-          <div className="divide-y divide-[#d5dbe3]">
-            {more.map((ep) => (
-              <EpisodeCard key={ep.slug} episode={ep} showPlayer={false} />
-            ))}
           </div>
         </div>
       </section>
