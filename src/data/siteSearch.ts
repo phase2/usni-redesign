@@ -40,7 +40,7 @@ import {
 import { allBooks, newReleases } from './books'
 import { upcomingEvents } from './events'
 import { pastEvents } from './pastEvents'
-import { episodes } from './podcastEpisodes'
+import { episodes, episodeHref } from './podcastEpisodes'
 import { essayContests } from './essayContests'
 import imgProceedingsPodcast from '@/assets/images/proceedings-podcast-thumb.png'
 import imgNavalHistoryPodcast from '@/assets/images/nh-podcast-thumb.png'
@@ -457,7 +457,7 @@ const podcasts: SearchItem[] = episodes.map((ep, i) => ({
   type: 'podcasts' as const,
   title: ep.title,
   summary: ep.description,
-  href: '/proceedings/podcast',
+  href: episodeHref(ep),
   ...readDate(ep.date),
   authors: [],
   tags: tagsOf([], `${ep.title} ${ep.description ?? ''}`),

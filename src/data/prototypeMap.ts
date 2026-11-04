@@ -218,7 +218,17 @@ export const prototypeSection: PrototypeSection = {
           ],
         },
         { label: 'Sponsored Content', href: '/proceedings/sponsored' },
-        { label: 'Proceedings Podcast', href: '/proceedings/podcast' },
+        {
+          label: 'Proceedings Podcast',
+          href: '/proceedings/podcast',
+          children: [
+            {
+              label: 'EP. 512: Behind Every Sortie',
+              href: '/proceedings/podcast/ep-512-behind-every-sortie-air-boss-naval-aviation',
+              note: 'Sample episode',
+            },
+          ],
+        },
         { label: 'American Sea Power Project', href: '/proceedings/sea-power-project' },
         { label: 'Submission Guidelines', href: '/proceedings/submit' },
       ],

@@ -1,41 +1,25 @@
 import { useState } from 'react'
 import Pagination from '@/components/ui/Pagination'
-import { episodes, type Episode } from '@/data/podcastEpisodes'
+import SoundCloudPlayer from '@/components/ui/SoundCloudPlayer'
+import { episodes, episodeHref, type Episode } from '@/data/podcastEpisodes'
 
-function EpisodePlayer({ trackId, title }: { trackId: number; title: string }) {
-  const src =
-    'https://w.soundcloud.com/player/?url=' +
-    encodeURIComponent(`https://api.soundcloud.com/tracks/${trackId}`) +
-    '&color=%23023e7d&auto_play=false&hide_related=false&show_comments=false&show_user=true&show_reposts=false&show_teaser=true'
-  return (
-    <iframe
-      title={`SoundCloud player: ${title}`}
-      width="100%"
-      height="166"
-      scrolling="no"
-      frameBorder="no"
-      loading="lazy"
-      allow="autoplay"
-      src={src}
-      className="mt-5"
-    />
-  )
-}
-
-function EpisodeCard({ episode }: { episode: Episode }) {
+/** One episode in a list. Also used for "More Episodes" on an episode's page. */
+export function EpisodeCard({ episode, showPlayer = true }: { episode: Episode; showPlayer?: boolean }) {
   return (
     <article className="py-8 lg:py-10">
       <div className="min-w-0">
         <h3 className="font-headline text-[22px] lg:text-[26px] text-navy-bolder leading-[1.2]">
-          <a href="#" className="link-underline-hover">{episode.title}</a>
+          <a href={episodeHref(episode)} className="link-underline-hover">{episode.title}</a>
         </h3>
         <p className="font-body font-semibold text-sm uppercase tracking-[0.08em] text-neutral-subtle mt-2">
           {episode.date}
         </p>
-        <p className="font-body text-base text-[#1d2535] leading-relaxed mt-3">
-          {episode.description}
-        </p>
-        <EpisodePlayer trackId={episode.trackId} title={episode.title} />
+        {episode.description && (
+          <p className="font-body text-base text-[#1d2535] leading-relaxed mt-3">
+            {episode.description}
+          </p>
+        )}
+        {showPlayer && <SoundCloudPlayer trackId={episode.trackId} title={episode.title} className="mt-5" />}
       </div>
     </article>
   )
@@ -100,7 +84,7 @@ export default function ProceedingsPodcastEpisodes() {
         {filtered.length > 0 ? (
           <div className="divide-y divide-[#d5dbe3]">
             {filtered.map((episode) => (
-              <EpisodeCard key={episode.title} episode={episode} />
+              <EpisodeCard key={episode.slug} episode={episode} />
             ))}
           </div>
         ) : (

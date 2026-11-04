@@ -46,6 +46,7 @@ import DonateConfirmation from '@/pages/DonateConfirmation'
 import ProceedingsCurrentIssue from '@/pages/ProceedingsCurrentIssue'
 import ProceedingsAllIssues from '@/pages/ProceedingsAllIssues'
 import ProceedingsPodcast from '@/pages/ProceedingsPodcast'
+import ProceedingsPodcastEpisode from '@/pages/ProceedingsPodcastEpisode'
 import BooksAndPress from '@/pages/BooksAndPress'
 import ProceedingsArticle from '@/pages/ProceedingsArticle'
 import ProceedingsSubmissions from '@/pages/ProceedingsSubmissions'
@@ -201,6 +202,7 @@ export default function App() {
         <Route path="/proceedings/apr-2026" element={<ProceedingsCurrentIssue />} />
         <Route path="/proceedings/all-issues" element={<ProceedingsAllIssues />} />
         <Route path="/proceedings/podcast" element={<ProceedingsPodcast />} />
+        <Route path="/proceedings/podcast/:slug" element={<ProceedingsPodcastEpisode />} />
         {/* The two magazine contact pages became one masthead under About */}
         <Route path="/proceedings/contact" element={<Navigate replace to="/about/editorial-staff?magazine=proceedings" />} />
         <Route path="/proceedings/submit" element={<ProceedingsSubmissions />} />
