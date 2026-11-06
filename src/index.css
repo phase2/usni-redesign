@@ -22,6 +22,12 @@
     line-height: 1.1;
   }
 
+  /* Keeps a paragraph's last line from ending on a single word. Base layer,
+     so a .text-balance utility on a paragraph still wins. */
+  p {
+    text-wrap: pretty;
+  }
+
   *, *::before, *::after {
     box-sizing: border-box;
   }
