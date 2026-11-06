@@ -12,8 +12,9 @@ import { SEARCH_FACETS, searchIndex } from '@/data/siteSearch'
  * box under the page title, a facet column on the left, and the results in a
  * list or a grid (FacetedResults).
  *
- * Covers the site's current content: the latest magazine articles, USNI News,
- * books, events, podcasts and essay contests. The 150-year magazine archive
+ * Covers the site's current content: the latest magazine articles, books,
+ * events, podcasts and essay contests. USNI News is on its own WordPress site
+ * and isn't searched here. The 150-year magazine archive
  * has its own search, Browse All Articles (/browse); a keyword that names one
  * of its subjects offers the way there.
  *

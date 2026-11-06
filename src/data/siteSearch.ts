@@ -8,11 +8,12 @@
  *
  * Sources: the April 2026 Proceedings issue, the homepage's Proceedings picks,
  * the American Sea Power Project series, the August 2026 Naval History issue
- * and the homepage's Naval History picks, the homepage's USNI News feed, the
- * Press catalog, upcoming and past events, the Proceedings Podcast, and the
- * open essay contests. Section pages (Membership, Giving, and so on) are left
- * out: the main navigation already reaches them, and the client asked for
- * search to return content only.
+ * and the homepage's Naval History picks, the Press catalog, upcoming and past
+ * events, the Proceedings Podcast, and the open essay contests. Section pages
+ * (Membership, Giving, and so on) are left out: the main navigation already
+ * reaches them, and the client asked for search to return content only. USNI
+ * News is left out too: it lives on its own WordPress site, outside this
+ * site's search.
  *
  * Every record is tagged with the managed vocabulary proposed in the content
  * architecture plan (src/data/searchTaxonomy.ts): its old category goes to the
@@ -29,7 +30,7 @@
 import type { Article } from '@/types'
 import { aprilIssueArticles } from './proceedingsApril2026'
 import { augustIssueArticles } from './navalHistoryAugust2026'
-import { latestNewsArticles, proceedingsArticles, navalHistoryArticles } from './homepage'
+import { proceedingsArticles, navalHistoryArticles } from './homepage'
 import {
   phaseOneArticles,
   phaseTwoArticles,
@@ -58,7 +59,6 @@ import {
 export type SearchType =
   | 'proceedings'
   | 'naval-history'
-  | 'news'
   | 'books'
   | 'events'
   | 'podcasts'
@@ -68,7 +68,6 @@ export type SearchType =
 export const SEARCH_TYPES: { id: SearchType; label: string; eyebrow: string }[] = [
   { id: 'proceedings', label: 'Proceedings', eyebrow: 'Proceedings' },
   { id: 'naval-history', label: 'Naval History', eyebrow: 'Naval History' },
-  { id: 'news', label: 'USNI News', eyebrow: 'USNI News' },
   { id: 'books', label: 'Books', eyebrow: 'Book' },
   { id: 'events', label: 'Events', eyebrow: 'Event' },
   { id: 'podcasts', label: 'Podcasts', eyebrow: 'Podcast' },
@@ -411,8 +410,6 @@ const navalHistory = dedupe([
   ...navalHistoryArticles.map((a) => fromArticle('naval-history', a)),
 ])
 
-const news = dedupe(latestNewsArticles.map((a) => fromArticle('news', a)))
-
 // New releases first: they carry the fuller byline where a title is in both.
 const books: SearchItem[] = (() => {
   const seen = new Set<string>()
@@ -482,7 +479,6 @@ const contests: SearchItem[] = essayContests.map((c) => ({
 export const searchIndex: SearchItem[] = [
   ...proceedings,
   ...navalHistory,
-  ...news,
   ...books,
   ...events,
   ...podcasts,
