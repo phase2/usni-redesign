@@ -8,7 +8,10 @@
  * directory listed them so either magazine's staff can be shown on its own.
  *
  * Corrections to the live copy: the Naval History directory mails Bill Hamblet
- * at Bill Bray's address (bbray@); he is given his own (bhamblet@).
+ * at Bill Bray's address (bbray@); he is given his own (bhamblet@). The
+ * Proceedings directory's separate "James Stavridis, Chair" entry is the name
+ * of Hamblet's endowed post, the James Stavridis Proceedings Chair, and is
+ * folded into his titles.
  */
 
 export type Magazine = 'proceedings' | 'naval-history'
@@ -19,6 +22,10 @@ export const magazineNames: Record<Magazine, string> = {
 }
 
 export interface StaffRole {
+  /**
+   * Followed by ", <magazine>" unless it contains `{magazine}`, which marks
+   * where the magazine name goes instead (the James Stavridis Proceedings Chair).
+   */
   title: string
   /**
    * The magazines the title applies to. Empty for an Institute title (CEO and
@@ -57,13 +64,9 @@ export const editorialStaff: StaffGroup[] = [
         mastheads: ['naval-history'],
       },
       {
-        name: 'James Stavridis',
-        roles: [{ title: 'Chair', magazines: ['proceedings'] }],
-        mastheads: ['proceedings'],
-      },
-      {
         name: 'Bill Hamblet',
         roles: [
+          { title: 'James Stavridis {magazine} Chair', magazines: ['proceedings'] },
           { title: 'Editor-in-Chief', magazines: ['proceedings'] },
           { title: 'Executive Vice President, Periodicals', magazines: [] },
         ],

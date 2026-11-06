@@ -45,16 +45,20 @@ const tabs: TabItem[] = [
 ]
 
 function RoleLine({ role }: { role: StaffRole }) {
+  const mags = role.magazines.map((m, i) => (
+    <Fragment key={m}>
+      {i > 0 && ' and '}
+      <em>{magazineNames[m]}</em>
+    </Fragment>
+  ))
+  // A title that names the magazine mid-phrase ("James Stavridis Proceedings Chair")
+  const [before, after] = role.title.split('{magazine}')
+  if (after !== undefined) return <>{before}{mags}{after}</>
   return (
     <>
       {role.title}
       {role.magazines.length > 0 && ', '}
-      {role.magazines.map((m, i) => (
-        <Fragment key={m}>
-          {i > 0 && ' and '}
-          <em>{magazineNames[m]}</em>
-        </Fragment>
-      ))}
+      {mags}
     </>
   )
 }
