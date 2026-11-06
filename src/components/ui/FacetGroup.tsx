@@ -8,8 +8,7 @@ import { useId, useState } from 'react'
  * An accordion row with the selection count, an optional "Find …" box once
  * the list is long, the first few options, and a Show all toggle for the
  * rest. Counts are the caller's to compute (site search counts
- * disjunctively). A group with nothing to offer renders disabled rather than
- * vanishing, so the column keeps its shape between result sets.
+ * disjunctively). A group with nothing to offer isn't shown.
  */
 
 /** Options a facet shows before "Show all". */
@@ -105,26 +104,9 @@ export default function FacetGroup({
   const [find, setFind] = useState('')
 
   // A facet with nothing to offer for these results (no topics or bylines on
-  // a podcast, say) stays in the column, disabled, so the sidebar keeps its shape
-  // and a reader can see the filter exists. Leaves off `accordion-row`, which
-  // carries the hover band.
-  if (options.length === 0 && selected.length === 0) {
-    return (
-      <div className="border-b border-border-light">
-        <button
-          type="button"
-          disabled
-          className="flex items-center justify-between w-full gap-3 px-3 py-3 font-body font-bold text-sm text-navy-bolder text-left opacity-40 cursor-not-allowed"
-        >
-          <span>
-            {title}
-            <span className="sr-only"> — no options for these results</span>
-          </span>
-          <AccordionChevron open={false} />
-        </button>
-      </div>
-    )
-  }
+  // a podcast, say) leaves the column rather than sitting there disabled. One
+  // with a selection stays, so the selection can be cleared.
+  if (options.length === 0 && selected.length === 0) return null
 
   const listed = [
     ...selected

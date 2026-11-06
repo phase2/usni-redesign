@@ -170,23 +170,9 @@ export default function IssueRangePicker({
     if (nextKey !== valueKey) onChange(next)
   }
 
-  if (options.length === 0 && !value) {
-    return (
-      <div className="border-b border-border-light">
-        <button
-          type="button"
-          disabled
-          className="flex items-center justify-between w-full gap-3 px-3 py-3 font-body font-bold text-sm text-navy-bolder text-left opacity-40 cursor-not-allowed"
-        >
-          <span>
-            {title}
-            <span className="sr-only"> — no options for these results</span>
-          </span>
-          <AccordionChevron open={false} />
-        </button>
-      </div>
-    )
-  }
+  // No issues in these results and no range set: the filter isn't shown,
+  // as with FacetGroup
+  if (options.length === 0 && !value) return null
 
   return (
     <div className="border-b border-border-light">
