@@ -1,6 +1,5 @@
 import {
   contestEntryStat,
-  currentEdition,
   essayContests,
   essaySubmitPath,
   isPhotoEntry,
@@ -88,7 +87,6 @@ export default function EssayContestBody({ contest }: { contest: EssayContest })
 
   const entryStat = contestEntryStat(contest)
   const closed = contest.status === 'closed'
-  const current = closed ? currentEdition(contest) : undefined
 
   return (
     <section className="bg-white py-12 lg:py-16">
@@ -222,16 +220,8 @@ export default function EssayContestBody({ contest }: { contest: EssayContest })
                 </div>
               </dl>
 
-              {closed ? (
-                current && (
-                  <a
-                    href={current.href}
-                    className="flex items-center justify-center gap-2 bg-navy-bolder text-white font-body font-bold text-base px-5 py-3.5 border border-navy-bolder hover:bg-navy-bright hover:border-navy-bright transition-colors"
-                  >
-                    Enter the {current.year} contest
-                  </a>
-                )
-              ) : (
+              {/* A closed edition's sidebar is facts only, with no entry button */}
+              {!closed && (
                 <>
                   <a
                     href={essaySubmitPath(contest)}

@@ -127,11 +127,6 @@ export function isPhotoEntry(contest: EssayContest): boolean {
   return contest.entryKind === 'photo'
 }
 
-/** The open edition of a closed contest's series, if one is running now. */
-export function currentEdition(contest: EssayContest): EssayContest | undefined {
-  return essayContests.find((c) => c.title === contest.title && c.status !== 'closed')
-}
-
 // ── Contests ────────────────────────────────────────────────────────────────
 
 /**
