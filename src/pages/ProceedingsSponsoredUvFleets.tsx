@@ -5,17 +5,21 @@ import ArticleHeader from '@/sections/ArticleHeader'
 import ArticleHeroImage from '@/sections/ArticleHeroImage'
 import UvFleetsArticleBody from '@/sections/UvFleetsArticleBody'
 import ArticleRelated from '@/sections/ArticleRelated'
-import ArticleSponsorCredit from '@/sections/ArticleSponsorCredit'
+import ArticleSponsorCredit, { ArticleSponsorBanner } from '@/sections/ArticleSponsorCredit'
 import heroImg from '@/assets/images/proceedings-articles/sponsored/uv-fleets-hero.jpg'
 import sponsorLogo from '@/assets/images/proceedings-articles/sponsored/booz-allen-wordmark-stacked.png'
+
+const SPONSOR = { name: 'Booz Allen', logo: sponsorLogo }
 
 /**
  * A sponsored Proceedings article, linked from the landing page's sponsored
  * billboard.
  *
- * As on the live page, a "Sponsored Content | Booz Allen" ribbon with the
- * sponsor's logo folds over the top right corner of the hero, here in tan and
- * without the live page's darkened photo (see ArticleSponsorCredit).
+ * The sponsor is credited twice above the fold (see ArticleSponsorCredit): a
+ * tan "Sponsored Content: Booz Allen" banner in place of the leaderboard ad,
+ * and, as on the live page, a "Sponsored Content" ribbon with the sponsor's
+ * logo folding over the top right corner of the hero, here in tan and without
+ * the live page's darkened photo.
  * Sponsored content is open to everyone, so the page carries no article meter.
  *
  * The deck is the live page's meta description; the live page shows none.
@@ -33,6 +37,7 @@ export default function ProceedingsSponsoredUvFleets() {
           magazineName="Proceedings Magazine"
           author="Randy Yamada, Ph.D., and Vice Admiral Roy Kitchener, U.S. Navy (Retired)"
           readTime="4 min read"
+          banner={<ArticleSponsorBanner {...SPONSOR} />}
           breadcrumbs={[
             { label: 'Home', href: '/' },
             { label: 'Proceedings', href: '/proceedings' },
@@ -45,7 +50,7 @@ export default function ProceedingsSponsoredUvFleets() {
           alt="An unmanned surface vessel with a radar and antenna mast speeds across choppy water, throwing spray."
           caption="The appearance of U.S. Department of War (DoW) visual information does not imply or constitute DoW endorsement."
           photoCredit="U.S. Navy (Devin M. Langer)"
-          overlay={<ArticleSponsorCredit name="Booz Allen" logo={sponsorLogo} />}
+          overlay={<ArticleSponsorCredit {...SPONSOR} />}
         />
         <UvFleetsArticleBody />
         <ArticleRelated />

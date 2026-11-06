@@ -1,6 +1,7 @@
 import SharePopover from '@/components/ui/SharePopover'
 import SaveArticleButton from '@/components/ui/SaveArticleButton'
 import { Button } from '@/components/ui/Button'
+import type { ReactNode } from 'react'
 
 interface ArticleHeaderProps {
   publication?: string
@@ -12,6 +13,11 @@ interface ArticleHeaderProps {
   author: string
   commentCount?: number
   readTime?: string
+  /**
+   * Takes the leaderboard ad's place below the breadcrumb (the sponsored
+   * article's ArticleSponsorBanner).
+   */
+  banner?: ReactNode
 }
 
 function AdFrame({ children }: { children: React.ReactNode }) {
@@ -36,6 +42,7 @@ export default function ArticleHeader({
   author = 'Corporal Richard Sweeney III, U.S. Marine Corps Reserve',
   commentCount = 0,
   readTime,
+  banner,
 }: ArticleHeaderProps) {
   return (
     <section style={{ background: 'linear-gradient(to bottom, #EBF4FF 0%, #FFF 100%)' }}>
@@ -66,15 +73,19 @@ export default function ArticleHeader({
           ))}
         </nav>
 
-        {/* Leaderboard ad — below breadcrumb */}
-        <div className="flex justify-center py-4">
-          <AdFrame>
-            <div className="bg-[#DDE1E7] flex flex-col items-center justify-center gap-1 w-[728px] max-w-full h-[90px]">
-              <span className="font-body text-xs font-semibold text-neutral-subtle uppercase tracking-wider">Advertisement</span>
-              <span className="font-body text-[11px] text-neutral-subtle/60">Leaderboard · 728 × 90</span>
-            </div>
-          </AdFrame>
-        </div>
+        {/* Leaderboard ad — below breadcrumb — unless a banner replaces it */}
+        {banner ? (
+          <div className="max-w-[864px] mx-auto pt-6">{banner}</div>
+        ) : (
+          <div className="flex justify-center py-4">
+            <AdFrame>
+              <div className="bg-[#DDE1E7] flex flex-col items-center justify-center gap-1 w-[728px] max-w-full h-[90px]">
+                <span className="font-body text-xs font-semibold text-neutral-subtle uppercase tracking-wider">Advertisement</span>
+                <span className="font-body text-[11px] text-neutral-subtle/60">Leaderboard · 728 × 90</span>
+              </div>
+            </AdFrame>
+          </div>
+        )}
 
         {/* Narrow article hero — 864px centered */}
         <div className="max-w-[864px] mx-auto pt-8 pb-10">
