@@ -23,7 +23,7 @@ export default function ProceedingsSponsoredBillboard() {
               className="w-full h-full object-cover"
             />
             <div className="absolute bottom-4 left-4 bg-white px-2 py-2 flex flex-col gap-1">
-              <p className="font-body font-medium text-xs text-neutral-subtle uppercase tracking-widest">
+              <p className="font-body font-medium text-xs text-navy-subtle uppercase tracking-widest">
                 Sponsored Content
               </p>
               <img

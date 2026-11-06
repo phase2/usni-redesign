@@ -56,7 +56,7 @@ export default function ArticleSponsorCredit({ name, logo }: Sponsor) {
       />
       {/* The banner's tan: the light ground and its tan-subtle border */}
       <div className="relative flex flex-col items-center gap-2 sm:gap-3 lg:gap-4 bg-tan-subtlest border border-tan-subtle px-4 py-3 sm:px-6 sm:py-5 lg:px-10 lg:py-7">
-        <p className="font-body font-bold uppercase tracking-widest text-[10px] sm:text-xs lg:text-sm text-navy-bolder whitespace-nowrap">
+        <p className="font-body font-medium uppercase tracking-widest text-[10px] sm:text-xs lg:text-sm text-navy-subtle whitespace-nowrap">
           Sponsored Content
         </p>
         <img src={logo} alt={name} className="h-8 sm:h-14 lg:h-20 w-auto" />
