@@ -11,8 +11,8 @@ import EventCard, { type EventCardData } from '@/components/cards/EventCard'
  * Past events listing, built on the essay contest archive's layout: a filters
  * sidebar on the left, a results header with sort, and a card grid.
  *
- * Cards link to the event pages the current site publishes; only a few of
- * those have a page in this prototype so far (see eventDetails.ts).
+ * Cards link to the event pages the current site publishes; only the upcoming
+ * samples have a page in this prototype so far (see eventDetails.ts).
  *
  * `scope="all"` is the See All Events listing: the upcoming events join the
  * past ones, a When facet (Upcoming / Past) leads the filters, and the default
@@ -21,9 +21,8 @@ import EventCard, { type EventCardData } from '@/components/cards/EventCard'
  * prototype's dates never drift into the wrong group.
  *
  * Accepts `?q=` and `?type=` so other pages can link here pre-filtered —
- * `type` is an event type in slug form, e.g. `?type=author-event`, which is
- * how the Books & Press nav's Author Events link lands here. Facets take
- * several values, comma-separated (`?type=conference,author-event`); the
+ * `type` is an event type in slug form, e.g. `?type=conference`. Facets take
+ * several values, comma-separated (`?type=conference,workshop`); the
  * all-events scope adds `?when=upcoming` or `?when=past`, and `?sort=` and
  * `?page=` round out the state, all kept in step with the controls below.
  */
@@ -70,7 +69,7 @@ function countBy(events: ListedEvent[], key: (e: ListedEvent) => string) {
 
 const slug = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, '-')
 
-/** Facet values named by a comma-separated list of slugs, e.g. `?type=conference,author-event`. */
+/** Facet values named by a comma-separated list of slugs, e.g. `?type=conference,workshop`. */
 function fromSlugs(param: string | null, options: string[]): string[] {
   if (!param) return []
   const wanted = param.split(',')

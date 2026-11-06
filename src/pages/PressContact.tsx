@@ -16,7 +16,7 @@ export default function PressContact() {
         <BooksSubNav />
         <PageHero
           title="Contact the Naval Institute Press"
-          description="Review copies, author events, trade and wholesale orders, manuscripts, and rights and permissions."
+          description="Review copies, trade and wholesale orders, manuscripts, and rights and permissions."
           breadcrumb={
             <Breadcrumb
               trail={[

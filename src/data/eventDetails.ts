@@ -7,9 +7,8 @@
  * line, the time and venue where the record lacks them, the registration link,
  * and the body copy.
  *
- * Samples so far: the three America's First Aircraft Carrier talks, showing
- * how the migrated author events read, and two upcoming events, the 2026
- * History Conference and Life of Courage. Every other event card still falls through to the 404.
+ * Samples so far: two upcoming events, the 2026 History Conference and Life of
+ * Courage. Every other event card still falls through to the 404.
  *
  * Past events leave out the live Register and Purchase Tickets buttons — the
  * page says the event has passed instead. Date, time and location always sit
@@ -43,45 +42,6 @@ export interface EventDetail {
 }
 
 export const eventDetails: EventDetail[] = [
-  {
-    slug: 'historian-talk-americas-first-aircraft-carrier',
-    subtitle: 'USS Langley',
-    venue: ['National Museum of the USN', '736 Sicard Street Southeast', 'Washington, DC 20374'],
-    html: `
-      <p><strong>Friday, December 13</strong></p>
-      <p><strong>Noon–1 pm</strong></p>
-      <p><strong>Presentation by David F. Winkler, Ph.D.</strong> on <em>key personalities</em> who made USS <em>Langley</em> (CV-1) a reality at the US Navy Museum at the Washington Navy Yard.</p>
-      <p>Sale/Book signing for <em><a href="https://www.usni.org/press/books/americas-first-aircraft-carrier">America’s First Aircraft Carrier</a></em> to follow presentation.</p>
-    `,
-  },
-  {
-    slug: 'americas-first-aircraft-carrier-discussionsigning',
-    time: '4 PM',
-    venue: ['Pax River Naval Air Museum', '22156 Three Notch Rd', 'Lexington Park, MD 20653'],
-    html: `
-      <p>Join the Pax River Naval Air Museum on Wednesday, November 13, 2024 at 4 p.m. for an engaging talk by Dr. David Winkler, PhD, CDR (USN, Ret). Dr. Winkler will discuss his book, <a href="https://www.usni.org/press/books/americas-first-aircraft-carrier"><em>America’s First Aircraft Carrier; USS Langley and the Dawn of US Naval Aviation</em></a>, highlighting the pivotal role of the USS Langley in transforming naval aviation. With decades of experience as a naval historian and educator, Dr. Winkler will provide unique insights into the ship’s history and its influence on naval strategy. This event promises a fascinating look at a key chapter in maritime history.</p>
-      <p>Books will also be available for purchase. Regular museum admission prices apply.</p>
-    `,
-  },
-  {
-    slug: 'americas-first-aircraft-carrier-lecture-dr-david-winkler',
-    time: '3:00 PM',
-    venue: ['St. Peter’s Chapel', '1181 Walnut Ave', 'Mare Island, CA 94592'],
-    html: `
-      <p>Join the the Mare Island Historic Park Foundation for a captivating afternoon with Dr. David Winkler, renowned naval historian and retired Commander of the U.S. Navy, for a captivating discussion on his latest book, “America’s First Aircraft Carrier: USS Langley,” published by the Naval Institute Press. Dr. Winkler will delve into the pivotal role of the USS Langley in the development of U.S. naval aviation and its impact on naval warfare. Mark your calendars and prepare for an unforgettable journey through time!</p>
-      <p>Dr. David Winkler brings a wealth of knowledge from his extensive career as a naval historian. With over 25 years as the staff historian at the Naval Historical Foundation and roles with the National Maritime Historical Society and Naval War College, his contributions to naval history are profound. Dr. Winkler’s academic background includes a Ph.D. in history from American University and numerous publications, including “Cold War at Sea” and “Amirs, Admirals, and Desert Sailors.”</p>
-      <p>This event is a unique opportunity to gain deep insights into the history of American naval aviation and the pioneering efforts that shaped modern naval warfare. Don’t miss this chance to learn from one of the foremost experts in the field.</p>
-      <p><strong>Tickets are limited! Purchase your tickets today.</strong></p>
-      <ul>
-        <li>Advanced Tickets: $15</li>
-        <li>Mare Island Historic Park Foundation members receive a $5 discount</li>
-        <li>Tickets at the door: $20</li>
-      </ul>
-    `,
-  },
-]
-
-export const upcomingEventDetails: EventDetail[] = [
   {
     slug: 'why-wars-come-faster-we-expect-and-what-readiness-really-requires',
     photoHero: { panelSide: 'left' },
@@ -121,5 +81,5 @@ export const upcomingEventDetails: EventDetail[] = [
 ]
 
 export function eventDetail(slug: string): EventDetail | undefined {
-  return [...eventDetails, ...upcomingEventDetails].find((d) => d.slug === slug)
+  return eventDetails.find((d) => d.slug === slug)
 }

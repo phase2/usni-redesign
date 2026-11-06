@@ -73,7 +73,7 @@ export const contactRoutes: ContactRoute[] = [
   },
   {
     title: 'Naval Institute Press',
-    summary: 'Review copies, author events, trade orders, and rights and permissions.',
+    summary: 'Review copies, trade orders, and rights and permissions.',
     href: '/books/contact',
     cta: 'Contact the Press',
   },

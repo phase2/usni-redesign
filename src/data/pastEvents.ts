@@ -32,7 +32,6 @@ import imgWest2025 from '@/assets/images/events/past/west-2025.png'
 import imgWest2026 from '@/assets/images/events/past/west-2026.png'
 
 import { PLACEHOLDER_EVENT_IMAGE } from '@/data/events'
-import { pastAuthorEvents } from '@/data/pastAuthorEvents'
 
 export interface PastEvent {
   /** Prototype route for the event page. */
@@ -50,8 +49,13 @@ export interface PastEvent {
   imageAlt: string
 }
 
-/** Past events, scraped from the current site's /events/past listing. */
-const generalEvents: PastEvent[] = [
+/**
+ * Past events, scraped from the current site's /events/past listing. The
+ * current site's separate author events archive (/press/author-events/past)
+ * is left out: the Press team doesn't want author events as a content type or
+ * in site search.
+ */
+export const pastEvents: PastEvent[] = [
   {
     href: '/events/americas-navy-new-strategic-era-featured-us-naval-institute-annual-meeting',
     title: 'America\'s Navy in a New Strategic Era - Featured at the U.S. Naval Institute Annual Meeting',
@@ -548,9 +552,3 @@ const generalEvents: PastEvent[] = [
     imageAlt: 'Lessons of Herosim',
   },
 ]
-
-/**
- * The one Past Events archive: the general listing plus the author events the
- * current site keeps in a separate archive (see pastAuthorEvents.ts).
- */
-export const pastEvents: PastEvent[] = [...generalEvents, ...pastAuthorEvents]

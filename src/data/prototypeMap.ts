@@ -127,16 +127,7 @@ export const prototypeSection: PrototypeSection = {
             },
             { label: 'Life of Courage', href: '/events/life-courage', note: 'Upcoming' },
             { label: 'All Events', href: '/events/all', note: 'Upcoming and past' },
-            {
-              label: 'Past Events',
-              href: '/events/past',
-              children: [
-                { label: 'Author Events', href: '/events/past?type=author-event', note: 'Filtered' },
-                { label: 'Historian Talk: America’s First Aircraft Carrier', href: '/events/historian-talk-americas-first-aircraft-carrier' },
-                { label: 'America’s First Aircraft Carrier | Discussion/Signing', href: '/events/americas-first-aircraft-carrier-discussionsigning' },
-                { label: 'America’s First Aircraft Carrier: Lecture by Dr. David Winkler', href: '/events/americas-first-aircraft-carrier-lecture-dr-david-winkler' },
-              ],
-            },
+            { label: 'Past Events', href: '/events/past' },
           ],
         },
         {

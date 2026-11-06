@@ -41,7 +41,7 @@ const INTERESTS = [
     id: 'books-press',
     name: 'Books & Press',
     frequency: 'Regularly',
-    description: 'New releases, author events, and offers from Naval Institute Press.',
+    description: 'New releases and offers from Naval Institute Press.',
     icon: 'fa-book-open',
     accent: '#1A5C3A',
   },
@@ -163,7 +163,7 @@ export default function NewsletterJoin() {
               Subscribe to Our Newsletter
             </h1>
             <p className="font-body text-lg text-neutral-subtle leading-relaxed max-w-[560px] mx-auto">
-              Get updates on new releases, author events, and exclusive member content.
+              Get updates on new releases and exclusive member content.
             </p>
           </div>
         </div>

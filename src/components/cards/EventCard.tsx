@@ -11,7 +11,7 @@
 export interface EventCardData {
   href: string
   title: string
-  /** Badge label, e.g. "Conference" or "Author Event". */
+  /** Badge label, e.g. "Conference" or "Workshop". */
   kind: string
   location: string
   date: string

@@ -16,7 +16,6 @@ interface SubNavItem {
 const navItems: SubNavItem[] = [
   { label: 'Books', href: '/books/collection' },
   { label: 'New Releases', href: '/books/new-releases' },
-  { label: 'Author Events', href: '/events/past?type=author-event' },
   {
     label: 'Professional Military Education',
     href: '/books/professional-military-education',
