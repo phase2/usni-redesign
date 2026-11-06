@@ -2,8 +2,9 @@
  * The sponsor credits on a sponsored article, both above the fold.
  *
  * ArticleSponsorBanner takes the leaderboard ad's place below the breadcrumb:
- * a tan-bordered row with "Sponsored Content: <sponsor>" on the left and the
- * logo on the right. Pass it to ArticleHeader's `banner`.
+ * the sponsored billboard's double-bordered tan box, with "Sponsored Content:
+ * <sponsor>" as a small headline on the left and the logo on the right. Pass
+ * it to ArticleHeader's `banner`.
  *
  * ArticleSponsorCredit is a tan ribbon laid over the top right corner of the
  * hero image. As on the live page, the panel runs past the image's right edge
@@ -17,13 +18,16 @@ type Sponsor = { name: string; logo: string }
 
 export function ArticleSponsorBanner({ name, logo }: Sponsor) {
   return (
-    <div className="flex items-center justify-between gap-6 bg-tan-subtlest border-2 border-tan px-5 py-4 lg:px-8 lg:py-5">
-      <p className="font-body text-sm lg:text-base text-navy-bolder">
-        <span className="font-bold uppercase tracking-widest">Sponsored Content:</span>{' '}
-        <span>{name}</span>
-      </p>
-      {/* The name is in the label, so the logo is decorative here */}
-      <img src={logo} alt="" className="h-10 lg:h-14 w-auto flex-none" />
+    // The sponsored billboard's box: a tan ground with a tan-subtle border, and
+    // a second border inset within it
+    <div className="bg-tan-subtlest border border-tan-subtle p-3 lg:p-4">
+      <div className="flex items-center justify-between gap-6 border border-tan-subtle px-5 py-4 lg:px-8 lg:py-5">
+        <p className="font-headline text-[20px] lg:text-[24px] text-navy-bolder leading-[1.2]">
+          Sponsored Content: {name}
+        </p>
+        {/* The name is in the label, so the logo is decorative here */}
+        <img src={logo} alt="" className="h-10 lg:h-14 w-auto flex-none" />
+      </div>
     </div>
   )
 }
