@@ -415,7 +415,7 @@ export default function Cards() {
             </div>
             <ClassTable
               rows={[
-                { part: 'List wrapper', classes: 'divide-y divide-border-light', note: 'Belongs to the placement, not the row. Shown here as LatestNews uses it.' },
+                { part: 'List wrapper', classes: 'divide-y divide-border-light', note: 'Belongs to the placement, not the row.' },
                 { part: 'Row', classes: 'flex items-start gap-3 py-4' },
                 { part: 'Text column', classes: 'flex flex-col gap-1.5 flex-1 min-w-0', note: 'min-w-0 lets a long headline wrap instead of pushing the thumbnail out.' },
                 { part: 'Category', classes: 'font-body font-normal text-[14px] uppercase tracking-[0.5px] text-[#0466C8]' },

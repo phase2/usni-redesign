@@ -6,12 +6,11 @@ import imgAIWarfighting from '@/assets/images/books/ai-warfighting.jpg'
 import imgOurHistory from '@/assets/images/our-histroy-feature-image.png'
 import imgGivingHero from '@/assets/images/demo-hero/giving-hero-feature.png'
 
-import imgCarrierGeorge from '@/assets/images/usni-news-Carrier-USS-George.png'
-import imgAmphibSanAntonio from '@/assets/images/usni-news-Amphib-USS-San-Antonio.png'
-import imgArticleFeatureCenter from '@/assets/images/usni-news-article-feature-center.png'
-import imgMiddleEastShipping from '@/assets/images/usni-news-Middle-East-Shipping.png'
-import imgAmphibsBougainville from '@/assets/images/usni-news-amphibs-bougainville.png'
-import imgProgramTrain700 from '@/assets/images/usni-news-Program-Has-Helped-Train-700.png'
+import imgNewsRoosevelt from '@/assets/images/usni-news-theodore-roosevelt-singapore.jpg'
+import imgNewsOkinawa from '@/assets/images/usni-news-okinawa-curfew.jpg'
+import imgNewsPulse from '@/assets/images/usni-news-western-pacific-pulse.jpg'
+import imgNewsNampho from '@/assets/images/usni-news-nampho-shipyard.jpg'
+import imgNewsUsmcFlag from '@/assets/images/usni-news-usmc-flag.svg'
 
 // Proceedings
 import imgProceedingsCover from '@/assets/images/proceedings-cover-april26.png'
@@ -209,67 +208,61 @@ export const navInstituteAtWorkCards: PlainCardData[] = [
   },
 ]
 
+/**
+ * The homepage's USNI News grid: the five latest stories from
+ * https://news.usni.org/latest (captured 6 November 2026). USNI News is its
+ * own WordPress site, so each card links to the story there.
+ *
+ * Order is the grid's: the lead story (the newest) runs large in the center,
+ * then two on the left and two on the right, newest first. The category is
+ * the story's most specific USNI News category, not the catch-all "News &
+ * Analysis". Alt text is written from each photo's caption.
+ */
 export const latestNewsArticles: Article[] = [
   {
-    id: '1',
-    category: 'Industry',
-    headline: 'Amphibs Bougainville, Fallujah Deliveries Are Pushed Another Year',
-    date: 'April 27, 2026 5:38 PM',
-    image: imgAmphibsBougainville,
-    imageAlt: 'USS Bougainville amphibious assault ship under construction',
-    href: '/news/uss-bougainville-construction',
+    id: 'n1',
+    category: 'U.S. Marine Corps',
+    headline: 'III MEF Extends Curfew for Junior Members in Okinawa Following Murder Indictment',
+    date: 'November 6, 2026 2:10 PM',
+    image: imgNewsOkinawa,
+    imageAlt: 'U.S. service members and Okinawa police officers on a joint patrol along Koza Gate Street in Okinawa City.',
+    href: 'https://news.usni.org/2026/11/06/iii-mef-extends-curfew-for-junior-members-in-okinawa-following-murder-indictment',
   },
   {
-    id: '2',
-    category: 'Industry',
-    headline: 'Amphib USS San Antonio Returns from Southern Command After More Than 8-month Deployment',
-    date: 'April 28, 2026 6:28 PM',
-    image: imgAmphibSanAntonio,
-    imageAlt: 'Sailors aboard USS San Antonio',
-    href: '/news/san-antonio-pacific-exercise',
+    id: 'n2',
+    category: 'Western Pacific Pulse',
+    headline: 'USNI News Western Pacific Pulse: Nov. 6, 2026',
+    date: 'November 6, 2026 1:35 PM',
+    image: imgNewsPulse,
+    imageAlt: 'Map of the Western Pacific from Japan to Singapore, with colored markers showing where naval forces are operating.',
+    href: 'https://news.usni.org/2026/11/06/usni-news-western-pacific-pulse-nov-6-2026',
   },
   {
-    id: '3',
-    category: 'China',
-    headline: 'U.S. Missiles Deploy Near Taiwan During Balikatan Exercise, Chinese Action Group Operates Nearby',
-    date: 'April 28, 2026 12:19 PM',
-    image: imgArticleFeatureCenter,
-    imageAlt: 'HIMARS missile system deployed near C-130',
-    href: '/news/taiwan-balikatan-exercise',
+    id: 'n3',
+    category: 'U.S. Navy',
+    headline: 'Theodore Roosevelt Carrier Strike Group Pulls Into Singapore',
+    date: 'November 6, 2026 9:04 AM',
+    image: imgNewsRoosevelt,
+    imageAlt: 'The aircraft carrier USS Theodore Roosevelt (CVN-71) under way in the Pacific Ocean.',
+    href: 'https://news.usni.org/2026/11/06/theodore-roosevelt-carrier-strike-group-pulls-into-singapore',
   },
   {
-    id: 'mp1',
-    category: 'Industry',
-    headline: 'Program Has Helped Train 700 RNs for Life in the ER Fast Lane',
-    date: 'April 24, 2026 6:02 PM',
-    image: imgProgramTrain700,
-    imageAlt: 'Ship launch ceremony',
-    href: '/news/navy-program-train-700-sailors',
-  },
-  {
-    id: 'mp2',
-    category: 'Aviation',
-    headline: 'Carrier USS George H.W. Bush Now in U.S. Central Command After Traveling Around Africa',
-    date: 'April 23, 2026 6:11 PM',
-    image: imgCarrierGeorge,
-    imageAlt: 'F/A-18 launching from USS George Washington',
-    href: '/news/george-washington-deployment',
-  },
-  {
-    id: 'mp3',
+    id: 'n4',
     category: 'Foreign Forces',
-    headline: "Middle East Shipping 'Paralyzed' by Dueling U.S., Iranian Blockades, Analysts Say",
-    date: 'March 3, 2026',
-    image: imgMiddleEastShipping,
-    imageAlt: 'Container ship in Middle East shipping lane',
-    href: '/news/middle-east-shipping-threat',
+    headline: 'North Korean Leader Inspects New Warship Under Construction at Nampho Shipyard',
+    date: 'November 5, 2026 5:02 PM',
+    image: imgNewsNampho,
+    imageAlt: 'North Korean leader Kim Jong Un inspects a new warship at Nampho Shipyard.',
+    href: 'https://news.usni.org/2026/11/05/north-korean-leader-inspects-new-warship-under-construction-at-nampho-shipyard',
   },
   {
-    id: 'mp4',
-    category: 'USNI News',
-    headline: 'Pentagon Budget Cuts Raise Questions About Pacific Readiness',
-    date: 'April 21, 2025',
-    href: '/news/pentagon-budget-pacific',
+    id: 'n5',
+    category: 'U.S. Marine Corps',
+    headline: 'Marines Identify Member Who Died After Fast-rope Training in Japan',
+    date: 'November 5, 2026 2:52 PM',
+    image: imgNewsUsmcFlag,
+    imageAlt: 'The flag of the U.S. Marine Corps.',
+    href: 'https://news.usni.org/2026/11/05/marines-identify-member-who-died-after-fast-rope-training-in-japan',
   },
 ]
 
