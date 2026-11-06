@@ -32,14 +32,26 @@ export function ArticleSponsorBanner({ name, logo }: Sponsor) {
   )
 }
 
-/** How far the ribbon runs past the image's right edge, and the fold's size. */
+/**
+ * How far the ribbon runs past the image's right edge: the panel's overhang,
+ * the fold's size, and the inset that keeps the shadow over the photo.
+ */
 const OVERHANG = 'right-[-12px] lg:right-[-20px]'
 const FOLD = 'w-3 h-3 lg:w-5 lg:h-5'
+const OVER_IMAGE = 'right-3 lg:right-5'
 
 export default function ArticleSponsorCredit({ name, logo }: Sponsor) {
   return (
     <div className={`absolute top-3 sm:top-6 lg:top-8 ${OVERHANG} z-10`}>
-      <div className="flex flex-col items-center gap-2 sm:gap-3 lg:gap-4 bg-tan-subtlest shadow-[0_4px_12px_rgba(14,18,26,0.18)] px-4 py-3 sm:px-6 sm:py-5 lg:px-10 lg:py-7">
+      {/* The shadow, cast only on the photo: it stops at the image's right
+          edge, so none falls on the page beside the overhang */}
+      <div
+        className={`absolute inset-y-0 left-0 ${OVER_IMAGE} shadow-[0_6px_16px_rgba(14,18,26,0.12)]`}
+        style={{ clipPath: 'inset(-40px 0 -40px -40px)' }}
+        aria-hidden="true"
+      />
+      {/* The banner's tan: the light ground and its tan-subtle border */}
+      <div className="relative flex flex-col items-center gap-2 sm:gap-3 lg:gap-4 bg-tan-subtlest border border-tan-subtle px-4 py-3 sm:px-6 sm:py-5 lg:px-10 lg:py-7">
         <p className="font-body font-bold uppercase tracking-widest text-[10px] sm:text-xs lg:text-sm text-navy-bolder whitespace-nowrap">
           Sponsored Content
         </p>
@@ -47,7 +59,7 @@ export default function ArticleSponsorCredit({ name, logo }: Sponsor) {
       </div>
       {/* The fold: the ribbon's underside, turning back behind the image */}
       <div
-        className={`absolute top-full right-0 ${FOLD} bg-tan`}
+        className={`absolute top-full right-0 ${FOLD} bg-tan-subtle`}
         style={{ clipPath: 'polygon(0 0, 100% 0, 0 100%)' }}
         aria-hidden="true"
       />
