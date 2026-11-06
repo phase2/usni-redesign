@@ -24,7 +24,7 @@ export default function ProceedingsSponsoredBillboard() {
             />
             <div className="absolute bottom-4 left-4 bg-white px-2 py-2 flex flex-col gap-1">
               <p className="font-body font-medium text-xs text-neutral-subtle uppercase tracking-widest">
-                Sponsored by
+                Sponsored Content
               </p>
               <img
                 src={sponsorLogoImg}

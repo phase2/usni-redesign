@@ -1,8 +1,6 @@
 import ArticleAuthorBio from '@/sections/ArticleAuthorBio'
 import ArticleComments from '@/sections/ArticleComments'
 import AdUnit from '@/components/ui/AdUnit'
-import ArticleSponsorCredit from '@/sections/ArticleSponsorCredit'
-import sponsorLogo from '@/assets/images/proceedings-articles/sponsored/booz-allen-wordmark-stacked.png'
 import controlImg from '@/assets/images/proceedings-articles/sponsored/uv-fleets-control.jpg'
 
 // Article text from the live sponsored article (Proceedings, Booz Allen):
@@ -13,8 +11,6 @@ import controlImg from '@/assets/images/proceedings-articles/sponsored/uv-fleets
 // those are repaired here. The live subheads are bold first lines of their
 // paragraphs; they are set as h2s, as in the other Proceedings articles. The
 // authors' email links on the live page are malformed and are left out.
-
-const SPONSOR = { name: 'Booz Allen', logo: sponsorLogo }
 
 const articleAuthors = [
   {
@@ -31,9 +27,8 @@ const articleAuthors = [
 
 // ── Layout contract ───────────────────────────────────────────────────────────
 // The same two-column band as FortifyingArticleBody: an 864px reading column
-// plus a 300px rail at xl, the column centered below it. The rail leads with
-// the sponsor credit, then carries ads; below xl the credit moves to the top of
-// the column.
+// plus a 300px rail of ads at xl, the column centered below it. The sponsor is
+// credited on the hero image (see ProceedingsSponsoredUvFleets).
 
 function Subhead({ children }: { children: React.ReactNode }) {
   return (
@@ -49,10 +44,6 @@ export default function UvFleetsArticleBody() {
           <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_300px] xl:gap-[30px]">
 
           <div className="max-w-[864px] mx-auto xl:mx-0 w-full pb-10">
-
-            <div className="xl:hidden mb-8">
-              <ArticleSponsorCredit {...SPONSOR} layout="inline" />
-            </div>
 
             <div className="font-body text-[16px] lg:text-[18px] text-[#1d2535] leading-[1.5] space-y-8 article-body">
 
@@ -202,17 +193,12 @@ export default function UvFleetsArticleBody() {
 
           </div>
 
-          {/* Right rail: the sponsor credit, then ads — two rather than four,
-              for a short article. The credit sits outside the ads' aside so it
-              is not announced as part of the "Advertisements" landmark. */}
-          <div className="hidden xl:flex xl:flex-col">
-            <ArticleSponsorCredit {...SPONSOR} />
-            <aside className="flex-1 flex flex-col mt-8" aria-label="Advertisements">
-              <AdUnit size="rectangle" />
-              <div className="flex-1" aria-hidden="true" />
-              <AdUnit size="rectangle" />
-            </aside>
-          </div>
+          {/* Right rail: two ads rather than four, for a short article */}
+          <aside className="hidden xl:flex xl:flex-col" aria-label="Advertisements">
+            <AdUnit size="rectangle" />
+            <div className="flex-1" aria-hidden="true" />
+            <AdUnit size="rectangle" />
+          </aside>
 
           </div>
 

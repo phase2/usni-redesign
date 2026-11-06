@@ -13,15 +13,16 @@ import { sponsoredArticles } from '@/data/proceedingsSponsored'
  * landing's sponsored billboard and each sponsored article link to it.
  *
  * It is the issue table of contents' listing, grid and list views alike, with
- * the sponsor as each card's eyebrow (as on the article itself) and the date
- * shown in both views, since the list spans six years of issues.
+ * "Sponsored Content | <sponsor>" as each card's eyebrow (as on the article
+ * itself) and the date shown in both views, since the list spans six years of
+ * issues.
  */
 
 const PAGE_SIZE = 12
 
 const articles = sponsoredArticles.map(({ sponsor, ...article }) => ({
   ...article,
-  category: `Sponsored by ${sponsor}`,
+  category: `Sponsored Content | ${sponsor}`,
 }))
 
 export default function ProceedingsSponsoredContent() {

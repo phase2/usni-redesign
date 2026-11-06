@@ -5,18 +5,18 @@ import ArticleHeader from '@/sections/ArticleHeader'
 import ArticleHeroImage from '@/sections/ArticleHeroImage'
 import UvFleetsArticleBody from '@/sections/UvFleetsArticleBody'
 import ArticleRelated from '@/sections/ArticleRelated'
+import ArticleSponsorCredit from '@/sections/ArticleSponsorCredit'
 import heroImg from '@/assets/images/proceedings-articles/sponsored/uv-fleets-hero.jpg'
+import sponsorLogo from '@/assets/images/proceedings-articles/sponsored/booz-allen-wordmark-stacked.png'
 
 /**
  * A sponsored Proceedings article, linked from the landing page's sponsored
  * billboard.
  *
- * The live page lays a "Sponsored Content · Booz Allen" ribbon and the sponsor
- * logo over a darkened hero. Here the sponsor is credited in a tan block at
- * the head of the article's right rail, above the first ad (see
- * UvFleetsArticleBody), and the hero photograph runs as it does on any other
- * article. Sponsored content is open to everyone, so the
- * page carries no article meter.
+ * As on the live page, a "Sponsored Content | Booz Allen" ribbon with the
+ * sponsor's logo folds over the top right corner of the hero, here in tan and
+ * without the live page's darkened photo (see ArticleSponsorCredit).
+ * Sponsored content is open to everyone, so the page carries no article meter.
  *
  * The deck is the live page's meta description; the live page shows none.
  */
@@ -45,6 +45,7 @@ export default function ProceedingsSponsoredUvFleets() {
           alt="An unmanned surface vessel with a radar and antenna mast speeds across choppy water, throwing spray."
           caption="The appearance of U.S. Department of War (DoW) visual information does not imply or constitute DoW endorsement."
           photoCredit="U.S. Navy (Devin M. Langer)"
+          overlay={<ArticleSponsorCredit name="Booz Allen" logo={sponsorLogo} />}
         />
         <UvFleetsArticleBody />
         <ArticleRelated />

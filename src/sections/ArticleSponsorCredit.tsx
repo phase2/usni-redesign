@@ -1,44 +1,37 @@
 /**
- * The sponsor credit on a sponsored article: a "Sponsored by" eyebrow and the
- * sponsor's logo in a tan block. The tan and the eyebrow treatment are the
- * Proceedings landing's sponsored billboard, so the article and its teaser read
- * as the same paid placement.
+ * The sponsor credit on a sponsored article: a tan ribbon laid over the top
+ * right corner of the hero image, so the sponsor is credited above the fold.
  *
- * It sits at the head of the ad rail, above the first ad, so the sponsor is
- * credited beside the opening of the article without covering the hero image.
- * Below xl the rail is hidden, and the `inline` layout carries the credit at
- * the top of the reading column instead.
+ * As on the live page, the panel runs past the image's right edge and a
+ * darker triangle under the overhang reads as the ribbon folding back around
+ * the edge. Pass it to ArticleHeroImage's `overlay`, which positions it.
+ *
+ * The label always reads "Sponsored Content", followed by the sponsor's name.
+ * The logo repeats the name, so it's decorative; it's dropped below sm, where
+ * a full panel would cover most of the photograph.
  */
-export default function ArticleSponsorCredit({
-  name,
-  logo,
-  layout = 'stacked',
-}: {
-  name: string
-  logo: string
-  /** `stacked` for the 300px rail; `inline`, a single row, for the reading column. */
-  layout?: 'stacked' | 'inline'
-}) {
-  const eyebrow = (
-    <p className="font-body font-medium text-xs text-navy-subtle uppercase tracking-widest">
-      Sponsored by
-    </p>
-  )
 
-  if (layout === 'inline') {
-    return (
-      <div className="flex flex-wrap items-center gap-x-6 gap-y-3 bg-tan-subtlest border border-tan-subtle px-5 py-4">
-        {eyebrow}
-        <img src={logo} alt={name} className="h-14 w-auto" />
-      </div>
-    )
-  }
+/** How far the ribbon runs past the image's right edge, and the fold's size. */
+const OVERHANG = 'right-[-12px] lg:right-[-20px]'
+const FOLD = 'w-3 h-3 lg:w-5 lg:h-5'
 
+export default function ArticleSponsorCredit({ name, logo }: { name: string; logo: string }) {
   return (
-    <div className="flex flex-col items-center gap-4 bg-tan-subtlest border border-tan-subtle px-6 py-6 text-center">
-      {eyebrow}
-      <div className="w-full border-t border-tan-subtle" aria-hidden="true" />
-      <img src={logo} alt={name} className="h-20 w-auto" />
+    <div className={`absolute top-3 sm:top-6 lg:top-8 ${OVERHANG} z-10`}>
+      <div className="flex flex-col items-center gap-3 lg:gap-4 bg-tan-subtlest shadow-[0_4px_12px_rgba(14,18,26,0.18)] px-4 py-3 sm:px-6 sm:py-5 lg:px-10 lg:py-7">
+        <p className="flex items-center gap-2.5 lg:gap-3 font-body text-[11px] sm:text-xs lg:text-sm text-navy-bolder whitespace-nowrap">
+          <span className="font-bold uppercase tracking-widest">Sponsored Content</span>
+          <span className="w-0.5 self-stretch bg-navy-bolder" aria-hidden="true" />
+          <span>{name}</span>
+        </p>
+        <img src={logo} alt="" className="hidden sm:block h-14 lg:h-20 w-auto" />
+      </div>
+      {/* The fold: the ribbon's underside, turning back behind the image */}
+      <div
+        className={`absolute top-full right-0 ${FOLD} bg-tan`}
+        style={{ clipPath: 'polygon(0 0, 100% 0, 0 100%)' }}
+        aria-hidden="true"
+      />
     </div>
   )
 }

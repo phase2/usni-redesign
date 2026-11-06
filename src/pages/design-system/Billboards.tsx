@@ -198,7 +198,7 @@ export default function Billboards() {
                       {code('border border-tan-subtle overflow-hidden items-stretch')}. The image half is{' '}
                       {code('lg:w-1/2 flex-none')} with an inline {code('minHeight: 220px')}, and the{' '}
                       {code('<img>')} is in the flow ({code('w-full h-full object-cover')}), not absolute. A white
-                      &ldquo;Sponsored by&rdquo; logo badge sits {code('absolute bottom-4 left-4')} over the photo.
+                      &ldquo;Sponsored Content&rdquo; logo badge sits {code('absolute bottom-4 left-4')} over the photo.
                       The inner box is {code('p-6 lg:p-12')}. The eyebrow is {code('text-xs text-navy-subtle tracking-widest')}.
                       The headline is a smaller {code('<h2>')} ({code('text-2xl lg:text-3xl')}), the lead is{' '}
                       {code('text-base')}, and there are two small buttons (solid navy-bold and outline). The section
