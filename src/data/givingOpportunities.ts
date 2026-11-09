@@ -181,7 +181,7 @@ export const givingOpportunities: Opportunity[] = [
   {
     id: 'commemorative-bricks-chairs',
     title: 'Commemorative Bricks and Chairs',
-    teaser: 'Put a name on the Jack C. Taylor Conference Center.',
+    teaser: 'Honor someone with a permanent place at the Jack C. Taylor Conference Center.',
     image: 'commemorative-bricks-chairs.webp',
     imageAlt: 'The Jack C. Taylor Conference Center commemorative brick wall, its engraved donor names arranged in columns',
     body: [
