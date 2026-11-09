@@ -7,12 +7,7 @@ import { Button } from '@/components/ui/Button'
 import CreditCardModal from '@/components/ui/CreditCardModal'
 import { AcceptedCards } from '@/components/ui/CardBrandIcons'
 import { PRIORITY_LABELS, TRIBUTE_LABELS, makeOrderNumber } from '@/data/transactions'
-import {
-  appendCommemorativeParams,
-  commemorativeLineLabel,
-  money,
-  readDonation,
-} from '@/data/commemorativeGifts'
+import { money, readDonationAmount } from '@/data/donation'
 import { countries, militaryStatuses, ranksForService, services, suffixes, usStates } from '@/data/essaySubmission'
 import { GradYearHelpTooltip, ServiceHelpTooltip } from '@/components/ui/FieldHelp'
 import { ACCOUNT_ADDRESS, ACCOUNT_CARD, isTestLogin } from '@/data/testAccount'
@@ -170,12 +165,11 @@ export default function DonateCheckout() {
   const frequencyLabel = frequency === 'monthly' ? 'Monthly' : 'One-Time'
   const priorityLabels = priorityIds.map(id => PRIORITY_LABELS[id] ?? id)
 
-  /** The cash gift and any bricks and chairs, itemised and totalled. */
-  const { cash, lines: commemorativeLines, total } = readDonation(searchParams)
+  const cash = readDonationAmount(searchParams)
 
   useEffect(() => {
-    setCartCount((cash > 0 ? 1 : 0) + commemorativeLines.length)
-  }, [cash, commemorativeLines.length, setCartCount])
+    setCartCount(cash > 0 ? 1 : 0)
+  }, [cash, setCartCount])
 
   // ── Account
   const [activeTab, setActiveTab]       = useState<'guest' | 'create' | 'signin'>('guest')
@@ -288,7 +282,6 @@ export default function DonateCheckout() {
     })
     if (cash > 0) params.set('amount', String(cash))
     if (priorityIds.length > 0) params.set('priorities', priorityIds.join(','))
-    appendCommemorativeParams(params, commemorativeLines)
     if (isAnonymous) params.set('anonymous', 'true')
     if (tributeName) {
       params.set('tribute', tributeType ?? 'honor')
@@ -545,46 +538,28 @@ export default function DonateCheckout() {
                   <div className="p-6 flex flex-col gap-6">
                     <h2 className="font-headline text-[24px] text-[#1d2535] leading-[1.2]">Order summary</h2>
 
-                    {/* Line items: the gift with its frequency, then each
-                        brick or chair line, then what is charged today. */}
+                    {/* Line items */}
                     <div className="flex flex-col gap-0">
-                      {cash > 0 && (
-                        <div className="flex justify-between items-baseline gap-4 py-3 border-b border-[#e8eaed]">
-                          <span className="font-body font-bold text-[15px] text-[#1d2535]">
-                            Gift <span className="font-normal text-[#4e576a]">({frequencyLabel})</span>
-                          </span>
-                          <span className="font-body text-[15px] text-[#4e576a]">{money(cash)}</span>
-                        </div>
-                      )}
-                      {commemorativeLines.map(line => (
-                        <div
-                          key={line.gift.id}
-                          className="flex justify-between items-baseline gap-4 py-3 border-b border-[#e8eaed]"
-                        >
-                          <span className="font-body font-bold text-[15px] text-[#1d2535] capitalize">
-                            {commemorativeLineLabel(line)}
-                          </span>
-                          <span className="font-body text-[15px] text-[#4e576a]">${line.subtotal.toLocaleString()}</span>
-                        </div>
-                      ))}
+                      <div className="flex justify-between items-baseline gap-4 py-3 border-b border-[#e8eaed]">
+                        <span className="font-body font-bold text-[15px] text-[#1d2535]">Frequency</span>
+                        <span className="font-body text-[15px] text-[#4e576a]">{frequencyLabel}</span>
+                      </div>
                       <div className="flex justify-between items-baseline gap-4 pt-4 mt-1">
                         <span className="font-body font-bold text-[17px] text-[#1d2535]">Total</span>
-                        <span className="font-headline text-[32px] text-[#023e7d]">{money(total)}</span>
+                        <span className="font-headline text-[32px] text-[#023e7d]">{money(cash)}</span>
                       </div>
-                      {frequency === 'monthly' && cash > 0 && (
+                      {frequency === 'monthly' && (
                         <p className="font-body text-[13px] text-[#4e576a] leading-[1.5] mt-2">
                           Your card will be charged {money(cash)} each month. Cancel anytime in your account settings.
-                          {commemorativeLines.length > 0 && ' Bricks and chairs are charged once.'}
                         </p>
                       )}
                     </div>
 
                     <div className="h-px bg-[#c4c9d4]" />
 
-                    {/* Where it goes: the gift's priorities or the default
-                        fund, and the bricks and chairs' fixed fund. */}
+                    {/* Where it goes: the gift's priorities or the default fund */}
                     <div className="flex flex-col gap-2">
-                      {cash > 0 && (priorityLabels.length > 0 ? (
+                      {priorityLabels.length > 0 ? (
                         <>
                           <span className="font-body font-bold text-[15px] text-[#1d2535]">Investment Priorities</span>
                           <div className="flex flex-col gap-1.5 mt-1">
@@ -598,11 +573,6 @@ export default function DonateCheckout() {
                           <span className="font-body font-bold text-[15px] text-[#1d2535]">Fund</span>
                           <span className="font-body text-[15px] text-[#4e576a]">Most Needed</span>
                         </div>
-                      ))}
-                      {commemorativeLines.length > 0 && (
-                        <span className="font-body text-[13px] text-[#4e576a] mt-1 italic">
-                          Bricks and chairs: Jack C. Taylor Conference Center Maintenance &amp; Technology Fund
-                        </span>
                       )}
                       {/* The two choices made back in the cart, reported here
                           rather than asked again. */}

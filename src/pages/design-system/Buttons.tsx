@@ -788,8 +788,8 @@ export default function Buttons() {
 
             <LiveMarkup label="CTA row (spec): resize below 640px to see it stack" previewClassName="p-6 lg:p-8 bg-navy-boldest">
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 sm:items-center">
-                <ButtonLink href="#commemorative-gifts" variant="primary" size="md">
-                  Purchase a brick or chair
+                <ButtonLink href="/giving/donate?priority=taylor-conference-center" variant="primary" size="md">
+                  Support the Center
                 </ButtonLink>
                 <ButtonLink
                   href="https://www.jackctaylorconferencecenter.org/"

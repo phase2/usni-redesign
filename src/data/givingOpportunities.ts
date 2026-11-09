@@ -1,11 +1,14 @@
 /**
- * Giving Opportunities — the twelve programmes the Foundation raises for.
+ * Giving Opportunities — the twelve programs the Foundation raises for.
  *
  * Twelve since the October 2026 review: Sponsor Student Memberships came down
  * from its featured billboard above the grid to sit in it as an equal, and the
- * commemorative bricks and chairs lost their purchase picker on the Taylor
- * Center page and became a card here that points a donor at the Foundation —
- * what remains is limited, so it is a conversation rather than a checkout.
+ * commemorative bricks and chairs became a card here. In November 2026 the
+ * client took bricks and chairs out of the online donation form as well, so
+ * this card is the only place they are offered: what remains is limited, so
+ * it is a conversation with the Foundation rather than a checkout. The Taylor
+ * Center's own card mentions them too, since a donor interested in the Center
+ * is the likeliest to want one.
  *
  * Transcribed from /donate/giving-opportunities and its nine child pages on the
  * live Drupal site (test-usni3.pantheonsite.io, captured 11 September 2026).
@@ -160,13 +163,14 @@ export const givingOpportunities: Opportunity[] = [
   {
     id: 'taylor-conference-center',
     title: 'Jack C. Taylor Conference Center',
-    teaser: 'The Institute’s physical flagship — and the one gift that carries a name on the building.',
+    teaser: 'The Institute’s physical flagship in Annapolis, kept current by private support.',
     image: 'taylor-conference-center.jpg',
     imageAlt: 'Exterior signage on the Jack C. Taylor Conference Center in Annapolis',
     body: [
       { type: 'p', text: 'Funded entirely with private donations, the Jack C. Taylor Conference Center is the Naval Institute’s physical flagship: a 406-seat auditorium, five meeting rooms, two indoor/outdoor terraces, and a broadcast studio, adjoining the Institute’s headquarters on the Yard of the U.S. Naval Academy. It is where naval professionals, historians, government officials, midshipmen, students, and interested civilians convene for conferences, lectures, workshops, and wargames, and it is optimized for classified discussion on a per-use, waiver basis.' },
       { type: 'p', text: 'Private support is what keeps it current. Gifts to the Jack C. Taylor Conference Center Maintenance & Technology Fund underwrite the upkeep of the building and the audiovisual equipment behind every session held in it — the projection and acoustics in the auditorium, the stage LED wall, and the broadcast studio that carries a discussion well beyond the people in the room.' },
-      { type: 'p', text: 'For more information on how you can support the Jack C. Taylor Conference Center, please contact the Naval Institute Foundation at (410) 295-1054 or foundation@usni.org . Or make a direct contribution today as part of your gift to the Institute’s comprehensive campaign.' },
+      { type: 'p', text: 'A name can go on the Center itself, too: an engraved nameplate on a seat in the auditorium, or an engraved brick on the donor wall. A limited number remain, so they are arranged with the Foundation directly rather than online.' },
+      { type: 'p', text: 'For more information on how you can support the Jack C. Taylor Conference Center, or about the remaining bricks and chairs, please contact the Naval Institute Foundation at (410) 295-1054 or foundation@usni.org . Or make a direct contribution today as part of your gift to the Institute’s comprehensive campaign.' },
     ],
     cta: {
       label: 'About the Center',
@@ -185,7 +189,7 @@ export const givingOpportunities: Opportunity[] = [
       { type: 'p', text: 'A limited number of bricks and chairs remain. Contact the Naval Institute Foundation at (410) 295-1054 or foundation@usni.org to learn more about remaining brick and chair opportunities.' },
     ],
     cta: {
-      label: 'Contact the Foundation',
+      label: 'Contact USNI to Learn More',
       href: '/giving/contact',
     },
     donate: false,

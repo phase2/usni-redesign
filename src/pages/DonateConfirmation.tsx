@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useCart } from '@/context/CartContext'
-import { commemorativeLineLabel, money, readDonation } from '@/data/commemorativeGifts'
+import { money, readDonationAmount } from '@/data/donation'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import {
@@ -51,13 +51,7 @@ export default function DonateConfirmation() {
   const frequencyLabel = isMonthly ? 'Monthly recurring' : 'One-time'
   const priorityLabels = priorityIds.map(id => PRIORITY_LABELS[id] ?? id)
 
-  /**
-   * A commemorative gift names what it bought on the receipt — the donor needs
-   * the record to say "2 commemorative chairs", not only the fund the money
-   * landed in, since the Foundation follows up about nameplate text. The cash
-   * gift and the bricks and chairs are itemised and totalled.
-   */
-  const { cash, lines: commemorativeLines, total } = readDonation(searchParams)
+  const cash = readDonationAmount(searchParams)
 
   const giftDate = formatReceiptDate()
 
@@ -93,8 +87,8 @@ export default function DonateConfirmation() {
       ),
     },
     {
-      title: total >= 1000 ? 'Welcome to the Leadership Circle' : 'You will hear how it was used',
-      body: total >= 1000 ? (
+      title: cash >= 1000 ? 'Welcome to the Leadership Circle' : 'You will hear how it was used',
+      body: cash >= 1000 ? (
         <>
           Gifts of $1,000 or more within a calendar year are recognized in the Leadership Circle, the
           first of the Institute's premier gift-recognition societies. A member of the Foundation
@@ -137,28 +131,11 @@ export default function DonateConfirmation() {
 
               <ReceiptCard title="Your gift" action={<PrintReceiptButton />}>
                 <div className="flex flex-col gap-0">
-                  {cash > 0 && (
-                    <>
-                      <ReceiptRow label="Gift" value={`${money(cash)} · ${frequencyLabel}`} />
-                      <ReceiptRow
-                        label="Designation"
-                        value={priorityLabels.length > 0 ? priorityLabels.join(', ') : 'Most Needed'}
-                      />
-                    </>
-                  )}
-                  {commemorativeLines.map(line => (
-                    <ReceiptRow
-                      key={line.gift.id}
-                      label={line.gift.plural}
-                      value={`${commemorativeLineLabel(line)} · $${line.subtotal.toLocaleString()}`}
-                    />
-                  ))}
-                  {commemorativeLines.length > 0 && (
-                    <ReceiptRow
-                      label={cash > 0 ? 'Bricks and chairs designated to' : 'Designation'}
-                      value="Jack C. Taylor Conference Center Maintenance & Technology Fund"
-                    />
-                  )}
+                  <ReceiptRow label="Gift" value={`${money(cash)} · ${frequencyLabel}`} />
+                  <ReceiptRow
+                    label="Designation"
+                    value={priorityLabels.length > 0 ? priorityLabels.join(', ') : 'Most Needed'}
+                  />
                   {tributeName && (
                     <ReceiptRow
                       label="Dedication"
@@ -170,7 +147,7 @@ export default function DonateConfirmation() {
                     value={cardLast4 ? `Credit card ending in ${cardLast4}` : 'Credit card'}
                   />
                   <ReceiptRow label="Recognition" value={isAnonymous ? 'Anonymous' : 'Publicly acknowledged'} />
-                  <ReceiptTotal label={isMonthly ? 'Charged today' : 'Total gift'} value={money(total)} />
+                  <ReceiptTotal label={isMonthly ? 'Charged today' : 'Total gift'} value={money(cash)} />
                 </div>
 
                 <p className="font-body text-[14px] text-neutral-subtle leading-relaxed border-t border-[#e8eaed] pt-4">

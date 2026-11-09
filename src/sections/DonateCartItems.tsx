@@ -2,14 +2,7 @@ import { useState, useEffect, type ReactNode } from 'react'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import { useCart } from '@/context/CartContext'
 import { DONATION_PRIORITIES } from '@/data/givingOpportunities'
-import {
-  appendCommemorativeParams,
-  commemorativeLineLabel,
-  donateFormHref,
-  money,
-  readDonation,
-  type CommemorativeGift,
-} from '@/data/commemorativeGifts'
+import { donateFormHref, money, readDonationAmount } from '@/data/donation'
 
 function Toggle({ on, onToggle }: { on: boolean; onToggle: () => void }) {
   return (
@@ -100,15 +93,12 @@ function Detail({ label, children }: { label: string; children: ReactNode }) {
 const Divider = () => <div className="w-px h-5 bg-[#c4c9d4]" aria-hidden />
 
 /**
- * The donation cart. As on the live /foundation flow, a gift and any bricks or
- * chairs from the donation form arrive together and list as separate items —
- * the gift with its frequency and amount, each commemorative gift with its
- * quantity — each with its own Edit and Remove, and a total under them.
+ * The donation cart: the gift from the donation form, with its frequency and
+ * amount, Edit and Remove, and the investment priorities it can be designated
+ * to. Edit and Back return to the donation form with the amount still chosen.
  *
- * Investment priorities apply to the cash gift, so the picker shows only while
- * there is one. Bricks and chairs are always designated to the Center's
- * Maintenance & Technology Fund, so they report their recognition instead.
- * Edit and Back return to the donation form with every choice still made.
+ * Commemorative bricks and chairs listed here as items of their own until
+ * November 2026, when they left the online flow (see `donation.ts`).
  */
 export default function DonateCartItems() {
   const [searchParams] = useSearchParams()
@@ -118,15 +108,9 @@ export default function DonateCartItems() {
   const frequency      = searchParams.get('frequency') ?? 'one-time'
   const frequencyLabel = frequency === 'monthly' ? 'Monthly' : 'One-Time'
 
-  const donation = readDonation(searchParams)
-  const [cashRemoved, setCashRemoved] = useState(false)
-  const [removedLines, setRemovedLines] = useState<Set<CommemorativeGift['id']>>(new Set())
-
-  const cash = cashRemoved ? 0 : donation.cash
-  const commemorativeLines = donation.lines.filter(l => !removedLines.has(l.gift.id))
-  const total = cash + commemorativeLines.reduce((sum, l) => sum + l.subtotal, 0)
-  const itemCount = (cash > 0 ? 1 : 0) + commemorativeLines.length
-  const removed = itemCount === 0
+  const [removed, setRemoved] = useState(false)
+  const cash = removed ? 0 : readDonationAmount(searchParams)
+  const itemCount = cash > 0 ? 1 : 0
 
   /**
    * A gift that arrived already designated — the Donate Today buttons under
@@ -139,7 +123,7 @@ export default function DonateCartItems() {
   const presetPriority = DONATION_PRIORITIES.some(o => o.id === requestedPriority)
     ? requestedPriority!
     : null
-  const editPath = donateFormHref({ cash, lines: commemorativeLines }, presetPriority)
+  const editPath = donateFormHref(cash, presetPriority)
 
   const [useWhereNeeded, setUseWhereNeeded] = useState(!presetPriority)
   const [priorities, setPriorities]         = useState<Set<string>>(
@@ -170,10 +154,8 @@ export default function DonateCartItems() {
   }
 
   const handleCheckout = () => {
-    const params = new URLSearchParams({ frequency })
-    if (cash > 0) params.set('amount', String(cash))
-    // Priorities designate the cash gift; bricks and chairs are already designated.
-    if (cash > 0 && !useWhereNeeded && priorities.size > 0) {
+    const params = new URLSearchParams({ frequency, amount: String(cash) })
+    if (!useWhereNeeded && priorities.size > 0) {
       params.set('priorities', Array.from(priorities).join(','))
     }
     if (isAnonymous) params.set('anonymous', 'true')
@@ -183,11 +165,10 @@ export default function DonateCartItems() {
       params.set('tribute', tributeType)
       params.set('tributeName', tributeName.trim())
     }
-    appendCommemorativeParams(params, commemorativeLines)
     navigate(`/giving/donate/checkout?${params.toString()}`)
   }
 
-  if (removed) {
+  if (cash === 0) {
     return (
       <section className="bg-white py-16">
         <div className="container-site flex flex-col gap-8">
@@ -233,88 +214,23 @@ export default function DonateCartItems() {
           <h2 className="font-headline text-[40px] text-[#1d2535] leading-[1.1]">Cart items</h2>
         </div>
 
-        {/* Items: the gift, then each commemorative gift, then the total. The
-            items have their own column so the last one drops its rule (`last:`)
-            and only the darker one above the total shows. */}
-        <div className="flex flex-col gap-6">
-          <div className="flex flex-col gap-6">
-            {cash > 0 && (
-              <CartItem
-                title="Gift to the U.S. Naval Institute"
-                onEdit={() => navigate(editPath)}
-                onRemove={() => setCashRemoved(true)}
-              >
-                <Detail label="Frequency">{frequencyLabel}</Detail>
-                <Divider />
-                <Detail label="Amount">{money(cash)}</Detail>
-              </CartItem>
-            )}
+        <CartItem
+          title="Gift to the U.S. Naval Institute"
+          onEdit={() => navigate(editPath)}
+          onRemove={() => setRemoved(true)}
+        >
+          <Detail label="Frequency">{frequencyLabel}</Detail>
+          <Divider />
+          <Detail label="Amount">{money(cash)}</Detail>
+        </CartItem>
 
-            {commemorativeLines.map(line => (
-              <CartItem
-                key={line.gift.id}
-                title={`${line.gift.plural} — Jack C. Taylor Conference Center`}
-                onEdit={() => navigate(editPath)}
-                onRemove={() => setRemovedLines(prev => new Set(prev).add(line.gift.id))}
-              >
-                <Detail label="Quantity">{line.count}</Detail>
-                <Divider />
-                <Detail label="Amount">${line.subtotal.toLocaleString()}</Detail>
-                <span className="font-body text-[15px] text-[#4e576a]">
-                  (${line.gift.unitPrice.toLocaleString()} each)
-                </span>
-              </CartItem>
-            ))}
-          </div>
-
-          {itemCount > 1 && (
-            <div className="flex items-baseline justify-end gap-4 border-t border-[#c4c9d4] pt-5">
-              <span className="font-body font-bold text-[17px] text-[#1d2535]">Total</span>
-              <span className="font-headline text-[32px] text-[#023e7d] leading-none">{money(total)}</span>
-            </div>
-          )}
-        </div>
-
-        {/* Bricks and chairs are already designated, so they report their
-            recognition rather than asking the donor to choose a priority. */}
-        {commemorativeLines.length > 0 && (
-          <div className="bg-[#f4f5f7] border border-[#e0e2e7] p-6 flex flex-col gap-5">
-            <div className="flex flex-col gap-1">
-              <h3 className="font-body font-bold text-[18px] text-[#1d2535]">
-                Your commemorative gift
-              </h3>
-              <p className="font-body text-[14px] text-[#4e576a] leading-[1.5]">
-                Bricks and chairs support the Jack C. Taylor Conference Center Maintenance &amp;
-                Technology Fund and are recognized at the Center itself.
-              </p>
-            </div>
-
-            <div className="flex flex-col gap-4">
-              {commemorativeLines.map(line => (
-                <div key={line.gift.id} className="flex flex-col gap-1.5">
-                  <p className="font-body font-bold text-[15px] text-[#1d2535] capitalize">
-                    {commemorativeLineLabel(line)}
-                  </p>
-                  <p className="font-body text-[14px] text-[#1d2535] leading-[1.6]">
-                    {line.gift.recognition}
-                  </p>
-                  <p className="font-body italic text-[13px] text-[#4e576a] leading-[1.5]">
-                    {line.gift.footnote}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Investment priorities, for the cash gift */}
-        {cash > 0 && (
+        {/* Investment priorities */}
         <div className="bg-[#f4f5f7] border border-[#e0e2e7] p-6 flex flex-col gap-5">
           <div className="flex flex-col gap-1">
             <h3 className="font-body font-bold text-[18px] text-[#1d2535]">Select investment priorities</h3>
             <p className="font-body text-[14px] text-[#4e576a] leading-[1.5]">
-              Select where your {commemorativeLines.length > 0 ? `${money(cash)} gift` : 'donation'} will
-              be used. If more than one priority is selected, your donation will be split evenly between the selections.
+              Select where your donation will be used. If more than one priority is selected, your
+              donation will be split evenly between the selections.
             </p>
             <p className="font-body text-[14px] text-[#4e576a] leading-[1.5]">
               If you do not see your desired priority in the list,{' '}
@@ -344,7 +260,6 @@ export default function DonateCartItems() {
             ))}
           </div>
         </div>
-        )}
 
         {/* Send a message */}
         <div className="flex flex-col gap-3">

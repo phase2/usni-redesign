@@ -31,9 +31,9 @@ import heroImage from '@/assets/images/taylor-center/jctcc-rooftop.jpg'
  * who came to book a room.
  *
  * The commemorative bricks and chairs had a purchase picker here, between the
- * rooms and the namesake. Since October 2026 it is part of the main donation
- * form instead (DonateCommemorative, on /giving/donate), as on the live
- * /foundation page.
+ * rooms and the namesake. It moved into the main donation form in October
+ * 2026, and in November left the online flow altogether: they are now a card
+ * on /giving/opportunities that points a donor at the Foundation.
  */
 export default function GivingTaylorCenter() {
   return (

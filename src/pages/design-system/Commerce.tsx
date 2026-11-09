@@ -1178,7 +1178,7 @@ export default function Commerce() {
               tone="drift"
               title="Drift"
               items={[
-                { path: 'src/sections/DonateCartItems.tsx', note: 'same row, but Remove hovers to a pale hover:bg-[#fff5f5] tint instead of filling red. A commemorative gift adds a priced list of bricks and chairs under the title.' },
+                { path: 'src/sections/DonateCartItems.tsx', note: 'same row, but Remove hovers to a pale hover:bg-[#fff5f5] tint instead of filling red.' },
                 { path: 'src/sections/CartItems.tsx', note: 'membership and magazine lines: no flex-wrap on the row or terms (gap-4 only), term text in text-[#4e576a] instead of #1d2535, rule bg-[#d9d9d9], and the pale Remove hover.' },
                 { path: 'src/sections/NavalHistoryCartItems.tsx', note: 'its own add-on membership line labels Edit as “Change” and drops both icons.' },
               ]}
@@ -1734,7 +1734,7 @@ rebuilding them, with the stepper built as Forms describes. When the quantity ch
               title="Drift"
               items={[
                 { path: 'src/pages/MembershipCheckout.tsx', note: 'total is text-[28px] text-[#1d2535] (not 30px navy-subtle). Rows read Plan, Term, “NH Format”, “NH Term”. No coupon. The auto-renew rows above are hand-rolled aria-pressed buttons between 2px gold rules, with a #1d2535 “on” track instead of Toggle’s #023e7d, and they state a fixed date (“January 1, 2027”).' },
-                { path: 'src/pages/DonateCheckout.tsx', note: 'total is text-[32px]. Frequency row only, then a designation block (commemorative lines, priorities, or “Fund: Most Needed”) with italic tribute and anonymity notes. No coupon.' },
+                { path: 'src/pages/DonateCheckout.tsx', note: 'total is text-[32px]. Frequency row only, then a designation block (priorities, or “Fund: Most Needed”) with italic tribute and anonymity notes. No coupon.' },
               ]}
             />
           </div>

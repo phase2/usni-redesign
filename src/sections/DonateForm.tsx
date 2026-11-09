@@ -1,13 +1,9 @@
 import { useRef, useState, type ReactNode } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { DONATION_PRIORITIES } from '@/data/givingOpportunities'
-import { COMMEMORATIVE_GIFTS, money, readCommemorativeLines } from '@/data/commemorativeGifts'
-import DonateCommemorative, { type CommemorativeSelection } from '@/sections/DonateCommemorative'
+import { money, parseAmount } from '@/data/donation'
 
 const presetAmounts = [50, 100, 500, 1000]
-
-/** A whole-dollar or dollars-and-cents amount above zero. */
-const parseAmount = (raw: string) => (/^\d+(\.\d{1,2})?$/.test(raw.trim()) ? Number(raw) : 0)
 
 /**
  * The large checkbox on an amount card. The card is a radio underneath — one
@@ -54,19 +50,20 @@ function AmountCard({
 }
 
 /**
- * The donation form: an amount, bricks and chairs for the Jack C. Taylor
- * Conference Center, and a running total that goes to the cart — the live
- * /foundation page's flow, in the prototype's treatments.
+ * The donation form: an amount and a running total that goes to the cart, the
+ * live /foundation page's flow in the prototype's treatments.
  *
- * Choosing an amount no longer jumps to the cart. Each amount card is a large
- * checkbox (one amount at a time, with Clear selection to take it back), so a
- * donor can add a brick or chair to the same gift, or give one on its own,
- * before Add to Cart. The button stays disabled until there is something to
- * add.
+ * Each amount card is a large checkbox (one amount at a time, with Clear
+ * selection to take it back), and Add to Cart stays disabled until there is an
+ * amount.
  *
- * Everything the form needs arrives in the query string too — `amount`,
- * `chairs`, `bricks` — so the cart's Edit brings a donor back with their
- * choices still made.
+ * The live page also sells commemorative bricks and chairs for the Jack C.
+ * Taylor Conference Center under the amounts. They were here too until the
+ * client took them out of the online flow in November 2026; they are now a
+ * Giving Opportunities card that points a donor at the Foundation.
+ *
+ * The amount arrives in the query string too, so the cart's Edit brings a
+ * donor back with it still chosen.
  */
 export default function DonateForm() {
   const navigate = useNavigate()
@@ -91,17 +88,10 @@ export default function DonateForm() {
 
   // Seeded once from the URL, as the cart's Edit leaves it.
   const [initial] = useState(() => {
-    const amount = parseAmount(searchParams.get('amount') ?? '')
-    const lines = readCommemorativeLines(searchParams)
+    const amount = parseAmount(searchParams.get('amount'))
     return {
       preset: presetAmounts.includes(amount) ? amount : null,
       custom: amount > 0 && !presetAmounts.includes(amount) ? String(amount) : '',
-      commemorative: Object.fromEntries(
-        COMMEMORATIVE_GIFTS.map(gift => {
-          const line = lines.find(l => l.gift.id === gift.id)
-          return [gift.id, { on: !!line, count: line?.count ?? 1 }]
-        }),
-      ) as CommemorativeSelection,
     }
   })
 
@@ -110,20 +100,12 @@ export default function DonateForm() {
     initial.preset ?? (initial.custom ? 'custom' : null),
   )
   const [custom, setCustom] = useState(initial.custom)
-  const [commemorative, setCommemorative] = useState<CommemorativeSelection>(initial.commemorative)
 
-  const cash = selected === 'custom' ? parseAmount(custom) : (selected ?? 0)
-  const lines = COMMEMORATIVE_GIFTS.filter(g => commemorative[g.id].on).map(gift => ({
-    gift,
-    count: commemorative[gift.id].count,
-  }))
-  const total = cash + lines.reduce((sum, l) => sum + l.gift.unitPrice * l.count, 0)
+  const total = selected === 'custom' ? parseAmount(custom) : (selected ?? 0)
 
   const addToCart = () => {
-    const params = new URLSearchParams({ frequency: 'one-time' })
-    if (cash > 0) params.set('amount', String(cash))
-    lines.forEach(l => params.set(l.gift.id, String(l.count)))
-    if (designation && cash > 0) params.set('priority', designation.id)
+    const params = new URLSearchParams({ frequency: 'one-time', amount: String(total) })
+    if (designation) params.set('priority', designation.id)
     navigate(`/giving/donate/cart?${params.toString()}`)
   }
 
@@ -191,12 +173,6 @@ export default function DonateForm() {
           )}
         </fieldset>
 
-        {/* Bricks and chairs */}
-        <DonateCommemorative
-          selection={commemorative}
-          onChange={(id, next) => setCommemorative(prev => ({ ...prev, [id]: next }))}
-        />
-
         {/* Running total and hand-off to the cart */}
         <div className="border-t border-[#c4c9d4] pt-6 flex flex-wrap items-center justify-between gap-4">
           {/* Label and amount share a baseline — the amount is more than twice
@@ -211,7 +187,7 @@ export default function DonateForm() {
                 </span>
               </>
             ) : (
-              'Select a donation amount or add a brick or chair to continue.'
+              'Select a donation amount to continue.'
             )}
           </p>
           <button

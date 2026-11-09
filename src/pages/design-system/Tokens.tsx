@@ -90,7 +90,7 @@ const COLOR_META: Record<string, { group: Group; role: ReactNode; uses: number; 
   'gold-dark': { group: 'Gold', role: 'Hover for gold buttons. The name is legacy: it is the lightest gold, not the darkest.', uses: 28, hardCoded: 5 },
   tan: { group: 'Tan', role: 'Accent underlines (`.footer-nav-accent`, currently unused), tan borders.', uses: 6, hardCoded: 0 },
   'tan-subtle': { group: 'Tan', role: 'Tan borders on tan-subtlest panels.', uses: 8, hardCoded: 4 },
-  'tan-subtlest': { group: 'Tan', role: 'Warm section band (commemorative gifts, school directory), article callouts.', uses: 14, hardCoded: 8 },
+  'tan-subtlest': { group: 'Tan', role: 'Warm section band (school directory), article callouts.', uses: 14, hardCoded: 8 },
   'light-blue': { group: 'Utility', role: 'Eyebrows and links on navy; the rule under the breadcrumb on light-blue heroes; cover-art panels. Figma calls it primary-subtler.', uses: 37, hardCoded: 23 },
   'surface-subtle': { group: 'Utility', role: 'Light blue-tinted band (tax information, selected donation amount).', uses: 54, hardCoded: 0 },
   'border-light': { group: 'Utility', role: 'Default hairline: card borders, list dividers, the header’s top-zone rule. Utility reads `border-border-light`.', uses: 107, hardCoded: 18 },
@@ -268,8 +268,8 @@ const HEADINGS: TypeRow[] = [
   {
     role: 'H2 — interior heading with blue rule',
     classes: 'font-headline text-[26px] lg:text-[32px] text-navy-bolder leading-[1.15] pb-4 border-b-2 border-[#0466C8]',
-    sample: 'Purchase a Brick or Chair at the new Jack C. Taylor Conference Center',
-    where: '17 uses — DonateCommemorative, StudentSchoolDirectory…',
+    sample: 'Inside the Center',
+    where: '17 uses — StudentSchoolDirectory, TaylorCenterSpaces…',
     note: 'The rule colour is navy-bright, hard-coded.',
   },
   {
