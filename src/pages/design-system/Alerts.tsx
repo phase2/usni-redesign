@@ -423,7 +423,7 @@ export default function Alerts() {
 
             <ClassTable
               rows={[
-                { part: 'Band', classes: 'bg-[#fefde8] border-b border-gold-dark', note: '<aside aria-label="Announcement">, first in <body>, above the sticky header, so it scrolls away while the header stays pinned. #fefde8 is the lightest yellow on the site (the donate cart banner’s) and has no token yet.' },
+                { part: 'Band', classes: 'bg-[#fefde8]', note: '<aside aria-label="Announcement">, first in <body>, above the sticky header, so it scrolls away while the header stays pinned. #fefde8 is the lightest yellow on the site (the donate cart banner’s) and has no token yet.' },
                 { part: 'Content', classes: 'container-site py-5 lg:py-6 flex flex-col gap-1.5', note: 'Held to the page container, so it lines up with the sections below.' },
                 { part: 'Headline', classes: 'font-headline text-[22px] lg:text-[26px] text-navy-bolder leading-[1.2]', note: 'A styled <p>, not a heading, so the page’s h1 stays first in the outline.' },
                 { part: 'Summary', classes: 'font-body text-base text-[#1d2535] leading-relaxed', note: 'One line. See More sits at its end.' },

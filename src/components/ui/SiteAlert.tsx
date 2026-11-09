@@ -35,7 +35,7 @@ export default function SiteAlert({
   const moreId = useId()
 
   return (
-    <aside aria-label="Announcement" className="bg-[#fefde8] border-b border-gold-dark">
+    <aside aria-label="Announcement" className="bg-[#fefde8]">
       <div className="container-site py-5 lg:py-6 flex flex-col gap-1.5">
         <p className="font-headline text-[22px] lg:text-[26px] text-navy-bolder leading-[1.2]">{title}</p>
         <p className="font-body text-base text-[#1d2535] leading-relaxed">
