@@ -1,6 +1,4 @@
-import { useState } from 'react'
-import Pagination from '@/components/ui/Pagination'
-import IssueCoverCard from '@/components/ui/IssueCoverCard'
+import IssueArchive, { type ArchiveIssue } from '@/sections/IssueArchive'
 
 import aug26Cover from '@/assets/images/proceedings-magazine-aug26-cover.png'
 import jul26Cover from '@/assets/images/proceedings-magazine-jul26-cover.png'
@@ -19,15 +17,7 @@ import jul25Cover from '@/assets/images/proceedings-magazine-jul25-cover.png'
 import jun25Cover from '@/assets/images/proceedings-magazine-jun25-cover.png'
 import may25Cover from '@/assets/images/proceedings-magazine-may25-cover.png'
 
-interface Issue {
-  month: string
-  year: number
-  vol: string
-  cover: string
-  href: string
-}
-
-const issues: Issue[] = [
+const issues: ArchiveIssue[] = [
   { month: 'August', year: 2026, vol: 'Vol. 152/8/1,482', cover: aug26Cover, href: '#' },
   { month: 'July', year: 2026, vol: 'Vol. 152/7/1,481', cover: jul26Cover, href: '#' },
   { month: 'June', year: 2026, vol: 'Vol. 152/6/1,480', cover: jun26Cover, href: '#' },
@@ -51,98 +41,23 @@ const months = [
   'July', 'August', 'September', 'October', 'November', 'December',
 ]
 
-const selectClasses =
-  'font-body text-sm text-navy-bolder border border-[#94A3B8] px-3 py-2.5 pr-8 outline-none ' +
-  'focus:border-navy-bright focus:shadow-[0_0_0_3px_rgba(4,102,200,0.15)] bg-white transition'
-
 export default function ProceedingsAllIssuesGrid() {
-  const [year, setYear] = useState('all')
-  const [month, setMonth] = useState('all')
-
-  const filtered = issues.filter(
-    (issue) =>
-      (year === 'all' || issue.year === Number(year)) &&
-      (month === 'all' || issue.month === month)
-  )
-
   return (
-    <section className="bg-white py-12 lg:py-16">
-      <div className="container-site">
-
-        {/* ── Filters ── */}
-        <div className="flex flex-wrap items-end gap-4 lg:gap-6">
-          <label className="flex flex-col gap-1.5">
-            <span className="font-body font-semibold text-sm uppercase tracking-[0.08em] text-navy-bolder">
-              Year
-            </span>
-            <select
-              value={year}
-              onChange={(e) => setYear(e.target.value)}
-              className={`select-field ${selectClasses}`}
-              aria-label="Filter issues by year"
-            >
-              <option value="all">All Years</option>
-              <option value="2026">2026</option>
-              <option value="2025">2025</option>
-            </select>
-          </label>
-
-          <label className="flex flex-col gap-1.5">
-            <span className="font-body font-semibold text-sm uppercase tracking-[0.08em] text-navy-bolder">
-              Month
-            </span>
-            <select
-              value={month}
-              onChange={(e) => setMonth(e.target.value)}
-              className={`select-field ${selectClasses}`}
-              aria-label="Filter issues by month"
-            >
-              <option value="all">All Months</option>
-              {months.map((m) => (
-                <option key={m} value={m}>{m}</option>
-              ))}
-            </select>
-          </label>
-        </div>
-
-        {/* ── Light accent separator between filters and the issue grid ── */}
-        <div className="bg-[#C2DDFF] h-px w-full mt-8 mb-10" />
-
-        {/* ── Issue grid: 4-up on desktop ── */}
-        {filtered.length > 0 ? (
-          <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-6 lg:gap-x-8 gap-y-10 lg:gap-y-12">
-            {filtered.map((issue) => (
-              <IssueCoverCard
-                key={`${issue.month}-${issue.year}`}
-                href={issue.href}
-                cover={issue.cover}
-                alt={`Proceedings ${issue.month} ${issue.year} cover`}
-                title={`Proceedings \u2013 ${issue.month} ${issue.year}`}
-                subtitle={issue.vol}
-                aspect="aspect-[534/728]"
-              />
-            ))}
-          </div>
-        ) : (
-          <p className="font-body text-lg text-neutral-subtle py-12 text-center">
-            No issues match the selected filters.
-          </p>
-        )}
-
-        {/* ── Pagination (demo) ── */}
-        <div className="mt-14">
-          <Pagination label="Archive pagination" />
-        </div>
-
-        {/* ── Donor credit ── */}
+    <IssueArchive
+      magazine="Proceedings"
+      issues={issues}
+      years={[2026, 2025]}
+      months={months}
+      aspect="aspect-[534/728]"
+      footer={
+        /* Donor credit */
         <div className="flex items-center justify-center gap-3 bg-[#EBF4FF] border border-[#C2DDFF] px-6 py-4 mt-12">
           <i className="fa-solid fa-circle-info text-navy-bolder text-[18px] flex-shrink-0" aria-hidden="true" />
           <p className="font-body font-bold text-base text-navy-bolder">
             Digital <em>Proceedings</em> content made possible by a gift from CAPT Roger Ekman, USN (Ret.)
           </p>
         </div>
-
-      </div>
-    </section>
+      }
+    />
   )
 }

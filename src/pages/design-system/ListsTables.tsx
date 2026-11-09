@@ -177,6 +177,7 @@ export default function ListsTables() {
               items={[
                 { path: 'src/sections/PastEventsArchive.tsx', note: 'layout, keyword, checkbox facets (FacetGroup), sort, pager. scope="all" is the All Events listing and adds a When facet.' },
                 { path: 'src/sections/EssayContestsArchive.tsx', note: 'the same layout, plus the Show more threshold' },
+                { path: 'src/sections/IssueArchive.tsx', note: 'the same layout with Year and Month selects in the rail instead of checkbox facets (each select in a border-b pb-5 block, like the keyword field), a results count, and the live pager at 12 per page. Proceedings and Naval History All Issues (ProceedingsAllIssuesGrid, NavalHistoryAllIssuesGrid) are its data.' },
               ]}
             />
             <SourceList
@@ -185,8 +186,6 @@ export default function ListsTables() {
               items={[
                 { path: 'src/sections/BooksCollectionLayout.tsx', note: 'Its own sidebar, hidden lg:block, so below 1024px the books listing has no filters at all. It also has a “Filter By” heading in font-extrabold text-sm uppercase over border-b-2, a w-[220px] xl:w-[240px] column, a local Accordion without .accordion-row or aria-controls, a type-ahead filter inside long facets, removable filter chips, a “Sort by:” label in neutral-subtle, a border-border-light select, and its own pager (below).' },
                 { path: 'src/sections/StudentSchoolDirectory.tsx', note: 'filters inline above the grid rather than in a panel. Labels are font-bold text-xs uppercase navy-subtle, and inputs use border-navy-subtle with a focus outline instead of the halo. Its count line is the only one with role="status".' },
-                { path: 'src/sections/ProceedingsAllIssuesGrid.tsx', note: 'year and month selects above the issue grid (uppercase text-sm labels), then a bg-[#C2DDFF] h-px rule (light-blue) and the demo pager' },
-                { path: 'src/sections/NavalHistoryAllIssuesGrid.tsx', note: 'the same as Proceedings' },
               ]}
             />
           </div>

@@ -792,7 +792,7 @@ export default function Utilities() {
                 items={[
                   { path: 'src/components/ui/FormField.tsx', note: 'SelectInput — the canonical control' },
                   { path: 'src/components/ui/SentenceSelect.tsx', note: 'the large inline select' },
-                  { path: 'src/sections/ProceedingsAllIssuesGrid.tsx', note: 'archive filters' },
+                  { path: 'src/sections/IssueArchive.tsx', note: 'All Issues year and month filters' },
                 ]}
               />
             </Entry>
