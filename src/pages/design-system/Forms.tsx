@@ -108,54 +108,111 @@ function QtyStepperCopy() {
   )
 }
 
-const ArrowIcon = () => (
-  <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-)
-
-/** From sections/DonateForm.tsx — one preset card and the custom-amount card. */
-function AmountCardsCopy({ selected }: { selected: number | null }) {
-  const [custom, setCustom] = useState('')
+/** From sections/DonateForm.tsx — the radio mark drawn on each amount card. */
+function RadioMarkCopy({ on }: { on: boolean }) {
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
-      {[50, 100, 500, 1000].map(amount => (
-        <div
-          key={amount}
-          className={`border p-5 flex flex-col gap-6 transition-colors
-                ${selected === amount ? 'border-navy-bolder bg-surface-subtle' : 'border-border-light'}`}
-        >
-          <p className="font-headline text-4xl lg:text-5xl text-navy-subtle">${amount.toLocaleString()}</p>
-          <button className="flex items-center justify-between w-full bg-navy-bolder text-white font-body font-bold text-sm px-4 py-3 hover:bg-navy-bright transition-colors">
-            Select Amount
-            <ArrowIcon />
-          </button>
-        </div>
-      ))}
-      <div
-        className={`border p-5 flex flex-col gap-3 transition-colors col-span-2 lg:col-span-1
-            ${selected === -1 ? 'border-navy-bolder bg-surface-subtle' : 'border-border-light'}`}
-      >
-        <div>
-          <label className="font-body font-semibold text-sm text-navy-bolder block mb-1">Custom Amount</label>
-          <div className="flex items-center border border-border-light bg-white px-3 py-2">
-            <span className="font-body text-neutral-subtle mr-1">$</span>
+    <span
+      aria-hidden="true"
+      className={`flex-shrink-0 w-7 h-7 rounded-full border-2 bg-white flex items-center justify-center transition-colors
+        group-has-[.amount-radio:focus-visible]:ring-2 group-has-[.amount-radio:focus-visible]:ring-navy-bright
+        group-has-[.amount-radio:focus-visible]:ring-offset-2
+        ${on ? 'border-navy-bolder' : 'border-[#94A3B8] group-hover:border-navy-bolder'}`}
+    >
+      {on && <span className="w-3.5 h-3.5 rounded-full bg-navy-bolder" />}
+    </span>
+  )
+}
+
+/**
+ * From sections/DonateForm.tsx — the amount radio group, the running total, and
+ * Add to Cart. Live, so the selected, hover, and focus states can be tried; Add
+ * to Cart goes nowhere here.
+ */
+function AmountCardsCopy({ initial }: { initial: number | null }) {
+  const [selected, setSelected] = useState<number | 'custom' | null>(initial)
+  const [custom, setCustom] = useState('')
+  const total = selected === 'custom' ? Number(custom) || 0 : (selected ?? 0)
+  const card = (on: boolean) =>
+    `group cursor-pointer border-2 p-5 flex flex-col gap-6 transition-colors ${
+      on ? 'border-navy-bolder bg-surface-subtle' : 'border-border-light bg-white hover:border-navy-subtle'
+    }`
+
+  return (
+    <div className="flex flex-col gap-10">
+      <fieldset className="flex flex-col gap-6">
+        <legend className="font-headline text-2xl lg:text-3xl text-navy-bolder leading-[1.1] text-center w-full mb-10">
+          Select your donation amount
+        </legend>
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
+          {[50, 100, 500, 1000].map(amount => (
+            <label key={amount} className={card(selected === amount)}>
+              <input
+                type="radio"
+                name="ds-donation-amount"
+                checked={selected === amount}
+                onChange={() => setSelected(amount)}
+                className="amount-radio sr-only"
+              />
+              <RadioMarkCopy on={selected === amount} />
+              <span className="font-headline text-4xl lg:text-5xl text-navy-subtle">${amount.toLocaleString()}</span>
+            </label>
+          ))}
+          <label className={`${card(selected === 'custom')} col-span-2 lg:col-span-1`}>
             <input
-              type="number"
-              min="1"
-              placeholder="___"
-              value={custom}
-              onChange={e => setCustom(e.target.value)}
-              className="flex-1 font-body text-navy-bolder text-base outline-none w-full"
+              type="radio"
+              name="ds-donation-amount"
+              checked={selected === 'custom'}
+              onChange={() => setSelected('custom')}
+              className="amount-radio sr-only"
             />
-          </div>
+            <span className="flex items-center gap-3">
+              <RadioMarkCopy on={selected === 'custom'} />
+              <span className="font-body font-semibold text-base text-navy-bolder">Custom amount</span>
+            </span>
+            <span className="flex items-center border border-[#94A3B8] bg-white px-3 py-2 mt-auto focus-within:border-navy-bright focus-within:shadow-[0_0_0_3px_rgba(4,102,200,0.15)] transition">
+              <span className="font-body text-neutral-subtle mr-1">$</span>
+              <input
+                type="number"
+                min="1"
+                step="0.01"
+                placeholder="___"
+                aria-label="Custom donation amount"
+                value={custom}
+                onChange={e => {
+                  setCustom(e.target.value)
+                  setSelected('custom')
+                }}
+                className="flex-1 font-body text-navy-bolder text-base outline-none w-full bg-transparent"
+              />
+            </span>
+          </label>
         </div>
+      </fieldset>
+
+      <div className="border-t border-[#c4c9d4] pt-6 flex flex-wrap items-center justify-between gap-4">
+        <p className="font-body text-base text-neutral-subtle flex flex-wrap items-baseline gap-x-3" aria-live="polite">
+          {total > 0 ? (
+            <>
+              <span>Your total</span>
+              <span className="font-headline text-[32px] text-navy-bolder leading-none">${total.toLocaleString()}</span>
+            </>
+          ) : (
+            'Select a donation amount to continue.'
+          )}
+        </p>
         <button
-          disabled={!custom}
-          className="flex items-center justify-between w-full bg-navy-bolder text-white font-body font-bold text-sm px-4 py-3 hover:bg-navy-bright transition-colors mt-auto disabled:opacity-50 disabled:cursor-not-allowed"
+          type="button"
+          disabled={total === 0}
+          className={`inline-flex items-center justify-center gap-2 font-body font-bold text-base px-6 py-4 border transition-colors ${
+            total === 0
+              ? 'bg-[#c4c9d4] text-white border-[#c4c9d4] cursor-not-allowed'
+              : 'bg-navy-bolder text-white border-navy-bolder hover:bg-navy-bright hover:border-navy-bright'
+          }`}
         >
-          Select Amount
-          <ArrowIcon />
+          Add to Cart
+          <svg className="w-3 h-3 flex-shrink-0" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M2 6h8M6 2l4 4-4 4" />
+          </svg>
         </button>
       </div>
     </div>
@@ -921,39 +978,44 @@ select.select-field:disabled {
         <DocSection title="Donation amount cards">
           <div className="flex flex-col gap-8">
             <Lede>
-              The first step of Donate: four preset amounts and a custom amount, each as a card with its own
-              “Select Amount” button. Choosing a preset goes straight to the cart — there is no separate selected
-              state and continue button. The custom card enables its button once a value is entered.
+              The first step of Donate: four preset amounts and a custom amount, as one radio group of large cards.
+              A donor picks one amount and changes it by picking another; nothing happens on selection. Below the
+              cards, a running total and Add to Cart, which stays disabled until there is an amount.
             </Lede>
 
-            <LiveMarkup label="Amount grid (reproduced from DonateForm) — $100 shown selected" defaultOpen={false}>
-              <AmountCardsCopy selected={100} />
+            <LiveMarkup label="Amount radio group (reproduced from DonateForm) — $100 selected; try Tab and the arrow keys" defaultOpen={false}>
+              <AmountCardsCopy initial={100} />
             </LiveMarkup>
 
             <ClassTable
               rows={[
+                { part: 'Group', classes: 'fieldset + legend', note: 'The legend, “Select your donation amount”, names the group: font-headline text-2xl lg:text-3xl text-navy-bolder, centered.' },
                 { part: 'Grid', classes: 'grid grid-cols-2 lg:grid-cols-5 gap-4', note: 'Two columns on mobile (custom card spans both), five in a row from lg.' },
-                { part: 'Card', classes: 'border p-5 flex flex-col gap-6 transition-colors border-border-light', note: 'Selected: `border-navy-bolder bg-surface-subtle`. In practice a preset navigates on click, so only the custom card shows it (while typing).' },
-                { part: 'Amount', classes: 'font-headline text-4xl lg:text-5xl text-navy-subtle', note: '36px → 48px at lg.' },
-                { part: 'Select button', classes: 'flex items-center justify-between w-full bg-navy-bolder text-white font-body font-bold text-sm px-4 py-3 hover:bg-navy-bright transition-colors', note: 'Arrow icon on the right. Custom card adds `mt-auto disabled:opacity-50 disabled:cursor-not-allowed`.' },
-                { part: 'Custom card', classes: 'border p-5 flex flex-col gap-3 transition-colors col-span-2 lg:col-span-1' },
-                { part: 'Custom label', classes: 'font-body font-semibold text-sm text-navy-bolder block mb-1' },
-                { part: 'Currency box', classes: 'flex items-center border border-border-light bg-white px-3 py-2', note: '“$” prefix in `font-body text-neutral-subtle mr-1`. Lighter border than the form fields (border-light, not #94A3B8).' },
-                { part: 'Custom input', classes: 'flex-1 font-body text-navy-bolder text-base outline-none w-full', note: 'type="number" min="1". No focus style — the outline is removed and nothing replaces it.' },
+                { part: 'Card', classes: 'group cursor-pointer border-2 p-5 flex flex-col gap-6 transition-colors border-border-light bg-white hover:border-navy-subtle', note: 'A <label> wrapping its radio, so the whole card is the hit area. Selected: `border-navy-bolder bg-surface-subtle`.' },
+                { part: 'Radio input', classes: 'amount-radio sr-only', note: 'Native radio, visually hidden. `amount-radio` is the hook the mark’s focus ring keys off.' },
+                { part: 'Radio mark', classes: 'w-7 h-7 rounded-full border-2 bg-white border-[#94A3B8] group-hover:border-navy-bolder', note: 'aria-hidden. Selected: `border-navy-bolder` with a `w-3.5 h-3.5 rounded-full bg-navy-bolder` dot. Focus: `group-has-[.amount-radio:focus-visible]:ring-2 ring-navy-bright ring-offset-2`.' },
+                { part: 'Amount', classes: 'font-headline text-4xl lg:text-5xl text-navy-subtle', note: '36px → 48px at lg. It is the card’s label text, so it is the radio’s accessible name.' },
+                { part: 'Custom card', classes: 'col-span-2 lg:col-span-1', note: 'Same card, with the mark and “Custom amount” in a row above the currency box. Typing in the box selects the card; selecting the card focuses the box.' },
+                { part: 'Currency box', classes: 'flex items-center border border-[#94A3B8] bg-white px-3 py-2 mt-auto focus-within:border-navy-bright focus-within:shadow-[0_0_0_3px_rgba(4,102,200,0.15)]', note: '“$” prefix in `font-body text-neutral-subtle mr-1`. The input is type="number" min="1" step="0.01" with aria-label “Custom donation amount”.' },
+                { part: 'Total', classes: 'font-body text-base text-neutral-subtle flex flex-wrap items-baseline gap-x-3', note: 'aria-live="polite". The figure is `font-headline text-[32px] text-navy-bolder leading-none`; with no amount it reads “Select a donation amount to continue.”' },
+                { part: 'Add to Cart', classes: 'inline-flex items-center gap-2 font-body font-bold text-base px-6 py-4 border bg-navy-bolder text-white hover:bg-navy-bright', note: 'Disabled: `bg-[#c4c9d4] border-[#c4c9d4] cursor-not-allowed`.' },
               ]}
             />
 
             <DevNote>
               <p>
-                Each preset is effectively a link: <Code>{'{{ cart_url }}?amount={{ amount }}&frequency=one-time'}</Code>{' '}
-                (plus <Code>&amp;priority={'{{ id }}'}</Code> when arriving from a giving opportunity). Render them as
-                buttons in a GET form or as links, so they work without JavaScript. Amounts are content —{' '}
-                <Code>{'{{ amounts }}'}</Code> from the donation form config, not hard-coded.
+                Radios, not checkboxes: a donor gives one amount. The cards were drawn as square tick boxes while
+                commemorative bricks and chairs shared the form and a donor could combine items; with those gone
+                (November 2026), a square would promise a multi-select the group doesn’t offer, and would not match
+                what a screen reader announces (“radio button, 2 of 5”).
               </p>
               <p>
-                Fix in production: associate the “Custom Amount” label with its input (<Code>for</Code>/
-                <Code>id</Code>), and give the input a visible focus style (the currency box can take{' '}
-                <Code>focus-within:</Code> the field ring).
+                Selection doesn’t navigate, so choosing an amount never changes context (WCAG 3.2.2); Add to Cart
+                does. In production this is a GET form: the radios submit{' '}
+                <Code>amount</Code>, the custom box overrides it when filled, and Add to Cart submits to{' '}
+                <Code>{'{{ cart_url }}'}</Code> with <Code>frequency=one-time</Code> (plus{' '}
+                <Code>priority={'{{ id }}'}</Code> when arriving from a giving opportunity). Amounts are content,{' '}
+                <Code>{'{{ amounts }}'}</Code> from the donation form config, not hard-coded.
               </p>
             </DevNote>
 
