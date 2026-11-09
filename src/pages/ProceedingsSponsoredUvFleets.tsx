@@ -5,7 +5,7 @@ import ArticleHeader from '@/sections/ArticleHeader'
 import ArticleHeroImage from '@/sections/ArticleHeroImage'
 import UvFleetsArticleBody from '@/sections/UvFleetsArticleBody'
 import ArticleRelated from '@/sections/ArticleRelated'
-import ArticleSponsorCredit, { ArticleSponsorBanner } from '@/sections/ArticleSponsorCredit'
+import { ArticleSponsorBanner } from '@/sections/ArticleSponsorCredit'
 import heroImg from '@/assets/images/proceedings-articles/sponsored/uv-fleets-hero.jpg'
 import sponsorLogo from '@/assets/images/proceedings-articles/sponsored/booz-allen-wordmark-stacked.png'
 
@@ -15,11 +15,10 @@ const SPONSOR = { name: 'Booz Allen', logo: sponsorLogo }
  * A sponsored Proceedings article, linked from the landing page's sponsored
  * billboard.
  *
- * The sponsor is credited twice above the fold (see ArticleSponsorCredit): a
- * tan "Sponsored Content: Booz Allen" banner in place of the leaderboard ad,
- * and, as on the live page, a "Sponsored Content" ribbon with the sponsor's
- * logo folding over the top right corner of the hero, here in tan and without
- * the live page's darkened photo.
+ * The sponsor is credited twice (see ArticleSponsorCredit): a tan "Sponsored
+ * Content" banner with the sponsor's name in place of the leaderboard ad, and
+ * a tan block with the sponsor's logo at the head of the ad rail. The hero
+ * photograph runs as it does on any other article.
  * Sponsored content is open to everyone, so the page carries no article meter.
  *
  * The deck is the live page's meta description; the live page shows none.
@@ -50,9 +49,8 @@ export default function ProceedingsSponsoredUvFleets() {
           alt="An unmanned surface vessel with a radar and antenna mast speeds across choppy water, throwing spray."
           caption="The appearance of U.S. Department of War (DoW) visual information does not imply or constitute DoW endorsement."
           photoCredit="U.S. Navy (Devin M. Langer)"
-          overlay={<ArticleSponsorCredit {...SPONSOR} />}
         />
-        <UvFleetsArticleBody />
+        <UvFleetsArticleBody sponsor={SPONSOR} />
         <ArticleRelated />
       </main>
       <Footer />

@@ -1,6 +1,7 @@
 import ArticleAuthorBio from '@/sections/ArticleAuthorBio'
 import ArticleComments from '@/sections/ArticleComments'
 import AdUnit from '@/components/ui/AdUnit'
+import ArticleSponsorCredit from '@/sections/ArticleSponsorCredit'
 import controlImg from '@/assets/images/proceedings-articles/sponsored/uv-fleets-control.jpg'
 
 // Article text from the live sponsored article (Proceedings, Booz Allen):
@@ -27,8 +28,9 @@ const articleAuthors = [
 
 // ── Layout contract ───────────────────────────────────────────────────────────
 // The same two-column band as FortifyingArticleBody: an 864px reading column
-// plus a 300px rail of ads at xl, the column centered below it. The sponsor is
-// credited on the hero image (see ProceedingsSponsoredUvFleets).
+// plus a 300px rail at xl, the column centered below it. The rail leads with
+// the sponsor credit, then carries ads; below xl the rail is hidden and the
+// banner above the headline credits the sponsor (see ProceedingsSponsoredUvFleets).
 
 function Subhead({ children }: { children: React.ReactNode }) {
   return (
@@ -36,7 +38,7 @@ function Subhead({ children }: { children: React.ReactNode }) {
   )
 }
 
-export default function UvFleetsArticleBody() {
+export default function UvFleetsArticleBody({ sponsor }: { sponsor: { name: string; logo: string } }) {
   return (
     <>
       <section className="bg-white pt-10 pb-0 overflow-x-clip">
@@ -193,12 +195,17 @@ export default function UvFleetsArticleBody() {
 
           </div>
 
-          {/* Right rail: two ads rather than four, for a short article */}
-          <aside className="hidden xl:flex xl:flex-col" aria-label="Advertisements">
-            <AdUnit size="rectangle" />
-            <div className="flex-1" aria-hidden="true" />
-            <AdUnit size="rectangle" />
-          </aside>
+          {/* Right rail: the sponsor credit, then ads, two rather than four,
+              for a short article. The credit sits outside the ads' aside so it
+              is not announced as part of the "Advertisements" landmark. */}
+          <div className="hidden xl:flex xl:flex-col">
+            <ArticleSponsorCredit {...sponsor} />
+            <aside className="flex-1 flex flex-col mt-8" aria-label="Advertisements">
+              <AdUnit size="rectangle" />
+              <div className="flex-1" aria-hidden="true" />
+              <AdUnit size="rectangle" />
+            </aside>
+          </div>
 
           </div>
 
