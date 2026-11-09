@@ -6,23 +6,24 @@ import { money, parseAmount } from '@/data/donation'
 const presetAmounts = [50, 100, 500, 1000]
 
 /**
- * The large checkbox on an amount card. The card is a radio underneath — one
- * amount per gift — drawn as a square tick box, as on the live /foundation
- * page, and it takes the keyboard focus ring for the hidden input beside it.
+ * The large radio mark on an amount card, drawing the hidden radio input the
+ * card wraps. A donor gives one amount, so it is a circle rather than the live
+ * /foundation page's square tick box, which reads as "choose several".
+ *
+ * It takes the keyboard focus ring for that input. The ring keys off the card
+ * (`group-has-`) rather than `peer-`, because on the custom card the mark sits
+ * inside a span and is not the input's sibling.
  */
-function CheckBox({ on }: { on: boolean }) {
+function RadioMark({ on }: { on: boolean }) {
   return (
     <span
       aria-hidden="true"
-      className={`flex-shrink-0 w-7 h-7 border-2 flex items-center justify-center transition-colors
-        peer-focus-visible:ring-2 peer-focus-visible:ring-navy-bright peer-focus-visible:ring-offset-2
-        ${on ? 'bg-navy-bolder border-navy-bolder' : 'bg-white border-[#94A3B8] group-hover:border-navy-bolder'}`}
+      className={`flex-shrink-0 w-7 h-7 rounded-full border-2 bg-white flex items-center justify-center transition-colors
+        group-has-[.amount-radio:focus-visible]:ring-2 group-has-[.amount-radio:focus-visible]:ring-navy-bright
+        group-has-[.amount-radio:focus-visible]:ring-offset-2
+        ${on ? 'border-navy-bolder' : 'border-[#94A3B8] group-hover:border-navy-bolder'}`}
     >
-      {on && (
-        <svg className="w-4 h-4 text-white" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M3 8.5l3.5 3.5L13 4.5" />
-        </svg>
-      )}
+      {on && <span className="w-3.5 h-3.5 rounded-full bg-navy-bolder" />}
     </span>
   )
 }
@@ -43,7 +44,7 @@ function AmountCard({
       className={`group cursor-pointer border-2 p-5 flex flex-col gap-6 transition-colors
         ${on ? 'border-navy-bolder bg-surface-subtle' : 'border-border-light bg-white hover:border-navy-subtle'} ${className}`}
     >
-      <input type="radio" name="donation-amount" checked={on} onChange={onSelect} className="peer sr-only" />
+      <input type="radio" name="donation-amount" checked={on} onChange={onSelect} className="amount-radio sr-only" />
       {children}
     </label>
   )
@@ -53,9 +54,14 @@ function AmountCard({
  * The donation form: an amount and a running total that goes to the cart, the
  * live /foundation page's flow in the prototype's treatments.
  *
- * Each amount card is a large checkbox (one amount at a time, with Clear
- * selection to take it back), and Add to Cart stays disabled until there is an
- * amount.
+ * The amount cards are one radio group: a donor picks a single amount, and
+ * changes it by picking another. Choosing one doesn't leave the page; Add to
+ * Cart does, and stays disabled until there is an amount.
+ *
+ * The cards were drawn as square tick boxes, with a Clear selection link,
+ * while bricks and chairs shared the form and a donor could combine items.
+ * With the amount the only choice left, they are drawn as radios to match
+ * what they are.
  *
  * The live page also sells commemorative bricks and chairs for the Jack C.
  * Taylor Conference Center under the amounts. They were here too until the
@@ -122,7 +128,7 @@ export default function DonateForm() {
           <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
             {presetAmounts.map(amount => (
               <AmountCard key={amount} on={selected === amount} onSelect={() => setSelected(amount)}>
-                <CheckBox on={selected === amount} />
+                <RadioMark on={selected === amount} />
                 <span className="font-headline text-4xl lg:text-5xl text-navy-subtle">${amount.toLocaleString()}</span>
               </AmountCard>
             ))}
@@ -136,7 +142,7 @@ export default function DonateForm() {
               className="col-span-2 lg:col-span-1"
             >
               <span className="flex items-center gap-3">
-                <CheckBox on={selected === 'custom'} />
+                <RadioMark on={selected === 'custom'} />
                 <span className="font-body font-semibold text-base text-navy-bolder">Custom amount</span>
               </span>
               <span className="flex items-center border border-[#94A3B8] bg-white px-3 py-2 mt-auto focus-within:border-navy-bright focus-within:shadow-[0_0_0_3px_rgba(4,102,200,0.15)] transition">
@@ -158,19 +164,6 @@ export default function DonateForm() {
               </span>
             </AmountCard>
           </div>
-
-          {selected !== null && (
-            <button
-              type="button"
-              onClick={() => {
-                setSelected(null)
-                setCustom('')
-              }}
-              className="self-start font-body text-sm text-link"
-            >
-              Clear selection
-            </button>
-          )}
         </fieldset>
 
         {/* Running total and hand-off to the cart */}
