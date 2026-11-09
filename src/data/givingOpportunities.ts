@@ -42,7 +42,11 @@ export function opportunityBanner(file: string): string | undefined {
   return banners[`../assets/images/giving-opportunities/${file}`]
 }
 
-/** A paragraph, sub-heading, or bullet inside an opportunity's copy. */
+/**
+ * A paragraph, sub-heading, or bullet inside an opportunity's copy. Paragraphs
+ * and bullets render through InlineRichText: emails and phone numbers link
+ * themselves, `[label](href)` is a link, and `*title*` is italic.
+ */
 export interface OpportunityBlock {
   type: 'p' | 'h3' | 'li'
   text: string
@@ -54,6 +58,11 @@ export interface Opportunity {
   /** The index card's one-line summary. */
   teaser: string
   image: string
+  /**
+   * CSS object-position for the 3:1 crop, where the default (center) cuts off
+   * what matters, as on the brick wall, whose sign is at the top.
+   */
+  imagePosition?: string
   imageAlt: string
   body: OpportunityBlock[]
   /**
@@ -104,8 +113,8 @@ export const givingOpportunities: Opportunity[] = [
     body: [
       { type: 'p', text: 'For 145 years, the Naval Institute has fostered challenging debate and delivered what is hands-down the world’s most vigorous independent forum on defense and security issues. Military readers consistently rank Proceedings as “Most Credible,” “Most Relevant,” “Most Important,” and as a “Must Read” among all military journals. The magazine’s writers include junior officers and enlisted professionals from all three Sea Services, senior fleet operators, acclaimed novelists, and even the heads of foreign navies. Its readership is just as diverse, spanning from cadets and midshipmen to the leaders of government agencies.' },
       { type: 'p', text: 'The Proceedings Trust enables the Institute to protect the magazine’s highly prized reputation for editorial independence, make Proceedings content more understandable and visually appealing, become less dependent on defense-contractor advertising, and build a more resilient, multi-source funding structure.' },
-      { type: 'p', text: 'The Proceedings Trust provides the opportunity for donors who care deeply about the Naval Institute’s historic Open Forum to help secure Proceedings ’ present and future. Supporters of The Proceedings Trust will provide direct philanthropic support to the ongoing needs of the magazine and to the strategic actions that are planned for its continued success.' },
-      { type: 'p', text: 'For more information on donating to Proceedings and the Proceedings Trust, please contact the Naval Institute Foundation at (410) 295-1054 or foundation@usni.org . Or make a direct contribution today as part of your gift to the Institute’s comprehensive campaign.' },
+      { type: 'p', text: 'The Proceedings Trust provides the opportunity for donors who care deeply about the Naval Institute’s historic Open Forum to help secure *Proceedings*’ present and future. Supporters of The Proceedings Trust will provide direct philanthropic support to the ongoing needs of the magazine and to the strategic actions that are planned for its continued success.' },
+      { type: 'p', text: 'For more information on donating to Proceedings and the Proceedings Trust, please contact the Naval Institute Foundation at (410) 295-1054 or foundation@usni.org. Or make a direct contribution today as part of your gift to the Institute’s comprehensive campaign.' },
     ],
   },
   {
@@ -115,10 +124,10 @@ export const givingOpportunities: Opportunity[] = [
     image: 'stavridis-chair.jpg',
     imageAlt: 'Admiral James Stavridis speaking at a Naval Institute event',
     body: [
-      { type: 'p', text: 'The chair’s incumbent will drive progress toward one of the Institute’s key strategic initiatives: To identify issues important to the naval services and nurture useful discussions of those issues, emboldening contributors and increasing the dare factor of everything published in Proceedings . Proceedings is the Institute’s historic flagship journal and is often called the best defense magazine in the world.' },
-      { type: 'p', text: 'Sustaining this work will always rely on the discerning intelligence of experienced editors. To ensure that it is guided by accomplished professionals, the Naval Institute seeks to fund the editor-in-chief’s chair for Proceedings . Judging from the experience of other leading institutions, we believe that this named chair will raise the sights and improve the performance of the entire editorial team, even as it serves to elicit contributions from a wider circle of writers. As a result, the magazine’s reach and impact, already global, will only increase.' },
-      { type: 'p', text: 'All gifts and pledges raised for this purpose will fund the salary and benefits of Proceedings ’ Editor-in-Chief, as well as those of his understudy, together with costs incurred in their work: travel, materials, equipment, and software.' },
-      { type: 'p', text: 'For more information on donating to the James Stavridis Proceedings Editorial Chair, please contact the Naval Institute Foundation at (410) 295-1054 or foundation@usni.org . Or make a direct contribution today as part of your gift to the Institute’s comprehensive campaign.' },
+      { type: 'p', text: 'The chair’s incumbent will drive progress toward one of the Institute’s key strategic initiatives: To identify issues important to the naval services and nurture useful discussions of those issues, emboldening contributors and increasing the dare factor of everything published in *Proceedings*. *Proceedings* is the Institute’s historic flagship journal and is often called the best defense magazine in the world.' },
+      { type: 'p', text: 'Sustaining this work will always rely on the discerning intelligence of experienced editors. To ensure that it is guided by accomplished professionals, the Naval Institute seeks to fund the editor-in-chief’s chair for *Proceedings*. Judging from the experience of other leading institutions, we believe that this named chair will raise the sights and improve the performance of the entire editorial team, even as it serves to elicit contributions from a wider circle of writers. As a result, the magazine’s reach and impact, already global, will only increase.' },
+      { type: 'p', text: 'All gifts and pledges raised for this purpose will fund the salary and benefits of *Proceedings*’ Editor-in-Chief, as well as those of his understudy, together with costs incurred in their work: travel, materials, equipment, and software.' },
+      { type: 'p', text: 'For more information on donating to the James Stavridis Proceedings Editorial Chair, please contact the Naval Institute Foundation at (410) 295-1054 or foundation@usni.org. Or make a direct contribution today as part of your gift to the Institute’s comprehensive campaign.' },
     ],
   },
   {
@@ -146,7 +155,7 @@ export const givingOpportunities: Opportunity[] = [
       { type: 'p', text: 'In 2013, USNI News was launched through unrestricted donations received by the Naval Institute Foundation. The vision? An independent news and analysis service focused on maritime and national security issues written by knowledgeable journalists and analysts who not only understand the densely interconnected world of navies and maritime commerce, but who also can explain it clearly to the general public.' },
       { type: 'p', text: 'For our growing market of international maritime and defense news readers, we are thrilled with the success of USNI News and want to expand our tools to keep our news and analysis fresh, exciting, and informative. We put our effort toward original reporting. We’re not repackaging someone else’s story and we’re not generating content just for clicks.' },
       { type: 'p', text: 'USNI News has more reporters covering the Navy than any other trade news outlet. USNI News reporters are out in the field, every day, delivering relevant news straight from the newsmakers. Whether it’s at a Congressional hearing in DC or aboard an aircraft carrier in the Middle East, we’ll be there to cover it.' },
-      { type: 'p', text: 'For more information on how you can support USNI News, please contact the Naval Institute Foundation at (410) 295-1054 or foundation@usni.org . Or make a direct contribution today as part of your gift to the Institute’s comprehensive campaign.' },
+      { type: 'p', text: 'For more information on how you can support USNI News, please contact the Naval Institute Foundation at (410) 295-1054 or foundation@usni.org. Or make a direct contribution today as part of your gift to the Institute’s comprehensive campaign.' },
     ],
   },
   {
@@ -157,7 +166,7 @@ export const givingOpportunities: Opportunity[] = [
     imageAlt: 'Panellists at a Naval Institute conference',
     body: [
       { type: 'p', text: 'Naval Institute professional conferences bring together preeminent military and civilian leaders, historians and policy-makers to discuss challenges to the naval services and to the Nation. These popular events provide the opportunity for sponsors to position themselves as dedicated supporters of the Navy, Marine Corps, and Coast Guard, and illustrates that the sponsor intends to play a constructive role in timely debate by fostering informed discussion of important naval issues. The Naval Institute also hosts a number of member receptions and special events around the country, giving sponsors other avenues to demonstrate their support for the Sea Services. Underwriting conferences and events provides the sponsor with recognition opportunities in print and online as well as on-site.' },
-      { type: 'p', text: 'For more information on sponsoring conferences and events, please contact the Naval Institute Foundation at (410) 295-1054 or foundation@usni.org . Or make a direct contribution today as part of your gift to the Institute’s comprehensive campaign.' },
+      { type: 'p', text: 'For more information on sponsoring conferences and events, please contact the Naval Institute Foundation at (410) 295-1054 or foundation@usni.org. Or make a direct contribution today as part of your gift to the Institute’s comprehensive campaign.' },
     ],
   },
   {
@@ -170,7 +179,7 @@ export const givingOpportunities: Opportunity[] = [
       { type: 'p', text: 'Funded entirely with private donations, the Jack C. Taylor Conference Center is the Naval Institute’s physical flagship: a 406-seat auditorium, five meeting rooms, two indoor/outdoor terraces, and a broadcast studio, adjoining the Institute’s headquarters on the Yard of the U.S. Naval Academy. It is where naval professionals, historians, government officials, midshipmen, students, and interested civilians convene for conferences, lectures, workshops, and wargames, and it is optimized for classified discussion on a per-use, waiver basis.' },
       { type: 'p', text: 'Private support is what keeps it current. Gifts to the Jack C. Taylor Conference Center Maintenance & Technology Fund underwrite the upkeep of the building and the audiovisual equipment behind every session held in it — the projection and acoustics in the auditorium, the stage LED wall, and the broadcast studio that carries a discussion well beyond the people in the room.' },
       { type: 'p', text: 'A name can go on the Center itself, too: an engraved nameplate on a seat in the auditorium, or an engraved brick on the donor wall. A limited number remain, so they are arranged with the Foundation directly rather than online.' },
-      { type: 'p', text: 'For more information on how you can support the Jack C. Taylor Conference Center, or about the remaining bricks and chairs, please contact the Naval Institute Foundation at (410) 295-1054 or foundation@usni.org . Or make a direct contribution today as part of your gift to the Institute’s comprehensive campaign.' },
+      { type: 'p', text: 'For more information on how you can support the Jack C. Taylor Conference Center, or about the remaining bricks and chairs, please contact the Naval Institute Foundation at (410) 295-1054 or foundation@usni.org. Or make a direct contribution today as part of your gift to the Institute’s comprehensive campaign.' },
     ],
     cta: {
       label: 'About the Center',
@@ -182,7 +191,8 @@ export const givingOpportunities: Opportunity[] = [
     id: 'commemorative-bricks-chairs',
     title: 'Commemorative Bricks and Chairs',
     teaser: 'Honor someone with a permanent place at the Jack C. Taylor Conference Center.',
-    image: 'commemorative-bricks-chairs.webp',
+    image: 'commemorative-bricks-chairs.jpg',
+    imagePosition: 'center 10%',
     imageAlt: 'The Jack C. Taylor Conference Center commemorative brick wall, its engraved donor names arranged in columns',
     body: [
       { type: 'p', text: 'Two gifts carry a name on the Jack C. Taylor Conference Center permanently: an engraved silver nameplate affixed to a seat in the auditorium, and an engraved brick on the donor wall. Either can honor or memorialize someone of your choosing.' },
@@ -203,7 +213,7 @@ export const givingOpportunities: Opportunity[] = [
     body: [
       { type: 'p', text: 'A founding member of the Association of American University Presses, the book-publishing arm of the Naval Institute was launched in 1898 with basic guides to naval practices. Now, more than a century later, Naval Institute Press titles address such diverse subjects as how-to books on boating and navigation, battle histories, biographies, ship and aircraft guides, and novels, including the bestsellers The Hunt for Red October (Tom Clancy) and Flight of the Intruder (Stephen Coonts). As of Fall 2018, the Press has expanded into publishing graphic novels under the Dead Reckoning imprint, bringing military history to new and younger audiences in a uniquely engaging format.' },
       { type: 'p', text: 'The Naval Institute Press proposes to capitalize on major changes going on in the publishing world, ensuring that worthy books of military history find a reputable publisher, and that many more young historians are encouraged to write and publish. Your donations will enable author advances, offer author prizes and awards, underwrite indexing costs, provide price subventions, and fund special projects in both print and digital media.' },
-      { type: 'p', text: 'For more information on how you can support the Naval Institute Press, please contact the Naval Institute Foundation at (410) 295-1054 or foundation@usni.org . Or make a direct contribution today as part of your gift to the Institute’s comprehensive campaign.' },
+      { type: 'p', text: 'For more information on how you can support the Naval Institute Press, please contact the Naval Institute Foundation at (410) 295-1054 or foundation@usni.org. Or make a direct contribution today as part of your gift to the Institute’s comprehensive campaign.' },
     ],
   },
   {
@@ -214,10 +224,10 @@ export const givingOpportunities: Opportunity[] = [
     imageAlt: 'The Honorable Gordon England',
     body: [
       { type: 'p', text: 'The chair’s incumbent directs the professional naval books program of the Naval Institute Press and furthers the organization’s strategic initiative to become the preeminent source of information for professional advancement in the naval services. The Gordon England Chair of Professional Naval Literature is the Naval Institute’s first such named chair.' },
-      { type: 'p', text: 'The position greatly strengthens the Naval Institute’s tradition for publishing books essential to the education of the men and women who have made the U.S. Navy one of the greatest forces in the history of the world. These essential books include such titles as: The Bluejackets Manual , The Coast Guardsman’s Manual , The Naval Shiphandler’s Guide , Dutton’s Nautical Navigation , The Handbook for Marine NCOs , The Watch Officers Guide , and The Naval Institute Guide to Naval Writing . In 2015, professional books occupied 17 of the top 30 slots in the Naval Institute Press’s list of best-selling books.' },
+      { type: 'p', text: 'The position greatly strengthens the Naval Institute’s tradition for publishing books essential to the education of the men and women who have made the U.S. Navy one of the greatest forces in the history of the world. These essential books include such titles as: *The Bluejackets Manual*, *The Coast Guardsman’s Manual*, *The Naval Shiphandler’s Guide*, *Dutton’s Nautical Navigation*, *The Handbook for Marine NCOs*, *The Watch Officers Guide*, and *The Naval Institute Guide to Naval Writing*. In 2015, professional books occupied 17 of the top 30 slots in the Naval Institute Press’s list of best-selling books.' },
       { type: 'p', text: 'The Chair also duly honors the rich legacy of Secretary England, a well-respected defense industry executive noted for his vision and innovation. England was selected to serve as the 72nd and 73rd Secretary of the Navy, the first Deputy Secretary for Homeland Security, and the 29th Deputy Secretary of Defense.' },
       { type: 'p', text: 'The Gordon England Chair of Professional Naval Literature helps to oversee the revision of many of the classic professional books while developing new titles to address the evolving duties of the nation’s Sailors, Marines, and Coast Guardsmen.' },
-      { type: 'p', text: 'For more information on how you can support The Gordon England Chair of Professional Naval Literature, please contact the Naval Institute Foundation at (410) 295-1054 or foundation@usni.org . Or make a direct contribution today as part of your gift to the Institute’s comprehensive campaign.' },
+      { type: 'p', text: 'For more information on how you can support The Gordon England Chair of Professional Naval Literature, please contact the Naval Institute Foundation at (410) 295-1054 or foundation@usni.org. Or make a direct contribution today as part of your gift to the Institute’s comprehensive campaign.' },
     ],
   },
   {
@@ -229,9 +239,9 @@ export const givingOpportunities: Opportunity[] = [
     body: [
       { type: 'p', text: 'The Naval Institute’s Naval History Magazine is the world’s most authoritative and engaging periodical for readers interested in our nautical heritage. Beautifully illustrated with dramatic period photographs and evocative paintings, the magazine brings to life U.S. Navy, Marine Corps, and Coast Guard history through insightful analysis of events, and firsthand accounts by those involved in our naval triumphs and tragedies. Gripping battle accounts, enlightening articles on enduring mysteries, thoughtful essays, scholarly analyses, and book reviews make Naval History a “must read” for its devoted audience.' },
       { type: 'p', text: 'Naval History Magazine dominates the subject of maritime history worldwide. It occupies a niche, with its American Sea Services focus, that no other magazine has occupied for many, many years. Naval History is a bridge between the academic world and popular naval history, with authoritative content supported by citations or named sources. David McCullough, host of “The American Experience” and Pulitzer Prize winning historian calls Naval History “One of the best magazines in the country…fundamental to improving the teaching and the understanding of American history…”' },
-      { type: 'p', text: 'Individuals who care deeply about the work of Naval History Magazine have an opportunity to help secure Naval History ’s present and future and, in this way, preserve and disseminate Sea Service history more widely and effectively.' },
+      { type: 'p', text: 'Individuals who care deeply about the work of Naval History Magazine have an opportunity to help secure *Naval History*’s present and future and, in this way, preserve and disseminate Sea Service history more widely and effectively.' },
       { type: 'p', text: 'Supporters of Naval History Magazine provide direct philanthropic support to the ongoing needs of the magazine and to the strategic actions that are planned for its continued success. These actions include greater use of Navy and Marine photographic, film, and textual records at the National Archives, more graphics and maps, more use of graphic novel excerpts, more commissioned artwork to illustrate articles more richly, and more special gatefold packages.' },
-      { type: 'p', text: 'For more information on how you can support Naval History Magazine, please contact the Naval Institute Foundation at (410) 295-1054 or foundation@usni.org . Or make a direct contribution today as part of your gift to the Institute’s comprehensive campaign.' },
+      { type: 'p', text: 'For more information on how you can support Naval History Magazine, please contact the Naval Institute Foundation at (410) 295-1054 or foundation@usni.org. Or make a direct contribution today as part of your gift to the Institute’s comprehensive campaign.' },
     ],
     /* On the source page this was a link the transcription flattened into a
        closing paragraph, where it read as a stray sentence. It is an action,
@@ -253,7 +263,7 @@ export const givingOpportunities: Opportunity[] = [
       { type: 'p', text: 'Spun off from the Columbia University program in 1969, the Naval Institute Oral History Program has amassed an unrivaled body of in-depth personal narratives of crucial naval events as experienced by the great leaders of the past century. These recollections have been painstakingly researched, recorded, transcribed, annotated, indexed, and published for use by historians, students, veterans, and documentary filmmakers. More than 270 oral histories have been completed, and dozens more are on deck. All supply rich detail often lost in official histories, creating an intimate, personal narrative of naval events and personalities. As such, they immediately become invaluable primary source materials for historians, as well as for Naval Academy and NROTC midshipmen and Coast Guard Academy cadets. These histories are cited in dozens of influential works of military history each year. Over the past five years, forty-five works of military history, some of them New York Times bestsellers and all of them influential in the field, have cited Naval Institute oral histories in their bibliographies.' },
       { type: 'p', text: 'Moving forward, the Naval Institute will aggressively identify, conduct, and publish fresh oral histories in a timely fashion, working from an evolving list of prospects. These new candidates will include strategic and operational leaders such as recent Chiefs of Naval Operations and carrier battle-group commanders, as well as naval strategists and chief technologists. The program will also capture the recollections of heroes and pacesetters such as Medal of Honor recipients and astronauts.' },
       { type: 'p', text: 'Thanks to the generosity of past donors, the program’s entire collection of audio-taped interviews has been digitized. Henceforth, all Naval Institute oral histories will be born digital, and key portions of the histories will be videotaped. Future historians and documentary filmmakers will thus be able to hear and watch these historic figures as they tell their most compelling stories. The oral histories will also be made available online.' },
-      { type: 'p', text: 'For more information on how you can support Historic Preservation, please contact the Naval Institute Foundation at (410) 295-1054 or foundation@usni.org . Or make a direct contribution today as part of your gift to the Institute’s comprehensive campaign.' },
+      { type: 'p', text: 'For more information on how you can support Historic Preservation, please contact the Naval Institute Foundation at (410) 295-1054 or foundation@usni.org. Or make a direct contribution today as part of your gift to the Institute’s comprehensive campaign.' },
     ],
   },
 ]

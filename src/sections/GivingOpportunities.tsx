@@ -2,6 +2,7 @@ import { useCallback, useState, type ReactNode } from 'react'
 import { Button, ButtonLink } from '@/components/ui/Button'
 import ExternalLinkIcon from '@/components/ui/ExternalLinkIcon'
 import Modal from '@/components/ui/Modal'
+import InlineRichText from '@/components/ui/InlineRichText'
 import {
   givingOpportunities,
   opportunityBanner,
@@ -91,7 +92,12 @@ function OpportunityActions({ opp }: { opp: Opportunity }) {
   )
 }
 
-/** The copy as paragraphs, sub-headings, and bullets, with each run of bullets in one list. */
+/**
+ * The copy as paragraphs, sub-headings, and bullets, with each run of bullets
+ * in one list. Paragraphs and bullets go through InlineRichText, so their
+ * emails and phone numbers link themselves and `[label](href)` and `*title*`
+ * work in the data.
+ */
 function OpportunityBody({ blocks }: { blocks: OpportunityBlock[] }) {
   const out: ReactNode[] = []
   for (let i = 0; i < blocks.length; i++) {
@@ -102,7 +108,7 @@ function OpportunityBody({ blocks }: { blocks: OpportunityBlock[] }) {
       i--
       out.push(
         <ul key={i} className="list-disc ml-5 flex flex-col gap-2 font-body text-base text-neutral-bold leading-[1.7]">
-          {items.map((item, j) => <li key={j}>{item.text}</li>)}
+          {items.map((item, j) => <li key={j}><InlineRichText text={item.text} /></li>)}
         </ul>,
       )
     } else if (block.type === 'h3') {
@@ -114,7 +120,7 @@ function OpportunityBody({ blocks }: { blocks: OpportunityBlock[] }) {
     } else {
       out.push(
         <p key={i} className="font-body text-base text-neutral-bold leading-[1.7]">
-          {block.text}
+          <InlineRichText text={block.text} />
         </p>,
       )
     }
@@ -130,6 +136,7 @@ function OpportunityCard({ opp, onOpen }: { opp: Opportunity; onOpen: () => void
         alt={opp.imageAlt}
         loading="lazy"
         className="w-full aspect-[3/1] object-cover"
+        style={{ objectPosition: opp.imagePosition }}
       />
 
       <div className="flex flex-col flex-1 gap-4 p-6">
@@ -195,6 +202,7 @@ export default function GivingOpportunities({
               src={opportunityBanner(active.image)}
               alt={active.imageAlt}
               className="w-full aspect-[3/1] object-cover block"
+              style={{ objectPosition: active.imagePosition }}
             />
           }
           footer={<OpportunityActions opp={active} />}
