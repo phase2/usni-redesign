@@ -1,8 +1,8 @@
 import { useId, useState, type ReactNode } from 'react'
 
 /**
- * A full-width announcement band at the top of a page, under the header: the
- * live site's site-wide alert (first used for the 2026 holiday Press sale on
+ * A full-width announcement band at the very top of a page, above the header:
+ * the live site's site-wide alert (first used for the 2026 holiday Press sale on
  * /books), in the redesign's treatment.
  *
  * The band runs edge to edge on the lightest yellow on the site (#fefde8, the
@@ -10,7 +10,8 @@ import { useId, useState, type ReactNode } from 'react'
  * lines up with everything below it. A headline leads, then a one-line
  * summary. Anything longer, such as shipping deadlines, goes in `more`, behind
  * a See More toggle at the end of the summary, so the band stays short until
- * a reader asks for the detail.
+ * a reader asks for the detail. The header is sticky, so the band scrolls away
+ * and the header stays pinned.
  *
  * Unlike Alert it has no role: it is standing page content, not a status
  * change, so a screen reader should meet it in reading order rather than have

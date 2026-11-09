@@ -400,7 +400,7 @@ export default function Alerts() {
         <DocSection title="Site alert (full width)">
           <div className="flex flex-col gap-8">
             <Lead>
-              A page-wide announcement band directly under the header, for something every visitor to a section
+              A page-wide announcement band at the very top of the page, above the header, for something every visitor to a section
               should see, such as a sale and its shipping deadlines. The band runs edge to edge; its content follows
               the page container. A headline and a one-line summary show by default, and longer detail waits behind
               See More. First used on /books for the 2026 holiday Press sale. It is not an Alert: nothing is wrong
@@ -423,7 +423,7 @@ export default function Alerts() {
 
             <ClassTable
               rows={[
-                { part: 'Band', classes: 'bg-[#fefde8] border-b border-gold-dark', note: '<aside aria-label="Announcement">, between the header and <main>. #fefde8 is the lightest yellow on the site (the donate cart banner’s) and has no token yet.' },
+                { part: 'Band', classes: 'bg-[#fefde8] border-b border-gold-dark', note: '<aside aria-label="Announcement">, first in <body>, above the sticky header, so it scrolls away while the header stays pinned. #fefde8 is the lightest yellow on the site (the donate cart banner’s) and has no token yet.' },
                 { part: 'Content', classes: 'container-site py-5 lg:py-6 flex flex-col gap-1.5', note: 'Held to the page container, so it lines up with the sections below.' },
                 { part: 'Headline', classes: 'font-headline text-[22px] lg:text-[26px] text-navy-bolder leading-[1.2]', note: 'A styled <p>, not a heading, so the page’s h1 stays first in the outline.' },
                 { part: 'Summary', classes: 'font-body text-base text-[#1d2535] leading-relaxed', note: 'One line. See More sits at its end.' },
@@ -435,7 +435,7 @@ export default function Alerts() {
 
             <DevNote>
               <p>
-                In Drupal this is a block in the region under the header, with fields for the headline, the summary,
+                In Drupal this is a block in a region above the header, with fields for the headline, the summary,
                 and the optional detail; leave the detail empty and See More is not rendered. The toggle needs a few
                 lines of JS (flip <C>aria-expanded</C> and the detail&rsquo;s <C>hidden</C>). Without JS, render the
                 detail open.

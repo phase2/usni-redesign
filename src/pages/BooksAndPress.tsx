@@ -12,15 +12,14 @@ import { newReleases, bestSellers } from '@/data/books'
 /**
  * The Books & Press landing.
  *
- * It opens on the site-wide alert the client added to the live site for the
- * 2026 holiday Press sale (SiteAlert): the offer as a headline and one line,
- * with the shipping deadlines behind See More. The copy is the live alert's,
- * split at the offer.
+ * It opens, above the header, on the site-wide alert the client added to the
+ * live site for the 2026 holiday Press sale (SiteAlert): the offer as a
+ * headline and one line, with the shipping deadlines behind See More. The
+ * copy is the live alert's, split at the offer.
  */
 export default function BooksAndPress() {
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
       <SiteAlert
         title="Celebrate the season with savings!"
         more={
@@ -36,6 +35,7 @@ export default function BooksAndPress() {
       >
         Enjoy 50% off titles when you enter code <PromoCode>HOLIDAY</PromoCode> at checkout.
       </SiteAlert>
+      <Header />
       <main className="flex-1">
         <BooksSubNav />
         <BooksHero />
