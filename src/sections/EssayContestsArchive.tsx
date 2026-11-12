@@ -115,6 +115,8 @@ export default function EssayContestsArchive() {
   const [categories, setCategories] = useState<string[]>([])
   const [categoriesOpen, setCategoriesOpen] = useState(true)
   const [showAllCategories, setShowAllCategories] = useState(false)
+  // Narrows the category list itself, not the results
+  const [categoryFind, setCategoryFind] = useState('')
   const [sort, setSort] = useState<SortKey>('recent')
   const [page, setPage] = useState(1)
 
@@ -136,14 +138,20 @@ export default function EssayContestsArchive() {
 
   const activeCount = categories.length + (query.trim() ? 1 : 0)
 
-  // A checked category stays visible when the list is collapsed, so clearing one
-  // never means hunting for it behind "See more"
-  const visibleCategories = showAllCategories
-    ? essayContestSeries
-    : essayContestSeries.filter(
-        (s, i) => i < SEE_MORE_THRESHOLD || categories.includes(s.slug),
-      )
-  const hiddenCategoryCount = essayContestSeries.length - visibleCategories.length
+  // While finding, every match shows and "Show more" steps aside. Otherwise a
+  // checked category stays visible when the list is collapsed, so clearing one
+  // never means hunting for it behind "Show more"
+  const categoryNeedle = categoryFind.trim().toLowerCase()
+  const visibleCategories = categoryNeedle
+    ? essayContestSeries.filter((s) => s.name.toLowerCase().includes(categoryNeedle))
+    : showAllCategories
+      ? essayContestSeries
+      : essayContestSeries.filter(
+          (s, i) => i < SEE_MORE_THRESHOLD || categories.includes(s.slug),
+        )
+  const hiddenCategoryCount = categoryNeedle
+    ? 0
+    : essayContestSeries.length - visibleCategories.length
 
   const results = useMemo(() => {
     const needle = query.trim().toLowerCase()
@@ -230,7 +238,26 @@ export default function EssayContestsArchive() {
             </button>
 
             {categoriesOpen && (
-              <div id="archive-categories" className="px-3 pt-3 pb-4">
+              <div id="archive-categories" className="px-3 pt-3 pb-4 flex flex-col">
+                {/* Narrows the list as you type, like the site search facets'
+                    find boxes */}
+                <div className="relative mb-2">
+                  <i
+                    className="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-sm text-neutral-subtle pointer-events-none"
+                    aria-hidden="true"
+                  />
+                  <input
+                    type="search"
+                    value={categoryFind}
+                    onChange={(e) => setCategoryFind(e.target.value)}
+                    placeholder="Find a category…"
+                    aria-label="Find a category"
+                    className="w-full bg-white border border-[#94A3B8] pl-9 pr-3 py-2 font-body text-sm text-navy-bolder
+                      placeholder:text-neutral-subtle outline-none focus:border-navy-bright
+                      focus:shadow-[0_0_0_3px_rgba(4,102,200,0.15)] transition"
+                  />
+                </div>
+
                 {/* 38 series is too many to sit open beside the results, so the
                     list reveals past the threshold rather than scrolling */}
                 {visibleCategories.map((s) => (
@@ -253,7 +280,11 @@ export default function EssayContestsArchive() {
                   </label>
                 ))}
 
-                {(showAllCategories || hiddenCategoryCount > 0) && (
+                {categoryNeedle && visibleCategories.length === 0 && (
+                  <p className="font-body text-sm text-neutral-subtle py-1.5">No matches.</p>
+                )}
+
+                {!categoryNeedle && (showAllCategories || hiddenCategoryCount > 0) && (
                   <FacetShowMore
                     expanded={showAllCategories}
                     onToggle={() => setShowAllCategories((v) => !v)}
