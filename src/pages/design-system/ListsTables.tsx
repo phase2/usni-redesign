@@ -159,9 +159,11 @@ export default function ListsTables() {
                 </li>
               </ul>
               <p>
-                The prototype applies filters as you type or tick, with no Apply button. In Drupal, either
-                enable AJAX with BEF auto-submit (debounce the keyword field) or add an Apply button. Both
-                are acceptable. Auto-submit must move nothing under the user&rsquo;s cursor. Any filter
+                The prototype applies checkboxes as you tick them, with no Apply button. The Keyword field
+                applies only when submitted with Enter or its search button; emptying it applies at once. A
+                long facet&rsquo;s find box only narrows that facet&rsquo;s options, so it filters as you
+                type. In Drupal, enable AJAX with BEF auto-submit for the checkboxes and keep the keyword
+                field submit-only. Auto-submit must move nothing under the user&rsquo;s cursor. Any filter
                 change returns to the first page, which Views does on its own because the pager
                 parameter is dropped on submit.
               </p>
@@ -251,13 +253,27 @@ export default function ListsTables() {
                   classes: 'hidden lg:flex flex-col gap-5',
                   note: 'Closed on mobile. When opened, hidden becomes flex. Always flex from lg. The id comes from React’s useId; use a stable id in Twig.',
                 },
-                { part: 'Keyword facet', classes: 'flex flex-col gap-1.5 border-b border-border-light pb-5', note: 'The rule closes the facet, matching the one under each disclosure.' },
+                { part: 'Keyword facet', classes: 'border-b border-border-light pb-5', note: 'Wraps RailSearch. The rule closes the facet, matching the one under each disclosure.' },
+                {
+                  part: 'Search form',
+                  classes: 'flex flex-col gap-1.5',
+                  note: 'RailSearch (src/components/ui/RailSearch.tsx). A <form role="search">: typing only edits the field, and the search runs on Enter or the button. Emptying the field applies at once. A long facet’s find box is a plain input that narrows its options as you type.',
+                },
                 { part: 'Keyword label', classes: 'font-body font-semibold text-sm text-navy-bolder' },
-                { part: 'Search icon', classes: 'fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-sm text-neutral-subtle', note: 'Inside a relative wrapper. aria-hidden.' },
+                {
+                  part: 'Field frame',
+                  classes: 'flex items-stretch border-2 border-navy-bolder bg-white transition focus-within:shadow-[0_0_0_3px_rgba(4,102,200,0.15)]',
+                  note: 'The site search box’s frame (SiteSearch.tsx), scaled down: one 2px navy border around the input and button. The halo shows while either has focus.',
+                },
                 {
                   part: 'Keyword input',
-                  classes: 'w-full bg-white border border-[#94A3B8] pl-10 pr-3 py-2.5 font-body text-base text-navy-bolder placeholder:text-neutral-subtle outline-none focus:border-navy-bright focus:shadow-[0_0_0_3px_rgba(4,102,200,0.15)] transition',
-                  note: 'type="search". The same focus halo as the sort select.',
+                  classes: 'flex-1 min-w-0 bg-transparent px-3.5 py-2.5 font-body text-base text-navy-bolder placeholder:text-neutral-subtle outline-none',
+                  note: 'type="text" with enterkeyhint="search", so the browser adds no clear ✕ beside the search button. The form’s role="search" carries the semantics. No border of its own; the frame draws it.',
+                },
+                {
+                  part: 'Search button',
+                  classes: 'flex-shrink-0 flex items-center justify-center w-11 bg-navy-bolder text-white hover:bg-navy-bright transition-colors  ›  i: fa-solid fa-magnifying-glass text-sm',
+                  note: 'type="submit", inside the frame and flush against the input. sr-only “Search”.',
                 },
                 { part: 'Facet group', classes: 'border-b border-border-light', note: 'Holds the disclosure button (.accordion-row … px-3 py-3 font-body font-bold text-sm) and its option list. See Accordions.' },
                 { part: 'Option list', classes: 'pb-4', note: 'Rendered only while open.' },

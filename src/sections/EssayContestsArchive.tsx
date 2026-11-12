@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom'
 import { ResultsCount } from '@/components/ui/ResultsList'
 import Pagination from '@/components/ui/Pagination'
 import FilterPanel from '@/components/ui/FilterPanel'
+import RailSearch from '@/components/ui/RailSearch'
 import { FacetShowMore } from '@/components/ui/FacetGroup'
 import { essayContestSeries } from '@/data/essayContests'
 import { archiveImage, essayArchive, type EssayArchiveEntry } from '@/data/essayArchive'
@@ -110,7 +111,8 @@ function AccordionChevron({ open }: { open: boolean }) {
 
 export default function EssayContestsArchive() {
   const [params] = useSearchParams()
-  // Seeded from the URL once; the field is user-owned from then on
+  // The applied keyword, seeded from the URL once. The field's unsubmitted
+  // text lives in RailSearch
   const [query, setQuery] = useState(params.get('q') ?? '')
   const [categories, setCategories] = useState<string[]>([])
   const [categoriesOpen, setCategoriesOpen] = useState(true)
@@ -192,29 +194,14 @@ export default function EssayContestsArchive() {
         <FilterPanel activeCount={activeCount} onClearAll={clearAll}>
 
           {/* Rule closes the keyword facet, matching the one under Categories */}
-          <div className="flex flex-col gap-1.5 border-b border-border-light pb-5">
-            <label
-              htmlFor="archive-search"
-              className="font-body font-semibold text-sm text-navy-bolder"
-            >
-              Keyword
-            </label>
-            <div className="relative">
-              <i
-                className="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-sm text-neutral-subtle"
-                aria-hidden="true"
-              />
-              <input
-                id="archive-search"
-                type="search"
-                value={query}
-                onChange={(e) => { setQuery(e.target.value); reset() }}
-                placeholder="Contest name keyword…"
-                className="w-full bg-white border border-[#94A3B8] pl-10 pr-3 py-2.5 font-body text-base
-                  text-navy-bolder placeholder:text-neutral-subtle outline-none
-                  focus:border-navy-bright focus:shadow-[0_0_0_3px_rgba(4,102,200,0.15)] transition"
-              />
-            </div>
+          <div className="border-b border-border-light pb-5">
+            <RailSearch
+              id="archive-search"
+              label="Keyword"
+              value={query}
+              onSearch={(q) => { setQuery(q); reset() }}
+              placeholder="Contest name keyword…"
+            />
           </div>
 
           {/* No `last:border-0` here, unlike the stacked Books facets — this is
@@ -240,7 +227,8 @@ export default function EssayContestsArchive() {
             {categoriesOpen && (
               <div id="archive-categories" className="px-3 pt-3 pb-4 flex flex-col">
                 {/* Narrows the list as you type, like the site search facets'
-                    find boxes */}
+                    find boxes. Only the Keyword field above waits for a submit,
+                    since it's the one that moves the results */}
                 <div className="relative mb-2">
                   <i
                     className="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-sm text-neutral-subtle pointer-events-none"

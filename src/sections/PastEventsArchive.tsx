@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom'
 import { ResultsCount } from '@/components/ui/ResultsList'
 import Pagination from '@/components/ui/Pagination'
 import FilterPanel from '@/components/ui/FilterPanel'
+import RailSearch from '@/components/ui/RailSearch'
 import { pastEvents } from '@/data/pastEvents'
 import { upcomingEvents } from '@/data/events'
 import EventCard, { type EventCardData } from '@/components/cards/EventCard'
@@ -197,22 +198,19 @@ export default function PastEventsArchive({ scope = 'past' }: { scope?: Scope })
   /**
    * Write params to the URL; null or '' removes one. Anything but a page
    * change drops the page number, since a new filter or sort starts the
-   * results over. Keystrokes in the keyword field replace the history entry
-   * rather than adding one per letter.
+   * results over. The keyword lands only when it's submitted, so each search
+   * is one history entry.
    */
-  const update = (changes: Record<string, string | null>, { replace = false } = {}) => {
-    setParams(
-      (prev) => {
-        const next = new URLSearchParams(prev)
-        for (const [key, value] of Object.entries(changes)) {
-          if (value) next.set(key, value)
-          else next.delete(key)
-        }
-        if (!('page' in changes)) next.delete('page')
-        return next
-      },
-      { replace },
-    )
+  const update = (changes: Record<string, string | null>) => {
+    setParams((prev) => {
+      const next = new URLSearchParams(prev)
+      for (const [key, value] of Object.entries(changes)) {
+        if (value) next.set(key, value)
+        else next.delete(key)
+      }
+      if (!('page' in changes)) next.delete('page')
+      return next
+    })
   }
 
   const toggle = (param: 'type' | 'when', options: string[], selected: string[]) => (value: string) => {
@@ -267,29 +265,14 @@ export default function PastEventsArchive({ scope = 'past' }: { scope?: Scope })
 
         <FilterPanel activeCount={activeCount} onClearAll={clearAll}>
 
-          <div className="flex flex-col gap-1.5 border-b border-border-light pb-5">
-            <label
-              htmlFor={`${idPrefix}-search`}
-              className="font-body font-semibold text-sm text-navy-bolder"
-            >
-              Keyword
-            </label>
-            <div className="relative">
-              <i
-                className="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-sm text-neutral-subtle"
-                aria-hidden="true"
-              />
-              <input
-                id={`${idPrefix}-search`}
-                type="search"
-                value={query}
-                onChange={(e) => update({ q: e.target.value }, { replace: true })}
-                placeholder="Event name or city…"
-                className="w-full bg-white border border-[#94A3B8] pl-10 pr-3 py-2.5 font-body text-base
-                  text-navy-bolder placeholder:text-neutral-subtle outline-none
-                  focus:border-navy-bright focus:shadow-[0_0_0_3px_rgba(4,102,200,0.15)] transition"
-              />
-            </div>
+          <div className="border-b border-border-light pb-5">
+            <RailSearch
+              id={`${idPrefix}-search`}
+              label="Keyword"
+              value={query}
+              onSearch={(q) => update({ q: q || null })}
+              placeholder="Event name or city…"
+            />
           </div>
 
           {scope === 'all' && (
