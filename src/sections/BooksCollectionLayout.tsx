@@ -4,7 +4,7 @@ import { allBooks, SERIES_FACETS, SUBJECT_FACETS } from '@/data/books'
 import type { Book } from '@/data/books'
 import BookGridCard from '@/components/cards/BookGridCard'
 import FilterChip from '@/components/ui/FilterChip'
-import { FacetShowMore } from '@/components/ui/FacetGroup'
+import { FacetFind, FacetShowMore } from '@/components/ui/FacetGroup'
 
 /* ── Constants ─────────────────────────────────────────────────────────────── */
 
@@ -140,28 +140,11 @@ function FilterableFacetGroup({
   return (
     <div>
       {showSearch && options.length > 5 && (
-        <div className="relative mb-3">
-          <i
-            className="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-neutral-subtle text-[11px] pointer-events-none"
-            aria-hidden="true"
-          />
-          <input
-            type="text"
-            value={filter}
-            onChange={e => { setFilter(e.target.value); setExpanded(false) }}
-            placeholder={`Filter ${fieldLabel.toLowerCase()}…`}
-            className="w-full pl-8 pr-3 py-2 font-body text-xs border border-border-light text-navy-bolder placeholder:text-neutral-subtle outline-none focus:border-navy-subtle transition-colors bg-white"
-          />
-          {filter && (
-            <button
-              onClick={() => setFilter('')}
-              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-neutral-subtle hover:text-navy-bolder"
-              aria-label="Clear filter"
-            >
-              <i className="fa-solid fa-xmark text-[10px]" aria-hidden="true" />
-            </button>
-          )}
-        </div>
+        <FacetFind
+          value={filter}
+          onChange={(v) => { setFilter(v); setExpanded(false) }}
+          placeholder={`Filter ${fieldLabel.toLowerCase()}…`}
+        />
       )}
 
       <div>

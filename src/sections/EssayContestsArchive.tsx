@@ -4,7 +4,7 @@ import { ResultsCount } from '@/components/ui/ResultsList'
 import Pagination from '@/components/ui/Pagination'
 import FilterPanel from '@/components/ui/FilterPanel'
 import RailSearch from '@/components/ui/RailSearch'
-import { FacetShowMore } from '@/components/ui/FacetGroup'
+import { FacetFind, FacetShowMore } from '@/components/ui/FacetGroup'
 import { essayContestSeries } from '@/data/essayContests'
 import { archiveImage, essayArchive, type EssayArchiveEntry } from '@/data/essayArchive'
 
@@ -229,22 +229,11 @@ export default function EssayContestsArchive() {
                 {/* Narrows the list as you type, like the site search facets'
                     find boxes. Only the Keyword field above waits for a submit,
                     since it's the one that moves the results */}
-                <div className="relative mb-2">
-                  <i
-                    className="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-sm text-neutral-subtle pointer-events-none"
-                    aria-hidden="true"
-                  />
-                  <input
-                    type="search"
-                    value={categoryFind}
-                    onChange={(e) => setCategoryFind(e.target.value)}
-                    placeholder="Find a category…"
-                    aria-label="Find a category"
-                    className="w-full bg-white border border-[#94A3B8] pl-9 pr-3 py-2 font-body text-sm text-navy-bolder
-                      placeholder:text-neutral-subtle outline-none focus:border-navy-bright
-                      focus:shadow-[0_0_0_3px_rgba(4,102,200,0.15)] transition"
-                  />
-                </div>
+                <FacetFind
+                  value={categoryFind}
+                  onChange={setCategoryFind}
+                  placeholder="Find a category…"
+                />
 
                 {/* 38 series is too many to sit open beside the results, so the
                     list reveals past the threshold rather than scrolling */}

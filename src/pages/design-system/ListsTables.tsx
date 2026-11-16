@@ -186,7 +186,7 @@ export default function ListsTables() {
               title="Drift: other filterable listings"
               tone="drift"
               items={[
-                { path: 'src/sections/BooksCollectionLayout.tsx', note: 'Its own sidebar, hidden lg:block, so below 1024px the books listing has no filters at all. It also has a “Filter By” heading in font-extrabold text-sm uppercase over border-b-2, a w-[220px] xl:w-[240px] column, a local Accordion without .accordion-row or aria-controls, a type-ahead filter inside long facets, removable filter chips, a “Sort by:” label in neutral-subtle, a border-border-light select, and its own pager (below).' },
+                { path: 'src/sections/BooksCollectionLayout.tsx', note: 'Its own sidebar, hidden lg:block, so below 1024px the books listing has no filters at all. It also has a “Filter By” heading in font-extrabold text-sm uppercase over border-b-2, a w-[220px] xl:w-[240px] column, a local Accordion without .accordion-row or aria-controls, removable filter chips, a “Sort by:” label in neutral-subtle, a border-border-light select, and its own pager (below).' },
                 { path: 'src/sections/StudentSchoolDirectory.tsx', note: 'filters inline above the grid rather than in a panel. Labels are font-bold text-xs uppercase navy-subtle, and inputs use border-navy-subtle with a focus outline instead of the halo. Its count line is the only one with role="status".' },
               ]}
             />
@@ -257,7 +257,7 @@ export default function ListsTables() {
                 {
                   part: 'Search form',
                   classes: 'flex flex-col gap-1.5',
-                  note: 'RailSearch (src/components/ui/RailSearch.tsx). A <form role="search">: typing only edits the field, and the search runs on Enter or the button. Emptying the field applies at once. A long facet’s find box is a plain input that narrows its options as you type.',
+                  note: 'RailSearch (src/components/ui/RailSearch.tsx). A <form role="search">: typing only edits the field, and the search runs on Enter or the button. Emptying the field applies at once. A long facet’s find box is FacetFind (below), which narrows its options as you type.',
                 },
                 { part: 'Keyword label', classes: 'font-body font-semibold text-sm text-navy-bolder' },
                 {
@@ -277,6 +277,11 @@ export default function ListsTables() {
                 },
                 { part: 'Facet group', classes: 'border-b border-border-light', note: 'Holds the disclosure button (.accordion-row … px-3 py-3 font-body font-bold text-sm) and its option list. See Accordions.' },
                 { part: 'Option list', classes: 'pb-4', note: 'Rendered only while open.' },
+                {
+                  part: 'Find box',
+                  classes: 'relative mb-2  ›  i: fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-sm text-neutral-subtle pointer-events-none  ›  input: w-full bg-white border border-[#94A3B8] pl-9 pr-3 py-2 font-body text-sm text-navy-bolder placeholder:text-neutral-subtle outline-none focus:border-navy-bright focus:shadow-[0_0_0_3px_rgba(4,102,200,0.15)] transition',
+                  note: 'FacetFind (FacetGroup.tsx), at the top of a long facet on every listing: essay archive Categories, Books series and subjects, site search and Browse All. Narrows the options as you type, never the results. The gray icon is decoration (aria-hidden), not a button. type="search"; the placeholder is the accessible name.',
+                },
                 {
                   part: 'Checkbox row',
                   classes: 'flex items-center gap-2.5 py-1.5 cursor-pointer group select-none',

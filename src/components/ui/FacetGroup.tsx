@@ -72,6 +72,43 @@ export function FacetShowMore({
   )
 }
 
+/**
+ * The "Find …" box at the top of a long facet's option list. It narrows that
+ * facet's options as you type; it never touches the results, so unlike the
+ * rail's Keyword field (RailSearch) it doesn't wait for a submit. The gray
+ * magnifying glass is decoration, not a button. Shared by every listing's
+ * facets so the box reads the same everywhere.
+ */
+export function FacetFind({
+  value,
+  onChange,
+  placeholder,
+}: {
+  value: string
+  onChange: (value: string) => void
+  /** Also the accessible name, minus a trailing ellipsis. */
+  placeholder: string
+}) {
+  return (
+    <div className="relative mb-2">
+      <i
+        className="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-sm text-neutral-subtle pointer-events-none"
+        aria-hidden="true"
+      />
+      <input
+        type="search"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        aria-label={placeholder.replace(/…$/, '')}
+        className="w-full bg-white border border-[#94A3B8] pl-9 pr-3 py-2 font-body text-sm text-navy-bolder
+          placeholder:text-neutral-subtle outline-none focus:border-navy-bright
+          focus:shadow-[0_0_0_3px_rgba(4,102,200,0.15)] transition"
+      />
+    </div>
+  )
+}
+
 export interface FacetOption {
   value: string
   count: number
@@ -143,16 +180,7 @@ export default function FacetGroup({
       {open && (
         <div id={id} className="px-3 pt-3 pb-4 flex flex-col">
           {findPlaceholder && listed.length > FACET_PREVIEW && (
-            <input
-              type="search"
-              value={find}
-              onChange={(e) => setFind(e.target.value)}
-              placeholder={findPlaceholder}
-              aria-label={findPlaceholder.replace(/…$/, '')}
-              className="mb-2 w-full bg-white border border-[#94A3B8] px-3 py-2 font-body text-sm text-navy-bolder
-                placeholder:text-neutral-subtle outline-none focus:border-navy-bright
-                focus:shadow-[0_0_0_3px_rgba(4,102,200,0.15)] transition"
-            />
+            <FacetFind value={find} onChange={setFind} placeholder={findPlaceholder} />
           )}
 
           {visible.map((o) => (
