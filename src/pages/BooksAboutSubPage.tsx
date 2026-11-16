@@ -11,7 +11,7 @@ import imgAiHero from '@/assets/images/AdobeStock_191892422_extended.png'
 /**
  * One basic-page template for the three pages linked from About the Press.
  *
- * Routed under /books/about/<slug> so the Books sub-nav keeps "About the Press"
+ * Routed under /press/about/<slug> so the Books sub-nav keeps "About the Press"
  * active on them. The header is `PageHero`, with About the Press as the
  * breadcrumb parent. None of the live pages has a lede; the AI page's opening
  * paragraph was lifted out of the body to serve as one. Examination
@@ -52,8 +52,8 @@ export default function BooksAboutSubPage({ slug }: { slug: BooksAboutSubPageSlu
             <Breadcrumb
               trail={[
                 { label: 'Home', href: '/' },
-                { label: 'Books & Press', href: '/books' },
-                { label: 'About the Press', href: '/books/about' },
+                { label: 'Books & Press', href: '/press' },
+                { label: 'About the Press', href: '/press/about' },
               ]}
               current={page.crumb}
               className="border-b border-[#C2DDFF] pb-4"

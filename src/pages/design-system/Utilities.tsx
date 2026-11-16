@@ -487,7 +487,7 @@ export default function Utilities() {
                   We serve our members by providing a monthly journal,{' '}
                   <a href="/proceedings" className="text-link">Proceedings</a>, and other benefits such as our daily news
                   service <a href="/news" className="text-link">USNI News</a>; discounts off all titles from the{' '}
-                  <a href="/books" className="text-link">Naval Institute Press</a>.
+                  <a href="/press" className="text-link">Naval Institute Press</a>.
                 </p>
               </LiveMarkup>
               <DevNote>

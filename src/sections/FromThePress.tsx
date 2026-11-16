@@ -94,7 +94,7 @@ export default function FromThePress() {
               the sea services &mdash; from professional guides and history to the ideas defining
               tomorrow's fight.
             </p>
-            <CardCta href="/books">
+            <CardCta href="/press">
               Browse Books &amp; Press
             </CardCta>
           </div>

@@ -6,7 +6,7 @@
  *   /about-us/contact-us    → /contact (form, visiting directions)
  *   /media-inquiries        → /contact#media
  *   /donate/contact-us      → /giving/contact
- *   /press/contact-us       → /books/contact
+ *   /press/contact-us       → /press/contact
  *   /archives/contact-us    → /archives/research-requests
  *   /advertise-us           → /advertise
  * Member Services, which the live site only reaches through deep links into
@@ -74,7 +74,7 @@ export const contactRoutes: ContactRoute[] = [
   {
     title: 'Naval Institute Press',
     summary: 'Review copies, trade orders, and rights and permissions.',
-    href: '/books/contact',
+    href: '/press/contact',
     cta: 'Contact the Press',
   },
   {

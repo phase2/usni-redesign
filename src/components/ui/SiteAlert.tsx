@@ -3,7 +3,7 @@ import { useId, useState, type ReactNode } from 'react'
 /**
  * A full-width announcement band at the very top of a page, above the header:
  * the live site's site-wide alert (first used for the 2026 holiday Press sale on
- * /books), in the redesign's treatment.
+ * /press), in the redesign's treatment.
  *
  * The band runs edge to edge on the lightest yellow on the site (#fefde8, the
  * donate cart banner's), with its content held to the page container so it

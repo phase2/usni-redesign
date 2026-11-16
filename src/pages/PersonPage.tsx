@@ -35,7 +35,7 @@ export default function PersonPage() {
             <Breadcrumb
               trail={[
                 { label: 'Home', href: '/' },
-                { label: 'Books & Press', href: '/books' },
+                { label: 'Books & Press', href: '/press' },
               ]}
               current={p.name}
               className="border-b border-[#C2DDFF] pb-4"

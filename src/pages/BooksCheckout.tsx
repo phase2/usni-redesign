@@ -15,7 +15,7 @@ import { BOOK_CATALOG, SHIPPING_METHODS, money, orderTotals } from '@/data/books
 
 /**
  * Books checkout — the step the books flow had no route for at all. The cart's
- * "Continue to Checkout" navigated to /books/checkout, which matched nothing,
+ * "Continue to Checkout" navigated to /press/checkout, which matched nothing,
  * so the catch-all served a 404 and no book could be bought.
  *
  * Mirrors the membership and subscription checkouts: account (create or sign
@@ -212,7 +212,7 @@ export default function BooksCheckout() {
     if (email.trim()) params.set('email', email.trim())
     if (firstName.trim()) params.set('name', firstName.trim())
     if (savedCardLast4) params.set('card', savedCardLast4)
-    navigate(`/books/confirmation?${params.toString()}`)
+    navigate(`/press/confirmation?${params.toString()}`)
   }
 
   return (

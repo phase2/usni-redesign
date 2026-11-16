@@ -2,7 +2,7 @@ import { memberServices, pressContact, pressGroups } from '@/data/contact'
 import { DetailBlock, EmailLink, PeopleGrid, PhoneLink } from '@/sections/ContactSections'
 
 /**
- * Contact the Naval Institute Press, at /books/contact.
+ * Contact the Naval Institute Press, at /press/contact.
  *
  * The live /press/contact-us, kept as its own page: its readers are booksellers,
  * reviewers, and authors rather than members, and its inquiries don't overlap
@@ -43,7 +43,7 @@ const inquiries = [
     body: (
       <>
         For manuscript submissions, see{' '}
-        <a href="/books/about/writing" className="text-link">Writing for the Naval Institute Press</a>.
+        <a href="/press/about/writing" className="text-link">Writing for the Naval Institute Press</a>.
       </>
     ),
   },

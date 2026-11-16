@@ -42,7 +42,7 @@ export default function BooksAndPress() {
         <BooksProductSection
           title="New releases"
           seeAllLabel="See all new releases"
-          seeAllHref="/books/new-releases"
+          seeAllHref="/press/new-releases"
           books={newReleases}
         />
         <AdUnit />
@@ -50,7 +50,7 @@ export default function BooksAndPress() {
         <BooksProductSection
           title="Best sellers"
           seeAllLabel="See all best sellers"
-          seeAllHref="/books/best-sellers"
+          seeAllHref="/press/books/best-sellers"
           books={bestSellers}
           background="subtle"
         />

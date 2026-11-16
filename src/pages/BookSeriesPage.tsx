@@ -35,7 +35,7 @@ export default function BookSeriesPage({ slug }: { slug: string }) {
           deck={collection.editor ? `${collection.editor.name}, Series Editor` : undefined}
           description={collection.summary}
           breadcrumbLabel={collection.shortName}
-          breadcrumbParent={{ label: 'Professional Military Education', href: '/books/professional-military-education' }}
+          breadcrumbParent={{ label: 'Professional Military Education', href: '/press/professional-military-education' }}
           hero={collection.hero}
           mark={collection.mark}
         />
@@ -50,7 +50,7 @@ export default function BookSeriesPage({ slug }: { slug: string }) {
           background="subtle"
           seeAll={
             available > 0
-              ? { label: 'Browse the full catalog', href: '/books/collection' }
+              ? { label: 'Browse the full catalog', href: '/press/books' }
               : undefined
           }
         />

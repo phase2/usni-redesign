@@ -13,19 +13,19 @@ const links = [
     title: 'Examination Requests',
     body: 'How professors and instructors can request examination copies for course adoption, and the desk copies an adopted title earns.',
     cta: 'Request an exam copy',
-    href: '/books/about/examination-requests',
+    href: '/press/about/examination-requests',
   },
   {
     title: 'Writing for the Naval Institute Press',
     body: 'What to include with a proposal or completed manuscript, and how to submit your work digitally or by mail.',
     cta: 'Read the submission guidelines',
-    href: '/books/about/writing',
+    href: '/press/about/writing',
   },
   {
     title: 'Artificial Intelligence at Naval Institute Press',
     body: 'How the Press uses AI to support publishing operations, where it will not, and what is expected of authors and peer reviewers.',
     cta: 'Read our AI policy',
-    href: '/books/about/ai',
+    href: '/press/about/ai',
   },
 ]
 

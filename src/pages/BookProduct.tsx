@@ -14,7 +14,7 @@ import { seriesBooksFor } from '@/data/bookProductData'
 import { BOOK_CATALOG } from '@/data/booksOrder'
 import { bestSellers } from '@/data/books'
 
-/** A book product page, at /books/:slug, for any title in BOOK_CATALOG. */
+/** A book product page, at /press/books/:slug, for any title in BOOK_CATALOG. */
 export default function BookProduct() {
   const { slug = '' } = useParams()
   const book = BOOK_CATALOG[slug]
@@ -46,8 +46,8 @@ export default function BookProduct() {
         <BooksProductSection
           title="You might also like"
           seeAllLabel="See all books"
-          seeAllHref="/books"
-          books={bestSellers.filter((b) => b.href !== `/books/${slug}`)}
+          seeAllHref="/press"
+          books={bestSellers.filter((b) => b.href !== `/press/books/${slug}`)}
         />
         <BookProductCategoryTags categories={book.categories} />
       </main>

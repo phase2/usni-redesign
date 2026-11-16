@@ -403,7 +403,7 @@ export default function Alerts() {
               A page-wide announcement band at the very top of the page, above the header, for something every visitor to a section
               should see, such as a sale and its shipping deadlines. The band runs edge to edge; its content follows
               the page container. A headline and a one-line summary show by default, and longer detail waits behind
-              See More. First used on /books for the 2026 holiday Press sale. It is not an Alert: nothing is wrong
+              See More. First used on /press for the 2026 holiday Press sale. It is not an Alert: nothing is wrong
               and nothing has changed, so it has no icon, no accent rule, and no live-region role.
             </Lead>
 

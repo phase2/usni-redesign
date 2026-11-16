@@ -14,17 +14,17 @@ interface SubNavItem {
 }
 
 const navItems: SubNavItem[] = [
-  { label: 'Books', href: '/books/collection' },
-  { label: 'New Releases', href: '/books/new-releases' },
+  { label: 'Books', href: '/press/books' },
+  { label: 'New Releases', href: '/press/new-releases' },
   {
     label: 'Professional Military Education',
-    href: '/books/professional-military-education',
-    alsoActiveUnder: ['/books/series', '/books/military-reading-lists'],
+    href: '/press/professional-military-education',
+    alsoActiveUnder: ['/press/series', '/press/military-reading-lists'],
   },
   { label: 'Oral Histories', href: '/archives/oral-histories' },
-  { label: 'Digital Editions', href: '/books/digital-editions' },
-  { label: 'About the Press', href: '/books/about' },
-  { label: 'Contact the Press', href: '/books/contact' },
+  { label: 'Digital Editions', href: '/press/digital-editions' },
+  { label: 'About the Press', href: '/press/about' },
+  { label: 'Contact the Press', href: '/press/contact' },
 ]
 
 function isItemActive(pathname: string, item: SubNavItem): boolean {

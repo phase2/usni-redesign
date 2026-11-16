@@ -57,7 +57,7 @@ const activities: {
         'Now the Naval Institute Press publishes about eighty titles each year, ranging from how-to books on boating and navigation to battle histories, biographies, ship and aircraft guides, and novels. Institute members receive significant discounts on the Press’ more than eight hundred books in print.',
       ],
     ],
-    cta: { label: 'Browse Books & Press', href: '/books' },
+    cta: { label: 'Browse Books & Press', href: '/press' },
   },
   {
     id: 'history-and-preservation',

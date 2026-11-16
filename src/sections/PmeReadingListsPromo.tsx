@@ -49,7 +49,7 @@ export default function PmeReadingListsPromo() {
               </p>
               <div className="pt-3">
                 <a
-                  href="/books/military-reading-lists"
+                  href="/press/military-reading-lists"
                   className="inline-flex items-center gap-2 self-start bg-gold text-navy-boldest font-body font-bold text-base tracking-[-0.5px] px-6 py-4 hover:bg-gold-dark transition-colors"
                 >
                   View the Military Reading Lists

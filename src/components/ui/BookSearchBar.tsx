@@ -2,30 +2,30 @@ import { useState, useRef, useEffect, type FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const AUTOCOMPLETE_TITLES = [
-  { title: 'Warfare Beneath the Waves', author: 'Axel Niestle', href: '/books/warfare-beneath-the-waves' },
-  { title: 'Training for Victory', author: 'Frank R. Donche', href: '/books/training-for-victory' },
-  { title: 'The Melting Point', author: 'Gen. Kenneth F. McKenzie Jr.', href: '/books/melting-point' },
-  { title: 'Standing Up the Space Force', author: 'Multiple Authors', href: '/books/standing-up-space-force' },
-  { title: 'Rush to Disaster', author: 'James D. Hornfischer', href: '/books/rush-to-disaster' },
-  { title: 'The Origins of Aegis', author: 'Thomas Wildenberg', href: '/books/origins-of-aegis' },
-  { title: 'United States Marines: A History', author: 'Multiple Authors', href: '/books/marines-history' },
-  { title: 'Japanese Submarines in World War Two', author: 'Terry C. Treadwell', href: '/books/japanese-submarines' },
-  { title: 'Greyhounds of the Pacific', author: 'Multiple Authors', href: '/books/greyhounds-pacific' },
-  { title: 'Give Me a Fast Ship', author: 'Tim McGrath', href: '/books/give-me-fast-ship' },
-  { title: "The Admiral's Bookshelf", author: 'James Stavridis', href: '/books/admirals-bookshelf' },
-  { title: 'Cold War Storm', author: 'Multiple Authors', href: '/books/cold-war-storm' },
-  { title: 'Battleship Diplomat', author: 'Nancy Snow', href: '/books/battleship-diplomat' },
-  { title: 'Career Compass', author: 'Douglas H. Raugh Jr.', href: '/books/career-compass' },
-  { title: 'AI Warfighting', author: 'Multiple Authors', href: '/books/ai-warfighting' },
-  { title: 'Countering China: The Great Game', author: 'Multiple Authors', href: '/books/countering-china' },
-  { title: 'Cyber Warfare and Navies', author: 'Multiple Authors', href: '/books/cyber-warfare-navies' },
-  { title: 'Destroyers at War', author: 'Multiple Authors', href: '/books/destroyers-at-war' },
-  { title: 'Sea Power and the American Interest', author: 'John Fass Morton', href: '/books/sea-power-american-interest' },
-  { title: 'American Airpower', author: 'Peter F. Owen', href: '/books/american-airpower' },
-  { title: 'Fighting Falcons', author: 'Multiple Authors', href: '/books/fighting-falcons' },
-  { title: 'Commanding Minds and Machines', author: 'Multiple Authors', href: '/books/commanding-minds-machines' },
-  { title: 'The Gamble in the Coral Sea', author: 'Multiple Authors', href: '/books/gamble-coral-sea' },
-  { title: 'Intruders and Wild Weasels', author: 'Thomas Wildenberg', href: '/books/intruders-wild-weasels' },
+  { title: 'Warfare Beneath the Waves', author: 'Axel Niestle', href: '/press/books/warfare-beneath-the-waves' },
+  { title: 'Training for Victory', author: 'Frank R. Donche', href: '/press/books/training-for-victory' },
+  { title: 'The Melting Point', author: 'Gen. Kenneth F. McKenzie Jr.', href: '/press/books/melting-point' },
+  { title: 'Standing Up the Space Force', author: 'Multiple Authors', href: '/press/books/standing-up-space-force' },
+  { title: 'Rush to Disaster', author: 'James D. Hornfischer', href: '/press/books/rush-to-disaster' },
+  { title: 'The Origins of Aegis', author: 'Thomas Wildenberg', href: '/press/books/origins-of-aegis' },
+  { title: 'United States Marines: A History', author: 'Multiple Authors', href: '/press/books/marines-history' },
+  { title: 'Japanese Submarines in World War Two', author: 'Terry C. Treadwell', href: '/press/books/japanese-submarines' },
+  { title: 'Greyhounds of the Pacific', author: 'Multiple Authors', href: '/press/books/greyhounds-pacific' },
+  { title: 'Give Me a Fast Ship', author: 'Tim McGrath', href: '/press/books/give-me-fast-ship' },
+  { title: "The Admiral's Bookshelf", author: 'James Stavridis', href: '/press/books/admirals-bookshelf' },
+  { title: 'Cold War Storm', author: 'Multiple Authors', href: '/press/books/cold-war-storm' },
+  { title: 'Battleship Diplomat', author: 'Nancy Snow', href: '/press/books/battleship-diplomat' },
+  { title: 'Career Compass', author: 'Douglas H. Raugh Jr.', href: '/press/books/career-compass' },
+  { title: 'AI Warfighting', author: 'Multiple Authors', href: '/press/books/ai-warfighting' },
+  { title: 'Countering China: The Great Game', author: 'Multiple Authors', href: '/press/books/countering-china' },
+  { title: 'Cyber Warfare and Navies', author: 'Multiple Authors', href: '/press/books/cyber-warfare-navies' },
+  { title: 'Destroyers at War', author: 'Multiple Authors', href: '/press/books/destroyers-at-war' },
+  { title: 'Sea Power and the American Interest', author: 'John Fass Morton', href: '/press/books/sea-power-american-interest' },
+  { title: 'American Airpower', author: 'Peter F. Owen', href: '/press/books/american-airpower' },
+  { title: 'Fighting Falcons', author: 'Multiple Authors', href: '/press/books/fighting-falcons' },
+  { title: 'Commanding Minds and Machines', author: 'Multiple Authors', href: '/press/books/commanding-minds-machines' },
+  { title: 'The Gamble in the Coral Sea', author: 'Multiple Authors', href: '/press/books/gamble-coral-sea' },
+  { title: 'Intruders and Wild Weasels', author: 'Thomas Wildenberg', href: '/press/books/intruders-wild-weasels' },
 ]
 
 function highlight(text: string, query: string) {
@@ -55,7 +55,7 @@ interface BookSearchBarProps {
 
 /** Where a submitted search lands: the full collection, filtered. */
 const resultsHref = (q: string) =>
-  q.trim() ? `/books/collection?q=${encodeURIComponent(q.trim())}` : '/books/collection'
+  q.trim() ? `/press/books?q=${encodeURIComponent(q.trim())}` : '/press/books'
 
 export default function BookSearchBar({ className = '', size = 'default', initialQuery = '' }: BookSearchBarProps) {
   const navigate = useNavigate()

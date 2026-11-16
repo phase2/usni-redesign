@@ -1161,7 +1161,7 @@ select.select-field:disabled {
                 { part: 'Results list', classes: 'absolute left-0 right-0 bg-white border-2 border-t-0 border-[#023E7D] shadow-lg z-50', note: 'role="listbox"; joins the field box seamlessly (no top border).' },
                 { part: 'Result link', classes: 'flex items-start gap-3 px-4 py-3 hover:bg-surface-subtle transition-colors', note: 'Title `font-body text-base text-navy-bolder leading-snug`, author `font-body text-base text-neutral-subtle mt-0.5`.' },
                 { part: 'Match highlight', classes: 'bg-[#0466C8]/15 text-[#0466C8] font-semibold', note: 'A <mark> around the matched substring.' },
-                { part: '“See all” row', classes: 'flex items-center gap-2 px-4 py-3 font-body font-semibold text-base text-[#0466C8] hover:bg-surface-subtle transition-colors', note: 'In an `li` with `border-t border-border-light`. Links to /books/collection?q=…' },
+                { part: '“See all” row', classes: 'flex items-center gap-2 px-4 py-3 font-body font-semibold text-base text-[#0466C8] hover:bg-surface-subtle transition-colors', note: 'In an `li` with `border-t border-border-light`. Links to /press/books?q=…' },
               ]}
             />
 
@@ -1169,7 +1169,7 @@ select.select-field:disabled {
               <p>
                 The results list is only rendered while open, so the snippet shows the idle field; the table gives the
                 list’s classes. In Drupal, back this with a Search API autocomplete endpoint and wrap the input in a{' '}
-                <Code>&lt;form action="/books/collection" method="get"&gt;</Code> so Enter submits a full search without
+                <Code>&lt;form action="/press/books" method="get"&gt;</Code> so Enter submits a full search without
                 JavaScript.
               </p>
               <p>

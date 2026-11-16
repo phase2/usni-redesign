@@ -331,7 +331,7 @@ export default function SectionPatterns() {
                   heading="Notable Books on Maritime Strategy"
                   intro="Recommended further reading from the Naval Institute Press on sea power, strategy, and the history of maritime competition."
                   titles={notableBooks.slice(0, 5)}
-                  seeAll={{ label: 'See all Press titles', href: '/books' }}
+                  seeAll={{ label: 'See all Press titles', href: '/press' }}
                 />
               </LiveMarkup>
               <p className="font-body text-sm text-neutral-subtle leading-relaxed mt-3 max-w-[760px]">

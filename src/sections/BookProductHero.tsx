@@ -18,7 +18,7 @@ export default function BookProductHero({ book }: Props) {
         {/* Breadcrumb */}
         <div className="pb-5 mb-8 border-b border-[#e4e7ec]">
           <nav className="flex flex-wrap items-center gap-x-2 gap-y-1 font-body text-sm text-neutral-subtle">
-            <a href="/books" className="hover:text-navy-bolder transition-colors">Books & Press</a>
+            <a href="/press" className="hover:text-navy-bolder transition-colors">Books & Press</a>
             <span className="text-[#c4c9d4]">/</span>
             {book.categories[0] && (
               <>
@@ -126,7 +126,7 @@ export default function BookProductHero({ book }: Props) {
             <div className="flex flex-col sm:flex-row gap-3 pt-1">
               <a
                 href={format.inStock
-                  ? `/books/cart?id=${book.id}&format=${encodeURIComponent(format.label)}&price=${format.price}`
+                  ? `/press/cart?id=${book.id}&format=${encodeURIComponent(format.label)}&price=${format.price}`
                   : undefined
                 }
                 aria-disabled={!format.inStock}

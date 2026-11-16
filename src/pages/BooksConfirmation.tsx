@@ -129,7 +129,7 @@ export default function BooksConfirmation() {
 
               <ConfirmationActions
                 links={[
-                  { label: 'Keep browsing the Press', href: '/books' },
+                  { label: 'Keep browsing the Press', href: '/press' },
                   { label: 'View your orders', href: '/account/orders' },
                   { label: 'Back to home', href: '/' },
                 ]}

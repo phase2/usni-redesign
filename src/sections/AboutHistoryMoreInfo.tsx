@@ -21,7 +21,7 @@ export default function AboutHistoryMoreInfo() {
               'The most immediate source of information is right here on ',
               { text: 'usni.org', href: '/' },
               '. The entire ',
-              { text: 'book list', href: '/books' },
+              { text: 'book list', href: '/press' },
               ' is easily searchable. The index to and contents of ',
               { text: 'Proceedings', href: '/proceedings' },
               ' since 1874 are available electronically, as well as selected articles from ',

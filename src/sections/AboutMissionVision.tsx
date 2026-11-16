@@ -47,7 +47,7 @@ export default function AboutMissionVision() {
                 USNI News
               </a>
               ; blogs, newsletters, and mobile apps; discounts off all titles from the{' '}
-              <a href="/books" className="text-link">
+              <a href="/press" className="text-link">
                 Naval Institute Press
               </a>
               ; as well as a discounted subscription rate on our award-winning bi-monthly{' '}

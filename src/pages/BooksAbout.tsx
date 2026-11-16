@@ -11,7 +11,7 @@ import heroImage from '@/assets/images/books/custom-bookstore-hero.png'
 
 /**
  * About the Naval Institute Press — the live /press/about page, at the
- * /books/about path the Books sub-nav already links to.
+ * /press/about path the Books sub-nav already links to.
  *
  * The live page carries no artwork, so the hero reuses the cover wall from the
  * Books & Press landing (BooksHero) — an even field of covers, so it reads the
@@ -37,7 +37,7 @@ export default function BooksAbout() {
             <Breadcrumb
               trail={[
                 { label: 'Home', href: '/' },
-                { label: 'Books & Press', href: '/books' },
+                { label: 'Books & Press', href: '/press' },
               ]}
               current="About the Press"
               tone="dark"

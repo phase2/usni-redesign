@@ -6,7 +6,7 @@ import PageHero from '@/sections/PageHero'
 import PressContactContent from '@/sections/PressContactContent'
 
 /**
- * Contact the Press, at /books/contact. See PressContactContent.
+ * Contact the Press, at /press/contact. See PressContactContent.
  */
 export default function PressContact() {
   return (
@@ -21,7 +21,7 @@ export default function PressContact() {
             <Breadcrumb
               trail={[
                 { label: 'Home', href: '/' },
-                { label: 'Books & Press', href: '/books' },
+                { label: 'Books & Press', href: '/press' },
               ]}
               current="Contact the Press"
               className="border-b border-[#C2DDFF] pb-4"

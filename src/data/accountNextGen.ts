@@ -135,7 +135,7 @@ export const memberPerks: MemberPerk[] = [
     label: 'Up to 40% off Naval Institute Press',
     detail: 'Member pricing shows automatically at checkout.',
     icon: 'fa-book',
-    href: '/books',
+    href: '/press',
     cta: 'Browse the catalog',
   },
   {

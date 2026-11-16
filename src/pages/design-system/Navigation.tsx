@@ -208,7 +208,7 @@ export default function Navigation() {
               label="Mega-menu open, side-image layout (Books & Press, right-anchored)"
               previewClassName="bg-white p-0"
               defaultOpen={false}
-              markupFor={<AtPath path="/books?previewNavOpen=Books%20%26%20Press"><Header /></AtPath>}
+              markupFor={<AtPath path="/press?previewNavOpen=Books%20%26%20Press"><Header /></AtPath>}
             >
               <LazyFrame
                 src="/design-system/preview/header?previewNavOpen=Books%20%26%20Press"
@@ -566,8 +566,8 @@ export default function Navigation() {
                 <C>{'{{ item.in_active_trail }}'}</C>. Drupal&rsquo;s active trail replaces the
                 prototype&rsquo;s path matching, but the edge cases the copies solved still need covering: a
                 landing tab must not light up on every child (<C>exact</C>), and a tab can need to stay lit on
-                pages outside its own path — Books&rsquo; PME tab owns <C>/books/series</C> and{' '}
-                <C>/books/military-reading-lists</C>, two prefixes, which the shared <C>matchPrefix</C> (one
+                pages outside its own path — Books&rsquo; PME tab owns <C>/press/series</C> and{' '}
+                <C>/press/military-reading-lists</C>, two prefixes, which the shared <C>matchPrefix</C> (one
                 string) cannot express yet. Use menu-link fields or Menu Trail By Path for those. A short label
                 and an external flag are menu-link fields too.
               </p>
@@ -786,7 +786,7 @@ const [active, setActive] = useState('2024')
             <div>
               <BreakpointLabel device="mobile">Mobile — below 640px, the back-link only</BreakpointLabel>
               <LazyFrame
-                src="/books/new-releases"
+                src="/press/new-releases"
                 width={375}
                 height={250}
                 title="New Releases page at 375px, showing the collapsed breadcrumb"
@@ -835,7 +835,7 @@ const [active, setActive] = useState('2024')
 <Breadcrumb
   trail={[
     { label: 'Home', href: '/' },
-    { label: 'Books & Press', href: '/books' },
+    { label: 'Books & Press', href: '/press' },
   ]}
   current="New Releases"
   className="pb-4 border-b border-[#C2DDFF]"

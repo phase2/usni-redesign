@@ -31,34 +31,34 @@ export default function PmeIntro() {
               The Naval Institute Press supports professional military education
               (PME) in the sea services. Since 1902, when the Naval Institute first
               published{' '}
-              <a href="/books/bluejackets-manual-26th-edition" className="text-link">
+              <a href="/press/books/bluejackets-manual-26th-edition" className="text-link">
                 <em>The Bluejacket’s Manual</em>
               </a>
               , the Navy, Marine Corps, and Coast Guard have relied upon our
               ever-growing library of professional books as an important source of
               information and guidance for sailors of all ranks. The{' '}
-              <a href="/books/series/blue-and-gold" className="text-link">
+              <a href="/press/series/blue-and-gold" className="text-link">
                 Blue &amp; Gold
               </a>{' '}
               and{' '}
-              <a href="/books/series/scarlet-and-gold" className="text-link">
+              <a href="/press/series/scarlet-and-gold" className="text-link">
                 Scarlet &amp; Gold
               </a>{' '}
               series offer such iconic titles as{' '}
-              <a href="/books/watch-officers-guide-16th-edition" className="text-link">
+              <a href="/press/books/watch-officers-guide-16th-edition" className="text-link">
                 <em>Watch Officer’s Guide</em>
               </a>
               ,{' '}
-              <a href="/books/command-at-sea-7th-edition" className="text-link">
+              <a href="/press/books/command-at-sea-7th-edition" className="text-link">
                 <em>Command at Sea</em>
               </a>
               ,{' '}
-              <a href="/books/handbook-for-marine-ncos-5th-edition" className="text-link">
+              <a href="/press/books/handbook-for-marine-ncos-5th-edition" className="text-link">
                 <em>Handbook for Marine NCOs</em>
               </a>
               , and{' '}
               <a
-                href="/books/newly-commissioned-naval-officers-guide-2nd-edition"
+                href="/press/books/newly-commissioned-naval-officers-guide-2nd-edition"
                 className="text-link"
               >
                 <em>The Newly Commissioned Officer’s Guide</em>
@@ -70,25 +70,25 @@ export default function PmeIntro() {
             <p>
               In addition, modern classics such as Wayne Hughes’{' '}
               <a
-                href="/books/fleet-tactics-and-naval-operations-3rd-edition"
+                href="/press/books/fleet-tactics-and-naval-operations-3rd-edition"
                 className="text-link"
               >
                 <em>Fleet Tactics and Naval Operations</em>
               </a>{' '}
               have been joined by more recent titles such as{' '}
               <a
-                href="/books/cyberspace-in-peace-and-war-2nd-edition"
+                href="/press/books/cyberspace-in-peace-and-war-2nd-edition"
                 className="text-link"
               >
                 <em>Cyberspace in Peace and War</em>
               </a>{' '}
               and{' '}
-              <a href="/books/airpower-applied" className="text-link">
+              <a href="/press/books/airpower-applied" className="text-link">
                 <em>Airpower Applied</em>
               </a>{' '}
               as mainstays at the war college level. Numerous books have also been
               selected for the{' '}
-              <a href="/books/military-reading-lists" className="text-link">
+              <a href="/press/military-reading-lists" className="text-link">
                 CNO’s Reading List
               </a>
               . Under the guidance of the Gordon England Chair of Professional Naval
@@ -109,7 +109,7 @@ export default function PmeIntro() {
 
             <div className="pt-1">
               <a
-                href="/books/military-reading-lists"
+                href="/press/military-reading-lists"
                 className="inline-flex items-center gap-2.5 bg-navy-bolder text-white font-body font-bold text-sm tracking-[-0.2px] px-6 py-4 border border-navy-bolder hover:bg-navy-bright hover:border-navy-bright transition-colors"
               >
                 View the Military Reading Lists

@@ -16,7 +16,7 @@ function Breadcrumb({
     <SiteBreadcrumb
       trail={[
         { label: 'Home', href: '/' },
-        { label: 'Books & Press', href: '/books' },
+        { label: 'Books & Press', href: '/press' },
         ...(parent ? [parent] : []),
       ]}
       current={label}

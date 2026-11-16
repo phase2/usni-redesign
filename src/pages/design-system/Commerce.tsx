@@ -177,11 +177,11 @@ function BookLineItem() {
   const priceNum = 38.95
   return (
     <div className="border border-[#c4c9d4] p-6 flex gap-6 items-start">
-      <a href="/books/ai-warfighting" className="flex-shrink-0 w-24">
+      <a href="/press/books/ai-warfighting" className="flex-shrink-0 w-24">
         <img src={book.coverImage} alt={`${book.title} cover`} className="w-24 shadow-md object-cover" />
       </a>
       <div className="flex-1 min-w-0 flex flex-col gap-2">
-        <a href="/books/ai-warfighting" className="font-headline text-[22px] leading-[1.2] text-link">
+        <a href="/press/books/ai-warfighting" className="font-headline text-[22px] leading-[1.2] text-link">
           {book.title}
         </a>
         <p className="font-body text-[14px] text-[#4e576a] leading-[1.4]">{book.subtitle}</p>
@@ -801,7 +801,7 @@ const FLOWS: { name: string; steps: string[]; note: string }[] = [
   },
   {
     name: 'Books',
-    steps: ['/books/ai-warfighting', '/books/cart', '/books/checkout', '/books/confirmation'],
+    steps: ['/press/books/ai-warfighting', '/press/cart', '/press/checkout', '/press/confirmation'],
     note: 'The only physical good: quantity, shipping method, shipping address, and estimated tax.',
   },
   {

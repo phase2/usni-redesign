@@ -6,7 +6,7 @@ import Breadcrumb from '@/components/ui/Breadcrumb'
 import NavalScienceGlossaryContent from '@/sections/NavalScienceGlossaryContent'
 
 /**
- * Glossary of Naval Skills Terms, at /books/online/naval-science-3/glossary.
+ * Glossary of Naval Skills Terms, at /press/books/online/naval-science-3/glossary.
  *
  * The live page is chapter 12 of the Naval Science 3 online book
  * (/press/books/online/naval-science-3-3rd-edition-2023/naval-science-3-3rd-edition-2023-12),
@@ -26,7 +26,7 @@ export default function BooksNavalScienceGlossary() {
             <Breadcrumb
               trail={[
                 { label: 'Home', href: '/' },
-                { label: 'Books & Press', href: '/books' },
+                { label: 'Books & Press', href: '/press' },
               ]}
               current="Glossary of Naval Skills Terms"
               className="border-b border-[#C2DDFF] pb-4"

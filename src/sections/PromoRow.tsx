@@ -52,7 +52,7 @@ export default function PromoRow() {
             headline="125 Years of Stories Worth Telling"
             body="From The Hunt for Red October to oral histories of the Navy's greatest leaders, Naval Institute Press brings the sea services to life — on the page and on screen."
             ctaLabel="Discover Books & Press"
-            ctaHref="/books"
+            ctaHref="/press"
             image={booksImage}
             imageAlt="Naval Institute Press bookstore"
           />

@@ -73,9 +73,9 @@ const benefits: Benefit[] = [
     modalBody:
       'Members receive 20% off all Naval Institute Press titles — more than 1,000 books spanning naval history, strategy, technology, biography, and fiction. From essential professional reading to rare archival works, the Press is the foremost publisher of naval literature and a benefit unique to USNI membership.',
     primaryLabel: 'Browse books',
-    primaryHref: '/books',
+    primaryHref: '/press',
     secondaryLabel: 'Learn about the Press',
-    secondaryHref: '/books/about',
+    secondaryHref: '/press/about',
   },
   {
     id: 'history',

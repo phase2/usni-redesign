@@ -113,7 +113,7 @@ export function bookDetailRows(book: BookProductData): BookDetailRow[] {
     { icon: 'fa-book', label: 'Format', value: book.formats.map((f) => f.label).join(', ') },
     { icon: 'fa-barcode', label: 'ISBN-13', value: isbn('isbn') },
     ...(isbn10 ? [{ icon: 'fa-barcode', label: 'ISBN-10', value: isbn10 }] : []),
-    { icon: 'fa-building', label: 'Publisher', value: book.publisher, href: '/books/about' },
+    { icon: 'fa-building', label: 'Publisher', value: book.publisher, href: '/press/about' },
     { icon: 'fa-calendar-days', label: 'Published', value: book.publishDate },
     ...(book.series
       ? [{ icon: 'fa-layer-group', label: 'Series', value: book.series.seriesName, href: book.series.href }]
@@ -156,7 +156,7 @@ export const aiWarfightingBook: BookProductData = {
   series: {
     label: 'AUSA Series',
     seriesName: 'Association of the United States Army',
-    href: '/books/series/ausa',
+    href: '/press/series/ausa',
   },
   overviewLead: true,
   overview: [
@@ -177,10 +177,10 @@ export const aiWarfightingBook: BookProductData = {
     },
   ],
   categories: [
-    { label: 'Weapons', href: '/books/collection' },
-    { label: 'Strategy', href: '/books/collection' },
-    { label: 'Association of the U.S. Army (AUSA)', href: '/books/series/ausa' },
-    { label: 'Spring 2027 Catalog', href: '/books/collection' },
+    { label: 'Weapons', href: '/press/books' },
+    { label: 'Strategy', href: '/press/books' },
+    { label: 'Association of the U.S. Army (AUSA)', href: '/press/series/ausa' },
+    { label: 'Spring 2027 Catalog', href: '/press/books' },
   ],
 }
 
@@ -328,34 +328,34 @@ export const meltingPointBook: BookProductData = {
     { label: 'Apple Books', href: 'https://books.apple.com/us/book/the-melting-point/id6470289648', logo: logoIBooks },
   ],
   categories: [
-    { label: 'Iraq & Afghanistan', href: '/books/collection' },
-    { label: 'U.S. Marine Corps', href: '/books/collection' },
-    { label: 'Biography & Memoirs', href: '/books/collection' },
-    { label: 'Spring 2024 Catalog', href: '/books/collection' },
+    { label: 'Iraq & Afghanistan', href: '/press/books' },
+    { label: 'U.S. Marine Corps', href: '/press/books' },
+    { label: 'Biography & Memoirs', href: '/press/books' },
+    { label: 'Spring 2024 Catalog', href: '/press/books' },
   ],
 }
 
 // AUSA series — 15 titles across 3 carousel pages
 // Cover images are placeholders until final assets are supplied
 export const ausaSeriesBooks: Book[] = [
-  { id: 'ausa-01', title: 'Chief of Staff, Vol. 1', author: 'Edited by Maj. Gen. David T. Zabecki, AUS (Ret.)', format: 'Paperback', price: 22.95, originalPrice: 29.95, image: imgAdmirals, href: '/books/chief-of-staff-vol-1' },
-  { id: 'ausa-02', title: 'Adopting Mission Command', author: 'Donald E. Vandergriff', format: 'Paperback', price: 24.95, originalPrice: 32.95, image: imgMarines, href: '/books/adopting-mission-command' },
-  { id: 'ausa-03', title: 'AI Warfighting', author: 'Matthew Moellering and Genna Moellering', format: 'Hardcover', price: 26.97, originalPrice: 44.95, image: imgAI, href: '/books/ai-warfighting' },
-  { id: 'ausa-04', title: 'Arming East Asia', author: 'Eric Setzekorn', format: 'Paperback', price: 22.95, originalPrice: 29.95, image: imgChina, href: '/books/arming-east-asia' },
-  { id: 'ausa-05', title: 'Bipolar General', author: 'Maj. Gen. Gregg F. Martin, USA (Ret.)', format: 'Hardcover', price: 28.95, originalPrice: 36.95, image: imgCareer, href: '/books/bipolar-general' },
-  { id: 'ausa-06', title: 'Black Ops Vietnam', author: 'Robert M. Gillespie', format: 'Paperback', price: 22.95, originalPrice: 29.95, image: imgWarfare, href: '/books/black-ops-vietnam' },
-  { id: 'ausa-07', title: 'Chief of Staff, Vol. 2', author: 'Edited by Maj. Gen. David T. Zabecki, AUS (Ret.)', format: 'Paperback', price: 22.95, originalPrice: 29.95, image: imgBattleship, href: '/books/chief-of-staff-vol-2' },
-  { id: 'ausa-08', title: 'Decision at Strasbourg', author: 'David P. Colley', format: 'Paperback', price: 21.95, originalPrice: 28.95, image: imgGamble, href: '/books/decision-at-strasbourg' },
-  { id: 'ausa-09', title: 'Elite Souls', author: 'Raymond James Raymond', format: 'Hardcover', price: 27.95, originalPrice: 35.95, image: imgDestroyers, href: '/books/elite-souls' },
-  { id: 'ausa-10', title: 'In Final Defense of the Reich', author: 'Stephen M. Rusiecki', format: 'Paperback', price: 22.95, originalPrice: 29.95, image: imgColdWar, href: '/books/in-final-defense-of-the-reich' },
-  { id: 'ausa-11', title: 'In the Gray Area', author: 'Lt. Col. Seth W. B. Folsom, USMC', format: 'Paperback', price: 21.95, originalPrice: 28.95, image: imgSpyPlanes, href: '/books/in-the-gray-area' },
-  { id: 'ausa-12', title: 'Leadership in Dangerous Situations, Second Edition', author: 'Edited by Patrick J. Sweeney et al.', format: 'Paperback', price: 24.95, originalPrice: 32.95, image: imgTraining, href: '/books/leadership-in-dangerous-situations' },
-  { id: 'ausa-13', title: 'Lost Battalion of Tet', author: 'Charles A. Krohn', format: 'Paperback', price: 19.95, originalPrice: 26.95, image: imgJapanese, href: '/books/lost-battalion-of-tet' },
-  { id: 'ausa-14', title: 'Soldiers on the Beaches', author: 'James A. Villanueva', format: 'Paperback', price: 22.95, originalPrice: 29.95, image: imgGreyhounds, href: '/books/soldiers-on-the-beaches' },
-  { id: 'ausa-15', title: 'When the Warrior Returns', author: 'Edited by Nathan D. Ainspan and Walter Penk', format: 'Paperback', price: 21.95, originalPrice: 28.95, image: imgSpaceForce, href: '/books/when-the-warrior-returns' },
+  { id: 'ausa-01', title: 'Chief of Staff, Vol. 1', author: 'Edited by Maj. Gen. David T. Zabecki, AUS (Ret.)', format: 'Paperback', price: 22.95, originalPrice: 29.95, image: imgAdmirals, href: '/press/books/chief-of-staff-vol-1' },
+  { id: 'ausa-02', title: 'Adopting Mission Command', author: 'Donald E. Vandergriff', format: 'Paperback', price: 24.95, originalPrice: 32.95, image: imgMarines, href: '/press/books/adopting-mission-command' },
+  { id: 'ausa-03', title: 'AI Warfighting', author: 'Matthew Moellering and Genna Moellering', format: 'Hardcover', price: 26.97, originalPrice: 44.95, image: imgAI, href: '/press/books/ai-warfighting' },
+  { id: 'ausa-04', title: 'Arming East Asia', author: 'Eric Setzekorn', format: 'Paperback', price: 22.95, originalPrice: 29.95, image: imgChina, href: '/press/books/arming-east-asia' },
+  { id: 'ausa-05', title: 'Bipolar General', author: 'Maj. Gen. Gregg F. Martin, USA (Ret.)', format: 'Hardcover', price: 28.95, originalPrice: 36.95, image: imgCareer, href: '/press/books/bipolar-general' },
+  { id: 'ausa-06', title: 'Black Ops Vietnam', author: 'Robert M. Gillespie', format: 'Paperback', price: 22.95, originalPrice: 29.95, image: imgWarfare, href: '/press/books/black-ops-vietnam' },
+  { id: 'ausa-07', title: 'Chief of Staff, Vol. 2', author: 'Edited by Maj. Gen. David T. Zabecki, AUS (Ret.)', format: 'Paperback', price: 22.95, originalPrice: 29.95, image: imgBattleship, href: '/press/books/chief-of-staff-vol-2' },
+  { id: 'ausa-08', title: 'Decision at Strasbourg', author: 'David P. Colley', format: 'Paperback', price: 21.95, originalPrice: 28.95, image: imgGamble, href: '/press/books/decision-at-strasbourg' },
+  { id: 'ausa-09', title: 'Elite Souls', author: 'Raymond James Raymond', format: 'Hardcover', price: 27.95, originalPrice: 35.95, image: imgDestroyers, href: '/press/books/elite-souls' },
+  { id: 'ausa-10', title: 'In Final Defense of the Reich', author: 'Stephen M. Rusiecki', format: 'Paperback', price: 22.95, originalPrice: 29.95, image: imgColdWar, href: '/press/books/in-final-defense-of-the-reich' },
+  { id: 'ausa-11', title: 'In the Gray Area', author: 'Lt. Col. Seth W. B. Folsom, USMC', format: 'Paperback', price: 21.95, originalPrice: 28.95, image: imgSpyPlanes, href: '/press/books/in-the-gray-area' },
+  { id: 'ausa-12', title: 'Leadership in Dangerous Situations, Second Edition', author: 'Edited by Patrick J. Sweeney et al.', format: 'Paperback', price: 24.95, originalPrice: 32.95, image: imgTraining, href: '/press/books/leadership-in-dangerous-situations' },
+  { id: 'ausa-13', title: 'Lost Battalion of Tet', author: 'Charles A. Krohn', format: 'Paperback', price: 19.95, originalPrice: 26.95, image: imgJapanese, href: '/press/books/lost-battalion-of-tet' },
+  { id: 'ausa-14', title: 'Soldiers on the Beaches', author: 'James A. Villanueva', format: 'Paperback', price: 22.95, originalPrice: 29.95, image: imgGreyhounds, href: '/press/books/soldiers-on-the-beaches' },
+  { id: 'ausa-15', title: 'When the Warrior Returns', author: 'Edited by Nathan D. Ainspan and Walter Penk', format: 'Paperback', price: 21.95, originalPrice: 28.95, image: imgSpaceForce, href: '/press/books/when-the-warrior-returns' },
 ]
 
 /** The carousel titles for a book's series, if the prototype has them. */
 export function seriesBooksFor(book: BookProductData): Book[] {
-  return book.series?.href === '/books/series/ausa' ? ausaSeriesBooks : []
+  return book.series?.href === '/press/series/ausa' ? ausaSeriesBooks : []
 }

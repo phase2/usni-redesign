@@ -8,7 +8,7 @@ export default function BooksNewReleasesHero() {
         <Breadcrumb
           trail={[
             { label: 'Home', href: '/' },
-            { label: 'Books & Press', href: '/books' },
+            { label: 'Books & Press', href: '/press' },
           ]}
           current="New Releases"
           className="border-b border-[#C2DDFF] pb-4"
@@ -21,7 +21,7 @@ export default function BooksNewReleasesHero() {
           </h1>
           <div className="lg:pb-2 flex-shrink-0">
             <a
-              href="/books/collection"
+              href="/press/books"
               className="inline-flex items-center gap-2.5 bg-navy-bolder text-white font-body font-bold text-sm tracking-[-0.2px] px-6 py-4 hover:bg-navy-bright transition-colors"
             >
               Browse all books

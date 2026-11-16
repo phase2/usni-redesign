@@ -21,6 +21,31 @@ function ScrollToTop() {
   }, [pathname, hash])
   return null
 }
+
+/**
+ * Books & Press moved from /books to /press, as on the live site: the landing
+ * is /press, the listing /press/books, and each title /press/books/<slug>.
+ * Old /books links (bookmarks, links shared from earlier reviews) land on the
+ * new page, query and hash kept.
+ */
+const PRESS_SECTIONS = new Set([
+  'new-releases', 'cart', 'checkout', 'confirmation', 'professional-military-education',
+  'military-reading-lists', 'about', 'contact', 'digital-editions', 'series',
+])
+
+function LegacyBooksRedirect() {
+  const { pathname, search, hash } = useLocation()
+  const rest = pathname.replace(/^\/books\/?/, '')
+  const first = rest.split('/')[0]
+  const to = !rest
+    ? '/press'
+    : first === 'collection'
+      ? '/press/books'
+      : PRESS_SECTIONS.has(first)
+        ? `/press/${rest}`
+        : `/press/books/${rest}`
+  return <Navigate replace to={`${to}${search}${hash}`} />
+}
 import { CartProvider } from '@/context/CartContext'
 import PrototypeNav from '@/components/prototype/PrototypeNav'
 import Home from '@/pages/Home'
@@ -208,31 +233,32 @@ export default function App() {
         <Route path="/proceedings/submit" element={<ProceedingsSubmissions />} />
         <Route path="/proceedings/submissions" element={<Navigate replace to="/proceedings/submit" />} />
         <Route path="/proceedings/sea-power-project" element={<SeaPowerProject />} />
-        <Route path="/books" element={<BooksAndPress />} />
-        <Route path="/books/collection" element={<BooksCollection />} />
-        <Route path="/books/new-releases" element={<BooksNewReleases />} />
-        <Route path="/books/cart" element={<BooksCart />} />
-        <Route path="/books/checkout" element={<BooksCheckout />} />
-        <Route path="/books/confirmation" element={<BooksConfirmation />} />
-        <Route path="/books/professional-military-education" element={<BooksPME />} />
-        <Route path="/books/military-reading-lists" element={<BooksReadingLists />} />
-        <Route path="/books/about" element={<BooksAbout />} />
-        <Route path="/books/contact" element={<PressContact />} />
-        <Route path="/books/about/examination-requests" element={<BooksAboutSubPage slug="examination-requests" />} />
-        <Route path="/books/about/writing" element={<BooksAboutSubPage slug="writing" />} />
-        <Route path="/books/about/ai" element={<BooksAboutSubPage slug="ai" />} />
-        <Route path="/books/digital-editions" element={<BooksDigitalEditions />} />
-        <Route path="/books/online/naval-science-3/glossary" element={<BooksNavalScienceGlossary />} />
+        <Route path="/books/*" element={<LegacyBooksRedirect />} />
+        <Route path="/press" element={<BooksAndPress />} />
+        <Route path="/press/books" element={<BooksCollection />} />
+        <Route path="/press/new-releases" element={<BooksNewReleases />} />
+        <Route path="/press/cart" element={<BooksCart />} />
+        <Route path="/press/checkout" element={<BooksCheckout />} />
+        <Route path="/press/confirmation" element={<BooksConfirmation />} />
+        <Route path="/press/professional-military-education" element={<BooksPME />} />
+        <Route path="/press/military-reading-lists" element={<BooksReadingLists />} />
+        <Route path="/press/about" element={<BooksAbout />} />
+        <Route path="/press/contact" element={<PressContact />} />
+        <Route path="/press/about/examination-requests" element={<BooksAboutSubPage slug="examination-requests" />} />
+        <Route path="/press/about/writing" element={<BooksAboutSubPage slug="writing" />} />
+        <Route path="/press/about/ai" element={<BooksAboutSubPage slug="ai" />} />
+        <Route path="/press/digital-editions" element={<BooksDigitalEditions />} />
+        <Route path="/press/books/online/naval-science-3/glossary" element={<BooksNavalScienceGlossary />} />
         {/* One template, nine series — see src/data/bookCollections.ts */}
-        <Route path="/books/series/scarlet-and-gold" element={<BookSeriesPage slug="scarlet-and-gold" />} />
-        <Route path="/books/series/blue-and-gold" element={<BookSeriesPage slug="blue-and-gold" />} />
-        <Route path="/books/series/marine-corps-history" element={<BookSeriesPage slug="marine-corps-history" />} />
-        <Route path="/books/series/military-aviation" element={<BookSeriesPage slug="military-aviation" />} />
-        <Route path="/books/series/president-commander-in-chief" element={<BookSeriesPage slug="president-commander-in-chief" />} />
-        <Route path="/books/series/transforming-war" element={<BookSeriesPage slug="transforming-war" />} />
-        <Route path="/books/series/naval-history-sea-power" element={<BookSeriesPage slug="naval-history-sea-power" />} />
-        <Route path="/books/series/essentials-of-strategy" element={<BookSeriesPage slug="essentials-of-strategy" />} />
-        <Route path="/books/series/war-on-film" element={<BookSeriesPage slug="war-on-film" />} />
+        <Route path="/press/series/scarlet-and-gold" element={<BookSeriesPage slug="scarlet-and-gold" />} />
+        <Route path="/press/series/blue-and-gold" element={<BookSeriesPage slug="blue-and-gold" />} />
+        <Route path="/press/series/marine-corps-history" element={<BookSeriesPage slug="marine-corps-history" />} />
+        <Route path="/press/series/military-aviation" element={<BookSeriesPage slug="military-aviation" />} />
+        <Route path="/press/series/president-commander-in-chief" element={<BookSeriesPage slug="president-commander-in-chief" />} />
+        <Route path="/press/series/transforming-war" element={<BookSeriesPage slug="transforming-war" />} />
+        <Route path="/press/series/naval-history-sea-power" element={<BookSeriesPage slug="naval-history-sea-power" />} />
+        <Route path="/press/series/essentials-of-strategy" element={<BookSeriesPage slug="essentials-of-strategy" />} />
+        <Route path="/press/series/war-on-film" element={<BookSeriesPage slug="war-on-film" />} />
         <Route path="/naval-history" element={<NavalHistory />} />
         <Route path="/naval-history/aug-2026" element={<NavalHistoryCurrentIssue />} />
         <Route path="/naval-history/all-issues" element={<NavalHistoryAllIssues />} />
@@ -270,7 +296,7 @@ export default function App() {
         <Route path="/proceedings/naval-aviation-got-better" element={<ProceedingsArticleGrubb />} />
         <Route path="/proceedings/sponsored" element={<ProceedingsSponsoredContent />} />
         <Route path="/proceedings/sponsored/updating-uv-fleets" element={<ProceedingsSponsoredUvFleets />} />
-        <Route path="/books/:slug" element={<BookProduct />} />
+        <Route path="/press/books/:slug" element={<BookProduct />} />
         <Route path="/people/:slug" element={<PersonPage />} />
         <Route path="/archives" element={<Archives />} />
         <Route path="/archives/research-requests" element={<ArchivesResearchRequests />} />

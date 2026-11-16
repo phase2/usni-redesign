@@ -71,7 +71,7 @@ export default function AccountWishlist() {
             title="Your wishlist is empty"
             action={
               <Link
-                to="/books/collection"
+                to="/press/books"
                 className="inline-flex items-center justify-center bg-navy-bolder text-white font-body font-bold text-[15px] px-5 py-3 border border-navy-bolder hover:bg-navy-bright hover:border-navy-bright transition-colors"
               >
                 Browse the Press catalogue
@@ -123,7 +123,7 @@ export default function AccountWishlist() {
 
               <div className="flex flex-col items-stretch gap-2 w-full sm:w-auto sm:flex-shrink-0">
                 <Link
-                  to={`/books/cart?id=${book.id}&format=${encodeURIComponent(book.format)}&price=${book.price}`}
+                  to={`/press/cart?id=${book.id}&format=${encodeURIComponent(book.format)}&price=${book.price}`}
                   className="inline-flex items-center justify-center gap-2 bg-gold text-navy-bolder font-body font-bold text-[14px] px-4 py-2.5 hover:bg-gold-dark transition-colors whitespace-nowrap"
                 >
                   <i className="fa-solid fa-cart-shopping text-[12px]" aria-hidden="true" />

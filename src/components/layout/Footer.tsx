@@ -18,7 +18,7 @@ const contentLinks = [
   { label: 'Proceedings', href: '/proceedings' },
   { label: 'USNI News', href: '/news' },
   { label: 'Naval History', href: '/naval-history' },
-  { label: 'Books & Press', href: '/books' },
+  { label: 'Books & Press', href: '/press' },
   { label: 'Naval Institute Archives', href: '/archives' },
   { label: 'Oral Histories', href: '/archives/oral-histories' },
   { label: 'Photos & Historical Prints', href: 'https://photos.usni.org', external: true },

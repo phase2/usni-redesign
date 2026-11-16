@@ -15,7 +15,7 @@ const faqs: { q: string; a: ReactNode }[] = [
     a: (
       <p>
         Please refer to our detailed{' '}
-        <a href="/books/about/writing" className="text-link">
+        <a href="/press/about/writing" className="text-link">
           book manuscript submission guidelines
         </a>
         .
@@ -53,7 +53,7 @@ const faqs: { q: string; a: ReactNode }[] = [
         Institute Press books are available as examination copies for course
         adoption at a cost of $6.00 per paperback copy and $10.00 per hardback copy
         to cover shipping and handling. There is a three book limit per semester.{' '}
-        <a href="/books/about/examination-requests" className="text-link">
+        <a href="/press/about/examination-requests" className="text-link">
           Click here
         </a>{' '}
         for more details on our policies.

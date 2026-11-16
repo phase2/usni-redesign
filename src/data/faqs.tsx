@@ -430,7 +430,7 @@ export const faqTopics: FaqTopic[] = [
       {
         q: "Why aren't all articles published in the print version of Proceedings available on the website?",
         a: (
-          <p><em>Proceedings</em> is one of the many benefits of membership with the U.S. Naval Institute. Members can access complete articles from every <em>Proceedings</em> issue from the present back to the first issue in 1874. <a href="/membership" className="text-link">Become a member</a> of the U.S. Naval Institute to have access to the full range of content, including other benefits such as discounts on all titles from the <a href="/books" className="text-link">Naval Institute Press</a>, discounts on graphic novels from <a href="https://www.deadreckoning.org/" className="text-link">Dead Reckoning</a>, invitations to <a href="/events" className="text-link">special events</a>, and discount subscription rates to<em> <a href="/naval-history" className="text-link">Naval History</a></em> magazine, and so much more.</p>
+          <p><em>Proceedings</em> is one of the many benefits of membership with the U.S. Naval Institute. Members can access complete articles from every <em>Proceedings</em> issue from the present back to the first issue in 1874. <a href="/membership" className="text-link">Become a member</a> of the U.S. Naval Institute to have access to the full range of content, including other benefits such as discounts on all titles from the <a href="/press" className="text-link">Naval Institute Press</a>, discounts on graphic novels from <a href="https://www.deadreckoning.org/" className="text-link">Dead Reckoning</a>, invitations to <a href="/events" className="text-link">special events</a>, and discount subscription rates to<em> <a href="/naval-history" className="text-link">Naval History</a></em> magazine, and so much more.</p>
         ),
       },
       {
@@ -539,7 +539,7 @@ export const faqTopics: FaqTopic[] = [
         a: (
           <>
             <p>Membership with the U.S. Naval Institute puts you in a community of engaged citizens that believe in our mission: Since 1873, the U.S. Naval Institute has been the nation’s foremost open, independent, and non-partisan forum for those dare to read, think, speak, and write to advance the professional, literary, and scientific understanding of sea power and other issues critical to global security.</p>
-            <p>Our members write, debate, and discuss key issues that ultimately strengthens the Navy, Marine Corps, and Coast Guard. Membership benefits include: a subscription to our award-winning <a href="/proceedings" className="text-link"><em>Proceedings</em></a> magazine; discounts to over 1,000 titles from books published by the <a href="/books" className="text-link">Naval Institute Press</a>; a discounted subscription to <a href="/naval-history" className="text-link"><em>Naval History</em></a> magazine; a subscription to our weekly USNI News members-only newsletter; special invitations to conferences and events; access to over 150 years of archival information such as historic photos, oral histories, and so much more!</p>
+            <p>Our members write, debate, and discuss key issues that ultimately strengthens the Navy, Marine Corps, and Coast Guard. Membership benefits include: a subscription to our award-winning <a href="/proceedings" className="text-link"><em>Proceedings</em></a> magazine; discounts to over 1,000 titles from books published by the <a href="/press" className="text-link">Naval Institute Press</a>; a discounted subscription to <a href="/naval-history" className="text-link"><em>Naval History</em></a> magazine; a subscription to our weekly USNI News members-only newsletter; special invitations to conferences and events; access to over 150 years of archival information such as historic photos, oral histories, and so much more!</p>
           </>
         ),
       },
@@ -620,7 +620,7 @@ export const faqTopics: FaqTopic[] = [
       {
         q: 'How do I find out more about submitting a book manuscript?',
         a: (
-          <p>Please refer to our detailed <a href="/books/about/writing" className="text-link">book manuscript submission guidelines</a>.</p>
+          <p>Please refer to our detailed <a href="/press/about/writing" className="text-link">book manuscript submission guidelines</a>.</p>
         ),
       },
       {
@@ -636,7 +636,7 @@ export const faqTopics: FaqTopic[] = [
       {
         q: 'I am interested in examining a Naval Institute Press book for a class I teach. Do you provide exam copies to professors and if so, how do I go about requesting an examination copy?',
         a: (
-          <p>The Naval Institute Press features a wide range of history, foreign affairs and policy, national security, and leadership titles that have been adopted for course work by colleges and universities across the country. Naval Institute Press books are available as examination copies for course adoption at a cost of $6.00 per paperback copy and $10.00 per hardback copy to cover shipping and handling. There is a three book limit per semester. <a href="/books/about/examination-requests" className="text-link">Click </a><a href="/books/about/examination-requests" className="text-link">here</a> for more details on our policies.</p>
+          <p>The Naval Institute Press features a wide range of history, foreign affairs and policy, national security, and leadership titles that have been adopted for course work by colleges and universities across the country. Naval Institute Press books are available as examination copies for course adoption at a cost of $6.00 per paperback copy and $10.00 per hardback copy to cover shipping and handling. There is a three book limit per semester. <a href="/press/about/examination-requests" className="text-link">Click </a><a href="/press/about/examination-requests" className="text-link">here</a> for more details on our policies.</p>
         ),
       },
     ],

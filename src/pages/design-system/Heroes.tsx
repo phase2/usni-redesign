@@ -41,7 +41,7 @@ const FULL_BLEED_PREVIEW = 'p-0 bg-white'
 
 const booksTrail = [
   { label: 'Home', href: '/' },
-  { label: 'Books & Press', href: '/books' },
+  { label: 'Books & Press', href: '/press' },
 ]
 
 const darkRule = 'pb-4 border-b border-white/25'
@@ -296,7 +296,7 @@ export default function Heroes() {
                 panelTone="light"
                 breadcrumb={
                   <Breadcrumb
-                    trail={[...booksTrail, { label: 'About the Press', href: '/books/about' }]}
+                    trail={[...booksTrail, { label: 'About the Press', href: '/press/about' }]}
                     current="Artificial Intelligence"
                     className="border-b border-[#C2DDFF] pb-4"
                   />
@@ -319,9 +319,9 @@ export default function Heroes() {
               </Prose>
               <div className="flex flex-wrap gap-8">
                 <div className="min-w-0 max-w-full">
-                  <DocLabel>mobileImage=&quot;short&quot; (2:1) — /books/digital-editions</DocLabel>
+                  <DocLabel>mobileImage=&quot;short&quot; (2:1) — /press/digital-editions</DocLabel>
                   <PreviewFrame
-                    src="/books/digital-editions"
+                    src="/press/digital-editions"
                     width={375}
                     height={760}
                     title="Digital Editions at 375px"
@@ -571,7 +571,7 @@ export default function Heroes() {
                 title={blueAndGold.name}
                 description={blueAndGold.summary}
                 breadcrumbLabel={blueAndGold.shortName}
-                breadcrumbParent={{ label: 'Professional Military Education', href: '/books/professional-military-education' }}
+                breadcrumbParent={{ label: 'Professional Military Education', href: '/press/professional-military-education' }}
                 hero={blueAndGold.hero}
                 mark={blueAndGold.mark}
               />
@@ -581,7 +581,7 @@ export default function Heroes() {
               <CollectionHero
                 title="Military Reading Lists"
                 breadcrumbLabel="Military Reading Lists"
-                breadcrumbParent={{ label: 'Professional Military Education', href: '/books/professional-military-education' }}
+                breadcrumbParent={{ label: 'Professional Military Education', href: '/press/professional-military-education' }}
                 hero={{ variant: 'light' }}
               />
             </LiveMarkup>
@@ -592,7 +592,7 @@ export default function Heroes() {
                 deck={warOnFilm.editor ? `${warOnFilm.editor.name}, Series Editor` : undefined}
                 description={warOnFilm.summary}
                 breadcrumbLabel={warOnFilm.shortName}
-                breadcrumbParent={{ label: 'Professional Military Education', href: '/books/professional-military-education' }}
+                breadcrumbParent={{ label: 'Professional Military Education', href: '/press/professional-military-education' }}
                 hero={warOnFilm.hero}
               />
             </LiveMarkup>

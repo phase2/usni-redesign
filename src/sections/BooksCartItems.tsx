@@ -27,7 +27,7 @@ export default function BooksCartItems() {
 
   const handleCheckout = () => {
     const params = new URLSearchParams({ id: bookId, format, price, qty: String(qty) })
-    navigate(`/books/checkout?${params.toString()}`)
+    navigate(`/press/checkout?${params.toString()}`)
   }
 
   if (removed) {
@@ -41,7 +41,7 @@ export default function BooksCartItems() {
           <div className="border-t border-[#999fad] pt-8">
             <button
               type="button"
-              onClick={() => navigate('/books')}
+              onClick={() => navigate('/press')}
               className="flex items-center gap-2 border border-[#002b5c] text-[#001845] font-body font-extrabold text-[20px] py-4 px-8 hover:bg-navy-bright hover:text-white hover:border-navy-bright transition-colors"
             >
               <svg className="w-3 h-3 flex-shrink-0" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
@@ -69,7 +69,7 @@ export default function BooksCartItems() {
 
           {/* Cover thumbnail */}
           {book?.coverImage && (
-            <a href={`/books/${bookId}`} className="flex-shrink-0 w-24">
+            <a href={`/press/books/${bookId}`} className="flex-shrink-0 w-24">
               <img
                 src={book.coverImage}
                 alt={`${book?.title ?? 'Book'} cover`}
@@ -80,7 +80,7 @@ export default function BooksCartItems() {
 
           {/* Book info */}
           <div className="flex-1 min-w-0 flex flex-col gap-2">
-            <a href={`/books/${bookId}`} className="font-headline text-[22px] leading-[1.2] text-link">
+            <a href={`/press/books/${bookId}`} className="font-headline text-[22px] leading-[1.2] text-link">
               {book?.title ?? 'Book'}
             </a>
             {book?.subtitle && (
@@ -152,7 +152,7 @@ export default function BooksCartItems() {
         <div className="border-t border-[#999fad] pt-8 flex flex-wrap items-center justify-between gap-4">
           <button
             type="button"
-            onClick={() => navigate('/books')}
+            onClick={() => navigate('/press')}
             className="flex items-center gap-2 border border-[#002b5c] text-[#001845] font-body font-extrabold text-[20px] py-4 px-8 hover:bg-navy-bright hover:text-white hover:border-navy-bright transition-colors"
           >
             <svg className="w-3 h-3 flex-shrink-0" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">

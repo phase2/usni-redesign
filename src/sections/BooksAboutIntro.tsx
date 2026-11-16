@@ -6,8 +6,8 @@ import { useState } from 'react'
  * Transcribed as the live /press/about page displays it, wording and all
  * (including "references works" and the spaced "U. S."). The prose lives here
  * as JSX rather than in `src/data` because it carries inline links — the same
- * arrangement PmeIntro and AboutMissionVision use. Live `/press/...` paths are
- * mapped onto the prototype's `/books/...` section.
+ * arrangement PmeIntro and AboutMissionVision use. Live `/press/...` links
+ * point at the prototype's own `/press/...` pages.
  *
  * The first two paragraphs show; the rest sits behind the same See more /
  * See less toggle EssayContestsAbout uses.
@@ -42,23 +42,23 @@ export default function BooksAboutIntro() {
             <>
               <p>
                 In the 1980s,{' '}
-                <a href="/books/hunt-red-october" className="text-link">
+                <a href="/press/books/hunt-red-october" className="text-link">
                   <em>The Hunt for Red October</em>
                 </a>{' '}
                 and{' '}
-                <a href="/books/flight-intruder" className="text-link">
+                <a href="/press/books/flight-intruder" className="text-link">
                   <em>Flight of the Intruder</em>
                 </a>
                 , its first two novels, became <em>New York Times</em> bestsellers and
                 the basis for feature films. Recent bestsellers include{' '}
-                <a href="/books/circle-treason" className="text-link">
+                <a href="/press/books/circle-treason" className="text-link">
                   <em>
                     Circle of Treason: A CIA Account of Traitor Aldrich Ames and the Men
                     He Betrayed
                   </em>
                 </a>
                 , which was produced as an ABC television miniseries, and{' '}
-                <a href="/books/seal-honor" className="text-link">
+                <a href="/press/books/seal-honor" className="text-link">
                   <em>
                     SEAL of Honor: Operation Red Wings and the Life of Lt. Michael P.
                     Murphy, USN

@@ -30,7 +30,7 @@ export default function BooksReadingLists() {
         <CollectionHero
           title="Military Reading Lists"
           breadcrumbLabel="Military Reading Lists"
-          breadcrumbParent={{ label: 'Professional Military Education', href: '/books/professional-military-education' }}
+          breadcrumbParent={{ label: 'Professional Military Education', href: '/press/professional-military-education' }}
           hero={{ variant: 'light' }}
         />
 
