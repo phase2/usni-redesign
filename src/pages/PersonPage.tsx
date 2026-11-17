@@ -45,9 +45,10 @@ export default function PersonPage() {
 
         <AdUnit />
 
-        {/* Bio — same text/photo split as LeadershipBioBody: the text leads in
-            its reading column and the photo takes its own column from `md` up,
-            stacking above the text below it. */}
+        {/* Bio — the text leads in its reading column and the photo takes its
+            own column from `md` up, stacking above the text below it.
+            (Leadership bios float the photo into the text instead; see
+            LeadershipBioBody.) */}
         <section className="bg-white pt-4 pb-14 lg:pb-20">
           <div className="container-site">
             <div
