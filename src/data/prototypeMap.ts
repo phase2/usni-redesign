@@ -454,6 +454,14 @@ export const archiveSection: PrototypeSection = {
           // proposed redesign, kept for a later phase.
           note: 'Future enhancement',
         },
+        {
+          label: 'Leadership Bio, Photo Column',
+          // Any bio works at /about/leadership/<slug>/photo-column; the live
+          // bios float the photo into the text. Kept for when these pages
+          // are enhanced further.
+          href: '/about/leadership/rob-colenso/photo-column',
+          note: 'Future enhancement',
+        },
       ],
     },
   ],

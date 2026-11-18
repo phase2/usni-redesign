@@ -4,6 +4,7 @@ import Footer from '@/components/layout/Footer'
 import AboutSubNav from '@/sections/AboutSubNav'
 import AboutPageHero from '@/sections/AboutPageHero'
 import LeadershipBioBody from '@/sections/LeadershipBioBody'
+import LeadershipBioBodyColumns from '@/sections/LeadershipBioBodyColumns'
 import AdUnit from '@/components/ui/AdUnit'
 import NotFound from '@/pages/NotFound'
 import { leadershipBio } from '@/data/leadershipBios'
@@ -15,8 +16,15 @@ import { leadershipBio } from '@/data/leadershipBios'
  * The name and title move out of the live page's body into the About hero,
  * under a Leadership & Staff crumb, with the leaderboard ad beneath it as on
  * the site's other interior pages.
+ *
+ * `layout="photo-column"` is the archived earlier body, the photo in its own
+ * column beside the text, kept for a later phase of these pages.
  */
-export default function AboutLeadershipBio() {
+export default function AboutLeadershipBio({
+  layout = 'float',
+}: {
+  layout?: 'float' | 'photo-column'
+}) {
   const { slug = '' } = useParams()
   const bio = leadershipBio(slug)
   if (!bio) return <NotFound />
@@ -33,7 +41,9 @@ export default function AboutLeadershipBio() {
           parent={{ label: 'Leadership & Staff', href: '/about/leadership' }}
         />
         <AdUnit />
-        <LeadershipBioBody bio={bio} />
+        {layout === 'photo-column'
+          ? <LeadershipBioBodyColumns bio={bio} />
+          : <LeadershipBioBody bio={bio} />}
       </main>
       <Footer />
     </div>

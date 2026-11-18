@@ -336,6 +336,9 @@ export default function App() {
         {/* /media-inquiries folded into the contact hub */}
         <Route path="/about/media" element={<Navigate replace to="/contact#media" />} />
         <Route path="/about/leadership/:slug" element={<AboutLeadershipBio />} />
+        {/* Archived: the earlier bio layout, photo in its own column, kept as a
+            future enhancement */}
+        <Route path="/about/leadership/:slug/photo-column" element={<AboutLeadershipBio layout="photo-column" />} />
         <Route path="/about/state-of-the-institute" element={<AboutStateOfTheInstitute />} />
         {/* Archived: the year-at-a-time version, kept as a future enhancement */}
         <Route path="/about/state-of-the-institute/by-year" element={<AboutStateOfTheInstituteByYear />} />
