@@ -13,12 +13,14 @@ import { leadershipBio } from '@/data/leadershipBios'
  * A leadership bio. Only the Executive Staff in `leadershipBios.ts` have one so
  * far; any other roster link falls through to the 404, as it always has.
  *
- * The name and title move out of the live page's body into the About hero,
- * under a Leadership & Staff crumb, with the leaderboard ad beneath it as on
- * the site's other interior pages.
+ * As on the live page, the About hero carries the name alone, under a
+ * Leadership & Staff crumb, with the leaderboard ad beneath it as on the
+ * site's other interior pages; the body repeats the name and title above
+ * the bio (LeadershipBioBody).
  *
- * `layout="photo-column"` is the archived earlier body, the photo in its own
- * column beside the text, kept for a later phase of these pages.
+ * `layout="photo-column"` is the archived earlier composition, kept for a
+ * later phase of these pages: the title sits in the hero under the name, and
+ * the body is the bio alone with the photo in its own column beside it.
  */
 export default function AboutLeadershipBio({
   layout = 'float',
@@ -36,7 +38,13 @@ export default function AboutLeadershipBio({
         <AboutSubNav />
         <AboutPageHero
           title={bio.name}
-          subtitle={<span dangerouslySetInnerHTML={{ __html: bio.roleHtml }} />}
+          // The live bio's hero is the name alone, with the name and title
+          // repeated in the body; the archived layout keeps the title here
+          subtitle={
+            layout === 'photo-column'
+              ? <span dangerouslySetInnerHTML={{ __html: bio.roleHtml }} />
+              : undefined
+          }
           breadcrumbLabel={bio.name}
           parent={{ label: 'Leadership & Staff', href: '/about/leadership' }}
         />

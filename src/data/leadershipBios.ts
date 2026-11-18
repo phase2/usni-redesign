@@ -11,9 +11,9 @@ import imgWallen from '@/assets/images/leadership/bios/chip-wallen.jpg'
  * /about-us/executive-staff/<slug> pages (Adam Kane's lives at the site root,
  * /adam-kane, on the live site; here it sits with the others).
  *
- * The live pages repeat the name, title and an "Executive Staff" kicker as
- * headings inside the body. Those move to the page hero, so `html` is the
- * bio paragraphs alone. Both `roleHtml` and `html` are trusted markup we
+ * The live pages repeat the name and title (and on some, a kicker) as
+ * headings inside the body. LeadershipBioBody rebuilds those headings from
+ * `name` and `roleHtml`, so `html` is the bio paragraphs alone. Both `roleHtml` and `html` are trusted markup we
  * transcribed, rendered with the `.rich-text` house styles.
  *
  * Photos are the live pages' full rectangular headshots, not the circle crops
