@@ -37,7 +37,7 @@ export default function ArchivesResearchContent() {
     <>
       <section className="bg-white py-12 lg:py-16" aria-labelledby="research-services-heading">
         <div className="container-site flex flex-col gap-8">
-          <h2 id="research-services-heading" className="font-headline text-[30px] lg:text-[40px] text-navy-bolder leading-[1.15]">
+          <h2 id="research-services-heading" className="font-headline text-4xl lg:text-5xl text-navy-bolder leading-[1.1]">
             How we can help
           </h2>
           <ul className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">
@@ -71,7 +71,7 @@ export default function ArchivesResearchContent() {
       <section className="bg-tan-subtlest py-12 lg:py-14" aria-labelledby="research-other-heading">
         <div className="container-site">
           <div className="max-w-[860px] flex flex-col gap-4">
-            <h2 id="research-other-heading" className="font-headline text-[30px] lg:text-[40px] text-navy-bolder leading-[1.15]">
+            <h2 id="research-other-heading" className="font-headline text-4xl lg:text-5xl text-navy-bolder leading-[1.1]">
               Other questions
             </h2>
             <ul className="flex flex-col gap-2 font-body text-base text-navy-bolder leading-[1.6]">

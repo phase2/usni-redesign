@@ -145,7 +145,7 @@ export default function EditorialStaffDirectory() {
 
       <section className="bg-surface-subtle py-14 lg:py-16" aria-labelledby="write-for-us-heading">
         <div className="container-site">
-          <h2 id="write-for-us-heading" className="font-headline text-[30px] lg:text-[40px] text-navy-bolder leading-[1.15] mb-8">
+          <h2 id="write-for-us-heading" className="font-headline text-4xl lg:text-5xl text-navy-bolder leading-[1.1] mb-8">
             Write for us
           </h2>
           <ul className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
