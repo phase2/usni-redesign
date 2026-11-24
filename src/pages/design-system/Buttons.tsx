@@ -906,7 +906,7 @@ export default function Buttons() {
                 { path: 'src/sections/AboutGetInvolved.tsx', note: 'compact recipe, with an outline-dark copy beside it' },
                 { path: 'src/sections/TaylorCenterVisit.tsx', note: 'compact recipe plus gap-2 and the external glyph' },
                 { path: 'src/sections/ProceedingsMembershipCTA.tsx', note: 'compact recipe with px-6' },
-                { path: 'src/sections/NavalHistoryMembershipCTA.tsx', note: 'compact recipe with px-6; its partner is a white button that hovers to neutral-subtlest (a fourth outline style), and the label carries a typed “→”' },
+                { path: 'src/sections/NavalHistoryMembershipCTA.tsx', note: 'compact recipe with px-6; its partner is a hand-rolled outline-dark at the same compact size, and the label carries a typed “→”' },
                 { path: 'src/sections/EventsConferenceCenter.tsx', note: 'compact recipe with no border (2px shorter)' },
                 { path: 'src/sections/DonateFAQ.tsx', note: 'compact recipe, no border' },
                 { path: 'src/sections/BooksAboutFAQ.tsx', note: 'compact recipe, no border' },
@@ -973,7 +973,6 @@ export default function Buttons() {
               items={[
                 { path: 'src/components/ui/SaveArticleButton.tsx', note: 'sm outline that tints #EBF4FF on hover instead of filling navy-bright (see above)' },
                 { path: 'src/pages/account/AccountWishlist.tsx', note: 'the Alert Undo action: bg-white border border-navy-bolder text-[15px] px-5 py-2.5, an outline-dark copy at its own size' },
-                { path: 'src/pages/NavalHistorySubscribe.tsx', note: 'white bordered button (bg-white text-navy-bolder … px-6 py-3.5 border border-navy-bolder hover:bg-neutral-subtlest), the same fourth outline style as NavalHistoryMembershipCTA' },
               ]}
             />
           </div>

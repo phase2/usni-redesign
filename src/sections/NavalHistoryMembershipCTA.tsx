@@ -28,7 +28,7 @@ export default function NavalHistoryMembershipCTA() {
             </a>
             <a
               href="/membership/join"
-              className="inline-flex items-center justify-center gap-2 bg-white text-navy-bolder font-body font-bold text-sm tracking-[-0.3px] px-6 py-3.5 border border-navy-bolder hover:bg-neutral-subtlest transition-colors"
+              className="inline-flex items-center justify-center gap-2 bg-white text-navy-bolder font-body font-bold text-sm tracking-[-0.3px] px-6 py-3.5 border border-navy-bolder hover:bg-navy-bright hover:text-white hover:border-navy-bright transition-colors"
             >
               Become a member
             </a>
