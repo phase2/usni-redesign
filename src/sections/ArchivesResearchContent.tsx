@@ -17,20 +17,17 @@ import { EmailLink } from '@/sections/ContactSections'
 const services = [
   {
     title: 'Send a research request',
-    body: 'Library staff assist with research requests from people who can’t visit Beach Hall, including copies of past articles.',
-    detail: 'Simple requests are normally handled within 24–48 hours. Detailed requests may take longer.',
+    body: 'Library staff assist with research requests from people who can’t visit Beach Hall, including copies of past articles. Simple requests are normally handled within 24–48 hours. Detailed requests may take longer.',
     action: { label: 'Email research@usni.org', href: `mailto:${archivesContact.researchEmail}?subject=Research%20request` },
   },
   {
     title: 'Visit the library',
-    body: 'The library is open to the public, and researchers are welcome to work on site in Beach Hall at the Naval Academy.',
-    detail: `Schedule a visit by calling ${archivesContact.libraryPhone}.`,
+    body: `The library is open to the public, and researchers are welcome to work on site in Beach Hall at the Naval Academy. Schedule a visit by calling ${archivesContact.libraryPhone}.`,
     action: { label: `Call ${archivesContact.libraryPhone}`, href: telHref(archivesContact.libraryPhone) },
   },
   {
     title: 'Find a photo',
-    body: 'About 15,000 images are online, from a collection of more than 450,000 spanning the Civil War to the present.',
-    detail: `Questions about photos or orders go to ${archivesContact.photoEmail}.`,
+    body: `About 15,000 images are online, from a collection of more than 450,000 spanning the Civil War to the present. Questions about photos or orders go to ${archivesContact.photoEmail}.`,
     action: { label: 'Search the photo archive', href: archivesContact.photoSite, external: true },
   },
 ]
@@ -47,13 +44,12 @@ export default function ArchivesResearchContent() {
             {services.map((s) => (
               <li key={s.title} className="flex flex-col gap-3 bg-white border border-navy-subtle p-6 lg:p-7">
                 <h3 className="font-headline text-[22px] lg:text-[26px] text-navy-bolder leading-[1.15]">{s.title}</h3>
-                <p className="font-body text-[15px] text-neutral-bold leading-[1.65]">{s.body}</p>
-                <p className="font-body text-[15px] text-navy-bolder font-semibold leading-[1.5] flex-1">{s.detail}</p>
+                <p className="font-body text-[15px] text-neutral-bold leading-[1.65] flex-1">{s.body}</p>
                 <div className="pt-2">
                   <ButtonLink
                     href={s.action.href}
                     variant="navy"
-                    size="md"
+                    size="sm"
                     fullWidth
                     {...(s.action.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                   >
@@ -75,7 +71,7 @@ export default function ArchivesResearchContent() {
       <section className="bg-tan-subtlest py-12 lg:py-14" aria-labelledby="research-other-heading">
         <div className="container-site">
           <div className="max-w-[860px] flex flex-col gap-4">
-            <h2 id="research-other-heading" className="font-headline text-[26px] lg:text-[32px] text-navy-bolder leading-[1.15]">
+            <h2 id="research-other-heading" className="font-headline text-[30px] lg:text-[40px] text-navy-bolder leading-[1.15]">
               Other questions
             </h2>
             <ul className="flex flex-col gap-2 font-body text-base text-navy-bolder leading-[1.6]">
