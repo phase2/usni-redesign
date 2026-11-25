@@ -1,5 +1,6 @@
 import coverImage from '@/assets/images/proceedings-magazine-april-cover.png'
 import Breadcrumb from '@/components/ui/Breadcrumb'
+import { ButtonLink } from '@/components/ui/Button'
 
 export default function ProceedingsIssueHero() {
   return (
@@ -33,14 +34,24 @@ export default function ProceedingsIssueHero() {
               Volume 152/4/1,478
             </p>
 
-            {/* CTA */}
-            <div className="pt-1">
-              <a
-                href="/proceedings/all-issues"
-                className="flex lg:inline-flex items-center justify-center bg-gold text-navy-bolder font-body font-bold text-base tracking-[-0.5px] px-5 py-4 hover:bg-gold-dark transition-colors"
-              >
+            {/* CTAs — the members' PDF leads; the archive sits beside it as the
+                secondary action. The note belongs to the PDF button alone, so it
+                sits in that button's column and the archive button aligns to the
+                buttons' top edge, not the note's. */}
+            <div className="pt-1 flex flex-col lg:flex-row lg:items-start gap-4">
+              <div className="flex flex-col gap-2">
+                {/* No digital edition URL yet: the live issue page has no PDF
+                    link. Swap in the members' PDF when there is one. */}
+                <ButtonLink href="#" variant="primary" size="md" className="w-full lg:w-auto">
+                  Proceedings Digital Edition (PDF)
+                </ButtonLink>
+                <p className="font-body text-sm text-[#f4f4f6] text-center lg:text-left">
+                  (member only benefit)
+                </p>
+              </div>
+              <ButtonLink href="/proceedings/all-issues" variant="outline" size="md" className="w-full lg:w-auto">
                 See the Proceedings Archive
-              </a>
+              </ButtonLink>
             </div>
           </div>
 
