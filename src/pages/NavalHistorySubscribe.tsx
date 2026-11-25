@@ -5,6 +5,7 @@ import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import NavalHistorySubNav from '@/sections/NavalHistorySubNav'
 import PageHero from '@/sections/PageHero'
+import PhotoCta from '@/components/ui/PhotoCta'
 import SentenceSelect, { SentenceText } from '@/components/ui/SentenceSelect'
 import {
   FEATURES,
@@ -193,31 +194,13 @@ export default function NavalHistorySubscribe() {
         </section>
 
         {/* ── Membership cross-sell ── */}
-        <section
-          className="relative w-full bg-cover bg-center overflow-hidden"
-          style={{ backgroundImage: `url(${crossSellImg})`, minHeight: '480px' }}
-        >
-          <div className="absolute inset-0 bg-navy-boldest/20" aria-hidden="true" />
-
-          <div className="relative container-site h-full flex items-center justify-end min-h-[480px]">
-            <div className="bg-white p-8 lg:p-12 w-full max-w-full md:max-w-[480px] lg:max-w-[560px] my-20">
-              <h2 className="font-headline text-4xl lg:text-5xl text-navy-bolder leading-[1.1] mb-4">
-                Naval History comes with membership
-              </h2>
-              <p className="font-body text-base text-neutral-subtle leading-relaxed mb-6">
-                A Naval Institute membership includes Proceedings and the complete digital archive, and
-                lets you add Naval History at the member rate. If you are joining anyway, that is the
-                cheaper route.
-              </p>
-              <a
-                href="/membership/join"
-                className="inline-flex items-center justify-center gap-2 bg-white text-navy-bolder font-body font-bold text-sm tracking-[-0.3px] px-6 py-3.5 border border-navy-bolder hover:bg-navy-bright hover:text-white hover:border-navy-bright transition-colors"
-              >
-                Compare memberships
-              </a>
-            </div>
-          </div>
-        </section>
+        <PhotoCta
+          image={crossSellImg}
+          cardSide="right"
+          heading="Naval History comes with membership"
+          body="A Naval Institute membership includes Proceedings and the complete digital archive, and lets you add Naval History at the member rate. If you are joining anyway, that is the cheaper route."
+          primary={{ label: 'Compare memberships', href: '/membership/join' }}
+        />
       </main>
 
       <Footer />

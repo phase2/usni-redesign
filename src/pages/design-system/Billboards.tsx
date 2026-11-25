@@ -32,7 +32,7 @@ export default function Billboards() {
           <p>
             Each pattern below shows one canonical version as the spec and lists the copies with how
             they differ. Production needs one template per pattern, with fields for the copy, image and
-            buttons, and a small set of options (panel colour, which side the image is on).
+            buttons, and a small set of options (panel color, which side the image is on).
           </p>
         </DocPageHeader>
 
@@ -189,48 +189,64 @@ export default function Billboards() {
         <DocSection title="Photo CTA">
           <div className="flex flex-col gap-8">
             <p className="font-body text-base text-neutral-subtle leading-relaxed max-w-[760px]">
-              A full-bleed photograph, at least 480px tall, with a card floating over it. The card holds an
-              eyebrow, headline, paragraph and one or two buttons. The card is usually white and sits on the
-              right. Use it to close a page with a single next step (join, subscribe, host an event). A 20%
-              navy wash over the photo keeps it from competing with the card. Below {code('md')} the card fills
-              the container and the photo shows as a band above and below it.
+              A full-bleed photograph, at least 480px tall, under a 20% navy wash, with a card floating over
+              it. The card holds an optional eyebrow, a 36px headline, a paragraph and one or two buttons. Use
+              it to close a page with a single next step (join, subscribe, host an event). Every one renders
+              through one component, {code('PhotoCta')}, so the headline, card width and buttons cannot drift
+              between pages. The card is white, or navy where it needs to stand out, and sits on either side.
+              Below {code('md')} the card fills the container and the photo shows as a band above and below it.
             </p>
 
             <LiveMarkup label="White card, right — SplitFeature (homepage)" previewClassName="p-0 bg-white">
               <SplitFeature />
             </LiveMarkup>
 
-            <LiveMarkup label="White card, left, two buttons — GivingConferenceCenter" previewClassName="p-0 bg-white">
+            <LiveMarkup label="White card, left, external link — GivingConferenceCenter" previewClassName="p-0 bg-white">
               <GivingConferenceCenter />
             </LiveMarkup>
 
-            <LiveMarkup label="Navy card, right — MembershipServicesCTA" previewClassName="p-0 bg-white">
+            <LiveMarkup label="Navy card, right, two buttons — MembershipServicesCTA" previewClassName="p-0 bg-white">
               <MembershipServicesCTA />
             </LiveMarkup>
 
             <div>
-              <DocLabel>Anatomy (SplitFeature)</DocLabel>
+              <DocLabel>Props</DocLabel>
+              <ClassTable
+                rows={[
+                  { part: 'image', classes: 'string (URL)', note: 'Set as a CSS background, so it is decorative and takes no alt text.' },
+                  { part: 'cardSide', classes: "'left' | 'right'", note: <>Right adds {code('justify-end')} to the container.</> },
+                  { part: 'theme', classes: "'white' (default) | 'navy'", note: 'Swaps the card, type and button classes together.' },
+                  { part: 'eyebrow', classes: 'string, optional' },
+                  { part: 'heading', classes: 'ReactNode', note: <>Always an {code('<h2>')}: the block is a section of its own.</> },
+                  { part: 'body', classes: 'ReactNode' },
+                  { part: 'primary, secondary', classes: '{ label, href, external? }', note: 'Secondary renders as the theme’s outline button. An external link opens in a new tab and carries the external-link marker.' },
+                ]}
+              />
+            </div>
+
+            <div>
+              <DocLabel>Anatomy</DocLabel>
               <ClassTable
                 rows={[
                   {
                     part: 'Section',
                     classes: 'relative w-full bg-cover bg-center overflow-hidden',
-                    note: <>The photo is a CSS background set inline ({code('style="background-image: url(…); min-height: 480px"')}), cropped from the centre. The Taylor Center blocks use 520px.</>,
+                    note: <>The photo is set inline ({code('style="background-image: url(…); min-height: 480px"')}), cropped from the center.</>,
                   },
                   {
                     part: 'Wash',
                     classes: 'absolute inset-0 bg-navy-boldest/20',
-                    note: <>{code('aria-hidden="true"')}. A 20% navy-boldest overlay. MembershipServicesCTA has none.</>,
+                    note: <>{code('aria-hidden="true"')}. A 20% navy-boldest overlay, on both themes.</>,
                   },
                   {
                     part: 'Container',
-                    classes: 'relative container-site h-full flex items-center justify-end min-h-[480px]',
-                    note: <>{code('justify-end')} puts the card on the right. Leave it off for a left card (GivingConferenceCenter). {code('relative')} lifts the content above the wash.</>,
+                    classes: 'relative container-site h-full flex items-center min-h-[480px]  (+ justify-end)',
+                    note: <>{code('justify-end')} for a right card. {code('relative')} lifts the content above the wash.</>,
                   },
                   {
                     part: 'Card',
-                    classes: 'bg-white p-8 lg:p-12 w-full max-w-full md:max-w-[480px] lg:max-w-[520px] my-12',
-                    note: <>Full width below {code('md')}, 480px from md and 520px from lg. {code('my-12')} leaves 48px of photo above and below. Navy variant: {code('bg-navy-boldest')}, {code('md:max-w-[520px]')}.</>,
+                    classes: 'bg-white | bg-navy-boldest  p-8 w-full max-w-full md:max-w-[480px] lg:max-w-[520px] my-12',
+                    note: <>32px padding at every width, so the headline keeps a usable measure. Full width below {code('md')}, 480px from md and 520px from lg. {code('my-12')} leaves 48px of photo above and below.</>,
                   },
                   {
                     part: 'Eyebrow + headline',
@@ -239,23 +255,21 @@ export default function Billboards() {
                   },
                   {
                     part: 'Headline',
-                    classes: 'font-headline text-3xl lg:text-4xl text-navy-bolder leading-[1.1]',
-                    note: <>30px, 36px from lg. On navy: {code('text-white')}.</>,
+                    classes: 'font-headline text-2xl md:text-4xl leading-[1.1]  text-navy-bolder | text-white',
+                    note: '36px from md, 24px on a phone. The same desktop size as the split billboard.',
                   },
                   {
                     part: 'Body',
-                    classes: 'font-body text-base text-neutral-subtle leading-relaxed mb-6',
-                    note: <>On navy: {code('text-neutral-subtlest')}.</>,
+                    classes: 'font-body text-base leading-relaxed mb-6  text-neutral-subtle | text-neutral-subtlest',
                   },
                   {
-                    part: 'Primary button',
-                    classes: 'inline-flex items-center justify-center bg-navy-bolder text-white font-body font-bold text-sm tracking-[-0.3px] px-5 py-3.5 border border-navy-bolder hover:bg-navy-bright hover:border-navy-bright transition-colors',
-                    note: <>Small solid navy. On a navy card, the gold button instead.</>,
+                    part: 'Button row',
+                    classes: 'flex flex-col sm:flex-row sm:flex-wrap sm:items-start gap-3',
                   },
                   {
-                    part: 'Secondary button',
-                    classes: 'inline-flex items-center justify-center gap-2 bg-transparent text-navy-bolder border border-navy-bolder font-body font-bold text-sm tracking-[-0.3px] px-5 py-3.5 hover:bg-navy-bright hover:text-white hover:border-navy-bright transition-colors',
-                    note: <>From GivingConferenceCenter, in a {code('flex flex-wrap gap-3')} row. Its external link carries {code('ExternalLinkIcon')} at 1.1em and an {code('sr-only')} &ldquo;(opens in a new tab)&rdquo;.</>,
+                    part: 'Buttons',
+                    classes: 'ButtonLink size="md"  navy + outline-dark | primary + outline',
+                    note: <>An external link adds {code('ExternalLinkIcon')} at 1.1em and an {code('sr-only')} &ldquo;(opens in a new tab)&rdquo;.</>,
                   },
                 ]}
               />
@@ -268,73 +282,36 @@ export default function Billboards() {
                 style (the prototype’s sources are 3500px across) and pick the focal point in the crop, since{' '}
                 {code('bg-center')} decides what survives on a phone. Card fields: {code('{{ eyebrow }}')},{' '}
                 {code('{{ heading }}')}, {code('{{ body }}')}, and up to two links. Options: card side
-                (left | right) and card colour (white | navy).
+                (left | right) and card color (white | navy).
               </p>
               <p>
                 <strong>Accessibility.</strong> A CSS background has no alt text, so the photo must be
                 decorative. Nothing in it can carry meaning that the card does not repeat. If an editor needs
                 alt text, render an {code('<img class="absolute inset-0 w-full h-full object-cover">')}{' '}
-                instead, as the split billboard does. Check contrast where the card overlaps busy parts of
-                the photo; the card is opaque, so its own text is always fine. External links take the
-                new-tab note. No JavaScript.
+                instead, as the split billboard does. The card is opaque, so its own text contrast never
+                depends on the photo. External links take the new-tab note. No JavaScript.
               </p>
             </DevNote>
 
             <SourceList
               title="Canonical"
               items={[
-                { path: 'src/sections/SplitFeature.tsx', note: 'White card, right, one button.' },
-                { path: 'src/sections/GivingConferenceCenter.tsx', note: 'Reference for the card-left option and the two-button row with an external link.' },
+                { path: 'src/components/ui/PhotoCta.tsx', note: 'the component' },
               ]}
             />
 
             <SourceList
-              title="Drift"
-              tone="drift"
+              title="Uses"
               items={[
-                {
-                  path: 'src/sections/ProceedingsMembershipCTA.tsx',
-                  note: (
-                    <>
-                      Card {code('lg:max-w-[560px]')} and {code('my-20')}. The headline is larger ({code('text-4xl lg:text-5xl')}),
-                      the button is {code('gap-2 px-6')}, and its label ends in a typed &ldquo;→&rdquo; that screen
-                      readers announce. Uses the Russell hero photo.
-                    </>
-                  ),
-                },
-                {
-                  path: 'src/sections/NavalHistoryMembershipCTA.tsx',
-                  note: (
-                    <>
-                      Same card as ProceedingsMembershipCTA (560px, {code('my-20')}, larger headline), plus a
-                      second white button ({code('bg-white … hover:bg-neutral-subtlest')}) whose hover does not
-                      match the site&rsquo;s outline button (which fills navy-bright). Buttons sit in{' '}
-                      {code('flex flex-col sm:flex-row gap-4')}. The image import is shared with Proceedings.
-                    </>
-                  ),
-                },
-                {
-                  path: 'src/sections/MembershipServicesCTA.tsx',
-                  note: (
-                    <>
-                      The navy-card option. The photo is on its own {code('absolute inset-0 bg-cover bg-center')}{' '}
-                      div with {code('aria-hidden')}, and there is no wash. The card is {code('bg-navy-boldest md:max-w-[520px]')}.
-                      The buttons are {code('text-base')}: gold, and a white outline with{' '}
-                      {code('hover:bg-white hover:text-navy-bolder')}, in {code('flex flex-wrap gap-3')}.
-                    </>
-                  ),
-                },
-                {
-                  path: 'src/sections/EventsConferenceCenter.tsx',
-                  note: (
-                    <>
-                      A near copy of GivingConferenceCenter with one button. That button has no {code('border')}{' '}
-                      (so it is 2px shorter than the bordered buttons), and it uses a Font Awesome{' '}
-                      {code('fa-arrow-up-right-from-square')} instead of {code('ExternalLinkIcon')}. It redeclares{' '}
-                      {code('JCTCC_URL')} instead of importing it from TaylorCenterAbout.
-                    </>
-                  ),
-                },
+                { path: 'src/sections/SplitFeature.tsx', note: 'white, right, one button (homepage)' },
+                { path: 'src/sections/ProceedingsMembershipCTA.tsx', note: 'white, right, one button (Proceedings landing)' },
+                { path: 'src/sections/NavalHistoryMembershipCTA.tsx', note: 'white, right, two buttons' },
+                { path: 'src/pages/NavalHistorySubscribe.tsx', note: 'white, right, no eyebrow (membership cross-sell)' },
+                { path: 'src/sections/AboutGetInvolved.tsx', note: 'white, right, two buttons' },
+                { path: 'src/sections/GivingConferenceCenter.tsx', note: 'white, left, external link' },
+                { path: 'src/sections/EventsConferenceCenter.tsx', note: 'white, left, external link' },
+                { path: 'src/sections/TaylorCenterVisit.tsx', note: 'white, left, no eyebrow, external link' },
+                { path: 'src/sections/MembershipServicesCTA.tsx', note: 'navy, right, two buttons' },
               ]}
             />
           </div>
@@ -604,7 +581,7 @@ export default function Billboards() {
 
         <DocSection title="Not on this sheet">
           <p className="font-body text-base text-neutral-subtle leading-relaxed max-w-[760px]">
-            {code('src/sections/NavalInstituteAtWork.tsx')} (homepage) is a centred section header over a
+            {code('src/sections/NavalInstituteAtWork.tsx')} (homepage) is a centered section header over a
             four-up grid of {code('PlainCard')}s. It is a card grid, not a promo; see Cards.
           </p>
         </DocSection>

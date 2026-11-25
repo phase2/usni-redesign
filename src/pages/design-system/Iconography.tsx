@@ -96,7 +96,7 @@ const GLOSSARY: { group: string; entries: GlossaryEntry[] }[] = [
       { classes: 'fa-solid fa-print', meaning: 'Print', where: 'Confirmation' },
       { classes: 'fa-solid fa-arrow-right-from-bracket', meaning: 'Sign out', where: 'Account layout' },
       { classes: 'fa-solid fa-bell', meaning: 'Notifications', where: 'AccountNotifications' },
-      { classes: 'fa-solid fa-arrow-up-right-from-square', meaning: 'External (drift; use ExternalLinkIcon)', where: 'EventsHero, EventsConferenceCenter' },
+      { classes: 'fa-solid fa-arrow-up-right-from-square', meaning: 'External (drift; use ExternalLinkIcon)', where: 'EventsHero' },
     ],
   },
   {
@@ -530,7 +530,7 @@ export default function Iconography() {
                 { path: 'src/components/layout/Header.tsx', note: 'its own close (M2 2l12 12…, and M6 18L18 6… at 24px), search, heart, cart and user marks; the search flydown uses Font Awesome sized with inline style fontSize 1.125rem / 1.375rem instead of a text-* class' },
                 { path: 'src/sections/CartItems.tsx', note: 'Edit, Remove, plus-circle and both small arrows drawn inline, repeated in BooksCartItems, DonateCartItems and NavalHistoryCartItems' },
                 { path: 'src/sections/MembershipCustomizer.tsx', note: 'check mark with a hard-coded stroke="#0466c8" instead of currentColor; copied into MembershipMagazineUpsell (stroke="#023e7d"), NavalHistorySubscribe (currentColor) and NavalHistoryMembershipUpsell' },
-                { path: 'src/sections/EventsHero.tsx', note: 'Font Awesome fa-arrow-up-right-from-square instead of ExternalLinkIcon (also EventsConferenceCenter)' },
+                { path: 'src/sections/EventsHero.tsx', note: 'Font Awesome fa-arrow-up-right-from-square instead of ExternalLinkIcon' },
               ]}
             />
           </div>

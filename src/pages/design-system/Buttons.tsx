@@ -468,6 +468,7 @@ export default function Buttons() {
                 { path: 'src/sections/TaylorCenterAbout.tsx' },
                 { path: 'src/sections/TaylorCenterSpaces.tsx' },
                 { path: 'src/sections/GivingOpportunities.tsx' },
+                { path: 'src/components/ui/PhotoCta.tsx', note: 'external actions on the Taylor Center photo CTAs' },
               ]}
             />
             <SourceList
@@ -475,9 +476,6 @@ export default function Buttons() {
               tone="drift"
               items={[
                 { path: 'src/sections/EventsHero.tsx', note: 'uses Font Awesome fa-solid fa-arrow-up-right-from-square text-xs instead of ExternalLinkIcon (keeps the sr-only note)' },
-                { path: 'src/sections/EventsConferenceCenter.tsx', note: 'same Font Awesome glyph, on a hand-rolled borderless navy button' },
-                { path: 'src/sections/GivingConferenceCenter.tsx', note: 'correct glyph and note, but both buttons are hand-rolled (compact navy recipe, see the drift list below)' },
-                { path: 'src/sections/TaylorCenterVisit.tsx', note: 'correct glyph and note on a hand-rolled navy button' },
                 { path: 'src/sections/ReadingListSection.tsx', note: 'correct glyph and note on a hand-rolled navy button' },
               ]}
             />
@@ -872,9 +870,6 @@ export default function Buttons() {
               items={[
                 { path: 'src/sections/Hero.tsx', note: 'stacks until lg (the homepage hero); same for AboutHero, ArchivesHero, EventsHero, GivingHero, MembershipHero and EssayContestsHero' },
                 { path: 'src/sections/BooksHero.tsx', note: 'flex flex-col lg:flex-row gap-3 lg:gap-4 without lg:items-center' },
-                { path: 'src/sections/AboutGetInvolved.tsx', note: 'flex flex-col sm:flex-row gap-3: right breakpoint, but 12px gap at every width and no items-center' },
-                { path: 'src/sections/NavalHistoryMembershipCTA.tsx', note: 'flex flex-col sm:flex-row gap-4' },
-                { path: 'src/sections/GivingConferenceCenter.tsx', note: 'flex flex-wrap gap-3: a toolbar row used for md-weight CTAs' },
               ]}
             />
           </div>
@@ -899,13 +894,6 @@ export default function Buttons() {
               items={[
                 { path: 'src/components/cards/PlainCard.tsx', note: 'the most common copy: text-sm tracking-[-0.3px] px-5 py-3.5, bordered, gap-2, w-full. Between sm and md.' },
                 { path: 'src/sections/AboutQuickLinks.tsx', note: 'same as PlainCard' },
-                { path: 'src/sections/SplitFeature.tsx', note: 'same compact recipe (text-sm tracking-[-0.3px] px-5 py-3.5, bordered)' },
-                { path: 'src/sections/GivingConferenceCenter.tsx', note: 'compact recipe, with an outline-dark copy beside it' },
-                { path: 'src/sections/AboutGetInvolved.tsx', note: 'compact recipe, with an outline-dark copy beside it' },
-                { path: 'src/sections/TaylorCenterVisit.tsx', note: 'compact recipe plus gap-2 and the external glyph' },
-                { path: 'src/sections/ProceedingsMembershipCTA.tsx', note: 'compact recipe with px-6' },
-                { path: 'src/sections/NavalHistoryMembershipCTA.tsx', note: 'compact recipe with px-6; its partner is a hand-rolled outline-dark at the same compact size, and the label carries a typed “→”' },
-                { path: 'src/sections/EventsConferenceCenter.tsx', note: 'compact recipe with no border (2px shorter)' },
                 { path: 'src/sections/DonateFAQ.tsx', note: 'compact recipe, no border' },
                 { path: 'src/sections/BooksAboutFAQ.tsx', note: 'compact recipe, no border' },
                 { path: 'src/sections/PmeIntro.tsx', note: 'text-sm tracking-[-0.2px] px-6 py-4 gap-2.5, bordered' },
@@ -945,7 +933,6 @@ export default function Buttons() {
                 { path: 'src/sections/NavalHistoryIssueHero.tsx', note: 'flex lg:inline-flex px-5 py-4, no border: primary md minus the border, full width below lg' },
                 { path: 'src/sections/EssayContestBody.tsx', note: 'text-base px-5 py-3.5, bordered' },
                 { path: 'src/sections/EssaySubmitForm.tsx', note: 'submit: px-8 py-4, bordered' },
-                { path: 'src/sections/MembershipServicesCTA.tsx', note: 'tracking-[-0.3px] px-5 py-3.5, no border (multi-line class string)' },
                 { path: 'src/sections/BooksOralHistory.tsx', note: 'text-sm tracking-[-0.2px] px-6 py-3.5, navy-boldest text' },
                 { path: 'src/components/layout/Footer.tsx', note: 'flex w-full gap-2 px-6 py-4 (multi-line)' },
                 { path: 'src/components/layout/Header.tsx', note: 'mega-menu CTA (flex tracking-[-0.3px] px-6 py-4) and the Donate button, which is deliberately compact: text-[15px] min-[1330px]:text-[16px] px-4 min-[1330px]:px-6 py-3 min-[1330px]:py-3.5 leading-none, with the logo mark' },
