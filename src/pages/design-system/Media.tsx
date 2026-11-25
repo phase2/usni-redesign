@@ -183,7 +183,7 @@ export default function Media() {
                 { path: 'src/sections/MitscherArticleBody.tsx', note: <>its own layout (<C>max-w-[1090px]</C>, <C>flex gap-12 items-start</C>, sidebar from <C>lg</C> not <C>xl</C>); prose <C>leading-[1.75] flex flex-col gap-5</C> instead of <C>leading-[1.5] space-y-8</C>; a local <C>SectionHeading</C> (<C>text-[28px] text-[#001845]</C> with a top rule) instead of the 32px subhead; an inline figure with <C>text-xs</C> caption and unlabelled credit; ad placeholders hand-built (<C>AdFrame</C>/<C>AdPlaceholder</C>, 300×250 + 160×600) instead of <C>AdUnit</C>; no references. Imports <C>SharePopover</C> and never uses it.</> },
                 { path: 'src/sections/ArticleBody.tsx, FortifyingArticleBody.tsx', note: <>each defines an identical local <C>PhotoFigure</C> and <C>ArticleTopics</C> — the in-column photo and the topic tags have no shared component.</> },
                 { path: 'src/sections/GrubbArticleBody.tsx', note: <>writes the same photo figure inline (A-4 Skyhawk), plus a local <C>ChartFigure</C>, a local <C>ArticleTopics</C>, and the &ldquo;Understanding the Math&rdquo; colour-block sidebar as inline markup.</> },
-                { path: 'src/sections/ArticleHeader.tsx', note: <>hand-rolls its breadcrumb instead of <C>Breadcrumb</C> (see <Link to="/design-system/navigation" className="text-link">Navigation</Link>), and its leaderboard ad as a local <C>AdFrame</C> instead of <C>AdUnit</C>.</> },
+                { path: 'src/sections/ArticleHeader.tsx', note: <>hand-rolls its leaderboard ad as a local <C>AdFrame</C> instead of <C>AdUnit</C>.</> },
               ]}
             />
           </div>
@@ -216,7 +216,7 @@ export default function Media() {
             <ClassTable
               rows={[
                 { part: 'Section', classes: '', note: <>Inline <C>background: linear-gradient(to bottom, #EBF4FF 0%, #FFF 100%)</C> — #EBF4FF is the light-blue band colour, no token. Inner: <C>container-site</C>.</> },
-                { part: 'Breadcrumb', classes: 'flex items-center flex-wrap gap-x-2 gap-y-1 pt-8 pb-6 border-b border-[#C2DDFF]', note: <>Hand-rolled (drift). Links <C>font-body font-bold text-sm text-navy-bolder hover:text-navy-subtle transition-colors</C>; separator <C>text-neutral-subtle/40 text-sm</C>; current <C>font-body text-sm text-neutral-subtle truncate max-w-[320px]</C>. Build it with the shared Breadcrumb (light tone) and its <C>pb-4 border-b border-[#C2DDFF]</C> wrapper instead.</> },
+                { part: 'Breadcrumb', classes: '<Breadcrumb className="pt-8 pb-6 border-b border-[#C2DDFF]" />', note: <>The shared Breadcrumb, light tone. The last crumb is the article title, rendered as the italic current page like everywhere else on the site.</> },
                 { part: 'Leaderboard ad', classes: 'flex justify-center py-4', note: <>Frame <C>bg-[#F4F4F6] p-2 border border-[#C4C9D4] max-w-full</C> (neutral-subtlest / neutral-subtler) around a <C>w-[728px] max-w-full h-[90px]</C> placeholder. An ad slot in production.</> },
                 { part: 'Column', classes: 'max-w-[864px] mx-auto pt-8 pb-10', note: <>Centred at every width. At <C>xl</C> the body&rsquo;s reading column is left-aligned in its band instead, so the headline sits about 130px right of the body text below it.</> },
                 { part: 'Headline (h1)', classes: 'font-headline text-[48px] lg:text-[60px] xl:text-[68px] text-navy-bolder leading-[1.05] mb-6' },

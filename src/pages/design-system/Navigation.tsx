@@ -852,14 +852,7 @@ const [active, setActive] = useState('2024')
               ]}
             />
 
-            <SourceList title="Canonical" items={[{ path: 'src/components/ui/Breadcrumb.tsx', note: 'replaced fourteen hand-rolled copies' }]} />
-            <SourceList
-              title="Drift"
-              tone="drift"
-              items={[
-                { path: 'src/sections/ArticleHeader.tsx', note: <>the article pages&rsquo; own breadcrumb: links <C>text-navy-bolder hover:text-navy-subtle</C> (not navy-subtle), separators <C>text-neutral-subtle/40</C>, current crumb not italic and truncated at <C>max-w-[320px]</C>, <C>aria-label="breadcrumb"</C>, and no mobile collapse. See the Article &amp; Media sheet.</> },
-              ]}
-            />
+            <SourceList title="Canonical" items={[{ path: 'src/components/ui/Breadcrumb.tsx', note: 'replaced fourteen hand-rolled copies; ArticleHeader renders it too' }]} />
           </div>
         </DocSection>
 

@@ -1,3 +1,4 @@
+import Breadcrumb from '@/components/ui/Breadcrumb'
 import SharePopover from '@/components/ui/SharePopover'
 import SaveArticleButton from '@/components/ui/SaveArticleButton'
 import { Button } from '@/components/ui/Button'
@@ -49,29 +50,13 @@ export default function ArticleHeader({
 
       <div className="container-site">
 
-        {/* Breadcrumb — light blue bottom border */}
-        <nav
-          aria-label="breadcrumb"
-          className="flex items-center flex-wrap gap-x-2 gap-y-1 pt-8 pb-6 border-b border-[#C2DDFF]"
-        >
-          {breadcrumbs.map((crumb, i) => (
-            <span key={i} className="flex items-center gap-2">
-              {i > 0 && <span className="text-neutral-subtle/40 text-sm">/</span>}
-              {crumb.href ? (
-                <a
-                  href={crumb.href}
-                  className="font-body font-bold text-sm text-navy-bolder hover:text-navy-subtle transition-colors"
-                >
-                  {crumb.label}
-                </a>
-              ) : (
-                <span className="font-body text-sm text-neutral-subtle truncate max-w-[320px]">
-                  {crumb.label}
-                </span>
-              )}
-            </span>
-          ))}
-        </nav>
+        {/* Breadcrumb — the site's shared trail, light blue bottom border. The
+            last crumb is the article itself, rendered as the italic current page. */}
+        <Breadcrumb
+          trail={breadcrumbs.slice(0, -1).map((c) => ({ label: c.label, href: c.href ?? '#' }))}
+          current={breadcrumbs[breadcrumbs.length - 1]?.label ?? ''}
+          className="pt-8 pb-6 border-b border-[#C2DDFF]"
+        />
 
         {/* Leaderboard ad — below breadcrumb — unless a banner replaces it */}
         {banner ? (
