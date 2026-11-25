@@ -80,9 +80,10 @@ function Cell({ value, highlight }: { value: CellValue; highlight?: boolean }) {
   )
 }
 
+/** `#compare` is the target of the Membership menu's Plans & Pricing link. */
 export default function MembershipComparisonTable() {
   return (
-    <section className="bg-[#ebf4ff] py-section">
+    <section id="compare" className="bg-[#ebf4ff] py-section scroll-mt-32">
       <div className="container-site">
         <h2 className="font-headline text-4xl lg:text-[56px] text-navy-bolder leading-[1.1] mb-8">
           Compare member benefits

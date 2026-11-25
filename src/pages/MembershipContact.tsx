@@ -1,5 +1,6 @@
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
+import MembershipSubNav from '@/sections/MembershipSubNav'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import PageHero from '@/sections/PageHero'
 import MemberServicesContact from '@/sections/MemberServicesContact'
@@ -17,6 +18,7 @@ export default function MembershipContact() {
     <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-1">
+        <MembershipSubNav />
         <PageHero
           title="Contact Member Services"
           description="Questions about joining, renewing, magazine delivery, billing, or your account. Send a message, call, or take care of it online."

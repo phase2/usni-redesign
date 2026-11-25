@@ -584,6 +584,7 @@ export default function Navigation() {
               items={[
                 { path: 'src/components/layout/SectionSubNav.tsx', note: 'the spec — current, and the only copy with shortLabel and external support built in' },
                 { path: 'src/sections/GivingSubNav.tsx', note: 'already a thin wrapper around it' },
+                { path: 'src/sections/MembershipSubNav.tsx', note: 'a thin wrapper too, built on it from the start' },
               ]}
             />
             <SourceList

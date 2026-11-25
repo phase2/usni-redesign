@@ -1,5 +1,6 @@
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
+import MembershipSubNav from '@/sections/MembershipSubNav'
 import JoinHero from '@/sections/JoinHero'
 import { TierCard } from '@/sections/MembershipCustomizer'
 
@@ -49,6 +50,7 @@ export default function SponsoredStudentMembership() {
     <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-1">
+        <MembershipSubNav />
         <JoinHero
           eyebrow="Student Membership"
           title="Sponsored Student Membership"

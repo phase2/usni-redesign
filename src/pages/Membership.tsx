@@ -1,5 +1,6 @@
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
+import MembershipSubNav from '@/sections/MembershipSubNav'
 import MembershipHero from '@/sections/MembershipHero'
 import MembershipBody from '@/sections/MembershipBody'
 import MembershipBenefits from '@/sections/MembershipBenefits'
@@ -11,6 +12,7 @@ export default function Membership() {
     <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-1">
+        <MembershipSubNav />
         <MembershipHero />
         <MembershipBody />
         <MembershipBenefits />

@@ -41,9 +41,9 @@ export interface SectionNavItem {
  * from the same markup and differing only in their link list and a wrinkle or
  * two of active-state logic. This is that markup, once, with those wrinkles as
  * options — `exact` for a landing tab, `matchPrefix` for a tab whose children
- * live elsewhere, `external` for a link off the site. Giving is the first
- * section to use it; the other six still hold their own copies and can be
- * moved over one at a time.
+ * live elsewhere, `external` for a link off the site. Giving was the first
+ * section to use it and Membership was built on it; the other six still hold
+ * their own copies and can be moved over one at a time.
  */
 export default function SectionSubNav({
   label,

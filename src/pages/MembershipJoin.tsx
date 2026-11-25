@@ -1,5 +1,6 @@
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
+import MembershipSubNav from '@/sections/MembershipSubNav'
 import JoinHero from '@/sections/JoinHero'
 import MembershipCustomizer from '@/sections/MembershipCustomizer'
 import { NavalHistoryBillboard, OrgMembershipBillboard } from '@/sections/MembershipBillboard'
@@ -12,6 +13,7 @@ export default function MembershipJoin() {
     <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-1">
+        <MembershipSubNav />
         <JoinHero />
         <MembershipCustomizer />
         <MembershipComparisonTable />
