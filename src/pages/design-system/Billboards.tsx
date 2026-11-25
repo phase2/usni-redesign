@@ -40,13 +40,16 @@ export default function Billboards() {
         <DocSection title="Split billboard">
           <div className="flex flex-col gap-8">
             <p className="font-body text-base text-neutral-subtle leading-relaxed max-w-[760px]">
-              A 50/50 block from {code('lg')} up: a solid colour panel on one side and a photograph filling
-              the other. Inside the panel, a box with a 1px rule holds the eyebrow, a 48px headline, a
-              lead paragraph and one button. That inner box is what sets this pattern apart. It comes in
-              two colourways, and either can sit on either side. <strong>Navy</strong> ({code('bg-navy-bolder')},
-              white type, gold button) is for the strongest call to action on a page. <strong>Tan</strong>{' '}
-              ({code('bg-tan-subtlest')}, navy type, solid navy button) is for a secondary offer. Below{' '}
-              {code('lg')} the two halves stack, and the photograph always comes first.
+              A 50/50 block from {code('lg')} up: a solid color panel on one side and a photograph filling
+              the other. Inside the panel, a box with a 1px rule holds an optional eyebrow, a 36px headline,
+              optional bold detail lines (an event&rsquo;s date and venue), a lead and one or two buttons,
+              each with an arrow. Every 50/50 feature renders through one component,{' '}
+              {code('SplitBillboard')}, so none of this can drift between pages. It comes in two themes, and
+              either can sit on either side. <strong>Navy</strong> ({code('bg-navy-bolder')}, white type, gold
+              button, white outline secondary) is for the strongest call to action on a page.{' '}
+              <strong>Tan</strong> ({code('bg-tan-subtlest')}, navy type, solid navy button, navy outline
+              secondary) is for a secondary offer. Below {code('lg')} the two halves stack, and the photograph
+              always comes first.
             </p>
 
             <LiveMarkup label="Navy panel, image right — NavalHistoryBillboard" previewClassName="p-6 lg:p-8 bg-white">
@@ -58,81 +61,67 @@ export default function Billboards() {
             </LiveMarkup>
 
             <div>
+              <DocLabel>Props</DocLabel>
+              <ClassTable
+                rows={[
+                  { part: 'theme', classes: "'navy' | 'tan'", note: 'Swaps the panel, rule, type and button classes together.' },
+                  { part: 'imagePosition', classes: "'left' | 'right'", note: <>Desktop side for the photo. Image-right keeps the photo second in the source and uses {code('flex-col-reverse')}, so it still leads when stacked.</> },
+                  { part: 'image, imageOverlay', classes: '{ src, alt } · ReactNode', note: 'The overlay sits over the photo: the sponsored-content logo badge uses it.' },
+                  { part: 'eyebrow', classes: 'string, optional' },
+                  { part: 'heading, headingLevel', classes: "ReactNode · 'h2' (default) | 'h3'", note: 'Set the level from where the block sits; the size never changes with it.' },
+                  { part: 'details', classes: 'ReactNode[], optional', note: 'Bold lines between the headline and the lead.' },
+                  { part: 'body', classes: 'ReactNode' },
+                  { part: 'primary, secondary', classes: '{ label, href, external? }', note: 'Secondary renders as the theme’s outline button. An external link swaps the arrow for the external-link marker and opens in a new tab.' },
+                ]}
+              />
+            </div>
+
+            <div>
               <DocLabel>Anatomy</DocLabel>
               <ClassTable
                 rows={[
                   {
-                    part: 'Page wrapper',
-                    classes: 'container-site py-section flex flex-col gap-8',
-                    note: <>From MembershipJoin. The billboard has no section or container of its own, so the page supplies them. Stacked billboards sit 32px apart.</>,
-                  },
-                  {
-                    part: 'Billboard — navy, image right',
-                    classes: 'bg-navy-bolder flex flex-col-reverse lg:flex-row w-full',
-                    note: <>The image comes second in the source, so {code('flex-col-reverse')} puts it on top when the block stacks. From {code('lg')} it is a plain row, with the panel on the left.</>,
-                  },
-                  {
-                    part: 'Billboard — tan, image left',
-                    classes: 'bg-tan-subtlest flex flex-col lg:flex-row w-full',
-                    note: <>The image comes first in the source, so a plain {code('flex-col')} already leads with it.</>,
+                    part: 'Billboard',
+                    classes: 'bg-navy-bolder | bg-tan-subtlest  flex flex-col lg:flex-row w-full',
+                    note: <>Image-right uses {code('flex-col-reverse')}. The billboard has no section or container of its own, so the page supplies them; stacked billboards sit 32px apart.</>,
                   },
                   {
                     part: 'Panel half',
                     classes: 'flex-1 flex items-center p-6 lg:p-12',
-                    note: 'Half the width from lg. Centres the inner box vertically when the photo is taller.',
+                    note: 'Half the width from lg. Centers the inner box vertically when the photo is taller.',
                   },
                   {
-                    part: 'Inner box — navy',
-                    classes: 'border border-navy-bold flex flex-col gap-4 px-6 py-10 lg:px-12 lg:py-16 w-full',
-                    note: <>The rule is {code('navy-bold')} #002B5C, one step lighter than the panel, so it reads as an inset frame.</>,
+                    part: 'Inner box',
+                    classes: 'border border-navy-bold | border-tan-subtle  flex flex-col gap-4 px-6 py-10 lg:px-12 lg:py-16 w-full',
+                    note: <>Navy rule {code('navy-bold')} #002B5C, one step lighter than the panel; tan rule {code('tan-subtle')} #D9D7BF.</>,
                   },
                   {
-                    part: 'Inner box — tan',
-                    classes: 'border border-tan-subtle flex flex-col gap-4 px-6 py-10 lg:px-12 lg:py-16 w-full',
-                    note: <>Rule {code('tan-subtle')} #D9D7BF.</>,
-                  },
-                  {
-                    part: 'Eyebrow + headline group',
-                    classes: 'flex flex-col gap-2',
-                  },
-                  {
-                    part: 'Eyebrow — navy',
-                    classes: 'font-body font-medium text-sm uppercase tracking-[0.05em] text-[#e0e0cc]',
+                    part: 'Eyebrow',
+                    classes: 'font-body font-medium text-sm uppercase tracking-[0.05em]  text-[#e0e0cc] | text-navy-bright',
                     note: <>{code('#e0e0cc')} has no token. It is the sub-nav tan; {code('tan-subtle')} #D9D7BF is the nearest token.</>,
                   },
                   {
-                    part: 'Eyebrow — tan',
-                    classes: 'font-body font-medium text-sm uppercase tracking-[0.05em] text-[#0466c8]',
-                    note: <>{code('#0466c8')} is {code('navy-bright')}.</>,
+                    part: 'Headline',
+                    classes: 'font-headline text-[30px] lg:text-[36px] leading-[1.1]  text-white | text-navy-bolder',
+                    note: '36px on desktop everywhere, stepping down to 30px on a phone.',
                   },
                   {
-                    part: 'Headline',
-                    classes: 'font-headline text-[48px] text-white leading-[1.1]',
-                    note: <>Tan: {code('text-navy-bolder')}. It is 48px at every width, with no smaller mobile size. That breaks on a phone: at 375px, &ldquo;Organizational Membership&rdquo; overflows the box and scrolls the page sideways. Production should step it down, for example {code('text-[32px] lg:text-[48px]')}.</>,
+                    part: 'Detail lines',
+                    classes: 'flex flex-col gap-1 font-body font-bold text-base  text-white | text-navy-bolder',
                   },
                   {
                     part: 'Lead',
-                    classes: 'font-body text-xl text-white/90 leading-[1.4]',
-                    note: <>Tan: {code('text-neutral-subtle')}. 20px at every width.</>,
+                    classes: 'font-body text-lg leading-[1.5]  text-white/90 | text-neutral-subtle',
                   },
                   {
                     part: 'Button row',
-                    classes: 'pt-3',
-                    note: 'Adds 12px above the button, on top of the box’s 16px gap.',
+                    classes: 'flex flex-col sm:flex-row sm:flex-wrap sm:items-start gap-3 pt-3',
+                    note: 'Adds 12px above the buttons, on top of the box’s 16px gap.',
                   },
                   {
-                    part: 'Button — navy panel (gold)',
-                    classes: 'inline-flex items-center gap-2 bg-gold text-navy-bolder font-body font-bold text-base tracking-[-0.5px] px-6 py-4 hover:bg-gold-dark transition-colors',
-                    note: <>Large gold CTA. Hover moves to {code('gold-dark')} #FFEC99, the lightest gold despite the name.</>,
-                  },
-                  {
-                    part: 'Button — tan panel (navy)',
-                    classes: 'inline-flex items-center gap-2 bg-navy-bold text-white font-body font-bold text-base tracking-[-0.5px] px-6 py-4 border border-navy-bold hover:bg-navy-bright hover:border-navy-bright transition-colors',
-                  },
-                  {
-                    part: 'Button arrow',
-                    classes: 'w-3 h-3 flex-shrink-0',
-                    note: <>Inline SVG, path {code('M2 6h8M6 2l4 4-4 4')}. The component calls it {code('CheckIcon')}, but it is a right arrow. It should carry {code('aria-hidden="true"')}.</>,
+                    part: 'Buttons',
+                    classes: 'ButtonLink size="lg"  primary + outline | navy + outline-dark',
+                    note: <>Each carries the 12px arrow ({code('M2 6h8M6 2l4 4-4 4')}, {code('aria-hidden')}), or the external-link marker for a link off the site.</>,
                   },
                   {
                     part: 'Image half',
@@ -142,7 +131,7 @@ export default function Billboards() {
                   {
                     part: 'Image',
                     classes: 'absolute inset-0 w-full h-full object-cover',
-                    note: 'Absolutely positioned so that the photo never drives the height. Crops from the centre.',
+                    note: 'Absolutely positioned so that the photo never drives the height. Crops from the center.',
                   },
                 ]}
               />
@@ -151,76 +140,46 @@ export default function Billboards() {
             <DevNote>
               <p>
                 <strong>One template, two options.</strong> Build a single Paragraph (or block) type with{' '}
-                {code('{{ eyebrow }}')}, {code('{{ heading }}')}, {code('{{ body }}')}, a link field for the
-                button ({code('{{ cta.url }}')}, {code('{{ cta.title }}')}) and an image field rendered through
-                an image style ({code('{{ image.url }}')}, {code('{{ image.alt }}')}). Add a{' '}
-                {code('theme')} option (navy | tan), which swaps the panel, rule, type and button classes, and
-                an {code('image_position')} option (left | right). Keep the image second in the markup for
-                image-right and use {code('flex-col-reverse')}, so the photo still leads on mobile without
+                {code('{{ eyebrow }}')}, {code('{{ heading }}')}, optional detail lines, {code('{{ body }}')}, a
+                primary and an optional secondary link field, and an image field rendered through an image
+                style ({code('{{ image.url }}')}, {code('{{ image.alt }}')}). Add a {code('theme')} option (navy |
+                tan) and an {code('image_position')} option (left | right). Keep the image second in the markup
+                for image-right and use {code('flex-col-reverse')}, so the photo still leads on mobile without
                 reordering the DOM.
               </p>
               <p>
-                <strong>Accessibility.</strong> The headline is an {code('<h3>')} in the prototype because
-                the billboard sits under a page section. Set the level from where the block is placed;
-                standing alone on a page, it should be an {code('<h2>')}. The image alt describes the
-                photo; leave it empty if the photo is decorative. No JavaScript.
+                <strong>Accessibility.</strong> Set the headline level from where the block is placed: an{' '}
+                {code('<h2>')} standing alone on a page, an {code('<h3>')} under a section heading. The image alt
+                describes the photo; leave it empty if the photo is decorative. No JavaScript.
               </p>
             </DevNote>
 
             <SourceList
               title="Canonical"
               items={[
-                { path: 'src/sections/MembershipBillboard.tsx', note: 'NavalHistoryBillboard (navy, image right; parked, commented out on MembershipJoin) and OrgMembershipBillboard (tan, image left; live on /membership/join).' },
+                { path: 'src/components/ui/SplitBillboard.tsx', note: 'the component' },
               ]}
             />
 
             <SourceList
-              title="Drift"
+              title="Uses"
+              items={[
+                { path: 'src/sections/FeaturedEvent.tsx', note: 'tan, image right, date and venue as detail lines, two buttons (homepage)' },
+                { path: 'src/sections/ProceedingsSponsoredBillboard.tsx', note: 'tan, image left, sponsor logo badge over the photo, two buttons' },
+                { path: 'src/sections/MembershipBillboard.tsx', note: 'NavalHistoryBillboard (navy, image right; parked) and OrgMembershipBillboard (tan, image left; /membership/join)' },
+                { path: 'src/sections/BooksBillboards.tsx', note: 'Oral History (navy, image right) and Ship’s Store (tan, image left)' },
+                { path: 'src/sections/EssayContestsArchiveTeaser.tsx', note: 'navy, image left, no eyebrow' },
+                { path: 'src/sections/EventsArchiveCta.tsx', note: 'navy, image left, no eyebrow' },
+                { path: 'src/sections/PmeReadingListsPromo.tsx', note: 'navy, image left, no eyebrow' },
+                { path: 'src/pages/Login.tsx', note: 'navy, image right, two buttons (Join CTA)' },
+              ]}
+            />
+
+            <SourceList
+              title="Related, not a split billboard"
               tone="drift"
               items={[
-                {
-                  path: 'src/sections/BooksBillboards.tsx',
-                  note: (
-                    <>
-                      Two copies of the canonical pair (Oral History, navy; Ship&rsquo;s Store, tan), wrapped
-                      in its own {code('section py-14 lg:py-16 bg-white')} + {code('container-site flex flex-col gap-8')}.
-                      The gold button uses {code('text-navy-boldest')} instead of {code('text-navy-bolder')}.
-                      The tan card adds a bold line ({code('font-body font-bold text-base text-navy-bolder')}) after
-                      the lead. The arrow SVG is copied again as {code('ArrowIcon')}.
-                    </>
-                  ),
-                },
-                {
-                  path: 'src/sections/ProceedingsSponsoredBillboard.tsx',
-                  note: (
-                    <>
-                      The tan billboard, image left, used for sponsored content. The outer block gains{' '}
-                      {code('border border-tan-subtle overflow-hidden items-stretch')}. The image half is{' '}
-                      {code('lg:w-1/2 flex-none')} with an inline {code('minHeight: 220px')}, and the{' '}
-                      {code('<img>')} is in the flow ({code('w-full h-full object-cover')}), not absolute. A white
-                      &ldquo;Sponsored Content&rdquo; logo badge sits {code('absolute bottom-4 left-4')} over the photo.
-                      The inner box is {code('p-6 lg:p-12')}. The eyebrow is {code('text-xs text-navy-subtle tracking-widest')}.
-                      The headline is a smaller {code('<h2>')} ({code('text-2xl lg:text-3xl')}), the lead is{' '}
-                      {code('text-base')}, and there are two small buttons (solid navy-bold and outline). The section
-                      ground is an inline {code('linear-gradient(232deg, #ffffff 35%, #f4f4f6 100%)')}, where #f4f4f6 is{' '}
-                      {code('neutral-subtlest')}.
-                    </>
-                  ),
-                },
-                {
-                  path: 'src/sections/FeaturedEvent.tsx',
-                  note: (
-                    <>
-                      An open version with no panel or inner box: a {code('grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center')}{' '}
-                      on white, the image an {code('aspect-[4/3]')} crop rather than full height. Because it is a
-                      grid, it leads with the image on mobile by ordering the cells ({code('order-2 lg:order-1')}{' '}
-                      on the copy, {code('order-1 lg:order-2')} on the image). The eyebrow is{' '}
-                      {code('text-[#0466c8] tracking-[1.5px]')}, the headline {code('text-[36px] lg:text-[44px]')}, and
-                      there are two bold date/venue lines and two small buttons (solid + outline). If an event promo
-                      is needed elsewhere, consider building it from the split billboard instead.
-                    </>
-                  ),
-                },
+                { path: 'src/sections/EssayContestPreviousWinners.tsx', note: <>The navy panel and inset frame with no photo, centered, and still at the old 48px headline.</> },
               ]}
             />
           </div>
@@ -608,17 +567,12 @@ export default function Billboards() {
                 {
                   part: 'Flex, image second in DOM',
                   classes: 'flex flex-col-reverse lg:flex-row',
-                  note: 'NavalHistoryBillboard, BooksBillboards (Oral History). Reverses only the stacked order; the row from lg is unaffected.',
+                  note: 'SplitBillboard with imagePosition="right". Reverses only the stacked order; the row from lg is unaffected.',
                 },
                 {
                   part: 'Flex, image first in DOM',
                   classes: 'flex flex-col lg:flex-row',
-                  note: 'OrgMembershipBillboard, BooksBillboards (Ship’s Store), ProceedingsSponsoredBillboard. Already correct.',
-                },
-                {
-                  part: 'Grid',
-                  classes: 'order-1 lg:order-2 (image) · order-2 lg:order-1 (copy)',
-                  note: 'FeaturedEvent. Grid cells are reordered instead.',
+                  note: 'SplitBillboard with imagePosition="left".',
                 },
                 {
                   part: 'Stacked image height',

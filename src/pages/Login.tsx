@@ -5,6 +5,7 @@ import Footer from '@/components/layout/Footer'
 import membershipHero from '@/assets/images/membership-hero.png'
 import { isTestLogin } from '@/data/testAccount'
 import Alert from '@/components/ui/Alert'
+import SplitBillboard from '@/components/ui/SplitBillboard'
 
 export default function Login() {
   const navigate = useNavigate()
@@ -160,53 +161,19 @@ export default function Login() {
           </div>
         </section>
 
-        {/* ── Join CTA — contained 50/50 block ── */}
+        {/* ── Join CTA — the navy split billboard ── */}
         <section className="pb-16 lg:pb-20">
           <div className="container-site">
-            <div className="flex flex-col lg:flex-row w-full bg-navy-bolder overflow-hidden">
-
-              {/* Left — content */}
-              <div className="flex-1 flex items-center p-10 lg:p-12">
-                <div className="border border-navy-bold flex flex-col gap-5 px-10 py-14 w-full">
-                  <p className="font-body font-medium text-sm uppercase tracking-[0.05em] text-[#E0E0CC]">
-                    Not yet a member?
-                  </p>
-                  <h2 className="font-headline text-[42px] lg:text-[48px] text-white leading-[1.1]">
-                    Join the U.S. Naval Institute
-                  </h2>
-                  <p className="font-body text-[18px] text-white/80 leading-[1.5]">
-                    Membership gives you full access to Proceedings, Naval History, the complete digital archive, and a community of the most serious minds in maritime defense.
-                  </p>
-                  <div className="flex flex-wrap gap-3 pt-2">
-                    <a
-                      href="/membership/join"
-                      className="inline-flex items-center gap-2 bg-gold text-navy-bolder font-body font-bold text-base tracking-[-0.5px] px-6 py-4 hover:bg-gold-dark transition-colors"
-                    >
-                      Join today
-                      <svg className="w-3 h-3 flex-shrink-0" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M2 6h8M6 2l4 4-4 4" />
-                      </svg>
-                    </a>
-                    <a
-                      href="/membership"
-                      className="inline-flex items-center gap-2 bg-transparent text-white font-body font-bold text-base px-6 py-4 border border-white/40 hover:bg-white hover:text-navy-bolder hover:border-white transition-colors"
-                    >
-                      Learn about membership
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right — image */}
-              <div className="flex-1 min-h-[320px] lg:min-h-0 relative overflow-hidden">
-                <img
-                  src={membershipHero}
-                  alt="USNI members"
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-              </div>
-
-            </div>
+            <SplitBillboard
+              theme="navy"
+              imagePosition="right"
+              image={{ src: membershipHero, alt: 'USNI members' }}
+              eyebrow="Not yet a member?"
+              heading="Join the U.S. Naval Institute"
+              body="Membership gives you full access to Proceedings, Naval History, the complete digital archive, and a community of the most serious minds in maritime defense."
+              primary={{ label: 'Join today', href: '/membership/join' }}
+              secondary={{ label: 'Learn about membership', href: '/membership' }}
+            />
           </div>
         </section>
 

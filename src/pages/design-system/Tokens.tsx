@@ -795,7 +795,7 @@ export default function Tokens() {
                 items={[
                   { path: 'src/components/ui/Eyebrow.tsx', note: 'tracking-[0.08em] rather than the class’s tracking-widest (0.1em); only used on the Style Guide' },
                   { path: 'src/components/cards/LargeFeature.tsx', note: 'card category: font-normal, tracking-[0.5px], #0466C8 — same in SmallFeature and XSmallFeature' },
-                  { path: 'src/sections/BooksBillboards.tsx', note: 'tracking-[0.05em] text-[#e0e0cc] — same in MembershipBillboard' },
+                  { path: 'src/components/ui/SplitBillboard.tsx', note: 'tracking-[0.05em]; text-[#e0e0cc] on the navy theme' },
                 ]}
               />
             </div>

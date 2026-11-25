@@ -874,7 +874,6 @@ export default function Buttons() {
                 { path: 'src/sections/BooksHero.tsx', note: 'flex flex-col lg:flex-row gap-3 lg:gap-4 without lg:items-center' },
                 { path: 'src/sections/AboutGetInvolved.tsx', note: 'flex flex-col sm:flex-row gap-3: right breakpoint, but 12px gap at every width and no items-center' },
                 { path: 'src/sections/NavalHistoryMembershipCTA.tsx', note: 'flex flex-col sm:flex-row gap-4' },
-                { path: 'src/sections/ProceedingsSponsoredBillboard.tsx', note: 'flex flex-col sm:flex-row gap-4 pt-3' },
                 { path: 'src/sections/GivingConferenceCenter.tsx', note: 'flex flex-wrap gap-3: a toolbar row used for md-weight CTAs' },
               ]}
             />
@@ -901,7 +900,6 @@ export default function Buttons() {
                 { path: 'src/components/cards/PlainCard.tsx', note: 'the most common copy: text-sm tracking-[-0.3px] px-5 py-3.5, bordered, gap-2, w-full. Between sm and md.' },
                 { path: 'src/sections/AboutQuickLinks.tsx', note: 'same as PlainCard' },
                 { path: 'src/sections/SplitFeature.tsx', note: 'same compact recipe (text-sm tracking-[-0.3px] px-5 py-3.5, bordered)' },
-                { path: 'src/sections/FeaturedEvent.tsx', note: 'compact recipe' },
                 { path: 'src/sections/GivingConferenceCenter.tsx', note: 'compact recipe, with an outline-dark copy beside it' },
                 { path: 'src/sections/AboutGetInvolved.tsx', note: 'compact recipe, with an outline-dark copy beside it' },
                 { path: 'src/sections/TaylorCenterVisit.tsx', note: 'compact recipe plus gap-2 and the external glyph' },
@@ -942,14 +940,8 @@ export default function Buttons() {
               title="Gold (nearest: Button primary)"
               tone="drift"
               items={[
-                { path: 'src/sections/BooksBillboards.tsx', note: 'billboard recipe: text-navy-boldest text-base tracking-[-0.5px] px-6 py-4, no border. Button primary lg minus the border, with navy-boldest text instead of navy-bolder.' },
-                { path: 'src/sections/PmeReadingListsPromo.tsx', note: 'billboard recipe, self-start' },
-                { path: 'src/sections/EssayContestsArchiveTeaser.tsx', note: 'billboard recipe, self-start' },
-                { path: 'src/sections/EventsArchiveCta.tsx', note: 'billboard recipe, self-start' },
-                { path: 'src/sections/EssayContestPreviousWinners.tsx', note: 'billboard recipe' },
+                { path: 'src/sections/EssayContestPreviousWinners.tsx', note: 'billboard recipe: text-navy-boldest text-base tracking-[-0.5px] px-6 py-4, no border. Button primary lg minus the border, with navy-boldest text instead of navy-bolder.' },
                 { path: 'src/pages/GivingOpportunitiesPage.tsx', note: 'billboard recipe, self-start' },
-                { path: 'src/sections/MembershipBillboard.tsx', note: 'billboard recipe with navy-bolder text' },
-                { path: 'src/pages/Login.tsx', note: 'billboard recipe with navy-bolder text (Join CTA)' },
                 { path: 'src/sections/NavalHistoryIssueHero.tsx', note: 'flex lg:inline-flex px-5 py-4, no border: primary md minus the border, full width below lg' },
                 { path: 'src/sections/EssayContestBody.tsx', note: 'text-base px-5 py-3.5, bordered' },
                 { path: 'src/sections/EssaySubmitForm.tsx', note: 'submit: px-8 py-4, bordered' },

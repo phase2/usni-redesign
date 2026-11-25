@@ -201,7 +201,7 @@ const INLINE_SVGS: SvgEntry[] = [
   { name: 'Menu (header)', viewBox: '0 0 24 24', strokeWidth: '2', paths: ['M4 6h16M4 12h16M4 18h16'], size: 'w-6 h-6', where: 'Header mobile menu' },
   { name: 'Search (header)', viewBox: '0 0 24 24', strokeWidth: '2', paths: ['m21 21-4.35-4.35'], size: 'w-5 h-5', where: 'Header (with <circle cx="11" cy="11" r="8">)' },
   { name: 'Accordion chevron', viewBox: '0 0 16 16', strokeWidth: '2', paths: ['M3 6l5 5 5-5'], size: 'w-4 h-4', where: 'Every FAQ accordion (.accordion-chevron box), archive filters' },
-  { name: 'Small arrow right', viewBox: '0 0 12 12', strokeWidth: '1.75', paths: ['M2 6h8M6 2l4 4-4 4'], size: 'w-3 h-3', where: 'Billboard and cart CTAs (MembershipBillboard, CartItems, Login)' },
+  { name: 'Small arrow right', viewBox: '0 0 12 12', strokeWidth: '1.75', paths: ['M2 6h8M6 2l4 4-4 4'], size: 'w-3 h-3', where: 'Billboard and cart CTAs (SplitBillboard, CartItems)' },
   { name: 'Small arrow left', viewBox: '0 0 12 12', strokeWidth: '1.75', paths: ['M10 6H2M6 2L2 6l4 4'], size: 'w-3 h-3', where: 'Cart “Back to …” buttons' },
   { name: 'Arrow right (16)', viewBox: '0 0 16 16', strokeWidth: '2', paths: ['M3 8h10M9 4l4 4-4 4'], size: 'w-4 h-4', where: 'ArchivesAbout, DonateForm, MembershipBenefits' },
   { name: 'Check', viewBox: '0 0 16 16', strokeWidth: '1.75', paths: ['M3 8l3.5 3.5L13 4.5'], size: 'w-4 h-4', where: 'Plan feature lists (MembershipCustomizer, upsells); stroked #0466c8' },
